@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row m-t-3 justify-content-center">
+        <h1>Easy Invoice Builder Sign in Page</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-4 offset-4 signin-head mt-2">
+            <div class="row">
+                <div class="col-md-2">
+                    <i class="text-secondary fas fa-sign-in-alt fa-2x"></i>
+                </div>
+                <div class="col-md-10">
+                    <h3 class="text-secondary">SIGN IN</h3>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 offset-4 border border-info">
+            <form class="mt-2 mb-2" [formGroup]="fillForm" (ngSubmit)="onSubmit()">
+                <div class="form-group row">
+                    <label for="email" class="col-sm-3 col-form-label">Email</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="email" formControlName="email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-sm-3 col-form-label">Password</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" id="password" formControlName="password">
+                    </div>
+                </div>
+                <div class="form-group row mt-2">
+                    <div class="col-4 offset-4 text-center">
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 offset-4">
+            <a href="#" class="text-primary">Forget Password</a>
+<!--            <p>If you have not already registered,<a [routerLink]="['/signup']" class="text-primary"> sign up here</a></p>-->
+<!--            <p>If you have not already registered,<a routerLink="/signup" class="text-primary"> sign up here</a></p>-->
+            <p>If you have not already registered,<a class="text-primary" (click)="onSignup()"> sign up here</a>
+        </div>
+    </div>
+
+</div>

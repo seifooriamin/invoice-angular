@@ -1,0 +1,8 @@
+.maring-top{
+    margin-top: 25%;
+}
+a:hover{
+    cursor: pointer;
+    text-decoration: none;
+    color: #ff0000;
+}

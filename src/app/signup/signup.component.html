@@ -1,0 +1,151 @@
+<div class="home-container">
+    <div class="container-fluid text-light">
+        <div class="row">
+            <div class="col-md-12 text-center margin-top-custom">
+                <i class="fas fa-user-plus fa-2x"></i>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12 text-center">
+                <h3>Sign Up</h3>
+            </div>
+
+        </div>
+        <div class="row mt-2">
+            <div class="col-12 text-center">
+                <h6>Your FREE Easy Invoice Maker account is almost here!</h6>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-3 col-sm-12">
+                <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert" *ngIf="invalidSubmit">
+                    <strong>Missed Information</strong> Please enter all the information correctly
+                    <button type="button" class="close" data-dismiss="alert" aria- abel="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert" *ngIf="f.first_name.errors && f.first_name.touched">
+                    <strong>Invalid Name</strong> First Name Must be between 2 to 20 characters and just alphabet
+                    <button type="button" class="close" data-dismiss="alert" aria- abel="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert" *ngIf="f.last_name.errors && f.last_name.touched">
+                    <strong>Invalid Name</strong> Last Name Must be between 2 to 20 characters and just alphabet
+                    <button type="button" class="close" data-dismiss="alert" aria- abel="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 bg-light text-dark">
+                <form class="pl-2 pr-2 mt-1" [formGroup]="fillForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label for="firstName" class="col-form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" formControlName="first_name"
+                                   [ngClass]="{ 'is-invalid': f.first_name.touched && f.first_name.invalid,
+                                    'is-valid': f.first_name.touched && f.first_name.valid}">
+                            <div *ngIf="f.first_name.touched && f.first_name.invalid" class="invalid-feedback">
+                                Invalid First Name
+                            </div>
+                          </div>
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label for="lastName" class="col-form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" formControlName="last_name"
+                                   [ngClass]="{ 'is-invalid': f.last_name.touched && f.last_name.invalid,
+                                    'is-valid': f.last_name.touched && f.last_name.valid}">
+                            <div *ngIf="f.last_name.touched && f.last_name.invalid" class="invalid-feedback">
+                                Invalid Last Name
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label for="email" class="col-form-label">Email</label>
+                            <input type="email" class="form-control" id="email" formControlName="email"
+                                   [ngClass]="{ 'is-invalid': f.email.touched && f.email.invalid,
+                                    'is-valid': f.email.touched && f.email.valid}">
+                            <div *ngIf="f.email.touched && f.email.errors && emailexist" class="invalid-feedback">
+                                Email already registered
+                            </div>
+                            <div *ngIf="f.email.touched && f.email.invalid && !emailexist" class="invalid-feedback">
+                                Invalid Email
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label for="confirmEmail" class="col-form-label">Confirm Email</label>
+                            <input type="email" class="form-control" id="confirmEmail" formControlName="confirmEmail"
+                                   [ngClass]="{ 'is-invalid': f.confirmEmail.touched && f.confirmEmail.invalid,
+                                    'is-valid': f.confirmEmail.touched && f.confirmEmail.valid}">
+                            <div *ngIf="f.confirmEmail.touched && f.confirmEmail.invalid" class="invalid-feedback">
+                                Email Mismatch
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label for="password" class="col-form-label">Password</label>
+                            <input type="password" class="form-control" id="password" formControlName="password"
+                                   [ngClass]="{ 'is-invalid': f.password.touched && f.password.invalid,
+                                    'is-valid': f.password.touched && f.password.valid}">
+                            <div *ngIf="f.password.touched && f.password.invalid" class="invalid-feedback">
+                                Invalid Password
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label for="confirmPassword" class="col-form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"
+                                   [ngClass]="{ 'is-invalid': f.confirmPassword.touched && f.confirmPassword.invalid,
+                                    'is-valid': f.confirmPassword.touched && f.confirmPassword.valid}">
+                            <div *ngIf="f.confirmPassword.touched && f.confirmPassword.invalid" class="invalid-feedback">
+                                Password Mismatch
+                            </div>
+                        </div>
+
+                        <input type="text" class="form-control" id="contact_number" formControlName="contact_number" hidden>
+                        <input type="text" class="form-control" id="address1" formControlName="address1" hidden>
+                        <input type="text" class="form-control" id="address2" formControlName="address2" hidden>
+                        <input type="text" class="form-control" id="city" formControlName="city" hidden>
+                        <input type="text" class="form-control" id="province" formControlName="province" hidden>
+                        <input type="text" class="form-control" id="country" formControlName="country" hidden>
+                        <input type="text" class="form-control" id="postalCode" formControlName="postal_code" hidden>
+                    </div>
+                    <div class="form-group row mt-2">
+                        <div class="col-md-4 offset-md-4 col-sm-12 text-center">
+                            <button type="submit" class="btn btn-primary" >Sign up</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert" *ngIf="f.password.errors && f.password.touched">
+                    <strong>Invalid Password</strong> Password must be at lest 6 characters and passwords must be at least six characters long and must contain characters from all of the following:
+                    uppercase characters, lowercase characters, digits (0-9)
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="modalMessage" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-light">
+                <h5 class="modal-title" id="modalMessageTitle">{{modalTitle}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-light">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{modalBody}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+

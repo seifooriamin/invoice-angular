@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 maring-top">
+            <div class="alert alert-success fade show mt-1 " role="alert" *ngIf="situation==='success'">
+                <strong>Account Activated</strong> Your email has been verified, <a class="alert-success stretched-link" (click)="onSignin()">Signin here</a>
+            </div>
+            <div class="alert alert-warning fade show mt-1" role="alert" *ngIf="situation==='notFound'">
+                <strong>Token Invalid</strong> The activation link is not valid
+            </div>
+            <div class="alert alert-danger fade show mt-1" role="alert" *ngIf="situation==='verify.component.ts'">
+                <strong>Activation Failed</strong> The activation process has been failed, contact
+                <a class="text-dark stretched-link" href="mailto:submit@einvoicemaker.com">Site Admin</a>
+            </div>
+        </div>
+    </div>
+
+</div>
