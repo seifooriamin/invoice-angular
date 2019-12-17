@@ -26,7 +26,9 @@ export class AuthenticationService {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           if (user['message'] === 'Successful login.'){
               localStorage.setItem('jwt', user['jwt']);
-              localStorage.setItem('access_level', user['access_level'])
+              localStorage.setItem('access_level', user['access_level']);
+              localStorage.setItem('first_name', user['first_name']);
+              localStorage.setItem('last_name', user['last_name']);
               localStorage.setItem('currentUser', JSON.stringify(user));
               this.currentUserSubject.next(user);
               return user;
@@ -38,6 +40,8 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     localStorage.removeItem('jwt');
+    localStorage.removeItem('first_name');
+    localStorage.removeItem('last_name');
     localStorage.removeItem('access_level');
     this.router.navigate(['signin']);
 
@@ -59,7 +63,6 @@ export class AuthenticationService {
               this.userService.tokenCheck(token).subscribe(
                   (response) => {
                       if (response['message'] === 'AG') {
-                          console.log(response['data']);
                           resolve('TV');
                       } else {
                           resolve('TIV');
