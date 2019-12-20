@@ -4,9 +4,12 @@
     class Database
     {
         private $host="localhost";
+//        private $db_name="einvoice_invoice";
+//        private $username="einvoice";
+//        private $password="Am!n2094";
         private $db_name="einvoice_invoice";
-        private $username="einvoice";
-        private $password="Am!n2094";
+        private $username="root";
+        private $password="";
         public $conn;
 
         public function getConnection(){

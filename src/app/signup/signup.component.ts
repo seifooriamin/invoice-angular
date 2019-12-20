@@ -55,8 +55,7 @@ export class SignupComponent implements OnInit {
   onSubmit() {
       if (this.fillForm.invalid) {
           this.invalidSubmit = true;
-            setTimeout(() =>
-                 {
+            setTimeout(() => {
               this.invalidSubmit = false;
                  }, 2000)
           return;

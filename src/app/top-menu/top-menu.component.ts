@@ -13,14 +13,9 @@ export class TopMenuComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSignout(){
-    console.log('signout');
+  onSignOut() {
     this.authenticationService.logout();
   }
 
-  onCheck(){
-    console.log('validated');
-    this.authenticationService.tokenValidate();
-  }
 
 }

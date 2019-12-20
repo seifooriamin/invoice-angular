@@ -20,7 +20,7 @@
 
     // get posted data
     $data = json_decode(file_get_contents("php://input"));
-
+    echo $data->name;
     // make sure data is not empty
     if(
         !empty($data->name) &&
@@ -36,8 +36,11 @@
         $companies->gst_no = $data->gst_no;
         $companies->website = $data->website;
         $companies->email = $data->email;
-        $companies->logo_link = $data->logo_link;
         $companies->user_id = $data->user_id;
+//        $companies->logo_link = $data->logo_link;
+        $image=!empty($_FILES["image"]["name"])
+            ? sha1_file($_FILES['image']['tmp_name']) . "-" . basename($_FILES["image"]["name"]) : "";
+        $companies->logo_link = $image;
 
 
         // create the product

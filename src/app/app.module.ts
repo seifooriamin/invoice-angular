@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +13,11 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { VerifyComponent } from './verify/verify.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { CompanyComponent } from './company/company.component';
+import { UsersComponent } from './users/users.component';
+import { CompanyListComponent } from './company/company-list/company-list.component';
+import { ViewComponent } from './company/view/view.component';
+import { AddModifyComponent } from './company/add-modify/add-modify.component';
 
 
 @NgModule({
@@ -24,8 +29,14 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     SignupComponent,
     ConfirmModalComponent,
     VerifyComponent,
+    CompanyComponent,
+    UsersComponent,
+    CompanyListComponent,
+    ViewComponent,
+    AddModifyComponent,
   ],
   imports: [
+    MDBBootstrapModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -33,8 +44,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     FormsModule,
     NgbModule,
     BrowserAnimationsModule,
-    MDBBootstrapModule.forRoot(),
   ],
+  schemas: [ NO_ERRORS_SCHEMA ],
   entryComponents: [
     ConfirmModalComponent
   ],

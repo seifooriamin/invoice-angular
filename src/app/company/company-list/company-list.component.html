@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row mt-2">
+        <div class="col-lg-2 col-md-4 col-6">
+            <button type="button" class="btn btn-primary" (click)="onAddNew()">New Company</button>
+        </div>
+    </div>
+    <div class="row mt-2">
+<!--        <table mdbTable class="z-depth-1">-->
+<!--            <thead class="black white-text">-->
+<!--            <tr>-->
+<!--                <th [mdbTableSort]="elements" sortBy="id">ID</th>-->
+<!--                <th [mdbTableSort]="elements" sortBy="first.nick">First</th>-->
+<!--                <th [mdbTableSort]="elements" sortBy="last">Last</th>-->
+<!--                <th [mdbTableSort]="elements" sortBy="handle">Handle</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr *ngFor="let el of elements; let i = index">-->
+<!--                <th scope="row">{{el.id}}</th>-->
+<!--                <td>{{el.first.nick}}</td>-->
+<!--                <td>{{el.last}}</td>-->
+<!--                <td>{{el.handle}}</td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+        <table mdbTable #tableEl="mdbTable" class="z-depth-1">
+            <thead class="unique-color white-text">
+            <tr>
+                <th [mdbTableSort]="elements" sortBy="id">ID</th>
+                <th [mdbTableSort]="elements" sortBy="first">First</th>
+                <th [mdbTableSort]="elements" sortBy="last">Last</th>
+                <th [mdbTableSort]="elements" sortBy="handle">Handle</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let el of elements; let i = index">
+                <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                    scope="row">{{el.id}}</th>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.first}}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.last}}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.handle}}</td>
+            </tr>
+            </tbody>
+            <tfoot class="grey lighten-5 w-100">
+            <tr>
+                <td colspan="4">
+                    <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
