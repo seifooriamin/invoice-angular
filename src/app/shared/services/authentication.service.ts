@@ -38,10 +38,6 @@ export class AuthenticationService {
         .pipe(map(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             if (user['message'] === 'Successful login.'){
-                localStorage.setItem('jwt', user['jwt']);
-                localStorage.setItem('access_level', user['access_level']);
-                localStorage.setItem('first_name', user['first_name']);
-                localStorage.setItem('last_name', user['last_name']);
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
                 return user;
@@ -52,10 +48,6 @@ export class AuthenticationService {
   public logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    localStorage.removeItem('jwt');
-    localStorage.removeItem('first_name');
-    localStorage.removeItem('last_name');
-    localStorage.removeItem('access_level');
     this.router.navigate(['signin']);
   }
 
@@ -64,7 +56,8 @@ export class AuthenticationService {
     }
 
     async tokenValidate(): Promise<any> {
-      const tokenValue = localStorage.getItem('jwt');
+      const jTokenValue = JSON.parse(localStorage.getItem('currentUser'));
+      const tokenValue = jTokenValue['jwt'];
       if (!tokenValue) {
           Promise.resolve('TE');
       }

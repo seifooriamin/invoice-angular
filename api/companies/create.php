@@ -15,12 +15,30 @@
 
     $database = new Database();
     $db = $database->getConnection();
-
+    $message = '';
     $companies = new Companies($db);
 
     // get posted data
-    $data = json_decode(file_get_contents("php://input"));
-    echo $data->name;
+    // $data = json_decode(file_get_contents("php://input"));
+
+    $image=!empty($_FILES["file"]["name"])
+        ? sha1_file($_FILES['file']['tmp_name']) . "-" . basename($_FILES["file"]["name"]) : "";
+    $data=json_decode($_POST["data"]);
+    if($image !== ''){
+        $companies->logo_link = $image;
+        if(!$companies->imageValidator()){
+            $image = "";
+            $imageMessage = "INV";
+        } else {
+            $imageMessage = "IV";
+        }
+
+    } else {
+        $imageMessage = "Empty";
+    }
+
+
+
     // make sure data is not empty
     if(
         !empty($data->name) &&
@@ -37,20 +55,30 @@
         $companies->website = $data->website;
         $companies->email = $data->email;
         $companies->user_id = $data->user_id;
-//        $companies->logo_link = $data->logo_link;
-        $image=!empty($_FILES["image"]["name"])
-            ? sha1_file($_FILES['image']['tmp_name']) . "-" . basename($_FILES["image"]["name"]) : "";
         $companies->logo_link = $image;
-
 
         // create the product
         if($companies->create()){
 
-            // set response code - 201 created
+            if($imageMessage == 'IV') {
+                if($companies->uploadPhoto()){
+
+                    $message = 'SIU';
+                } else {
+
+                    $message = 'SINU';
+                }
+            } else {
+                if($imageMessage == 'Empty'){
+                    $message = 'SIE';
+                }else{
+                    $message = 'SINV';
+                }
+            }
             http_response_code(201);
 
             // tell the user
-            echo json_encode(array("message" => "New Company Has Been Registered."));
+            echo json_encode(array("message" => $message));
         }
 
         // if unable to create the product, tell the user
@@ -60,7 +88,8 @@
             http_response_code(503);
 
             // tell the user
-            echo json_encode(array("message" => "Unable to Register New Company."));
+            echo json_encode(array("message" => "FAIL"));
+
         }
     }
 
@@ -71,6 +100,6 @@
         http_response_code(400);
 
         // tell the user
-        echo json_encode(array("message" => "Fill all the mandatory fields."));
+        echo json_encode(array("message" => "INCOMPLETE"));
     }
 ?>

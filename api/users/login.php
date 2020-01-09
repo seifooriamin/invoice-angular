@@ -65,7 +65,8 @@
                     "jwt" => $jwt,
                     "access_level" => $user->access_level,
                     "first_name" => $user->first_name,
-                    "last_name" => $user->last_name
+                    "last_name" => $user->last_name,
+                    "id" => $user->id
                 )
             );
 

@@ -57,7 +57,7 @@ export class SignupComponent implements OnInit {
           this.invalidSubmit = true;
             setTimeout(() => {
               this.invalidSubmit = false;
-                 }, 2000)
+                 }, 2000);
           return;
       } else {
           this.userService.userCreate(this.fillForm.value).subscribe(
@@ -78,6 +78,7 @@ export class SignupComponent implements OnInit {
                           this.modalBody = 'Due to technical issue your account has not been registered, ' +
                               'please contact submit@einvoicemaker.com';
                           this.modalTitle = 'Failure';
+                          jQuery('#modalMessage').modal('show');
                       }
                   }
                   }

@@ -5,4 +5,18 @@
 .border-color{
     border-color: #737373 !important;
 }
-
+.img-box{
+    height: 80px;
+}
+.invalid-feedback-manual{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+.valid-feedback-manual{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #28a745;
+}

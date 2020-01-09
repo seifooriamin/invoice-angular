@@ -29,7 +29,6 @@ export class SigninComponent implements OnInit {
       password: ['', Validators.compose([Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z]).{6,}')])]
     });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    console.log(this.returnUrl);
   }
 
   onSubmit() {
@@ -39,7 +38,6 @@ export class SigninComponent implements OnInit {
         //     this.router.navigate(['dashboard']);
         // }
         data => {
-          console.log(data);
           this.router.navigate([this.returnUrl]);
         },
         error => {

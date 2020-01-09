@@ -8,10 +8,22 @@ export class CompanyService {
 
   constructor(private httpClient: HttpClient) { }
 
-  uploader(data) {
-    // return this.httpClient.post('http://www.einvoicemaker.com/invoice/api/users/create.php', data);
-    return this.httpClient.post('http://localhost/invoice-angular/api/companies/uploader.php', data);
+  fileanddata(file: File, data: any) {
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(data));
+    if (file != null) {
+      formData.append('file', file, file.name);
+    }
+    return this.httpClient.post('http://localhost/invoice-angular/api/companies/uploader.php', formData);
+  }
 
+  companyCreate(file: File, data: any) {
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(data));
+    if (file != null) {
+      formData.append('file', file, file.name);
+    }
+    return this.httpClient.post('http://localhost/invoice-angular/api/companies/create.php', formData);
   }
 
 }

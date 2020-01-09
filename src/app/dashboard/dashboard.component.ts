@@ -93,7 +93,9 @@ export class DashboardComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
-    this.userName = localStorage.getItem('first_name');
+
+    const jCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.userName = jCurrentUser['first_name'];
     this.optionsSelect = [
       { value: '1', label: 'Option 1' },
       { value: '2', label: 'Option 2' },

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {CompanyService} from '../../shared/services/company.service';
+import {ToolsService} from '../../shared/services/tools.service';
 
 
 
@@ -12,15 +13,16 @@ import {CompanyService} from '../../shared/services/company.service';
 })
 export class AddModifyComponent implements OnInit {
   fillForm: FormGroup;
+  previewUrl: any = null;
+  fileToUpload: File = null;
+  imageHint = false;
+  submitMessageStatusFail = false;
+  submitMessageStatusSuccess = false;
+  submitMessage = '';
 
-    fileData: File = null;
-    previewUrl: any = null;
-    fileUploadProgress: string = null;
-    uploadedFilePath: string = null;
-    fileToUpload: File = null;
-    filepost: any;
 
-  constructor(private formBuilder: FormBuilder, private companyService: CompanyService, private http: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private companyService: CompanyService, private http: HttpClient,
+              private toolsService: ToolsService) {
   }
 
   ngOnInit() {
@@ -28,59 +30,95 @@ export class AddModifyComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20),
         Validators.pattern('(?=.*[a-zA-Z0-9]).{2,}')]],
       address: ['', [Validators.required, Validators.pattern('(?=.*[a-zA-Z0-9]).{2,}')]],
-      phone: ['', [Validators.pattern('(?=.*[0-9])'), Validators.maxLength(11)]],
-      businessNo: ['', [Validators.maxLength(20), Validators.pattern('(?=.*[a-zA-z0-9])')]],
-      gstNo: ['', [Validators.maxLength(20), Validators.pattern('(?=.*[a-zA-z0-9])')]],
+      phone: ['', [Validators.pattern('(^\\+[0-9]{2})([0-9]{8,13}$)'),
+          Validators.maxLength(14)]],
+      business_no: ['', [Validators.maxLength(20), Validators.pattern('^(\\w*\\.*\\ *\\-*\\_*\\\\*\\/*)*$')]],
+      gst_no: ['', [Validators.maxLength(20), Validators.pattern('^(\\w*\\.*\\ *\\-*\\_*\\\\*\\/*)*$')]],
       website: ['', Validators.maxLength(50)],
       email: ['', [Validators.email, Validators.maxLength(50)]],
       logoFile: [''],
+      user_id: ['', Validators.required]
     });
   }
+  handleFileInput(files: FileList) {
+      if ((files.item(0)) != null) {
+          this.fileToUpload = files.item(0);
+          if (this.toolsService.imageAccept(this.fileToUpload.type) && this.toolsService.imageSize(this.fileToUpload.size)) {
+              this.imageHint = false;
+              this.preview();
+          } else {
+              this.imageHint = true;
+              this.imageCleanUp();
+          }
+      } else {
+          this.imageCleanUp();
+      }
 
-    fileProgress(fileInput: any) {
-        this.fileData = <File>fileInput.target.files[0];
-        this.preview();
-    }
-    handleFileInput(files: FileList) {
-        this.fileToUpload = files.item(0);
-        console.log(this.fileToUpload.name);
     }
 
-    preview() {
+  imageCleanUp() {
+        this.fileToUpload = null;
+        this.previewUrl = null;
+        this.fillForm.patchValue({
+           logoFile: null
+        });
+    }
+
+  preview() {
         // Show preview
-        var mimeType = this.fileData.type;
+        const mimeType = this.fileToUpload.type;
         if (mimeType.match(/image\/*/) == null) {
             return;
         }
 
-        var reader = new FileReader();
-        reader.readAsDataURL(this.fileData);
+        const reader = new FileReader();
+        reader.readAsDataURL(this.fileToUpload);
         reader.onload = (_event) => {
             this.previewUrl = reader.result;
-        }
+        };
     }
 
   get f() { return this.fillForm.controls; }
 
-  onUpload() {
-      // const formData = new FormData();
-      // formData.append('file', this.fileData);
-      // this.http.post('http://localhost/invoice-angular/api/companies/uploader.php', formData)
-      //     .subscribe(res => {
-      //         console.log(res);
-      //         // this.uploadedFilePath = res.data.filePath;
-      //         alert('SUCCESS !!');
-      //     });
-      const formData: FormData = new FormData();
-      formData.append('image', this.fileToUpload, this.fileToUpload.name);
-      this.http.post('http://localhost/invoice-angular/api/companies/uploader.php', formData).subscribe(
-          (response) => {
-              console.log(response);
-          }
-      );
+
+  onSetUserId() {
+      const jCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+      this.fillForm.patchValue({
+          user_id: jCurrentUser['id']
+      });
   }
 
   onSubmit() {
+      if (this.fillForm.valid) {
+          this.companyService.companyCreate(this.fileToUpload, this.fillForm.value).subscribe(
+              (response) => {
+                  if (response['message'] === 'SIU' || response['message'] === 'SIE') {
+                      this.submitMessageStatusSuccess = true;
+                      this.submitMessage = 'Company has been successfully registered';
+                      this.fillForm.reset();
+                      this.imageCleanUp();
+                  } else {
+                      if (response['message'] === 'SINU') {
+                          this.submitMessage = 'Company has been successfully registered, the logo has not been uploaded';
+                          this.fillForm.reset();
+                          this.imageCleanUp();
+                      } else {
+                          if (response['message'] === 'FAIL') {
+                              this.submitMessageStatusFail = true;
+                              this.submitMessage = 'Due to technical issue the company has not been registered';
+                          }
+                      }
+                  }
+              }
+          );
+      } else {
+            this.submitMessageStatusFail = true;
+          setTimeout(() => {
+              this.submitMessageStatusFail = false;
+              this.submitMessage = 'Fill all the mandatory fields';
+          }, 3000);
+      }
+
   }
 
 }

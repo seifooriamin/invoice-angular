@@ -1,8 +1,7 @@
-<div class="container-full-page border border-color">
-    <div class="container mt-2">
+    <div class="container mt-4 bg-dark mb-4">
         <div class="row">
             <div class="col-md-6 col-12">
-                <h3 class="text-light">New Company Registration</h3>
+                <h3 class="text-light pt-1">New Company Registration</h3>
             </div>
         </div>
 <!--        <div class="row mt-2 border">-->
@@ -12,13 +11,14 @@
                         <label for="name" class="col-form-label">Company Name</label>
                         <input type="text" class="form-control" id="name" formControlName="name"
                                [ngClass]="{ 'is-invalid': f.name.touched && f.name.invalid,
-                                    'is-valid': f.name.touched && f.name.valid}">
+                                    'is-valid': f.name.touched && f.name.valid}" (change)="onSetUserId()">
                         <div *ngIf="f.name.touched && f.name.invalid" class="invalid-feedback">
                             Company name is a mandatory field
                         </div>
+                        <input type="text" class="form-control" formControlName="user_id" hidden>
                     </div>
                 </div>
-                <div class="form-row mt-1 text-light">
+                <div class="form-row text-light">
                     <div class="form-group col-12">
                         <label for="address" class="col-form-label">Address</label>
                         <input type="text" class="form-control" id="address" formControlName="address"
@@ -29,80 +29,84 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-row mt-1 text-light">
+                <div class="form-row text-light">
                     <div class="form-group col-6">
                             <label for="phone" class="col-form-label">Phone</label>
                             <input type="text" class="form-control" id="phone" formControlName="phone"
                                    [ngClass]="{ 'is-invalid': f.phone.touched && f.phone.invalid,
-                                    'is-valid': f.phone.touched && f.phone.valid}">
+                                    'is-valid': f.phone.valid}">
                             <div *ngIf="f.phone.touched && f.phone.invalid" class="invalid-feedback">
-                                Invalid phone number
+                                Invalid phone number acceptable format +11111111111 (max 13 digit plus +)
                             </div>
                     </div>
                     <div class="form-group col-6">
                             <label for="businessNo" class="col-form-label">Business No</label>
-                            <input type="text" class="form-control" id="businessNo" formControlName="businessNo"
-                                   [ngClass]="{ 'is-invalid': f.businessNo.touched && f.businessNo.invalid,
-                                    'is-valid': f.businessNo.touched && f.businessNo.valid}">
-                            <div *ngIf="f.businessNo.touched && f.businessNo.invalid" class="invalid-feedback">
-                                Invalid business number format
+                            <input type="text" class="form-control" id="businessNo" formControlName="business_no"
+                                   [ngClass]="{ 'is-invalid': f.business_no.touched && f.business_no.invalid,
+                                    'is-valid': f.business_no.valid}">
+                            <div *ngIf="f.business_no.touched && f.business_no.invalid" class="invalid-feedback">
+                                No special characters allowed (*!@#$%^&)
                             </div>
                     </div>
                 </div>
-                <div class="form-row mt-1 text-light">
+                <div class="form-row text-light">
                     <div class="form-group col-6">
                         <label for="gstNo" class="col-form-label">GST No</label>
-                        <input type="text" class="form-control" id="gstNo" formControlName="gstNo"
-                               [ngClass]="{ 'is-invalid': f.gstNo.touched && f.gstNo.invalid,
-                                    'is-valid': f.gstNo.touched && f.gstNo.valid}">
-                        <div *ngIf="f.gstNo.touched && f.gstNo.invalid" class="invalid-feedback">
-                            Invalid GST number
+                        <input type="text" class="form-control" id="gstNo" formControlName="gst_no"
+                               [ngClass]="{ 'is-invalid': f.gst_no.touched && f.gst_no.invalid,
+                                    'is-valid': f.gst_no.valid}">
+                        <div *ngIf="f.gst_no.touched && f.gst_no.invalid" class="invalid-feedback">
+                            No special characters allowed (*!@#$%^&)
                         </div>
                     </div>
                     <div class="form-group col-6">
                         <label for="website" class="col-form-label">Website</label>
                         <input type="text" class="form-control" id="website" formControlName="website"
                                [ngClass]="{ 'is-invalid': f.website.touched && f.website.invalid,
-                                    'is-valid': f.website.touched && f.website.valid}">
+                                    'is-valid': f.website.valid}">
                         <div *ngIf="f.website.touched && f.website.invalid" class="invalid-feedback">
                             Invalid website format
                         </div>
                     </div>
                 </div>
-                <div class="form-row mt-1 text-light">
+                <div class="form-row text-light">
                     <div class="form-group col-8">
                         <label for="email" class="col-form-label">Email</label>
                         <input type="email" class="form-control" id="email" formControlName="email"
                                [ngClass]="{ 'is-invalid': f.email.touched && f.email.invalid,
-                                    'is-valid': f.email.touched && f.email.valid}">
+                                    'is-valid': f.email.valid}">
                         <div *ngIf="f.email.touched && f.email.invalid" class="invalid-feedback">
                             Invalid email format
                         </div>
                     </div>
-                </div>
-                <div class="form-row mt-1 text-light">
-                    <div class="form-group">
-                        <input type="file" name="image" formControlName="logoFile" (change)="handleFileInput($event.target.files)">
-                    </div>
-                    <div *ngIf="fileUploadProgress">
-                        Upload progress: {{ fileUploadProgress }}
-                    </div>
-                    <div class="image-preview mb-3" *ngIf="previewUrl">
-                        <img [src]="previewUrl" height="300" />
-                    </div>
 
-                    <div class="mb-3" *ngIf="uploadedFilePath">
-                        {{uploadedFilePath}}
+                </div>
+                <div class="form-row text-light img-box">
+                    <div class="form-group col-8">
+                        <input type="file" name="image" formControlName="logoFile" accept="image/jpeg,image/png,image/gif"
+                               (change)="handleFileInput($event.target.files)">
+                        <div *ngIf="imageHint" class="invalid-feedback-manual">
+                            Accepted image format is PNG, JPEG, GIF and size should be less than 2MB
+                        </div>
                     </div>
-                    <button type="button" class="btn btn-primary" (click)="onUpload()">Upload</button>
+                    <div class="col-4">
+                        <div class="image-preview" *ngIf="previewUrl">
+                            <img [src]="previewUrl" height="80" />
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group row mt-2">
-                    <div class="col-md-4 offset-md-4 col-sm-12 text-center">
-                        <button type="submit" class="btn btn-primary" >Sign up</button>
+                <div class="form-group row mt-1">
+                    <div class="col-md-4 offset-md-4 col-sm-8 text-center">
+                        <button type="submit" class="btn btn-primary" >Register</button>
+                    </div>
+                    <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual col-md-4 col-sm-4 text-center">
+                        {{ submitMessage }}
+                    </div>
+                    <div *ngIf="submitMessageStatusSuccess" class="valid-feedback-manual col-md-4 col-sm-4 text-center">
+                        {{ submitMessage }}
                     </div>
                 </div>
             </form>
     </div>
-</div>
 
