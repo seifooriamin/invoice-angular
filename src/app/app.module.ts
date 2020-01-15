@@ -16,8 +16,9 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CompanyComponent } from './company/company.component';
 import { UsersComponent } from './users/users.component';
 import { CompanyListComponent } from './company/company-list/company-list.component';
-import { ViewComponent } from './company/view/view.component';
 import { AddModifyComponent } from './company/add-modify/add-modify.component';
+
+
 
 
 @NgModule({
@@ -32,7 +33,6 @@ import { AddModifyComponent } from './company/add-modify/add-modify.component';
     CompanyComponent,
     UsersComponent,
     CompanyListComponent,
-    ViewComponent,
     AddModifyComponent,
   ],
   imports: [

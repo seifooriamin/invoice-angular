@@ -30,7 +30,7 @@
         http_response_code(200);
 
         // tell the user
-        echo json_encode(array("message" => "Company has been deleted."));
+        echo json_encode(array("message" => "SUCCESS"));
     }
 
     // if unable to delete the product
@@ -40,6 +40,6 @@
         http_response_code(503);
 
         // tell the user
-        echo json_encode(array("message" => "Unable to delete company."));
+        echo json_encode(array("message" => "FAIL"));
     }
 ?>

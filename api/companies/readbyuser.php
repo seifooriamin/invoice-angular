@@ -10,7 +10,10 @@
     $db=$database->getConnection();
 
     $companies= new Companies($db);
-    $stmt=$companies->read();
+    $data = json_decode(file_get_contents("php://input"));
+    $companies->user_id = $data->user_id;
+
+    $stmt=$companies->readByUser();
 
     $num = $stmt->rowCount();
 

@@ -21,7 +21,6 @@ export class VerifyComponent implements OnInit {
         }
     );
 
-    console.log(this.token);
     this.token = '{ "access_code" : "' + this.token + '" }';
     console.log(this.token);
     this.userService.emailVerify(this.token).subscribe(

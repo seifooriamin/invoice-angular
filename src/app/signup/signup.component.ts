@@ -5,7 +5,7 @@ import {CheckEmailExist} from '../shared/tools/checkemailExist.validator';
 import {MustMatch} from '../shared/tools/mustmatch.validator';
 import {Router} from '@angular/router';
 
-declare var jQuery:any;
+declare var jQuery: any;
 
 @Component({
   selector: 'app-signup',

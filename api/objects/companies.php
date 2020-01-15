@@ -36,6 +36,28 @@ class Companies
         $stmt->execute();
         return $stmt;
     }
+    function readByUser(){
+        $query="SELECT u.first_name as first_name, u.last_name as last_name ,c.id,c.name,c.address,c.business_no,c.phone,c.gst_no,
+                c.website,c.email,c.logo_link,c.user_id,c.created
+                FROM " . $this->table_name . " c
+                LEFT JOIN
+                    users u
+                    ON c.user_id=u.id
+                WHERE c.user_id = ?    
+                ORDER BY c.created DESC";
+        $stmt=$this->conn->prepare($query);
+        $stmt->bindParam(1, $this->user_id);
+        $stmt->execute();
+        return $stmt;
+    }
+//    function countByUser(){
+//        $query="SELECT COUNT(*) as total_rows FROM " . $this->table_name . " WHERE user_id = ?";
+//        $stmt=$this->conn->prepare($query);
+//        $stmt->bindParam(1, $this->user_id);
+//        $stmt->execute();
+//        $row=$stmt->fetch(PDO::FETCH_ASSOC);
+//        return $row["total_rows"];
+//    }
     function count(){
         $query="SELECT COUNT(*) as total_rows FROM " . $this->table_name . "";
         $stmt=$this->conn->prepare($query);

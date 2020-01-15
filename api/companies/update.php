@@ -18,39 +18,81 @@
     $companies = new Companies($db);
 
     // get id of product to be edited
-    $data = json_decode(file_get_contents("php://input"));
+//    $data = json_encode(file_get_contents("php://input"));
+    $image=!empty($_FILES["file"]["name"])
+        ? sha1_file($_FILES['file']['tmp_name']) . "-" . basename($_FILES["file"]["name"]) : "";
+    $data=json_decode($_POST["data"]);
+    if($image !== ''){
+        $companies->logo_link = $image;
+        if(!$companies->imageValidator()){
+            $image = "";
+            $imageMessage = "INV";
+        } else {
+            $imageMessage = "IV";
+        }
 
-    // set ID property of product to be edited
-    $companies->id = $data->id;
-
-    // set product property values
-    $companies->name = $data->name;
-    $companies->address = $data->address;
-    $companies->phone = $data->phone;
-    $companies->business_no = $data->business_no;
-    $companies->gst_no = $data->gst_no;
-    $companies->website = $data->website;
-    $companies->email = $data->email;
-    $companies->logo_link = $data->logo_link;
-    $companies->user_id = $data->user_id;
-
-    // update the product
-    if($companies->update()){
-
-        // set response code - 200 ok
-        http_response_code(200);
-
-        // tell the user
-        echo json_encode(array("message" => "Company Information has been updated."));
+    } else {
+        $imageMessage = "Empty";
     }
 
-    // if unable to update the product, tell the user
-    else{
+    if(
+        !empty($data->name) &&
+        !empty($data->address) &&
+        !empty($data->user_id) &&
+        !empty(($data->id))
+        ) {
+        // set ID property of product to be edited
+        $companies->id = $data->id;
 
-        // set response code - 503 service unavailable
-        http_response_code(503);
+        // set product property values
+        $companies->name = $data->name;
+        $companies->address = $data->address;
+        $companies->phone = $data->phone;
+        $companies->business_no = $data->business_no;
+        $companies->gst_no = $data->gst_no;
+        $companies->website = $data->website;
+        $companies->email = $data->email;
+        $companies->logo_link = $image;
+        $companies->user_id = $data->user_id;
+
+        // update the product
+        if ($companies->update()) {
+
+            if($imageMessage == 'IV') {
+                if($companies->uploadPhoto()){
+
+                    $message = 'SIU';
+                } else {
+
+                    $message = 'SINU';
+                }
+            } else {
+                if($imageMessage == 'Empty'){
+                    $message = 'SIE';
+                }else{
+                    $message = 'SINV';
+                }
+            }
+
+            // set response code - 200 ok
+            http_response_code(200);
+
+            // tell the user
+            echo json_encode(array("message" => $message));
+        } // if unable to update the product, tell the user
+        else {
+
+            // set response code - 503 service unavailable
+            http_response_code(503);
+
+            // tell the user
+            echo json_encode(array("message" => "FAIL"));
+        }
+    } else {
+        // set response code - 400 bad request
+        http_response_code(400);
 
         // tell the user
-        echo json_encode(array("message" => "Unable to update company information."));
+        echo json_encode(array("message" => "INCOMPLETE"));
     }
 ?>
