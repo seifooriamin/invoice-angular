@@ -50,14 +50,7 @@ class Companies
         $stmt->execute();
         return $stmt;
     }
-//    function countByUser(){
-//        $query="SELECT COUNT(*) as total_rows FROM " . $this->table_name . " WHERE user_id = ?";
-//        $stmt=$this->conn->prepare($query);
-//        $stmt->bindParam(1, $this->user_id);
-//        $stmt->execute();
-//        $row=$stmt->fetch(PDO::FETCH_ASSOC);
-//        return $row["total_rows"];
-//    }
+
     function count(){
         $query="SELECT COUNT(*) as total_rows FROM " . $this->table_name . "";
         $stmt=$this->conn->prepare($query);

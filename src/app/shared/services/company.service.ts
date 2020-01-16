@@ -9,15 +9,6 @@ export class CompanyService {
 
   constructor(private httpClient: HttpClient) { }
 
-  fileanddata(file: File, data: any) {
-    const formData = new FormData();
-    formData.append('data', JSON.stringify(data));
-    if (file != null) {
-      formData.append('file', file, file.name);
-    }
-    return this.httpClient.post('http://localhost/invoice-angular/api/companies/uploader.php', formData);
-  }
-
   companyCreate(file: File, data: any) {
     const formData = new FormData();
     formData.append('data', JSON.stringify(data));
@@ -25,12 +16,6 @@ export class CompanyService {
       formData.append('file', file, file.name);
     }
     return this.httpClient.post('http://localhost/invoice-angular/api/companies/create.php', formData);
-  }
-  companyRead() {
-    return this.httpClient.get<Array<CompanyModel>>('http://localhost/invoice-angular/api/companies/read.php', {responseType: 'json'});
-  }
-  companyPage(url) {
-    return this.httpClient.get(url);
   }
   companyReadByUser(userId) {
     return this.httpClient.post<Array<CompanyModel>>
@@ -49,7 +34,6 @@ export class CompanyService {
     if (file != null) {
       formData.append('file', file, file.name);
     }
-
     return this.httpClient.post('http://localhost/invoice-angular/api/companies/update.php', formData);
   }
 

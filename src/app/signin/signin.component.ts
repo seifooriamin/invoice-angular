@@ -20,7 +20,11 @@ export class SigninComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder,
-              private authentication: AuthenticationService) { }
+              private authentication: AuthenticationService) {
+    if (this.authentication.currentUserValue) {
+      this.router.navigate(['/']);
+    }
+  }
 
   ngOnInit() {
     this.fillForm = this.formBuilder.group({

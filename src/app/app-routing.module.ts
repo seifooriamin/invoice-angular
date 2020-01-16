@@ -9,6 +9,9 @@ import {UsersComponent} from './users/users.component';
 import {CompanyComponent} from './company/company.component';
 import {CompanyListComponent} from './company/company-list/company-list.component';
 import {AddModifyComponent} from './company/add-modify/add-modify.component';
+import {CustomerComponent} from './customer/customer.component';
+import {CustomerListComponent} from './customer/customer-list/customer-list.component';
+import {AddModifyViewComponent} from './customer/add-modify-view/add-modify-view.component';
 
 
 const routes: Routes = [
@@ -19,6 +22,13 @@ const routes: Routes = [
       {path: 'new', component: AddModifyComponent},
       {path: ':id', component: AddModifyComponent},
       {path: ':id/modify', component: AddModifyComponent},
+
+    ]},
+  {path: 'customer', component: CustomerComponent, canActivate: [AuthGuard], children: [
+      {path: 'customer-list', component: CustomerListComponent},
+      {path: 'new', component: AddModifyViewComponent},
+      {path: ':id', component: AddModifyViewComponent},
+      {path: ':id/modify', component: AddModifyViewComponent},
 
     ]},
   {path: 'users', component: UsersComponent},

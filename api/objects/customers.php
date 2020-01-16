@@ -31,6 +31,19 @@ class Customers
         $stmt->execute();
         return $stmt;
     }
+    function readByUser(){
+        $query="SELECT u.first_name as first_name, u.last_name as last_name ,c.id,c.name,c.address,c.user_id,c.created
+                FROM " . $this->table_name . " c
+                LEFT JOIN
+                    users u
+                    ON c.user_id=u.id
+                WHERE c.user_id = ?    
+                ORDER BY c.created DESC";
+        $stmt=$this->conn->prepare($query);
+        $stmt->bindParam(1, $this->user_id);
+        $stmt->execute();
+        return $stmt;
+    }
     function count(){
         $query="SELECT COUNT(*) as total_rows FROM " . $this->table_name . "";
         $stmt=$this->conn->prepare($query);

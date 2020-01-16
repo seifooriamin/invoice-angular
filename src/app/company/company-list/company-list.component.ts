@@ -3,7 +3,7 @@ import { MdbTablePaginationComponent, MdbTableDirective } from 'node_modules/ang
 import {ActivatedRoute, Router} from '@angular/router';
 import {CompanyService} from '../../shared/services/company.service';
 import {CompanyModel} from '../../shared/models/company.model';
-import {PagingModel} from '../../shared/models/paging.model';
+
 declare var jQuery: any;
 
 @Component({
@@ -13,45 +13,39 @@ declare var jQuery: any;
 })
 export class CompanyListComponent implements OnInit, AfterViewInit {
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
-  @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective
+  @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
   elements: any = [];
   previous: any = [];
   data: CompanyModel[];
-  pages: PagingModel[];
   currentUser: any;
   companyName = '';
   companyIndex = '';
   companyId = '';
   deleteMessageStatus = false;
-  constructor(private cdRef: ChangeDetectorRef, private router: Router, private route: ActivatedRoute,
-              private companyService: CompanyService) { }
+  constructor(private cdRef: ChangeDetectorRef, private router: Router, private companyService: CompanyService) { }
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId: string = '{ "user_id" : "' + this.currentUser['id'] + '" }';
-    this.companyService.companyReadByUser(userId).subscribe(
-        (records: Array<CompanyModel>) => {
-          this.data = records['records'];
-          for (let idata of records['records']) {
-            this.elements.push({id: idata.id, name: idata.name , phone: idata.phone, email: idata.email});
-          }
-          this.mdbTable.setDataSource(this.elements);
-          this.elements = this.mdbTable.getDataSource();
-          this.previous = this.mdbTable.getDataSource();
-        }
-    );
+    try {
+        this.companyService.companyReadByUser(userId).subscribe(
+            (records: Array<CompanyModel>) => {
+                this.data = records['records'];
+                for (let idata of records['records']) {
+                    this.elements.push({id: idata.id, name: idata.name , phone: idata.phone, email: idata.email});
+                }
+                this.mdbTable.setDataSource(this.elements);
+                this.elements = this.mdbTable.getDataSource();
+                this.previous = this.mdbTable.getDataSource();
+            }
+        );
+    } catch (e) {
+        console.log(e.toString());
+    }
+
 
   }
 
-
-  onPageLoad(url: any) {
-    this.companyService.companyPage(url).subscribe(
-        (records: Array<CompanyModel>) => {
-          this.data = records['records'];
-          this.pages = records['paging']['pages'];
-        }
-    );
-  }
   ngAfterViewInit() {
     this.mdbTablePagination.setMaxVisibleItemsNumberTo(5);
 

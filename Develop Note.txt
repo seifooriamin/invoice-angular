@@ -1,0 +1,4 @@
+HTTP Error Catch
+Menu Modification
+Add Subscribtion var and empty them on destroy event
+Tables View
