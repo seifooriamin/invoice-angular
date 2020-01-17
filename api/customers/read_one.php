@@ -29,6 +29,8 @@
             "id" =>  $customers->id,
             "name" => $customers->name,
             "address" => $customers->address,
+            "phone" => $customers->phone,
+            "email" => $customers->email,
             "user_id" => $customers->user_id,
             "user_full_name" => $customers->user_first_name." ". $customers->user_last_name,
             "created" => $customers->created

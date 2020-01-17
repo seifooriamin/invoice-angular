@@ -73,7 +73,7 @@ export class AddModifyComponent implements OnInit {
           id: ['']
       });
   }
-    initializeFormData() {
+  initializeFormData() {
         this.fillForm = this.formBuilder.group({
             name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40),
                 Validators.pattern('(?=.*[a-zA-Z0-9]).{2,}')]],
@@ -171,12 +171,12 @@ export class AddModifyComponent implements OnInit {
                   (response) => {
                       if (response['message'] === 'SIU' || response['message'] === 'SIE') {
                           this.submitMessageStatusSuccess = true;
-                          this.submitMessage = 'Company has been successfully registered';
+                          this.submitMessage = 'The company has been successfully registered';
                           this.fillForm.reset();
                           this.imageCleanUp();
                       } else {
                           if (response['message'] === 'SINU') {
-                              this.submitMessage = 'Company has been successfully registered, the logo has not been uploaded';
+                              this.submitMessage = 'The company has been successfully registered, the logo has not been uploaded';
                               this.fillForm.reset();
                               this.imageCleanUp();
                           } else {
@@ -201,13 +201,13 @@ export class AddModifyComponent implements OnInit {
                   (response) => {
                       if (response['message'] === 'SIU' || response['message'] === 'SIE') {
                           this.submitMessageStatusSuccess = true;
-                          this.submitMessage = 'Company information has been successfully updated';
+                          this.submitMessage = 'The company information has been successfully updated';
                           // this.fillForm.reset();
                           // this.imageCleanUp();
                           this.router.navigate(['/company/' + this.id]);
                       } else {
                           if (response['message'] === 'SINU') {
-                              this.submitMessage = 'Company information has been successfully updated, the logo has not been uploaded';
+                              this.submitMessage = 'The company information has been successfully updated, the logo has not been uploaded';
                               this.router.navigate(['/company/' + this.id]);
                               // this.fillForm.reset();
                               // this.imageCleanUp();

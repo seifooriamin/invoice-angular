@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {CustomerService} from '../../shared/services/customer.service';
 import {CustomerModel} from '../../shared/models/customer.model';
 import {Subscription} from 'rxjs';
-
+declare var jQuery: any;
 @Component({
   selector: 'app-customer-list',
   templateUrl: './customer-list.component.html',
@@ -20,6 +20,11 @@ export class CustomerListComponent implements OnInit, AfterViewInit, OnDestroy {
   currentUser: any;
   subscribe: Subscription;
   searchText = '';
+  customerName = '';
+  customerIndex = '';
+  customerId = '';
+  deleteMessageStatus = false;
+  deleteMessageText = '';
   constructor(private cdRef: ChangeDetectorRef, private router: Router, private customerService: CustomerService) { }
   @HostListener('input') oninput() { this.searchItems(); }
   ngOnInit() {
@@ -29,7 +34,7 @@ export class CustomerListComponent implements OnInit, AfterViewInit, OnDestroy {
         (records: Array<CustomerModel>) => {
           this.data = records['records'];
           for (let idata of records['records']) {
-            this.elements.push({id: idata.id, name: idata.name , address: idata.address});
+            this.elements.push({id: idata.id, name: idata.name , address: idata.address, phone: idata.phone, email: idata.email});
           }
           this.mdbTable.setDataSource(this.elements);
           this.elements = this.mdbTable.getDataSource();
@@ -49,7 +54,7 @@ export class CustomerListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       if (this.searchText) {
         this.elements = this.mdbTable.searchLocalDataByMultipleFields(this.searchText, ['name',
-          'address']);
+          'address', 'phone', 'email']);
         this.mdbTable.setDataSource(prev);
     }
   }
@@ -67,8 +72,38 @@ export class CustomerListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.cdRef.detectChanges();
   }
 
-  onAddNew() {
+  onModalShow(company, cindex, cid) {
+    this.customerName = company;
+    this.customerIndex = cindex;
+    this.customerId = cid;
+    jQuery('#modalMessage').modal('show');
+  }
 
+  onDeleteCustomer(index, id, name) {
+    jQuery('#modalMessage').modal('hide');
+    this.mdbTable.removeRow(index);
+    const idJson = '{ "id" : "' + id + '" }';
+    this.customerService.customerDelete(idJson).subscribe(
+        (response) => {
+          if (response['message'] === 'SUCCESS') {
+            this.deleteMessageText = name + 'has been deleted successfully';
+            this.deleteMessageStatus = true;
+            setTimeout(() => {
+              this.deleteMessageStatus = false;
+            }, 2000);
+          }
+        }, (e) => {
+          this.deleteMessageText = 'Due to technical issue' + name + 'has not been deleted.';
+          this.deleteMessageStatus = true;
+          setTimeout(() => {
+            this.deleteMessageStatus = false;
+          }, 2000);
+        }
+    );
+  }
+
+  onAddNew() {
+    this.router.navigate(['customer/new']);
   }
 
 }

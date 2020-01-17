@@ -1,8 +1,8 @@
-import {AfterViewInit, ChangeDetectorRef, Component, DoCheck, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, DoCheck, HostListener, OnInit, ViewChild} from '@angular/core';
 import { MdbTablePaginationComponent, MdbTableDirective } from 'node_modules/angular-bootstrap-md';
-import {ActivatedRoute, Router} from '@angular/router';
 import {CompanyService} from '../../shared/services/company.service';
 import {CompanyModel} from '../../shared/models/company.model';
+import {Router} from '@angular/router';
 
 declare var jQuery: any;
 
@@ -19,33 +19,47 @@ export class CompanyListComponent implements OnInit, AfterViewInit {
   data: CompanyModel[];
   currentUser: any;
   companyName = '';
+  searchText = '';
   companyIndex = '';
   companyId = '';
   deleteMessageStatus = false;
-  constructor(private cdRef: ChangeDetectorRef, private router: Router, private companyService: CompanyService) { }
+  deleteMessageText = '';
+  constructor(private cdRef: ChangeDetectorRef, private companyService: CompanyService, private router: Router) { }
+  @HostListener('input') oninput() { this.searchItems(); }
 
   ngOnInit() {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    const userId: string = '{ "user_id" : "' + this.currentUser['id'] + '" }';
-    try {
-        this.companyService.companyReadByUser(userId).subscribe(
-            (records: Array<CompanyModel>) => {
-                this.data = records['records'];
-                for (let idata of records['records']) {
-                    this.elements.push({id: idata.id, name: idata.name , phone: idata.phone, email: idata.email});
-                }
-                this.mdbTable.setDataSource(this.elements);
-                this.elements = this.mdbTable.getDataSource();
-                this.previous = this.mdbTable.getDataSource();
-            }
-        );
-    } catch (e) {
-        console.log(e.toString());
-    }
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      const userId: string = '{ "user_id" : "' + this.currentUser['id'] + '" }';
+      try {
+          this.companyService.companyReadByUser(userId).subscribe(
+              (records: Array<CompanyModel>) => {
+                  this.data = records['records'];
+                  for (let idata of records['records']) {
+                      this.elements.push({id: idata.id, name: idata.name, phone: idata.phone, email: idata.email});
+                  }
+                  this.mdbTable.setDataSource(this.elements);
+                  this.elements = this.mdbTable.getDataSource();
+                  this.previous = this.mdbTable.getDataSource();
+              }
+          );
+      } catch (e) {
+          console.log(e.toString());
+      }
 
 
   }
-
+    searchItems() {
+        const prev = this.mdbTable.getDataSource();
+        if (!this.searchText) {
+            this.mdbTable.setDataSource(this.previous);
+            this.elements = this.mdbTable.getDataSource();
+        }
+        if (this.searchText) {
+            this.elements = this.mdbTable.searchLocalDataByMultipleFields(this.searchText, ['name',
+                'phone', 'email']);
+            this.mdbTable.setDataSource(prev);
+        }
+    }
   ngAfterViewInit() {
     this.mdbTablePagination.setMaxVisibleItemsNumberTo(5);
 
@@ -65,7 +79,7 @@ export class CompanyListComponent implements OnInit, AfterViewInit {
       jQuery('#modalMessage').modal('show');
   }
 
-  onDeleteCompany(index, id) {
+  onDeleteCompany(index, id, name) {
       jQuery('#modalMessage').modal('hide');
       this.mdbTable.removeRow(index);
       // this.elements.splice(index, 1);
@@ -73,11 +87,18 @@ export class CompanyListComponent implements OnInit, AfterViewInit {
       this.companyService.companyDelete(idJson).subscribe(
           (response) => {
               if (response['message'] === 'SUCCESS') {
+                  this.deleteMessageText = name + ' has been deleted successfully';
                   this.deleteMessageStatus = true;
                   setTimeout(() => {
                       this.deleteMessageStatus = false;
                   }, 2000);
               }
+          }, (e) => {
+              this.deleteMessageText = 'Due to technical issue ' + name + ' has not been deleted.';
+              this.deleteMessageStatus = true;
+              setTimeout(() => {
+                  this.deleteMessageStatus = false;
+              }, 2000);
           }
       );
   }

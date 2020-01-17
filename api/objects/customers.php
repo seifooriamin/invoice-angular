@@ -9,6 +9,8 @@ class Customers
     public $id;
     public $name;
     public $address;
+    public $phone;
+    public $email;
     public $user_id;
     public $user_first_name;
     public $user_last_name;
@@ -32,7 +34,8 @@ class Customers
         return $stmt;
     }
     function readByUser(){
-        $query="SELECT u.first_name as first_name, u.last_name as last_name ,c.id,c.name,c.address,c.user_id,c.created
+        $query="SELECT u.first_name as first_name, u.last_name as last_name , c.id, c.name, c.address, c.user_id,
+                       c.created, c.phone, c.email
                 FROM " . $this->table_name . " c
                 LEFT JOIN
                     users u
@@ -72,7 +75,8 @@ class Customers
         $query = "INSERT INTO
                         " . $this->table_name . "
                     SET
-                        name=:name, address=:address, user_id=:user_id";
+                        name=:name, address=:address, user_id=:user_id,
+                        phone=:phone, email=:email";
 
         // prepare query
         $stmt = $this->conn->prepare($query);
@@ -80,12 +84,16 @@ class Customers
         // sanitize
         $this->name=htmlspecialchars(strip_tags($this->name));
         $this->address=htmlspecialchars(strip_tags($this->address));
-         $this->user_id=htmlspecialchars(strip_tags($this->user_id));
+        $this->user_id=htmlspecialchars(strip_tags($this->user_id));
+        $this->phone=htmlspecialchars(strip_tags($this->phone));
+        $this->email=htmlspecialchars(strip_tags($this->email));
 
 
         // bind values
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":address", $this->address);
+        $stmt->bindParam(":phone", $this->phone);
+        $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":user_id", $this->user_id);
 
         // execute query
@@ -100,7 +108,8 @@ class Customers
 
         // query to read single record
         $query = "SELECT
-                        u.first_name as first_name, u.last_name as last_name , c.id,c.name,c.address,c.user_id, c.created
+                        u.first_name as first_name, u.last_name as last_name , c.id, c.name, c.address, c.user_id,
+                        c.created, c.phone, c.email
                     FROM
                         " . $this->table_name . " c
                         LEFT JOIN
@@ -126,6 +135,8 @@ class Customers
         // set values to object properties
         $this->name = $row['name'];
         $this->address = $row['address'];
+        $this->phone = $row['phone'];
+        $this->email = $row['email'];
         $this->user_id = $row['user_id'];
         $this->user_first_name = $row['first_name'];
         $this->user_last_name = $row['last_name'];
@@ -137,9 +148,11 @@ class Customers
         $query = "UPDATE
                         " . $this->table_name . "
                     SET
-                        name = :name,
-                        address = :address,
-                        user_id = :user_id
+                        name=:name,
+                        address=:address,
+                        phone=:phone,
+                        email=:email,
+                        user_id=:user_id
                     WHERE
                         id = :id";
 
@@ -149,12 +162,16 @@ class Customers
         // sanitize
         $this->name=htmlspecialchars(strip_tags($this->name));
         $this->address=htmlspecialchars(strip_tags($this->address));
+        $this->phone=htmlspecialchars(strip_tags($this->phone));
+        $this->email=htmlspecialchars(strip_tags($this->email));
         $this->user_id=htmlspecialchars(strip_tags($this->user_id));
         $this->id=htmlspecialchars(strip_tags($this->id));
 
         // bind new values
         $stmt->bindParam(':name', $this->name);
         $stmt->bindParam(':address', $this->address);
+        $stmt->bindParam(':phone', $this->phone);
+        $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':user_id', $this->user_id);
         $stmt->bindParam(':id', $this->id);
 

@@ -26,9 +26,11 @@
                 "id" => $id,
                 "name" => $name,
                 "address" => $address,
+                "phone" => $phone,
+                "email" => $email,
                 "user_id" => $user_id,
                 "full_name" => $first_name." ".$last_name,
-                "created" => $created,
+                "created" => $created
             );
             array_push($customers_arr["records"],$customers_item);
         }

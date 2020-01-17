@@ -8,10 +8,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class CompanyComponent implements OnInit {
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit() {
-    // this.router.navigate(['company-list'], {relativeTo: this.route});
+
   }
 
 }

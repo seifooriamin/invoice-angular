@@ -5,12 +5,23 @@
         </div>
     </div>
     <div class="row mt-2">
+        <div class="col-lg-5 col-md-8 col-12">
+            <label class="sr-only" for="inlineFormInputGroup">Search</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fas fa-search"></i></div>
+                </div>
+                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search" [(ngModel)]="searchText">
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <table mdbTable #tableEl="mdbTable" class="z-depth-1">
             <thead class="unique-color white-text">
             <tr>
-                <th [mdbTableSort]="elements" sortBy="name" class="font-weight-bold">Company Name</th>
-                <th [mdbTableSort]="elements" sortBy="phone" class="font-weight-bold">Phone</th>
-                <th [mdbTableSort]="elements" sortBy="email" class="font-weight-bold">Email</th>
+                <th [mdbTableSort]="elements" sortBy="name" class="font-weight-bold">Company Name <i class="fas fa-sort"></i></th>
+                <th [mdbTableSort]="elements" sortBy="phone" class="font-weight-bold">Phone <i class="fas fa-sort"></i></th>
+                <th [mdbTableSort]="elements" sortBy="email" class="font-weight-bold">Email <i class="fas fa-sort"></i></th>
                 <th class="font-weight-bold">Operations</th>
             </tr>
             </thead>
@@ -35,7 +46,7 @@
             <tr>
                 <td colspan="5">
                     <div *ngIf="deleteMessageStatus" class="invalid-feedback-manual text-center">
-                        Company has been deleted successfully.
+                        {{deleteMessageText}}
                     </div>
                 </td>
             </tr>
@@ -44,7 +55,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="modalMessage" aria-hidden="true">
+<div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="modalMessage" aria-hidden="true"
+     data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header bg-dark text-light">
@@ -58,7 +70,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary" (click)="onDeleteCompany(companyIndex, companyId)">Yes</button>
+                <button type="button" class="btn btn-primary" (click)="onDeleteCompany(companyIndex, companyId, companyName)">Yes</button>
             </div>
         </div>
     </div>

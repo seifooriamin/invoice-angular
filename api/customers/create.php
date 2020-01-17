@@ -31,7 +31,8 @@
         $customers->name = $data->name;
         $customers->address = $data->address;
         $customers->user_id = $data->user_id;
-
+        $customers->phone = $data->phone;
+        $customers->email = $data->email;
 
         // create the product
         if($customers->create()){
@@ -40,7 +41,7 @@
             http_response_code(201);
 
             // tell the user
-            echo json_encode(array("message" => "New customer has been registered."));
+            echo json_encode(array("message" => "SUCCESS"));
         }
 
         // if unable to create the product, tell the user
@@ -50,7 +51,7 @@
             http_response_code(503);
 
             // tell the user
-            echo json_encode(array("message" => "Unable to register new customer."));
+            echo json_encode(array("message" => "FAIL"));
         }
     }
 
@@ -61,6 +62,6 @@
         http_response_code(400);
 
         // tell the user
-        echo json_encode(array("message" => "Fill all the mandatory fields."));
+        echo json_encode(array("message" => "INCOMPLETE"));
     }
 ?>
