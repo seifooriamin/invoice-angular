@@ -12,6 +12,8 @@ class Invoice
     public $customer_id;
     public $customer_name;
     public $customer_address;
+    public $customer_phone;
+    public $customer_email;
     public $company_id;
     public $company_name;
     public $company_address;
@@ -45,8 +47,11 @@ class Invoice
         $query="SELECT u.first_name as user_first_name, u.last_name as user_last_name, cu.name as customer_name, cu.address as customer_address,
                        co.name as company_name, co.address as company_address, co.email as company_email, co.phone as company_phone,
                        co.business_no as company_business_no, co.gst_no as company_gst_no, co.website as company_website,
-                       co.logo_link as company_logo_link, i.id, i.invoice_number, i.date, i.company_id, i.customer_id, i.sub_total,
-                       i.addition1, i.addition2, i.addition3, i.deduction1, i.deduction2, i.total, i.note, i.created, i.user_id, i.year
+                       co.logo_link as company_logo_link, i.id, i.invoice_number, i.date, i.company_id, i.customer_id,
+                       i.addition1, i.addition2, i.addition3, i.deduction1, i.deduction2, i.note, i.created, i.user_id, i.year,
+                       (SELECT SUM((quantity*unit_price)) FROM invoice_rows ir WHERE i.id = ir.invoice_id) as sub_total,
+                       ((SELECT SUM((quantity*unit_price)) FROM invoice_rows ir WHERE i.id = ir.invoice_id)-
+                       (i.deduction1+i.deduction2)+(i.addition1+i.addition2+i.addition3)) as total
                 FROM " . $this->table_name . " i
                 LEFT JOIN
                     users u
@@ -56,9 +61,38 @@ class Invoice
                     ON i.customer_id=cu.id
                 LEFT JOIN
                     companies co
-                    ON i.company_id=co.id        
+                    ON i.company_id=co.id
+                GROUP BY i.id            
                 ORDER BY i.created DESC";
         $stmt=$this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
+    function readByUser(){
+        $query="SELECT u.first_name as user_first_name, u.last_name as user_last_name, cu.name as customer_name,
+                       cu.address as customer_address, cu.phone as customer_phone, cu.email as customer_email,
+                       co.name as company_name, co.address as company_address, co.email as company_email, co.phone as company_phone,
+                       co.business_no as company_business_no, co.gst_no as company_gst_no, co.website as company_website,
+                       co.logo_link as company_logo_link, i.id, i.invoice_number, i.date, i.company_id, i.customer_id,
+                       i.addition1, i.addition2, i.addition3, i.deduction1, i.deduction2, i.note, i.created, i.user_id, i.year,
+                       (SELECT SUM((quantity*unit_price)) FROM invoice_rows ir WHERE i.id = ir.invoice_id) as sub_total,
+                       ((SELECT SUM((quantity*unit_price)) FROM invoice_rows ir WHERE i.id = ir.invoice_id)-
+                       (i.deduction1+i.deduction2)+(i.addition1+i.addition2+i.addition3)) as total
+                FROM " . $this->table_name . " i
+                LEFT JOIN
+                    users u
+                    ON i.user_id=u.id
+                LEFT JOIN
+                    customers cu
+                    ON i.customer_id=cu.id
+                LEFT JOIN
+                    companies co
+                    ON i.company_id=co.id
+                WHERE i.user_id = ?    
+                GROUP BY i.id            
+                ORDER BY i.created DESC";
+        $stmt=$this->conn->prepare($query);
+        $stmt->bindParam(1, $this->user_id);
         $stmt->execute();
         return $stmt;
     }
@@ -170,7 +204,6 @@ class Invoice
 
 
     }
-
     function invoice_number_generator(){
         $query="SELECT MAX(no) as current_invoice FROM ". $this->table_name .  " WHERE year=?";
         $current_year= date("Y");
@@ -381,7 +414,7 @@ class Invoice
                        co.name as company_name, co.address as company_address, co.email as company_email, co.phone as company_phone,
                        co.business_no as company_business_no, co.gst_no as company_gst_no, co.website as company_website,
                        co.logo_link as company_logo_link, i.id, i.invoice_number, i.date, i.company_id, i.customer_id, i.sub_total,
-                       i.addition1, i.addition2, i.addition3, i.deduction1, i.deduction2, i.total, i.note, i.created, i.user_id, i.year
+                       i.addition1, i.addition2, i.addition3, i.deduction1, i.deduction2, i.total, i.note, i.created, i.user_id, i.year,
                     FROM
                         " . $this->table_name . " i
                    LEFT JOIN
@@ -392,9 +425,10 @@ class Invoice
                     ON i.customer_id=cu.id
                    LEFT JOIN
                     companies co
-                    ON i.company_id=co.id   
-                    ORDER BY i.created DESC
-                    LIMIT ?, ?";
+                    ON i.company_id=co.id
+                   GROUP BY i.id    
+                   ORDER BY i.created DESC
+                   LIMIT ?, ?";
 
         // prepare query statement
         $stmt = $this->conn->prepare( $query );

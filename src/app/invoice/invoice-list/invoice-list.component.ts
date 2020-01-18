@@ -1,40 +1,42 @@
 import {AfterViewInit, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
-import {CompanyModel} from '../../shared/models/company.model';
-import {Router} from '@angular/router';
-import {CustomerService} from '../../shared/services/customer.service';
-import {CustomerModel} from '../../shared/models/customer.model';
 import {Subscription} from 'rxjs';
+import {InvoiceModel} from '../../shared/models/invoice.model';
+import {Router} from '@angular/router';
+import {InvoiceService} from '../../shared/services/invoice.service';
+import {CustomerModel} from '../../shared/models/customer.model';
 declare var jQuery: any;
 @Component({
-  selector: 'app-customer-list',
-  templateUrl: './customer-list.component.html',
-  styleUrls: ['./customer-list.component.css']
+  selector: 'app-invoice-list',
+  templateUrl: './invoice-list.component.html',
+  styleUrls: ['./invoice-list.component.css']
 })
-export class CustomerListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
   elements: any = [];
   previous: any = [];
-  data: CompanyModel[];
+  data: InvoiceModel[];
   currentUser: any;
   subscribe: Subscription;
   searchText = '';
-  customerName = '';
-  customerIndex = '';
-  customerId = '';
+  invoiceNumber = '';
+  invoiceIndex = '';
+  invoiceId = '';
   deleteMessageStatus = false;
   deleteMessageText = '';
-  constructor(private cdRef: ChangeDetectorRef, private router: Router, private customerService: CustomerService) { }
+  constructor(private cdRef: ChangeDetectorRef, private router: Router, private invoiceService: InvoiceService) { }
   @HostListener('input') oninput() { this.searchItems(); }
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId: string = '{ "user_id" : "' + this.currentUser['id'] + '" }';
-    this.subscribe = this.customerService.customerReadByUser(userId).subscribe(
+    this.subscribe = this.invoiceService.invoiceReadByUser(userId).subscribe(
         (records: Array<CustomerModel>) => {
           this.data = records['records'];
           for (let idata of records['records']) {
-            this.elements.push({id: idata.id, name: idata.name , address: idata.address, phone: idata.phone, email: idata.email});
+            this.elements.push({id: idata.id, invoice_number: idata.invoice_number,
+              date: idata.date, customer_name: idata.customer_name, company_name: idata.company_name,
+              total: idata.total, year: idata.year});
           }
           this.mdbTable.setDataSource(this.elements);
           this.elements = this.mdbTable.getDataSource();
@@ -47,18 +49,17 @@ export class CustomerListComponent implements OnInit, AfterViewInit, OnDestroy {
           }, 2000);
         }
     );
-
   }
   searchItems() {
-      const prev = this.mdbTable.getDataSource();
-      if (!this.searchText) {
-        this.mdbTable.setDataSource(this.previous);
-        this.elements = this.mdbTable.getDataSource();
-      }
-      if (this.searchText) {
-        this.elements = this.mdbTable.searchLocalDataByMultipleFields(this.searchText, ['name',
-          'address', 'phone', 'email']);
-        this.mdbTable.setDataSource(prev);
+    const prev = this.mdbTable.getDataSource();
+    if (!this.searchText) {
+      this.mdbTable.setDataSource(this.previous);
+      this.elements = this.mdbTable.getDataSource();
+    }
+    if (this.searchText) {
+      this.elements = this.mdbTable.searchLocalDataByMultipleFields(this.searchText, ['invoice_number',
+        'data', 'customer_name', 'company_name', 'total', 'year' ]);
+      this.mdbTable.setDataSource(prev);
     }
   }
   ngOnDestroy(): void {
@@ -66,7 +67,6 @@ export class CustomerListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.subscribe.unsubscribe();
     }
   }
-
   ngAfterViewInit() {
     this.mdbTablePagination.setMaxVisibleItemsNumberTo(5);
 
@@ -74,29 +74,27 @@ export class CustomerListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mdbTablePagination.calculateLastItemIndex();
     this.cdRef.detectChanges();
   }
-
-  onModalShow(company, cindex, cid) {
-    this.customerName = company;
-    this.customerIndex = cindex;
-    this.customerId = cid;
+  onModalShow(invoiceNumber, invoiceIndex, invoiceID) {
+    this.invoiceNumber = invoiceNumber;
+    this.invoiceIndex = invoiceIndex;
+    this.invoiceId = invoiceID;
     jQuery('#modalMessage').modal('show');
   }
-
-  onDeleteCustomer(index, id, name) {
+  onDeleteCustomer(index, id, invoiceNumber) {
     jQuery('#modalMessage').modal('hide');
     this.mdbTable.removeRow(index);
     const idJson = '{ "id" : "' + id + '" }';
-    this.customerService.customerDelete(idJson).subscribe(
+    this.subscribe = this.invoiceService.invoiceDelete(idJson).subscribe(
         (response) => {
           if (response['message'] === 'SUCCESS') {
-            this.deleteMessageText = name + 'has been deleted successfully';
+            this.deleteMessageText = 'Invoice #' + invoiceNumber + ' has been deleted successfully';
             this.deleteMessageStatus = true;
             setTimeout(() => {
               this.deleteMessageStatus = false;
             }, 2000);
           }
         }, (e) => {
-          this.deleteMessageText = 'Due to technical issue' + name + 'has not been deleted.';
+          this.deleteMessageText = 'Due to technical issue invoice #' + invoiceNumber + ' has not been deleted.';
           this.deleteMessageStatus = true;
           setTimeout(() => {
             this.deleteMessageStatus = false;
@@ -104,9 +102,7 @@ export class CustomerListComponent implements OnInit, AfterViewInit, OnDestroy {
         }
     );
   }
-
   onAddNew() {
-    this.router.navigate(['customer/new']);
+    this.router.navigate(['invoice/new']);
   }
-
 }

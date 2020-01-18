@@ -30,7 +30,6 @@ export class CompanyListComponent implements OnInit, AfterViewInit {
   ngOnInit() {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
       const userId: string = '{ "user_id" : "' + this.currentUser['id'] + '" }';
-      try {
           this.companyService.companyReadByUser(userId).subscribe(
               (records: Array<CompanyModel>) => {
                   this.data = records['records'];
@@ -40,13 +39,14 @@ export class CompanyListComponent implements OnInit, AfterViewInit {
                   this.mdbTable.setDataSource(this.elements);
                   this.elements = this.mdbTable.getDataSource();
                   this.previous = this.mdbTable.getDataSource();
+              }, (e) => {
+                  this.deleteMessageText = 'No record found';
+                  this.deleteMessageStatus = true;
+                  setTimeout(() => {
+                      this.deleteMessageStatus = false;
+                  }, 2000);
               }
           );
-      } catch (e) {
-          console.log(e.toString());
-      }
-
-
   }
     searchItems() {
         const prev = this.mdbTable.getDataSource();

@@ -21,6 +21,9 @@ import { CustomerComponent } from './customer/customer.component';
 import { AddModifyViewComponent } from './customer/add-modify-view/add-modify-view.component';
 import { CustomerListComponent } from './customer/customer-list/customer-list.component';
 import {HttpErrorInterceptor} from './shared/tools/httperror.interceptor';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { InvoiceListComponent } from './invoice/invoice-list/invoice-list.component';
+import { InvoiceAddViewModifyComponent } from './invoice/invoice-add-view-modify/invoice-add-view-modify.component';
 
 
 
@@ -41,6 +44,9 @@ import {HttpErrorInterceptor} from './shared/tools/httperror.interceptor';
     CustomerComponent,
     AddModifyViewComponent,
     CustomerListComponent,
+    InvoiceComponent,
+    InvoiceListComponent,
+    InvoiceAddViewModifyComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),

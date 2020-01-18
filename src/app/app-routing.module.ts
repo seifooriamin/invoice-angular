@@ -12,6 +12,9 @@ import {AddModifyComponent} from './company/add-modify/add-modify.component';
 import {CustomerComponent} from './customer/customer.component';
 import {CustomerListComponent} from './customer/customer-list/customer-list.component';
 import {AddModifyViewComponent} from './customer/add-modify-view/add-modify-view.component';
+import {InvoiceComponent} from './invoice/invoice.component';
+import {InvoiceListComponent} from './invoice/invoice-list/invoice-list.component';
+import {InvoiceAddViewModifyComponent} from './invoice/invoice-add-view-modify/invoice-add-view-modify.component';
 
 
 const routes: Routes = [
@@ -29,6 +32,13 @@ const routes: Routes = [
       {path: 'new', component: AddModifyViewComponent},
       {path: ':id', component: AddModifyViewComponent},
       {path: ':id/modify', component: AddModifyViewComponent},
+
+    ]},
+  {path: 'invoice', component: InvoiceComponent, canActivate: [AuthGuard], children: [
+      {path: 'invoice-list', component: InvoiceListComponent},
+      {path: 'new', component: InvoiceAddViewModifyComponent},
+      {path: ':id', component: InvoiceAddViewModifyComponent},
+      {path: ':id/modify', component: InvoiceAddViewModifyComponent},
 
     ]},
   {path: 'users', component: UsersComponent},
