@@ -31,7 +31,6 @@ class Invoice_rows
         $stmt->execute();
         return $stmt;
     }
-
     function readPerInvoice(){
         $query="SELECT inx,invoice_id,description,comment,unit_price,unit_measure,quantity,user_id
                 FROM " . $this->table_name . " WHERE invoice_id = ? ORDER BY inx ASC";
@@ -44,7 +43,6 @@ class Invoice_rows
 
         return $stmt;
     }
-
     function countPerInvoice(){
         $query="SELECT COUNT(*) as total_rows FROM " . $this->table_name . " WHERE invoice_id=?";
         $stmt=$this->conn->prepare($query);
@@ -53,7 +51,6 @@ class Invoice_rows
         $row=$stmt->fetch(PDO::FETCH_ASSOC);
         return $row["total_rows"];
     }
-
     function count(){
         $query="SELECT COUNT(*) as total_rows FROM " . $this->table_name . "";
         $stmt=$this->conn->prepare($query);
@@ -62,7 +59,6 @@ class Invoice_rows
         $row=$stmt->fetch(PDO::FETCH_ASSOC);
         return $row["total_rows"];
     }
-
     function create(){
 
         // query to insert record
@@ -107,7 +103,6 @@ class Invoice_rows
         return false;
 
     }
-
     function readOne(){
 
         // query to read single record
@@ -141,7 +136,6 @@ class Invoice_rows
         $this->created = $row['created'];
         $this->user_id = $row['user_id'];
     }
-
     function update(){
 
         // update query
@@ -187,28 +181,27 @@ class Invoice_rows
 //        echo($errors[2]);
         return false;
     }
-
     function delete(){
 
-        // delete query
         $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
-
-        // prepare query
         $stmt = $this->conn->prepare($query);
-
-        // sanitize
         $this->id=htmlspecialchars(strip_tags($this->id));
-
-        // bind id of record to delete
         $stmt->bindParam(1, $this->id);
-
-        // execute query
         if($stmt->execute()){
             return true;
         }
-
         return false;
+    }
+    function deleteByInvoiceID(){
 
+        $query = "DELETE FROM " . $this->table_name . " WHERE invoice_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $this->invoice_id=htmlspecialchars(strip_tags($this->invoice_id));
+        $stmt->bindParam(1, $this->invoice_id);
+        if($stmt->execute()){
+            return true;
+        }
+        return false;
     }
 
 

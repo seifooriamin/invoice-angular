@@ -190,25 +190,25 @@ class Estimate_rows
 
     function delete(){
 
-        // delete query
         $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
-
-        // prepare query
         $stmt = $this->conn->prepare($query);
-
-        // sanitize
         $this->id=htmlspecialchars(strip_tags($this->id));
-
-        // bind id of record to delete
         $stmt->bindParam(1, $this->id);
-
-        // execute query
         if($stmt->execute()){
             return true;
         }
-
         return false;
+    }
+    function deleteByEstimateID(){
 
+        $query = "DELETE FROM " . $this->table_name . " WHERE estimate_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $this->estimate_id=htmlspecialchars(strip_tags($this->estimate_id));
+        $stmt->bindParam(1, $this->estimate_id);
+        if($stmt->execute()){
+            return true;
+        }
+        return false;
     }
 
 

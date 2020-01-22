@@ -1,1 +1,128 @@
-<p>invoice-add-view-modify works!</p>
+<div class="container mt-4 bg-dark mb-4">
+    <div class="row pt-2">
+        <div class="col-lg-1 col-md-2 col-3">
+            <ng-template #hoverBack><p>Back</p></ng-template>
+            <button type="button" placement="bottom" class="btn btn-block btn-warning text-light" [mdbPopover]="hoverBack"
+                    triggers="hover" (click)="onBack()"><i class="fas fa-arrow-circle-left fa-lg"></i></button>
+        </div>
+        <div class="col-lg-1 col-md-2 col-3">
+            <ng-template #hoverEdit><p>Edit</p></ng-template>
+            <button type="button" class="btn btn-block btn-success text-light"
+                    *ngIf="pageStatus === 'view'" placement="bottom" [mdbPopover]="hoverEdit" triggers="hover"
+                    (click)="onModify()">
+                <i class="fas fa-edit fa-lg"></i></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h3 class="text-light pt-1">{{pageTitle}}</h3>
+        </div>
+    </div>
+    <form class="pl-2 pr-2 mt-1 bg-dark border-dark border" [formGroup]="fillForm" (ngSubmit)="onSubmit()">
+        <div class="border border-light">  <!--Company Information-->
+            <div class="form-row mt-2 text-light pl-2 pr-2">
+                <div class="col-lg-4 col-md-6">
+                    <label for="companyID" class="col-form-label">Company Information</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <ng-template #hoverCompany><p>Add New Company</p></ng-template>
+                            <button type="button" placement="bottom" class="btn btn-success text-light float-right" [mdbPopover]="hoverCompany"
+                                    triggers="hover" (click)="onAddCompany()"><i class="fas fa-plus-square"></i></button>
+                        </div>
+                        <select id="companyID" class="form-control" formControlName="company_id"
+                                (change)="onLoadCompanyData($event.target.value)"
+                                [ngClass]="{ 'is-invalid': f.company_id.touched && f.company_id.invalid,
+                                    'is-valid': f.company_id.valid}">
+                            <option *ngFor="let company of companyList" value="{{company.id}}">{{company.name}}</option>
+                        </select>
+                        <div *ngIf="f.company_id.touched && f.company_id.invalid" class="invalid-feedback">
+                            This field is mandatory, please select one option
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+
+                </div>
+                <div class="offset-lg-3 col-lg-4 col-md-6">
+                    <img [src]=imgUrl  class="img-thumbnail img" alt="" style="height: 100px"  />
+                </div>
+            </div>
+            <div class="form-row text-light mt-2 pl-2 pr-2">
+                <div class="col-lg-8 col-md-12">
+                    <p class="font-weight-bold">Address: {{companyInfo.address}}</p>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <p class="font-weight-bold">Phone: {{companyInfo.phone}}</p>
+                </div>
+            </div>
+            <div class="form-row text-light pl-2 pr-2">
+                <div class="col-6">
+                    <p class="font-weight-bold">Email: {{companyInfo.email}}</p>
+                </div>
+                <div class="col-6">
+                    <p class="font-weight-bold">Website: {{companyInfo.website}}</p>
+                </div>
+            </div>
+            <div class="form-row text-light pl-2 pr-2">
+                <div class="col-6">
+                    <p class="font-weight-bold">GST No.: {{companyInfo.gst_no}}</p>
+                </div>
+                <div class="col-6">
+                    <p class="font-weight-bold">Business No.: {{companyInfo.business_no}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="border border-light mt-1">  <!--Customer Information-->
+            <div class="form-row mt-2 text-light pl-2 pr-2">
+                <div class="col-lg-4 col-md-6">
+                    <label for="customerID" class="col-form-label">Customer Information</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <ng-template #hoverCustomer><p>Add New Customer</p></ng-template>
+                            <button type="button" placement="bottom" class="btn btn-success text-light float-right" [mdbPopover]="hoverCustomer"
+                                    triggers="hover" (click)="onAddCustomer()"><i class="fas fa-plus-square"></i></button>
+                        </div>
+                        <select id="customerID" class="form-control" formControlName="customer_id"
+                                (change)="onLoadCustomerData($event.target.value)"
+                                [ngClass]="{ 'is-invalid': f.customer_id.touched && f.customer_id.invalid,
+                                    'is-valid': f.customer_id.valid}">
+                            <option *ngFor="let customer of customerList" value="{{customer.id}}">{{customer.name}}</option>
+                        </select>
+                        <div *ngIf="f.customer_id.touched && f.customer_id.invalid" class="invalid-feedback">
+                            This field is mandatory, please select one option
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-row text-light mt-2 pl-2 pr-2">
+                <div class="col-lg-12 col-md-12">
+                    <p class="font-weight-bold">Address: {{customerInfo.address}}</p>
+                </div>
+            </div>
+            <div class="form-row text-light pl-2 pr-2">
+                <div class="col-6">
+                    <p class="font-weight-bold">Email: {{customerInfo.email}}</p>
+                </div>
+                <div class="col-6">
+                    <p class="font-weight-bold">Phone: {{customerInfo.phone}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row mt-1">
+            <div class="col-md-4 offset-md-4 col-sm-8 text-center">
+                <button type="submit" class="btn btn-primary"
+                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">{{pageStatus === 'modify' ? 'Modify' : 'Register'}}</button>
+            </div>
+            <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual col-md-4 col-sm-4 text-center">
+                {{ submitMessage }}
+            </div>
+            <div *ngIf="submitMessageStatusSuccess" class="valid-feedback-manual col-md-4 col-sm-4 text-center">
+                {{ submitMessage }}
+            </div>
+        </div>
+    </form>
+</div>
+

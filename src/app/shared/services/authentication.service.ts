@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {UserService} from './user.service';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {UserModel} from '../models/user.model';
+import {environment} from '../../../environments/environment';
 
 
 
@@ -34,7 +35,7 @@ export class AuthenticationService {
     //           return user;
     //       }
     //     }));
-    return this.http.post<any>('http://localhost/invoice-angular/api/users/login.php', data)
+    return this.http.post<any>(`${environment.apiUrl}users/login`, data)
         .pipe(map(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             if (user['message'] === 'Successful login.'){

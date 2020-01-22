@@ -5,6 +5,7 @@ import {InvoiceModel} from '../../shared/models/invoice.model';
 import {Router} from '@angular/router';
 import {InvoiceService} from '../../shared/services/invoice.service';
 import {CustomerModel} from '../../shared/models/customer.model';
+import {InvoiceRowsService} from '../../shared/services/invoice-rows.service';
 declare var jQuery: any;
 @Component({
   selector: 'app-invoice-list',
@@ -25,7 +26,8 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
   invoiceId = '';
   deleteMessageStatus = false;
   deleteMessageText = '';
-  constructor(private cdRef: ChangeDetectorRef, private router: Router, private invoiceService: InvoiceService) { }
+  constructor(private cdRef: ChangeDetectorRef, private router: Router, private invoiceService: InvoiceService,
+              private invoiceRowsService: InvoiceRowsService) { }
   @HostListener('input') oninput() { this.searchItems(); }
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -80,18 +82,32 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.invoiceId = invoiceID;
     jQuery('#modalMessage').modal('show');
   }
-  onDeleteCustomer(index, id, invoiceNumber) {
+  onDeleteInvoice(index, id, invoiceNumber) {
     jQuery('#modalMessage').modal('hide');
     this.mdbTable.removeRow(index);
     const idJson = '{ "id" : "' + id + '" }';
+    const invoiceIDJson = '{ "invoice_id" : "' + id + '" }';
     this.subscribe = this.invoiceService.invoiceDelete(idJson).subscribe(
         (response) => {
           if (response['message'] === 'SUCCESS') {
-            this.deleteMessageText = 'Invoice #' + invoiceNumber + ' has been deleted successfully';
-            this.deleteMessageStatus = true;
-            setTimeout(() => {
-              this.deleteMessageStatus = false;
-            }, 2000);
+              this.subscribe = this.invoiceRowsService.invoiceRowsDelete(invoiceIDJson).subscribe(
+                  (responseRows) => {
+                      if (responseRows['message'] === 'SUCCESS') {
+                          this.deleteMessageText = 'Invoice #' + invoiceNumber + ' has been deleted successfully';
+                          this.deleteMessageStatus = true;
+                          setTimeout(() => {
+                              this.deleteMessageStatus = false;
+                          }, 2000);
+                      }
+                  }, (e) => {
+                      this.deleteMessageText = 'Invoice #' + invoiceNumber + ' has been deleted successfully, but some related' +
+                          'related records have not been deleted yet, contact ADMINISTRATOR';
+                      this.deleteMessageStatus = true;
+                      setTimeout(() => {
+                          this.deleteMessageStatus = false;
+                      }, 2000);
+                  }
+              );
           }
         }, (e) => {
           this.deleteMessageText = 'Due to technical issue invoice #' + invoiceNumber + ' has not been deleted.';

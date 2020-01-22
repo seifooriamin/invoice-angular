@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CompanyModel} from '../models/company.model';
+import {environment} from '../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +17,18 @@ export class CompanyService {
     if (file != null) {
       formData.append('file', file, file.name);
     }
-    return this.httpClient.post('http://localhost/invoice-angular/api/companies/create.php', formData);
+
+    return this.httpClient.post(`${environment.apiUrl}companies/create`, formData);
   }
   companyReadByUser(userId) {
     return this.httpClient.post<Array<CompanyModel>>
-    ('http://localhost/invoice-angular/api/companies/readbyuser.php', userId, {responseType: 'json'});
+    (`${environment.apiUrl}companies/readbyuser`, userId, {responseType: 'json'});
   }
   companyDelete(id) {
-    return this.httpClient.post('http://localhost/invoice-angular/api/companies/delete.php', id);
+    return this.httpClient.post(`${environment.apiUrl}companies/delete.php`, id);
   }
   companyByID(id) {
-    return this.httpClient.get<CompanyModel>('http://localhost/invoice-angular/api/companies/read_one.php?id=' + id,
+    return this.httpClient.get<CompanyModel>(`${environment.apiUrl}companies/read_one.php?id=` + id,
         {responseType: 'json'});
   }
   companyUpdate(file: File, data: any) {
@@ -34,7 +37,7 @@ export class CompanyService {
     if (file != null) {
       formData.append('file', file, file.name);
     }
-    return this.httpClient.post('http://localhost/invoice-angular/api/companies/update.php', formData);
+    return this.httpClient.post(`${environment.apiUrl}companies/update.php`, formData);
   }
 
 
