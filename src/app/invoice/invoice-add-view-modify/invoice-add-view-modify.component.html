@@ -1,14 +1,19 @@
 <div class="container mt-4 bg-dark mb-4">
     <div class="row pt-2">
         <div class="col-lg-1 col-md-2 col-3">
-            <ng-template #hoverBack><p>Back</p></ng-template>
-            <button type="button" placement="bottom" class="btn btn-block btn-warning text-light" [mdbPopover]="hoverBack"
-                    triggers="hover" (click)="onBack()"><i class="fas fa-arrow-circle-left fa-lg"></i></button>
+            <button type="button" placement="bottom" class="btn btn-block btn-warning text-light "
+                    ngbPopover="Back" [openDelay]="200" [closeDelay]="500"
+                    popoverClass="my-popover-class" triggers="mouseenter:mouseleave" placement="bottom"
+                    container="body"
+                    (click)="onBack()"><i class="fas fa-arrow-circle-left fa-lg"></i></button>
         </div>
         <div class="col-lg-1 col-md-2 col-3">
-            <ng-template #hoverEdit><p>Edit</p></ng-template>
+
             <button type="button" class="btn btn-block btn-success text-light"
-                    *ngIf="pageStatus === 'view'" placement="bottom" [mdbPopover]="hoverEdit" triggers="hover"
+                    *ngIf="pageStatus === 'view'"
+                    ngbPopover="Edit" [openDelay]="200" [closeDelay]="500"
+                    popoverClass="my-popover-class" triggers="mouseenter:mouseleave" placement="bottom"
+                    container="body"
                     (click)="onModify()">
                 <i class="fas fa-edit fa-lg"></i></button>
         </div>
@@ -25,9 +30,11 @@
                     <label for="companyID" class="col-form-label">Company Information</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <ng-template #hoverCompany><p>Add New Company</p></ng-template>
-                            <button type="button" placement="bottom" class="btn btn-success text-light float-right" [mdbPopover]="hoverCompany"
-                                    triggers="hover" (click)="onAddCompany()"><i class="fas fa-plus-square"></i></button>
+                            <button type="button" class="btn btn-success text-light float-right"
+                                    ngbPopover="Add new company" [openDelay]="200" [closeDelay]="500"
+                                    popoverClass="my-popover-class" triggers="mouseenter:mouseleave" placement="top-left"
+                                    container="body" (click)="onAddCompany()"><i class="fas fa-plus-square"></i>
+                            </button>
                         </div>
                         <select id="companyID" class="form-control" formControlName="company_id"
                                 (change)="onLoadCompanyData($event.target.value)"
@@ -78,9 +85,11 @@
                     <label for="customerID" class="col-form-label">Customer Information</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <ng-template #hoverCustomer><p>Add New Customer</p></ng-template>
-                            <button type="button" placement="bottom" class="btn btn-success text-light float-right" [mdbPopover]="hoverCustomer"
-                                    triggers="hover" (click)="onAddCustomer()"><i class="fas fa-plus-square"></i></button>
+                            <button type="button" class="btn btn-success text-light float-right"
+                                    ngbPopover="Add new company" [openDelay]="200" [closeDelay]="500"
+                                    popoverClass="my-popover-class" triggers="mouseenter:mouseleave" placement="top-left"
+                                    container="body" (click)="onAddCustomer()"><i class="fas fa-plus-square"></i>
+                            </button>
                         </div>
                         <select id="customerID" class="form-control" formControlName="customer_id"
                                 (change)="onLoadCustomerData($event.target.value)"
@@ -91,9 +100,7 @@
                         <div *ngIf="f.customer_id.touched && f.customer_id.invalid" class="invalid-feedback">
                             This field is mandatory, please select one option
                         </div>
-
                     </div>
-
                 </div>
             </div>
             <div class="form-row text-light mt-2 pl-2 pr-2">
@@ -110,7 +117,174 @@
                 </div>
             </div>
         </div>
-
+        <form [formGroup]="fillFormRows" (ngSubmit)="onSubmit()" class="border border-light mt-1">
+            <div formArrayName="invoiceRows"
+                 *ngFor="let rows of fillFormRows.get('invoiceRows').controls; let i = index;">
+                <div [formGroupName]="i" class="border-bottom border-info pb-2">
+                    <div class="form-row text-light pl-2 pr-2">
+                        <div class="col-lg-4 col-12">
+                            <label for="description" class="col-form-label">Description</label>
+                            <input formControlName="description" id="description"
+                                   class="form-control" [ngbTypeahead]="searchDescription">
+                        </div>
+                        <div class="col-lg-4 col-12">
+                            <label for="comment" class="col-form-label">Comment</label>
+                            <input formControlName="comment" id="comment" class="form-control">
+                        </div>
+                        <div class="col-lg-2 col-6">
+                            <label for="unitPrice" class="col-form-label">Unit Price</label>
+                            <input formControlName="unit_price" id="unitPrice" class="form-control text-right" type="text">
+                        </div>
+                        <div class="col-lg-2 col-6">
+                            <label for="quantity" class="col-form-label">Quantity</label>
+                            <input formControlName="quantity" id="quantity" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row text-light pl-2 pr-2">
+                        <div class="col-lg-2 col-4">
+                            <label for="unitMeasure" class="col-form-label">Unit Measure</label>
+                            <input formControlName="unit_measure" id="unitMeasure" class="form-control">
+                        </div>
+                        <div class="col-lg-2 col-4">
+                            <label class="col-form-label">Total</label>
+                            <p class="font-weight-bold">{{fillFormRows.controls.invoiceRows.controls[i].controls.quantity.value
+                            *fillFormRows.controls.invoiceRows.controls[i].controls.unit_price.value}}</p>
+<!--                            <input id="totalRow" class="form-control"-->
+<!--                                   value="{{fillFormRows.controls.invoiceRows.controls[i].controls.quantity.value*-->
+<!--                                   fillFormRows.controls.invoiceRows.controls[i].controls.unit_price.value}}">-->
+                        </div>
+                        <div class="col-lg-1 col-2 d-flex align-items-end">
+                            <button type="button" class="btn btn-block btn-danger text-light"
+                                    ngbPopover="Remove invoice line" [openDelay]="200" [closeDelay]="500"
+                                    popoverClass="my-popover-class" triggers="mouseenter:mouseleave" placement="right"
+                                    container="body"
+                                    (click)="onRemoveLine(i)"><i class="fas fa-minus-square fa-lg"></i></button>
+                        </div>
+                    </div>
+                    <input formControlName="inx" placeholder="inx" value="{{i}}" hidden>
+                    <input formControlName="invoice_id" placeholder="invoice_id" hidden>
+                    <input formControlName="user_id" placeholder="user_id" hidden>
+                </div>
+            </div>
+            <div class="form-row text-light pl-2 pt-2 pb-2 ">
+                <div class="col-lg-1 col-2">
+                    <button type="button" class="btn btn-block btn-success text-light"
+                            ngbPopover="Add new invoice line" [openDelay]="200" [closeDelay]="500"
+                            popoverClass="my-popover-class" triggers="mouseenter:mouseleave" placement="right"
+                            container="body"
+                            (click)="onAddLine()"><i class="fas fa-plus fa-lg"></i></button>
+                </div>
+            </div>
+        </form>
+        <div class="border border-light mt-1"> <!--Summery Part-->
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
+                <div class="offset-lg-4 col-lg-2 col-3 text-right">
+                    <p class="font-weight-bold"><p>Sub-Total</p>
+                </div>
+                <div class="col-lg-2 col-3 text-light">
+                    <p class="font-weight-bold"><p>10000$</p>
+                </div>
+            </div>
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
+                <div class="offset-lg-4 col-lg-2 col-3 text-right">
+                    <label for="deduction1" class="col-form-label ">Discount</label>
+                </div>
+                <div class="col-lg-2 col-3">
+                    <select id="deduction1" class="form-control"
+                            (change)="onDeduction1Select($event.target.value)">
+                        <option *ngFor="let mode of additionDeductionMode" value="{{mode.value}}">
+                            {{mode.name}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 col-3">
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-lg-2 col-3">
+                    <input type="text" class="form-control" formControlName="deduction1">
+                </div>
+            </div>
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
+                <div class="offset-lg-4 col-lg-2 col-3 text-right">
+                    <label for="deduction2" class="col-form-label ">Promo</label>
+                </div>
+                <div class="col-lg-2 col-3">
+                    <select id="deduction2" class="form-control"
+                            (change)="onDeduction1Select($event.target.value)">
+                        <option *ngFor="let mode of additionDeductionMode" value="{{mode.value}}">
+                            {{mode.name}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 col-3">
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-lg-2 col-3">
+                    <input type="text" class="form-control" formControlName="deduction2">
+                </div>
+            </div>
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
+                <div class="offset-lg-4 col-lg-2 col-3 text-right">
+                    <label for="addition1" class="col-form-label ">GST</label>
+                </div>
+                <div class="col-lg-2 col-3">
+                    <select id="addition1" class="form-control"
+                            (change)="onAddition1Select($event.target.value)">
+                        <option *ngFor="let mode of additionDeductionMode" value="{{mode.value}}">
+                            {{mode.name}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 col-3">
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-lg-2 col-3">
+                    <input type="text" class="form-control" formControlName="addition1">
+                </div>
+            </div>
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
+                <div class="offset-lg-4 col-lg-2 col-3 text-right">
+                    <label for="addition2" class="col-form-label ">PST</label>
+                </div>
+                <div class="col-lg-2 col-3">
+                    <select id="addition2" class="form-control"
+                            (change)="onAddition2Select($event.target.value)">
+                        <option *ngFor="let mode of additionDeductionMode" value="{{mode.value}}">
+                            {{mode.name}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 col-3">
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-lg-2 col-3">
+                    <input type="text" class="form-control" formControlName="addition2">
+                </div>
+            </div>
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
+                <div class="offset-lg-4 col-lg-2 col-3 text-right">
+                    <label for="addition3" class="col-form-label ">Service</label>
+                </div>
+                <div class="col-lg-2 col-3">
+                    <select id="addition3" class="form-control"
+                            (change)="onAddition3Select($event.target.value)">
+                        <option *ngFor="let mode of additionDeductionMode" value="{{mode.value}}">
+                            {{mode.name}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 col-3">
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-lg-2 col-3">
+                    <input type="text" class="form-control" formControlName="addition3">
+                </div>
+            </div>
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
+                <div class="offset-lg-4 col-lg-2 col-3 text-right">
+<!--                    <label class="col-form-label ">Total</label>-->
+                    <p class="font-weight-bold"><p>Total</p>
+                </div>
+                <div class="col-lg-2 col-3 text-light">
+                    <p class="font-weight-bold"><p>10000$</p>
+                </div>
+            </div>
+        </div>
         <div class="form-group row mt-1">
             <div class="col-md-4 offset-md-4 col-sm-8 text-center">
                 <button type="submit" class="btn btn-primary"

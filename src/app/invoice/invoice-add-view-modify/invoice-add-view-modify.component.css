@@ -1,0 +1,7 @@
+.my-popover-class{
+    background: #DCE9F6;
+    font-size: 50%;
+}
+.my-popover-class .arrow::after {
+    border-top-color: #DCE9F6;
+}
