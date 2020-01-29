@@ -3,7 +3,7 @@ import {AbstractControl} from '@angular/forms';
 export function CheckEmailExist(control: AbstractControl): Promise<any> {
     // Avoids initial check against an empty string
     if (!control.value.length) {
-    Promise.resolve(null);
+         Promise.resolve(null);
     }
 
     clearTimeout(this.debouncedTimeout);

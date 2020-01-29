@@ -16,4 +16,7 @@ export class InvoiceService {
   invoiceDelete(id) {
     return this.httpClient.post(`${environment.apiUrl}invoice/delete`, id);
   }
+  getInvoiceNumber(id) {
+    return this.httpClient.post(`${environment.apiUrl}invoice/getinvoicenumber`, id);
+  }
 }

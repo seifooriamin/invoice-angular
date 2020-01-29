@@ -59,20 +59,21 @@ export class AuthenticationService {
     async tokenValidate(): Promise<any> {
       const jTokenValue = JSON.parse(localStorage.getItem('currentUser'));
       const tokenValue = jTokenValue['jwt'];
-      if (!tokenValue) {
-          Promise.resolve('TE');
-      }
 
       const q = new Promise((resolve, reject) => {
-              const token: string = '{ "jwt" : "' + tokenValue + '" }';
-              this.userService.tokenCheck(token).subscribe(
-                  (response) => {
-                      if (response['message'] === 'AG') {
-                          resolve('TV');
-                      } else {
-                          resolve('TIV');
-                      }
-                  });
+              if (!tokenValue) {
+                  resolve('TE');
+              } else {
+                  const token: string = '{ "jwt" : "' + tokenValue + '" }';
+                  this.userService.tokenCheck(token).subscribe(
+                      (response) => {
+                          if (response['message'] === 'AG') {
+                              resolve('TV');
+                          } else {
+                              resolve('TIV');
+                          }
+                      });
+              }
       });
       return q;
   }

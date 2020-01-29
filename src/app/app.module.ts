@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateAdapter, NgbDateParserFormatter, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
@@ -24,6 +24,8 @@ import {HttpErrorInterceptor} from './shared/tools/httperror.interceptor';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoiceListComponent } from './invoice/invoice-list/invoice-list.component';
 import { InvoiceAddViewModifyComponent } from './invoice/invoice-add-view-modify/invoice-add-view-modify.component';
+import {CustomAdapter} from './shared/tools/dateformatmodal';
+import {NgbDateCustomParserFormatter} from './shared/tools/dateformat';
 
 
 
@@ -66,7 +68,8 @@ import { InvoiceAddViewModifyComponent } from './invoice/invoice-add-view-modify
     provide: HTTP_INTERCEPTORS,
     useClass: HttpErrorInterceptor,
     multi: true
-  }],
+  }, {provide: NgbDateAdapter, useClass: CustomAdapter},
+    {provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

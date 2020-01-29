@@ -9,11 +9,15 @@ import {CustomerService} from '../../shared/services/customer.service';
 import {CustomerModel} from '../../shared/models/customer.model';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 import {InvoiceRowsService} from '../../shared/services/invoice-rows.service';
+import {ToolsService} from '../../shared/services/tools.service';
+import {InvoiceService} from '../../shared/services/invoice.service';
+
+
 
 @Component({
   selector: 'app-invoice-add-view-modify',
   templateUrl: './invoice-add-view-modify.component.html',
-  styleUrls: ['./invoice-add-view-modify.component.css']
+  styleUrls: ['./invoice-add-view-modify.component.css'],
 })
 export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   pageStatus = 'new';
@@ -36,6 +40,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   customerInfo: CustomerModel = {id: 0, address: '', created: this.date, email: '', first_name: '', last_name: '',
     modified: this.date, name: '', phone: '', user_id: 0};
   descriptionText: string[] = [];
+
   searchDescription = (text$: Observable<string>) =>
       text$.pipe(
           debounceTime(200),
@@ -43,12 +48,34 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
           map(term => term.length < 1 ? []
               : this.descriptionText.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
       )
+
   constructor(private router: Router, private companyService: CompanyService, private formBuilder: FormBuilder,
-              private customerService: CustomerService, private invoiceRowsService: InvoiceRowsService) { }
+              private customerService: CustomerService, private invoiceRowsService: InvoiceRowsService,
+              private toolsService: ToolsService, private invoiceService: InvoiceService) { }
 
   ngOnInit() {
     this.initFormNew();
     this.getDescription();
+    this.onSetInvoiceNumberDefault();
+  }
+  onSetInvoiceNumberDefault() {
+    this.toolsService.getInvoiceNumber().then(
+        (response) => {
+          if (response['invoicePrefix']) {
+            this.fillForm.patchValue({
+              no: response['invoiceDigit'],
+              invoice_no: response['invoicePrefix'] + response['invoiceDigit']
+            });
+          } else {
+            let currentYear = new Date().getFullYear().toString();
+            currentYear += '-';
+            this.fillForm.patchValue({
+              no: response['invoiceDigit'],
+              invoice_no: currentYear + response['invoiceDigit']
+            });
+          }
+
+        });
   }
   getDescription() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -61,12 +88,12 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
         }, (e) => {}
     );
   }
+
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }
-
   initFormNew() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId: string = '{ "user_id" : "' + this.currentUser['id'] + '" }';
@@ -85,6 +112,12 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
         }
     );
     this.fillForm = this.formBuilder.group({
+      date : ['', [Validators.required,
+        Validators.pattern('^(([0-2]+\\d{1})|([3]+[0,1]{1}))-([0,1]+\\d{1})-([1-9]{1}\\d{3})$')]],
+      invoice_no: ['', [Validators.required,
+          Validators.pattern('^([a-zA-Z0-9-_\\\\\\/]{0,10})([0-9]{1,6})$')]],
+      no: [''],
+      year: [''],
       company_id : ['', Validators.required],
       customer_id : ['', Validators.required],
       addition1 : [''],
@@ -102,23 +135,42 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
       inx: '',
       invoice_id: '',
       description: '',
-      comment: '',
-      unit_price: '0.00',
-      unit_measure: '',
-      quantity: '',
-      user_id: ''
+      comment: [''],
+      unit_price: ['', [Validators.required,
+          Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$')]],
+      unit_measure: [''],
+      quantity: ['', [Validators.required,
+        Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$')]],
+      user_id: ['', Validators.required]
     });
+  }
+  onSetYear() {
+    const selectedDate: string = this.f.date.value;
+    const selectedYear = selectedDate.substr(6, 4);
+    this.fillForm.patchValue({
+      year: selectedYear
+    });
+  }
+  onCurrencyShow(amount, index) {
+    const i = this.toolsService.showNumberWithDecimal(amount);
+    this.invoiceRows = this.fillFormRows.get('invoiceRows') as FormArray;
+    this.invoiceRows.at(index).get('unit_price').setValue(i);
+
   }
   onBack() {
     this.router.navigate(['/invoice/invoice-list']);
   }
   get f() { return this.fillForm.controls; }
   get q() { return this.fillFormRows.controls; }
+  get s() {return this.fillFormRows.get('invoiceRows') as FormArray; }
+
+
   onModify() {
 
   }
   onSubmit() {
     // console.log(this.fillFormRows.controls.invoiceRows.controls[0].value);
+    console.log(this.fillForm.value);
   }
   onLoadCompanyData(companyID) {
     this.companyInfo = this.companyList.find(company => company.id === companyID);

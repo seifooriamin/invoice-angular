@@ -2,10 +2,7 @@
     <div class="row pt-2">
         <div class="col-lg-1 col-md-2 col-3">
             <button type="button" placement="bottom" class="btn btn-block btn-warning text-light "
-                    ngbPopover="Back" [openDelay]="200" [closeDelay]="500"
-                    popoverClass="my-popover-class" triggers="mouseenter:mouseleave" placement="bottom"
-                    container="body"
-                    (click)="onBack()"><i class="fas fa-arrow-circle-left fa-lg"></i></button>
+                    title="Back" (click)="onBack()"><i class="fas fa-arrow-circle-left fa-lg"></i></button>
         </div>
         <div class="col-lg-1 col-md-2 col-3">
 
@@ -24,16 +21,52 @@
         </div>
     </div>
     <form class="pl-2 pr-2 mt-1 bg-dark border-dark border" [formGroup]="fillForm" (ngSubmit)="onSubmit()">
-        <div class="border border-light">  <!--Company Information-->
+        <div class="border border-light"> <!--Date and Invoice Number-->
+            <div class="form-row mt-2 text-light pl-2 pr-2">
+                <div class="col-lg-4 col-6 pb-2">
+                    <label for="date" class="col-form-label">Date</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button type="button" class="btn btn-primary text-light"
+                                    title="Calendar" (click)="d.toggle()"><i class="fas fa-calendar-alt"></i>
+                            </button>
+                        </div>
+                        <input id="date" formControlName="date" class="form-control" placeholder="DD-MM-YYYY"
+                               ngbDatepicker #d="ngbDatepicker" (dateSelect)="onSetYear()"  (change)="onSetYear()"
+                               [ngClass]="{ 'is-invalid': f.date.touched && f.date.invalid,
+                                    'is-valid': f.date.valid}">
+                        <div *ngIf="f.date.touched && f.date.errors?.required" class="invalid-feedback">
+                            Date is mandatory
+                        </div>
+                        <div *ngIf="f.date.touched && f.date.errors?.pattern" class="invalid-feedback">
+                            Accepted format is DD-MM-YYYY
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-6 offset-lg-2">
+                    <label for="invoiceNo" class="col-form-label">Invoice Number</label>
+                    <input id="invoiceNo" formControlName="invoice_no" class="form-control"
+                           [ngClass]="{ 'is-invalid': f.invoice_no.touched && f.invoice_no.invalid,
+                                    'is-valid': f.invoice_no.valid}">
+                    <div *ngIf="f.invoice_no.touched && f.invoice_no.errors?.required" class="invalid-feedback">
+                        Invoice number is mandatory
+                    </div>
+                    <div *ngIf="f.invoice_no.touched && f.invoice_no.errors?.pattern" class="invalid-feedback">
+                        Invoice number should be ended by number
+                    </div>
+                </div>
+                <input formControlName="no" class="form-control" placeholder="no">
+                <input formControlName="year" class="form-control" placeholder="year">
+            </div>
+        </div>
+        <div class="border border-light mt-1">  <!--Company Information-->
             <div class="form-row mt-2 text-light pl-2 pr-2">
                 <div class="col-lg-4 col-md-6">
                     <label for="companyID" class="col-form-label">Company Information</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <button type="button" class="btn btn-success text-light float-right"
-                                    ngbPopover="Add new company" [openDelay]="200" [closeDelay]="500"
-                                    popoverClass="my-popover-class" triggers="mouseenter:mouseleave" placement="top-left"
-                                    container="body" (click)="onAddCompany()"><i class="fas fa-plus-square"></i>
+                                    title="Add new company" (click)="onAddCompany()"><i class="fas fa-plus-square"></i>
                             </button>
                         </div>
                         <select id="companyID" class="form-control" formControlName="company_id"
@@ -47,10 +80,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-1">
-
-                </div>
-                <div class="offset-lg-3 col-lg-4 col-md-6">
+                <div class="offset-lg-4 col-lg-4 col-md-6">
                     <img [src]=imgUrl  class="img-thumbnail img" alt="" style="height: 100px"  />
                 </div>
             </div>
@@ -119,59 +149,63 @@
         </div>
         <form [formGroup]="fillFormRows" (ngSubmit)="onSubmit()" class="border border-light mt-1">
             <div formArrayName="invoiceRows"
-                 *ngFor="let rows of fillFormRows.get('invoiceRows').controls; let i = index;">
+                 *ngFor="let rows of fillFormRows.get('invoiceRows')['controls']; let i = index;">
                 <div [formGroupName]="i" class="border-bottom border-info pb-2">
                     <div class="form-row text-light pl-2 pr-2">
                         <div class="col-lg-4 col-12">
-                            <label for="description" class="col-form-label">Description</label>
-                            <input formControlName="description" id="description"
+                            <label for="{{'description'+i}}" class="col-form-label">Description</label>
+                            <input formControlName="description" id="{{'description'+i}}"
                                    class="form-control" [ngbTypeahead]="searchDescription">
                         </div>
                         <div class="col-lg-4 col-12">
-                            <label for="comment" class="col-form-label">Comment</label>
-                            <input formControlName="comment" id="comment" class="form-control">
+                            <label for="{{'comment'+i}}" class="col-form-label">Comment</label>
+                            <input formControlName="comment" id="{{'comment'+i}}" class="form-control">
                         </div>
                         <div class="col-lg-2 col-6">
-                            <label for="unitPrice" class="col-form-label">Unit Price</label>
-                            <input formControlName="unit_price" id="unitPrice" class="form-control text-right" type="text">
+                            <label for="{{'unitPrice'+i}}" class="col-form-label">Unit Price</label>
+                            <input formControlName="unit_price" id="{{'unitPrice'+i}}" class="form-control text-right"
+                                   type="text" placeholder="0.00" (change)="onCurrencyShow($event.target.value, i)"
+                                   [ngClass]="{ 'is-invalid': s.at(i).get('unit_price').touched
+                                   && s.at(i).get('unit_price').invalid,
+                                    'is-valid': s.at(i).get('unit_price').valid}">
                         </div>
                         <div class="col-lg-2 col-6">
-                            <label for="quantity" class="col-form-label">Quantity</label>
-                            <input formControlName="quantity" id="quantity" class="form-control">
+                            <label for="{{'quantity'+i}}" class="col-form-label">Quantity</label>
+                            <input formControlName="quantity" id="{{'quantity'+i}}" class="form-control"
+                                   [ngClass]="{ 'is-invalid': s.at(i).get('quantity').touched
+                                   && s.at(i).get('quantity').invalid,
+                                    'is-valid': s.at(i).get('quantity').valid}">
+                            <div *ngIf="s.at(i).get('quantity').touched &&
+                            s.at(i).get('quantity').invalid" class="invalid-feedback">
+                                Quantity is mandatory
+                            </div>
                         </div>
                     </div>
                     <div class="form-row text-light pl-2 pr-2">
                         <div class="col-lg-2 col-4">
-                            <label for="unitMeasure" class="col-form-label">Unit Measure</label>
-                            <input formControlName="unit_measure" id="unitMeasure" class="form-control">
+                            <label for="{{'unitMeasure'+i}}" class="col-form-label">Unit Measure</label>
+                            <input formControlName="unit_measure" id="{{'unitMeasure'+i}}" class="form-control">
                         </div>
                         <div class="col-lg-2 col-4">
                             <label class="col-form-label">Total</label>
-                            <p class="font-weight-bold">{{fillFormRows.controls.invoiceRows.controls[i].controls.quantity.value
-                            *fillFormRows.controls.invoiceRows.controls[i].controls.unit_price.value}}</p>
-<!--                            <input id="totalRow" class="form-control"-->
-<!--                                   value="{{fillFormRows.controls.invoiceRows.controls[i].controls.quantity.value*-->
-<!--                                   fillFormRows.controls.invoiceRows.controls[i].controls.unit_price.value}}">-->
+                            <p class="font-weight-bold">{{s.at(i).get('quantity').value
+                            *s.at(i).get('unit_price').value}}</p>
                         </div>
                         <div class="col-lg-1 col-2 d-flex align-items-end">
-                            <button type="button" class="btn btn-block btn-danger text-light"
-                                    ngbPopover="Remove invoice line" [openDelay]="200" [closeDelay]="500"
-                                    popoverClass="my-popover-class" triggers="mouseenter:mouseleave" placement="right"
-                                    container="body"
+                            <button type="button" class="btn btn-block btn-danger text-light btn-sm"
+                                    title="Remove invoice line"
                                     (click)="onRemoveLine(i)"><i class="fas fa-minus-square fa-lg"></i></button>
                         </div>
                     </div>
-                    <input formControlName="inx" placeholder="inx" value="{{i}}" hidden>
-                    <input formControlName="invoice_id" placeholder="invoice_id" hidden>
-                    <input formControlName="user_id" placeholder="user_id" hidden>
+                    <input formControlName="inx" class="form-control" value="{{i}}">
+                    <input formControlName="invoice_id" class="form-control" hidden>
+                    <input formControlName="user_id" class="form-control" hidden>
                 </div>
             </div>
             <div class="form-row text-light pl-2 pt-2 pb-2 ">
                 <div class="col-lg-1 col-2">
-                    <button type="button" class="btn btn-block btn-success text-light"
-                            ngbPopover="Add new invoice line" [openDelay]="200" [closeDelay]="500"
-                            popoverClass="my-popover-class" triggers="mouseenter:mouseleave" placement="right"
-                            container="body"
+                    <button type="button" class="btn btn-block btn-success text-light btn-sm"
+                            title="Add new invoice line"
                             (click)="onAddLine()"><i class="fas fa-plus fa-lg"></i></button>
                 </div>
             </div>
@@ -277,7 +311,6 @@
             </div>
             <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
                 <div class="offset-lg-4 col-lg-2 col-3 text-right">
-<!--                    <label class="col-form-label ">Total</label>-->
                     <p class="font-weight-bold"><p>Total</p>
                 </div>
                 <div class="col-lg-2 col-3 text-light">
