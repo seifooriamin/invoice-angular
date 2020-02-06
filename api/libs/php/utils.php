@@ -36,14 +36,13 @@ class Utils{
         $headers  = "MIME-Version: 1.0\r\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
         $headers .= "From: {$from_name} <{$from_email}> \nX-Mailer: PHP/";
-//      This part is not working on localhost
-        if(mail($send_to_email, $subject, $body, $headers,"-odb -f $from_email")){
-            return true;
-        }else{
-            return false;
-        }
-//        return true;
-
+//      This part is not working on localhost this block should be enabled on real host
+//        if(mail($send_to_email, $subject, $body, $headers,"-odb -f $from_email")){
+//            return true;
+//        }else{
+//            return false;
+//        }
+        return true;
     }
  
 }

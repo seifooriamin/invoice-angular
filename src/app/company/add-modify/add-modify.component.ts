@@ -48,11 +48,9 @@ export class AddModifyComponent implements OnInit {
             this.pageTitle = 'View Company Information';
         }
     }
-
-    if (this.pageStatus === 'new') {
-        this.initializeFormNew();
-    } else {
-        this.initializeFormData();
+    this.initializeFormNew();
+    if (this.pageStatus === 'view' || this.pageStatus === 'modify') {
+        this.fillFormData();
     }
 
   }
@@ -73,20 +71,7 @@ export class AddModifyComponent implements OnInit {
           id: ['']
       });
   }
-  initializeFormData() {
-        this.fillForm = this.formBuilder.group({
-            name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40),
-                Validators.pattern('(?=.*[a-zA-Z0-9]).{2,}')]],
-            address: ['', [Validators.required, Validators.pattern('(?=.*[a-zA-Z0-9]).{2,}')]],
-            phone: ['', [Validators.pattern('(^\\+[0-9]{2})([0-9]{8,13}$)'),
-                Validators.maxLength(14)]],
-            business_no: ['', [Validators.maxLength(20), Validators.pattern('^(\\w*\\.*\\ *\\-*\\_*\\\\*\\/*)*$')]],
-            gst_no: ['', [Validators.maxLength(20), Validators.pattern('^(\\w*\\.*\\ *\\-*\\_*\\\\*\\/*)*$')]],
-            website: ['', Validators.maxLength(50)],
-            email: ['', [Validators.email, Validators.maxLength(50)]],
-            logoFile: [''],
-            user_id: ['', Validators.required],
-            id: ['']});
+  fillFormData() {
         this.companyService.companyByID(this.id).subscribe(
             (company: CompanyModel) => {
                 this.companyData = company;
@@ -151,7 +136,7 @@ export class AddModifyComponent implements OnInit {
 
 
   onSetUserId() {
-      const jCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+      const jCurrentUser = this.toolsService.getUserID();
       this.fillForm.patchValue({
           user_id: jCurrentUser['id']
       });

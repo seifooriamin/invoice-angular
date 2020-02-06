@@ -20,7 +20,7 @@
     $data = json_decode(file_get_contents("php://input"));
     $invoice_rows->user_id=$data->user_id;
     // read the details of product to be edited
-    $stmt=$invoice_rows->getDescriptionText();
+    $stmt=$invoice_rows->getCommentText();
     $num=$stmt->rowCount();
     if($num>0){
         $invoice_rows_arr=array();
@@ -29,7 +29,7 @@
         while ($row=$stmt->fetch(PDO::FETCH_ASSOC)) {
             extract($row);
             $invoice_rows_item = array(
-                "description" => $description
+                "comment" => $comment
             );
             array_push($invoice_rows_arr["records"], $invoice_rows_item);
         }

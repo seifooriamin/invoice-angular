@@ -34,7 +34,10 @@
     include_once '../libs/php-jwt-master/src/SignatureInvalidException.php';
     include_once '../libs/php-jwt-master/src/JWT.php';
     use \Firebase\JWT\JWT;
-
+    $ciphering = "AES-128-CTR";
+    $options = 0;
+    $decryption_iv = '0098916611423595';
+    $decryption_key = "AminSeifooriPegahMaktabi";
     // generate jwt will be here
     // check if email exists and if password is correct
     if($email_exists && $email_validated && password_verify($data->password, $user->password )){
@@ -63,7 +66,7 @@
                 array(
                     "message" => "Successful login.",
                     "jwt" => $jwt,
-                    "access_level" => $user->access_level,
+                    "access_level" => openssl_decrypt($user->access_level, $ciphering,$decryption_key, $options, $decryption_iv),
                     "first_name" => $user->first_name,
                     "last_name" => $user->last_name,
                     "id" => $user->id

@@ -19,7 +19,7 @@
     $data = json_decode(file_get_contents("php://input"));
     $invoice->user_id = $data->user_id;
 
-    $invoice_number = $invoice->getInvoiceNumber($invoice->user_id);
+    $invoice_number = $invoice->getInvoiceNumber();
 
     if($invoice_number!=null){
         // create array

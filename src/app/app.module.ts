@@ -64,11 +64,13 @@ import {NgbDateCustomParserFormatter} from './shared/tools/dateformat';
   entryComponents: [
     ConfirmModalComponent
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: HttpErrorInterceptor,
-    multi: true
-  }, {provide: NgbDateAdapter, useClass: CustomAdapter},
+  providers: [
+  //     {
+  //   provide: HTTP_INTERCEPTORS,
+  //   useClass: HttpErrorInterceptor,
+  //   multi: true
+  // },
+    {provide: NgbDateAdapter, useClass: CustomAdapter},
     {provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}],
   bootstrap: [AppComponent]
 })

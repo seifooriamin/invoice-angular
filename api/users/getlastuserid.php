@@ -8,36 +8,28 @@
 
     // include database and object files
     include_once '../config/database.php';
-    include_once '../objects/invoice_rows.php';
+    include_once '../objects/users.php';
 
     // get database connection
     $database = new Database();
     $db = $database->getConnection();
 
     // prepare product object
-    $invoice_rows = new Invoice_rows($db);
+    $user = new Users($db);
 
-    $data = json_decode(file_get_contents("php://input"));
-    $invoice_rows->user_id=$data->user_id;
-    // read the details of product to be edited
-    $stmt=$invoice_rows->getDescriptionText();
-    $num=$stmt->rowCount();
-    if($num>0){
-        $invoice_rows_arr=array();
-        $invoice_rows_arr["records"]=array();
+    $user_id = $user->getLastUserID();
 
-        while ($row=$stmt->fetch(PDO::FETCH_ASSOC)) {
-            extract($row);
-            $invoice_rows_item = array(
-                "description" => $description
-            );
-            array_push($invoice_rows_arr["records"], $invoice_rows_item);
-        }
+    if($user_id!=null){
+        // create array
+        $user_arr = array(
+            "ID" => $user_id
+        );
+
         // set response code - 200 OK
         http_response_code(200);
 
         // make it json format
-        echo json_encode($invoice_rows_arr);
+        echo json_encode($user_arr);
     }
 
     else{

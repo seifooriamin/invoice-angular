@@ -72,6 +72,7 @@ export class AddModifyViewComponent implements OnInit {
     });
     this.customerService.customerByID(this.id).subscribe(
         (customer: CustomerModel) => {
+          console.log(customer);
           this.customerData = customer;
           this.id = customer.id;
           this.fillForm.patchValue({

@@ -23,10 +23,14 @@ export class ToolsService {
       return  false;
     }
   }
-  showNumberWithDecimal(num): string {
-    return ((num = Math.abs(Number(num) || 0).toFixed(2))).toString();
+  showNumberWithDecimal(num): number {
+    num = Math.abs(Number(num) || 0);
+    num = num.toFixed(2);
+    return num;
   }
-
+  numberSeparator(value) {
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
   async getInvoiceNumber(): Promise<{invoiceDigit: string; invoicePrefix: string; }> {
      const q = new Promise<{invoiceDigit: string; invoicePrefix: string; }>((resolve) => {
      let digitPart = '';
@@ -66,5 +70,9 @@ export class ToolsService {
       );
     });
      return q;
+  }
+  getUserID(): string {
+    const jCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+    return  jCurrentUser;
   }
 }

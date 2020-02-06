@@ -15,4 +15,10 @@ export class InvoiceRowsService {
   getInvoiceRowsDescription(userID) {
     return this.httpClient.post(`${environment.apiUrl}invoice_rows/getdescription`, userID);
   }
+  getInvoiceRowsComment(userID) {
+    return this.httpClient.post(`${environment.apiUrl}invoice_rows/getcomment`, userID);
+  }
+  getInvoiceRowsUnitMeasure(userID) {
+    return this.httpClient.post(`${environment.apiUrl}invoice_rows/getunitmeasure`, userID);
+  }
 }

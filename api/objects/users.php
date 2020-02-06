@@ -167,8 +167,12 @@
             // hash the password before saving to database
             $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
             $stmt->bindParam(':password', $password_hash);
-
-            $access_level_hash = $password_hash($this->access_level, PASSWORD_BCRYPT);
+            $ciphering = "AES-128-CTR";
+            $iv_length = openssl_cipher_iv_length($ciphering);
+            $options = 0;
+            $encryption_iv = '0098916611423595';
+            $encryption_key = "AminSeifooriPegahMaktabi";
+            $access_level_hash = openssl_encrypt($this->access_level, $ciphering, $encryption_key, $options, $encryption_iv);
             $stmt->bindParam(':access_level', $access_level_hash);
             $stmt->bindParam(':access_code', $this->access_code);
             $stmt->bindParam(':status', $this->status);
@@ -177,18 +181,17 @@
             if($stmt->execute()){
                 return true;
             }else{
-                $this->showError($stmt);
                 return false;
             }
 
         }
-
-        public function showError($stmt){
-            echo "<pre>";
-            print_r($stmt->errorInfo());
-            echo "</pre>";
+        function getLastUserID(){
+            $query="SELECT ID FROM ". $this->table_name .  " ORDER BY id DESC LIMIT 1";
+            $stmt=$this->conn->prepare($query);
+            $stmt->execute();
+            $row=$stmt->fetch(PDO::FETCH_ASSOC);
+            return $row["ID"];
         }
-
         // read all user records
         function readAll($from_record_num, $records_per_page){
 

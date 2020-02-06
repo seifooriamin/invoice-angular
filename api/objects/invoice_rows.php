@@ -204,7 +204,21 @@ class Invoice_rows
         return false;
     }
     function getDescriptionText(){
-        $query="SELECT description FROM " . $this->table_name . " WHERE user_id = ?";
+        $query="SELECT description FROM " . $this->table_name . " WHERE user_id = ? GROUP BY description";
+        $stmt=$this->conn->prepare($query);
+        $stmt->bindParam(1, $this->user_id);
+        $stmt->execute();
+        return $stmt;
+    }
+    function getCommentText(){
+        $query="SELECT comment FROM " . $this->table_name . " WHERE user_id = ? GROUP BY comment";
+        $stmt=$this->conn->prepare($query);
+        $stmt->bindParam(1, $this->user_id);
+        $stmt->execute();
+        return $stmt;
+    }
+    function getUnitMeasureText(){
+        $query="SELECT unit_measure FROM " . $this->table_name . " WHERE user_id = ? GROUP BY unit_measure";
         $stmt=$this->conn->prepare($query);
         $stmt->bindParam(1, $this->user_id);
         $stmt->execute();

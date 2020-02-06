@@ -55,10 +55,12 @@
                         Invoice number should be ended by number
                     </div>
                 </div>
-                <input formControlName="no" class="form-control" placeholder="no">
-                <input formControlName="year" class="form-control" placeholder="year">
+                <input formControlName="no" class="form-control" hidden>
+                <input formControlName="year" class="form-control" hidden>
+                <input formControlName="user_id" class="form-control" hidden>
+                <input formControlName="id" class="form-control" hidden>
             </div>
-        </div>
+        </div> <!--Date and Invoice Number-->
         <div class="border border-light mt-1">  <!--Company Information-->
             <div class="form-row mt-2 text-light pl-2 pr-2">
                 <div class="col-lg-4 col-md-6">
@@ -71,6 +73,7 @@
                         </div>
                         <select id="companyID" class="form-control" formControlName="company_id"
                                 (change)="onLoadCompanyData($event.target.value)"
+                                (change)="onSetUserId()"
                                 [ngClass]="{ 'is-invalid': f.company_id.touched && f.company_id.invalid,
                                     'is-valid': f.company_id.valid}">
                             <option *ngFor="let company of companyList" value="{{company.id}}">{{company.name}}</option>
@@ -108,7 +111,7 @@
                     <p class="font-weight-bold">Business No.: {{companyInfo.business_no}}</p>
                 </div>
             </div>
-        </div>
+        </div> <!--Company Information-->
         <div class="border border-light mt-1">  <!--Customer Information-->
             <div class="form-row mt-2 text-light pl-2 pr-2">
                 <div class="col-lg-4 col-md-6">
@@ -146,8 +149,8 @@
                     <p class="font-weight-bold">Phone: {{customerInfo.phone}}</p>
                 </div>
             </div>
-        </div>
-        <form [formGroup]="fillFormRows" (ngSubmit)="onSubmit()" class="border border-light mt-1">
+        </div> <!--Customer Information-->
+        <form [formGroup]="fillFormRows" (ngSubmit)="onSubmit()" class="border border-light mt-1"> <!--Invoice Rows-->
             <div formArrayName="invoiceRows"
                  *ngFor="let rows of fillFormRows.get('invoiceRows')['controls']; let i = index;">
                 <div [formGroupName]="i" class="border-bottom border-info pb-2">
@@ -155,16 +158,19 @@
                         <div class="col-lg-4 col-12">
                             <label for="{{'description'+i}}" class="col-form-label">Description</label>
                             <input formControlName="description" id="{{'description'+i}}"
-                                   class="form-control" [ngbTypeahead]="searchDescription">
+                                   class="form-control" [ngbTypeahead]="searchDescription"
+                                   (change)="onSetInvoiceRowUserId(i)">
                         </div>
                         <div class="col-lg-4 col-12">
                             <label for="{{'comment'+i}}" class="col-form-label">Comment</label>
-                            <input formControlName="comment" id="{{'comment'+i}}" class="form-control">
+                            <input formControlName="comment" id="{{'comment'+i}}" class="form-control"
+                                   [ngbTypeahead]="searchComment">
                         </div>
                         <div class="col-lg-2 col-6">
                             <label for="{{'unitPrice'+i}}" class="col-form-label">Unit Price</label>
                             <input formControlName="unit_price" id="{{'unitPrice'+i}}" class="form-control text-right"
                                    type="text" placeholder="0.00" (change)="onCurrencyShow($event.target.value, i)"
+                                   (input)="onRowTotal(i)"
                                    [ngClass]="{ 'is-invalid': s.at(i).get('unit_price').touched
                                    && s.at(i).get('unit_price').invalid,
                                     'is-valid': s.at(i).get('unit_price').valid}">
@@ -172,6 +178,7 @@
                         <div class="col-lg-2 col-6">
                             <label for="{{'quantity'+i}}" class="col-form-label">Quantity</label>
                             <input formControlName="quantity" id="{{'quantity'+i}}" class="form-control"
+                                   (input)="onRowTotal(i)"
                                    [ngClass]="{ 'is-invalid': s.at(i).get('quantity').touched
                                    && s.at(i).get('quantity').invalid,
                                     'is-valid': s.at(i).get('quantity').valid}">
@@ -184,20 +191,21 @@
                     <div class="form-row text-light pl-2 pr-2">
                         <div class="col-lg-2 col-4">
                             <label for="{{'unitMeasure'+i}}" class="col-form-label">Unit Measure</label>
-                            <input formControlName="unit_measure" id="{{'unitMeasure'+i}}" class="form-control">
+                            <input formControlName="unit_measure" id="{{'unitMeasure'+i}}" class="form-control"
+                                   [ngbTypeahead]="searchUnitMeasure">
                         </div>
-                        <div class="col-lg-2 col-4">
+                        <div class="col-lg-3 col-5">
                             <label class="col-form-label">Total</label>
-                            <p class="font-weight-bold">{{s.at(i).get('quantity').value
-                            *s.at(i).get('unit_price').value}}</p>
+                            <input class="font-weight-bold form-control text-right" id="{{'rowTotal'+i}}" disabled
+                                   value="{{rowTotalString[i]}}">
                         </div>
-                        <div class="col-lg-1 col-2 d-flex align-items-end">
-                            <button type="button" class="btn btn-block btn-danger text-light btn-sm"
-                                    title="Remove invoice line"
-                                    (click)="onRemoveLine(i)"><i class="fas fa-minus-square fa-lg"></i></button>
+                        <div class="col-lg-1 col-2 offset-lg-6 offset-1 align-self-end">
+                              <button type="button" class="btn btn-block btn-danger text-light btn-sm"                                    title="Remove invoice line"
+                                (click)="onRemoveLine(i)"><i class="fas fa-minus-square fa-lg"></i>
+                              </button>
                         </div>
                     </div>
-                    <input formControlName="inx" class="form-control" value="{{i}}">
+                    <input formControlName="inx" class="form-control" value="{{i}}" hidden>
                     <input formControlName="invoice_id" class="form-control" hidden>
                     <input formControlName="user_id" class="form-control" hidden>
                 </div>
@@ -209,116 +217,134 @@
                             (click)="onAddLine()"><i class="fas fa-plus fa-lg"></i></button>
                 </div>
             </div>
-        </form>
+        </form> <!--Invoice Rows-->
         <div class="border border-light mt-1"> <!--Summery Part-->
             <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
-                <div class="offset-lg-4 col-lg-2 col-3 text-right">
-                    <p class="font-weight-bold"><p>Sub-Total</p>
+                <div class="col-1">
+                    <button type="button" class="btn btn-primary" (click)="onSettingCall()" title="Invoice setting">
+                        <i class="fas fa-user-cog"></i></button>
                 </div>
-                <div class="col-lg-2 col-3 text-light">
-                    <p class="font-weight-bold"><p>10000$</p>
+                <div class="offset-lg-3 col-lg-2 col-3 text-right">
+                    <label class="col-form-label">Sub-Total</label>
                 </div>
-            </div>
-            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
-                <div class="offset-lg-4 col-lg-2 col-3 text-right">
-                    <label for="deduction1" class="col-form-label ">Discount</label>
-                </div>
-                <div class="col-lg-2 col-3">
-                    <select id="deduction1" class="form-control"
-                            (change)="onDeduction1Select($event.target.value)">
-                        <option *ngFor="let mode of additionDeductionMode" value="{{mode.value}}">
-                            {{mode.name}}</option>
-                    </select>
-                </div>
-                <div class="col-lg-2 col-3">
-                    <input type="text" class="form-control">
-                </div>
-                <div class="col-lg-2 col-3">
-                    <input type="text" class="form-control" formControlName="deduction1">
+                <div class="col-lg-4 col-6 offset-lg-2 offset-3 text-light">
+                    <input type="text" class="form-control font-weight-bold text-right" disabled
+                           value="{{invoiceSubTotal}}">
                 </div>
             </div>
-            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2" *ngIf="invoiceSettingElements.deduction1status == 1">
                 <div class="offset-lg-4 col-lg-2 col-3 text-right">
-                    <label for="deduction2" class="col-form-label ">Promo</label>
+                    <label for="deduction1" class="col-form-label ">{{invoiceSettingElements.deduction1label}}</label>
                 </div>
                 <div class="col-lg-2 col-3">
-                    <select id="deduction2" class="form-control"
-                            (change)="onDeduction1Select($event.target.value)">
-                        <option *ngFor="let mode of additionDeductionMode" value="{{mode.value}}">
-                            {{mode.name}}</option>
-                    </select>
+                    <input type="text" class="form-control" [attr.disabled]="true" id="deduction1"
+                           value="{{invoiceSettingElements.deduction1type === 'D1P' ? 'Percentage' : 'Flat Rate'}}">
                 </div>
-                <div class="col-lg-2 col-3">
-                    <input type="text" class="form-control">
+                <div class="col-lg-2 col-3" *ngIf="invoiceSettingElements.deduction1type === 'D1P'">
+                    <input type="text" class="form-control" formControlName="deduction1Percentage"
+                           [attr.disabled]="invoiceSettingElements.deduction1type === 'D1P' ? 'disabled' : null"
+                    value="{{invoiceSettingElements.deduction1percentage}}">
                 </div>
-                <div class="col-lg-2 col-3">
-                    <input type="text" class="form-control" formControlName="deduction2">
+                <div class="col-lg-2 col-3"
+                     [ngClass]="{'offset-lg-2 offset-3': invoiceSettingElements.deduction1type === 'D1F'}">
+                    <input type="text" class="form-control" formControlName="deduction1"
+                           [attr.disabled]="invoiceSettingElements.deduction1type === 'D1P' ? 'disabled' : null">
                 </div>
-            </div>
-            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
+            </div> <!-- Deduction 1 -->
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2" *ngIf="invoiceSettingElements.deduction2status == 1">
                 <div class="offset-lg-4 col-lg-2 col-3 text-right">
-                    <label for="addition1" class="col-form-label ">GST</label>
+                    <label for="deduction2" class="col-form-label ">{{invoiceSettingElements.deduction2label}}</label>
                 </div>
                 <div class="col-lg-2 col-3">
-                    <select id="addition1" class="form-control"
-                            (change)="onAddition1Select($event.target.value)">
-                        <option *ngFor="let mode of additionDeductionMode" value="{{mode.value}}">
-                            {{mode.name}}</option>
-                    </select>
+                    <input type="text" class="form-control" [attr.disabled]="true" id="deduction2"
+                           value="{{invoiceSettingElements.deduction2type === 'D2P' ? 'Percentage' : 'Flat Rate'}}">
                 </div>
-                <div class="col-lg-2 col-3">
-                    <input type="text" class="form-control">
+                <div class="col-lg-2 col-3" *ngIf="invoiceSettingElements.deduction2type === 'D2P'">
+                    <input type="text" class="form-control" formControlName="deduction2Percentage"
+                           [attr.disabled]="invoiceSettingElements.deduction2type === 'D2P' ? 'disabled' : null"
+                           value="{{invoiceSettingElements.deduction2percentage}}">
                 </div>
-                <div class="col-lg-2 col-3">
-                    <input type="text" class="form-control" formControlName="addition1">
+                <div class="col-lg-2 col-3"
+                     [ngClass]="{'offset-lg-2 offset-3': invoiceSettingElements.deduction2type === 'D2F'}">
+                    <input type="text" class="form-control" formControlName="deduction2"
+                           [attr.disabled]="invoiceSettingElements.deduction2type === 'D2P' ? 'disabled' : null">
                 </div>
-            </div>
-            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
+            </div> <!-- Deduction 2 -->
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2" *ngIf="invoiceSettingElements.addition1status == 1">
                 <div class="offset-lg-4 col-lg-2 col-3 text-right">
-                    <label for="addition2" class="col-form-label ">PST</label>
+                    <label for="addition1" class="col-form-label ">{{invoiceSettingElements.addition1label}}</label>
                 </div>
                 <div class="col-lg-2 col-3">
-                    <select id="addition2" class="form-control"
-                            (change)="onAddition2Select($event.target.value)">
-                        <option *ngFor="let mode of additionDeductionMode" value="{{mode.value}}">
-                            {{mode.name}}</option>
-                    </select>
+                    <input type="text" class="form-control" [attr.disabled]="true" id="addition1"
+                           value="{{invoiceSettingElements.addition1type === 'A1P' ? 'Percentage' : 'Flat Rate'}}">
                 </div>
-                <div class="col-lg-2 col-3">
-                    <input type="text" class="form-control">
+                <div class="col-lg-2 col-3" *ngIf="invoiceSettingElements.addition1type === 'A1P'">
+                    <input type="text" class="form-control" formControlName="addition1Percentage"
+                           [attr.disabled]="invoiceSettingElements.addition1type === 'A1P' ? 'disabled' : null"
+                           value="{{invoiceSettingElements.addition1percentage}}">
                 </div>
-                <div class="col-lg-2 col-3">
-                    <input type="text" class="form-control" formControlName="addition2">
+                <div class="col-lg-2 col-3"
+                     [ngClass]="{'offset-lg-2 offset-3': invoiceSettingElements.addition1type === 'A1F'}">
+                    <input type="text" class="form-control" formControlName="addition1"
+                           [attr.disabled]="invoiceSettingElements.addition1type === 'A1P' ? 'disabled' : null">
                 </div>
-            </div>
-            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
+            </div> <!-- Addition 1 -->
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2" *ngIf="invoiceSettingElements.addition2status == 1">
                 <div class="offset-lg-4 col-lg-2 col-3 text-right">
-                    <label for="addition3" class="col-form-label ">Service</label>
+                    <label for="addition2" class="col-form-label ">{{invoiceSettingElements.addition2label}}</label>
                 </div>
                 <div class="col-lg-2 col-3">
-                    <select id="addition3" class="form-control"
-                            (change)="onAddition3Select($event.target.value)">
-                        <option *ngFor="let mode of additionDeductionMode" value="{{mode.value}}">
-                            {{mode.name}}</option>
-                    </select>
+                    <input type="text" class="form-control" [attr.disabled]="true" id="addition2"
+                           value="{{invoiceSettingElements.addition2type === 'A2P' ? 'Percentage' : 'Flat Rate'}}">
+                </div>
+                <div class="col-lg-2 col-3" *ngIf="invoiceSettingElements.addition2type === 'A2P'">
+                    <input type="text" class="form-control" formControlName="addition2Percentage"
+                           [attr.disabled]="invoiceSettingElements.addition2type === 'A2P' ? 'disabled' : null"
+                           value="{{invoiceSettingElements.addition2percentage}}">
+                </div>
+                <div class="col-lg-2 col-3"
+                     [ngClass]="{'offset-lg-2 offset-3': invoiceSettingElements.addition2type === 'A2F'}">
+                    <input type="text" class="form-control" formControlName="addition2"
+                           [attr.disabled]="invoiceSettingElements.addition2type === 'A2P' ? 'disabled' : null">
+                </div>
+            </div> <!-- Addition 2 -->
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2" *ngIf="invoiceSettingElements.addition3status == 1">
+                <div class="offset-lg-4 col-lg-2 col-3 text-right">
+                    <label for="addition3" class="col-form-label ">{{invoiceSettingElements.addition3label}}</label>
                 </div>
                 <div class="col-lg-2 col-3">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" [attr.disabled]="true" id="addition3"
+                           value="{{invoiceSettingElements.addition3type === 'A3P' ? 'Percentage' : 'Flat Rate'}}">
                 </div>
-                <div class="col-lg-2 col-3">
-                    <input type="text" class="form-control" formControlName="addition3">
+                <div class="col-lg-2 col-3" *ngIf="invoiceSettingElements.addition3type === 'A3P'">
+                    <input type="text" class="form-control" formControlName="addition3Percentage"
+                           [attr.disabled]="invoiceSettingElements.addition3type === 'A3P' ? 'disabled' : null"
+                           value="{{invoiceSettingElements.addition3percentage}}">
                 </div>
-            </div>
+                <div class="col-lg-2 col-3"
+                     [ngClass]="{'offset-lg-2 offset-3': invoiceSettingElements.addition3type === 'A3F'}">
+                    <input type="text" class="form-control" formControlName="addition3"
+                           [attr.disabled]="invoiceSettingElements.addition3type === 'A3P' ? 'disabled' : null">
+                </div>
+            </div> <!-- Addition 3 -->
             <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
                 <div class="offset-lg-4 col-lg-2 col-3 text-right">
                     <p class="font-weight-bold"><p>Total</p>
                 </div>
                 <div class="col-lg-2 col-3 text-light">
-                    <p class="font-weight-bold"><p>10000$</p>
+                    <p class="font-weight-bold">10000$</p>
                 </div>
             </div>
-        </div>
-        <div class="form-group row mt-1">
+        </div> <!--Summery Part-->
+        <div class="border border-light mt-1"> <!--Invoice Note-->
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
+                <div class="col-12">
+                    <label for="notes" class="col-form-label">Notes</label>
+                    <textarea id="notes" class="form-control" rows="10" formControlName="note" rows="3"></textarea>
+                </div>
+            </div>
+        </div> <!--Invoice Note-->
+        <div class="form-group row mt-1"> <!--Submition-->
             <div class="col-md-4 offset-md-4 col-sm-8 text-center">
                 <button type="submit" class="btn btn-primary"
                         [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">{{pageStatus === 'modify' ? 'Modify' : 'Register'}}</button>
@@ -329,7 +355,164 @@
             <div *ngIf="submitMessageStatusSuccess" class="valid-feedback-manual col-md-4 col-sm-4 text-center">
                 {{ submitMessage }}
             </div>
-        </div>
+        </div> <!--Submition-->
     </form>
 </div>
+<!--Setting Modal-->
+<div class="modal fade" id="modalSetting" tabindex="-1" role="dialog" aria-labelledby="modalMessage" aria-hidden="true"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-light">
+                <h5 class="modal-title" id="modalMessageTitle">Invoice Setting</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-light">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form [formGroup]="settingForm" (ngSubmit)="onSettingSubmit()">
+                        <div class="form-row text-dark font-weight-bold">
+                            <div class="col-1">
+                                <label class="col-form-label">Show</label>
+                            </div>
+                            <div class="col-2">
+                                <label class="col-form-label">Default Label</label>
+                            </div>
+                            <div class="col-4">
+                                <label class="col-form-label">New Label</label>
+                            </div>
+                            <div class="col-3">
+                                <label class="col-form-label">Type</label>
+                            </div>
+                            <div class="col-2">
+                                <label  class="col-form-label">Percentage</label>
+                            </div>
+                        </div>
+                        <div class="form-row text-dark">
+                            <div class="col-1">
+                                <div class="form-check justify-content-center align-content-center text-center">
+                                    <input type="checkbox" class="form-check-input mt-3 "
+                                           formControlName="deduction1status">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <label class="col-form-label">Discount 1</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" formControlName="deduction1label">
+                            </div>
+                            <div class="col-3">
+                                <select class="form-control" formControlName="deduction1type">
+                                    <option value="D1P">%</option>
+                                    <option value="D1F">Flat Rate</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <input type="text" class="form-control" formControlName="deduction1percentage">
+                            </div>
+                        </div>
+                        <div class="form-row text-dark">
+                            <div class="col-1">
+                                <div class="form-check justify-content-center align-content-center text-center">
+                                    <input type="checkbox" class="form-check-input mt-3 "
+                                           formControlName="deduction2status">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <label class="col-form-label">Discount 2</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" formControlName="deduction2label">
+                            </div>
+                            <div class="col-3">
+                                <select class="form-control" formControlName="deduction2type">
+                                    <option value="D2P">%</option>
+                                    <option value="D2F">Flat Rate</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <input type="text" class="form-control" formControlName="deduction2percentage">
+                            </div>
+                        </div>
+                        <div class="form-row text-dark">
+                            <div class="col-1">
+                                <div class="form-check justify-content-center align-content-center text-center">
+                                    <input type="checkbox" class="form-check-input mt-3 "
+                                           formControlName="addition1status">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <label class="col-form-label">Tax 1</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" formControlName="addition1label">
+                            </div>
+                            <div class="col-3">
+                                <select class="form-control" formControlName="addition1type">
+                                    <option value="A1P">%</option>
+                                    <option value="A1F">Flat Rate</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <input type="text" class="form-control" formControlName="addition1percentage">
+                            </div>
+                        </div>
+                        <div class="form-row text-dark">
+                            <div class="col-1">
+                                <div class="form-check justify-content-center align-content-center text-center">
+                                    <input type="checkbox" class="form-check-input mt-3 "
+                                           formControlName="addition2status">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <label class="col-form-label">Tax 2</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" formControlName="addition2label">
+                            </div>
+                            <div class="col-3">
+                                <select class="form-control" formControlName="addition2type">
+                                    <option value="A2P">%</option>
+                                    <option value="A2F">Flat Rate</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <input type="text" class="form-control" formControlName="addition2percentage">
+                            </div>
+                        </div>
+                        <div class="form-row text-dark">
+                            <div class="col-1">
+                                <div class="form-check justify-content-center align-content-center text-center">
+                                    <input type="checkbox" class="form-check-input mt-3 "
+                                           formControlName="addition3status">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <label class="col-form-label">Tax 3</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" formControlName="addition3label">
+                            </div>
+                            <div class="col-3">
+                                <select class="form-control" formControlName="addition3type">
+                                    <option value="A3P">%</option>
+                                    <option value="A3F">Flat Rate</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <input type="text" class="form-control" formControlName="addition3percentage">
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="onSaveSetting()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Setting Modal-->

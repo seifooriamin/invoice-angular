@@ -4,6 +4,7 @@ import {UserService} from '../shared/services/user.service';
 import {CheckEmailExist} from '../shared/tools/checkemailExist.validator';
 import {MustMatch} from '../shared/tools/mustmatch.validator';
 import {Router} from '@angular/router';
+import {InvoiceGeneralSettingService} from '../shared/services/invoice-general-setting.service';
 
 declare var jQuery: any;
 
@@ -14,13 +15,15 @@ declare var jQuery: any;
 })
 export class SignupComponent implements OnInit {
   fillForm: FormGroup;
-  emailexist: boolean = false;
-  invalidSubmit: boolean = false;
+  emailexist = false;
+  invalidSubmit = false;
   modalTitle: string;
-  modalBody: string;
+  modalBody = '';
+  userID: string;
 
 
-  constructor(private userService: UserService, private formBuilder: FormBuilder, private router: Router) {}
+  constructor(private userService: UserService, private formBuilder: FormBuilder, private router: Router,
+              private invoiceGeneralSettingService: InvoiceGeneralSettingService) {}
 
   ngOnInit() {
     // this.initForm();
@@ -63,14 +66,17 @@ export class SignupComponent implements OnInit {
           this.userService.userCreate(this.fillForm.value).subscribe(
               (response) => {
                   if (response['message'] === 'UWCES') {
+                      this.onCreateUserSetting();
                       this.fillForm.reset();
-                      this.modalBody = 'Your account has been successfully registered and verification email has been ' +
+                      this.modalBody += 'Your account has been successfully registered and verification email has been ' +
                           'sent, to continue please verify your email via the provided link';
                       this.modalTitle = 'Confirmation';
                       jQuery('#modalMessage').modal('show');
                   } else {
                       if (response['message'] === 'UWCENS') {
-                          this.modalBody = 'Your account has been successfully registered but verification email has not been ' +
+                          this.onCreateUserSetting();
+                          this.fillForm.reset();
+                          this.modalBody += 'Your account has been successfully registered but verification email has not been ' +
                               'sent, to continue please contact submit@einvoicemaker.com';
                           this.modalTitle = 'Confirmation - Verify Fail';
                           jQuery('#modalMessage').modal('show');
@@ -87,7 +93,24 @@ export class SignupComponent implements OnInit {
 
   }
   get f() { return this.fillForm.controls; }
+  onCreateUserSetting() {
+      this.userService.getLastUserID().subscribe(
+          (response) => {
+              this.userID = '{ "user_id" : "' + response['ID'] + '" }';
+              this.invoiceGeneralSettingService.createInvoiceSetting(this.userID).subscribe(
+                  (message) => {
+                      if (message['message'] === 'SUCCESS') {
+                          this.modalBody += '-';
+                      }
+                  }, (err) => {
+                      this.modalBody += '*';
+                  }
+              );
+          }, (e) => {
+          }
+      );
 
+  }
   onSignin() {
       this.router.navigate(['/signin']);
   }
