@@ -15,7 +15,7 @@
     $db = $database->getConnection();
 
     // prepare product object
-    $igs = new InvoiceGeneralSetting($db);
+    $igs = new Invoice_general_setting($db);
 
     // get id of product to be edited
     $data = json_decode(file_get_contents("php://input"));

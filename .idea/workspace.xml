@@ -2,34 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c4c7dfe-6670-4a27-8f34-d59f1855566a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/api/invoice_general_setting/create.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/invoice_general_setting/readonebyuserid.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/invoice_general_setting/update.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/invoice_rows/getcomment.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/invoice_rows/getunitmeasure.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/objects/invoice_general_setting.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/users/getlastuserid.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/shared/models/invoice-general-setting.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/invoice_custom_setting/create.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/invoice_custom_setting/delete.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/invoice_custom_setting/readonebyinvoiceid.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/invoice_custom_setting/update.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/objects/invoice_custom_setting.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/shared/models/invoice-custom-setting.model.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Develop Note.docx" beforeDir="false" afterPath="$PROJECT_DIR$/Develop Note.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/invoice/getinvoicenumber.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice/getinvoicenumber.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/invoice_rows/getdescription.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_rows/getdescription.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/libs/php/utils.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/libs/php/utils.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/objects/invoice_rows.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/objects/invoice_rows.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/objects/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/objects/users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/users/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/users/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/company/add-modify/add-modify.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/company/add-modify/add-modify.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/company/add-modify/add-modify.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/company/company-list/company-list.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/customer/add-modify-view/add-modify-view.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/customer/add-modify-view/add-modify-view.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/invoice_general_setting/create.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_general_setting/create.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/invoice_general_setting/readonebyuserid.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_general_setting/readonebyuserid.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/invoice_general_setting/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_general_setting/update.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/objects/invoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/objects/invoice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/objects/invoice_general_setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/objects/invoice_general_setting.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/shared/services/invoice-rows.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/invoice-rows.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/shared/services/tools.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/tools.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/shared/services/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/user.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/signup/signup.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/signup/signup.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/signup/signup.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -50,37 +38,67 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/shared/services/invoice-rows.service.ts">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="666">
+              <caret line="385" column="57" selection-start-line="385" selection-start-column="57" selection-end-line="385" selection-end-column="57" />
               <folding>
-                <element signature="e#0#43#0" expanded="true" />
+                <element signature="n#div#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#2;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#0;n#div#2;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#2;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#2;n#div#2;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#3;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#2;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#3;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#4;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#5;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#5;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#!!top" />
+                <element signature="n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="421">
-              <caret line="141" column="3" lean-forward="true" selection-start-line="141" selection-start-column="3" selection-end-line="141" selection-end-column="3" />
+            <state relative-caret-position="150">
+              <caret line="274" column="17" lean-forward="true" selection-start-line="274" selection-start-column="17" selection-end-line="274" selection-end-column="17" />
               <folding>
                 <element signature="e#0#59#0" expanded="true" />
-                <element signature="e#1752#1947#0" />
-                <element signature="e#2014#2154#0" />
-                <element signature="e#2334#2917#0" />
+                <element signature="e#1768#1963#0" />
+                <element signature="e#2030#2170#0" />
+                <element signature="e#2414#2997#0" />
+                <element signature="n#!!block;n#ngOnInit#0;n#InvoiceAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onSetInvoiceNumberDefault#0;n#InvoiceAddViewModifyComponent#0" />
-                <element signature="n#!!block;n#getDescription#1;n#InvoiceAddViewModifyComponent#0" />
-                <element signature="n#!!block;n#getComment#1;n#InvoiceAddViewModifyComponent#0" />
+                <element signature="n#!!block;n#getDescription#0;n#InvoiceAddViewModifyComponent#0" />
+                <element signature="n#!!block;n#getComment#0;n#InvoiceAddViewModifyComponent#0" />
+                <element signature="n#!!block;n#getUnitMeasure#0;n#InvoiceAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#ngOnDestroy#0;n#InvoiceAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onRowTotal#0;n#InvoiceAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#calcSubTotal#0;n#InvoiceAddViewModifyComponent#0" />
-                <element signature="n#!!block;n#initFormNew#0;n#InvoiceAddViewModifyComponent#0" />
+                <element signature="n#!!block;n#calcTotal#0;n#InvoiceAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#initSettingForm#0;n#InvoiceAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#fillSettingForm#0;n#InvoiceAddViewModifyComponent#0" />
+                <element signature="n#!!block;n#showFormControlName#0;n#InvoiceAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onSaveSetting#0;n#InvoiceAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onSettingCall#0;n#InvoiceAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onCreateRow#0;n#InvoiceAddViewModifyComponent#0" />
@@ -94,39 +112,7 @@
                 <element signature="n#!!block;n#onLoadCustomerData#0;n#InvoiceAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onAddCompany#0;n#InvoiceAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onAddCustomer#0;n#InvoiceAddViewModifyComponent#0" />
-                <element signature="n#!!block;n#onRemoveLine#0;n#InvoiceAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onAddLine#0;n#InvoiceAddViewModifyComponent#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="196" column="52" lean-forward="true" selection-start-line="196" selection-start-column="52" selection-end-line="196" selection-end-column="52" />
-              <folding>
-                <element signature="n#div#0;n#div#0;n#!!top" />
-                <element signature="n#div#1;n#div#0;n#div#0;n#!!top" />
-                <element signature="n#div#1;n#div#0;n#!!top" />
-                <element signature="n#div#0;n#form#0;n#div#0;n#!!top" />
-                <element signature="n#div#1;n#form#0;n#div#0;n#!!top" />
-                <element signature="n#div#2;n#form#0;n#div#0;n#!!top" />
-                <element signature="n#div#0;n#div#2;n#form#0;n#div#0;n#!!top" />
-                <element signature="n#div#1;n#div#2;n#form#0;n#div#0;n#!!top" />
-                <element signature="n#div#2;n#div#2;n#form#0;n#div#0;n#!!top" />
-                <element signature="n#div#1;n#form#0;n#form#0;n#div#0;n#!!top" />
-                <element signature="n#div#3;n#form#0;n#div#0;n#!!top" />
-                <element signature="n#div#4;n#form#0;n#div#0;n#!!top" />
-                <element signature="n#div#5;n#form#0;n#div#0;n#!!top" />
-                <element signature="n#div#1;n#!!top" />
-                <element signature="n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
-                <element signature="n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
-                <element signature="n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
-                <element signature="n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
-                <element signature="n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
-                <element signature="n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
               </folding>
             </state>
           </provider>
@@ -151,6 +137,7 @@
       <find>.row</find>
       <find>.container</find>
       <find>modal</find>
+      <find>invoice_id</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -159,13 +146,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/api/invoice/readbyuser.php" />
-        <option value="$PROJECT_DIR$/api/objects/estimate_rows.php" />
-        <option value="$PROJECT_DIR$/src/app/shared/models/invoice-rows.model.ts" />
-        <option value="$PROJECT_DIR$/api/invoice_rows/deletebyinvoiceid.php" />
-        <option value="$PROJECT_DIR$/src/app/invoice/invoice-list/invoice-list.component.html" />
-        <option value="$PROJECT_DIR$/src/environments/environment.ts" />
-        <option value="$PROJECT_DIR$/src/app/invoice/invoice-list/invoice-list.component.ts" />
         <option value="$PROJECT_DIR$/src/environments/environment.prod.ts" />
         <option value="$PROJECT_DIR$/src/app/shared/services/company.service.ts" />
         <option value="$PROJECT_DIR$/src/app/shared/services/customer.service.ts" />
@@ -180,14 +160,10 @@
         <option value="$PROJECT_DIR$/src/app/shared/tools/dateformatmodal.ts" />
         <option value="$PROJECT_DIR$/api/invoice/read_one.php" />
         <option value="$PROJECT_DIR$/api/invoice/get_invoice_number.php" />
-        <option value="$PROJECT_DIR$/api/objects/invoice.php" />
         <option value="$PROJECT_DIR$/src/app/shared/services/invoice.service.ts" />
         <option value="$PROJECT_DIR$/src/app/shared/services/authentication.service.ts" />
         <option value="$PROJECT_DIR$/src/app/company/add-modify/add-modify.component.html" />
         <option value="$PROJECT_DIR$/src/app/company/add-modify/add-modify.component.ts" />
-        <option value="$PROJECT_DIR$/src/app/shared/services/tools.service.ts" />
-        <option value="$PROJECT_DIR$/api/invoice_general_setting/create.php" />
-        <option value="$PROJECT_DIR$/api/invoice_general_setting/update.php" />
         <option value="$PROJECT_DIR$/api/libs/php/utils.php" />
         <option value="$PROJECT_DIR$/api/users/login.php" />
         <option value="$PROJECT_DIR$/api/objects/users.php" />
@@ -199,8 +175,6 @@
         <option value="$PROJECT_DIR$/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/api/invoice_general_setting/readbyuser.php" />
         <option value="$PROJECT_DIR$/src/app/customer/add-modify-view/add-modify-view.component.ts" />
-        <option value="$PROJECT_DIR$/api/invoice_general_setting/readonebyuserid.php" />
-        <option value="$PROJECT_DIR$/api/objects/invoice_general_setting.php" />
         <option value="$PROJECT_DIR$/src/app/shared/services/invoice-general-setting.service.ts" />
         <option value="$PROJECT_DIR$/src/app/shared/models/invoice-general-setting.model.ts" />
         <option value="$PROJECT_DIR$/api/invoice_rows/getcomment.php" />
@@ -208,8 +182,21 @@
         <option value="$PROJECT_DIR$/api/invoice_rows/getunitmeasure.php" />
         <option value="$PROJECT_DIR$/api/objects/invoice_rows.php" />
         <option value="$PROJECT_DIR$/src/app/shared/services/invoice-rows.service.ts" />
-        <option value="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html" />
+        <option value="$PROJECT_DIR$/api/objects/invoice_general_setting.php" />
+        <option value="$PROJECT_DIR$/api/invoice_general_setting/create.php" />
+        <option value="$PROJECT_DIR$/api/invoice_general_setting/readonebyuserid.php" />
+        <option value="$PROJECT_DIR$/api/invoice_general_setting/update.php" />
+        <option value="$PROJECT_DIR$/api/invoice_custom_setting/create.php" />
+        <option value="$PROJECT_DIR$/api/invoice_custom_setting/readonebyuserid.php" />
+        <option value="$PROJECT_DIR$/api/invoice_custom_setting/update.php" />
+        <option value="$PROJECT_DIR$/api/objects/invoice_custom_setting.php" />
+        <option value="$PROJECT_DIR$/api/invoice_custom_setting/delete.php" />
+        <option value="$PROJECT_DIR$/src/app/shared/models/invoice-custom-setting.model.ts" />
+        <option value="$PROJECT_DIR$/src/app/shared/services/tools.service.ts" />
+        <option value="$PROJECT_DIR$/src/index.html" />
+        <option value="$PROJECT_DIR$/api/objects/invoice.php" />
         <option value="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html" />
       </list>
     </option>
   </component>
@@ -241,31 +228,7 @@
               <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
               <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="customers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
-              <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="invoice_general_setting" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
-              <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="invoice_rows" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
-              <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="objects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
-              <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="users" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
@@ -292,14 +255,6 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="company" type="462c0819:PsiDirectoryNode" />
               <item name="add-modify" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
-              <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="company" type="462c0819:PsiDirectoryNode" />
-              <item name="company-list" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
@@ -385,7 +340,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/api/invoice_rows" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/app/shared/models" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
@@ -397,11 +352,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\invoice-angular\api\invoice_rows" />
-      <recent name="C:\wamp64\www\invoice-angular\api\users" />
       <recent name="C:\wamp64\www\invoice-angular\src\app\shared\models" />
+      <recent name="C:\wamp64\www\invoice-angular\api\invoice_custom_setting" />
       <recent name="C:\wamp64\www\invoice-angular\api" />
       <recent name="C:\wamp64\www\invoice-angular\api\objects" />
+      <recent name="C:\wamp64\www\invoice-angular\api\invoice_rows" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\invoice-angular\src\app" />
@@ -470,18 +425,18 @@
       <workItem from="1579306948551" duration="1000" />
       <workItem from="1579306959355" duration="7056000" />
       <workItem from="1579322273030" duration="13564000" />
-      <workItem from="1579642977227" duration="152105000" />
+      <workItem from="1579642977227" duration="170598000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="521180000" />
+    <option name="totallyTimeSpent" value="539673000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="702" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="702" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49824563" visible="true" weight="0.25340393" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49824563" visible="true" weight="0.25340393" />
       <window_info id="Structure" order="1" sideWeight="0.5017544" side_tool="true" weight="0.30484116" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -495,7 +450,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info active="true" anchor="bottom" id="TypeScript" order="10" visible="true" weight="0.05263158" />
+      <window_info anchor="bottom" id="TypeScript" order="10" visible="true" weight="0.05263158" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -531,74 +486,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/app/customer/customer-list/customer-list.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="58" selection-start-line="58" selection-end-line="77" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/bootstrap/dist/css/bootstrap.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="5729" column="9" lean-forward="true" selection-start-line="5729" selection-start-column="9" selection-end-line="5729" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice/read_one.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-561">
-          <caret selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice/read.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="39" selection-start-line="38" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_general_setting/read.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/objects/companies.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2941">
-          <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_general_setting/update.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="20" column="39" lean-forward="true" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/shared/tools/httperror.interceptor.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/libs/php-jwt-master/src/SignatureInvalidException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/libs/php-jwt-master/src/ExpiredException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/libs/php-jwt-master/src/BeforeValidException.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -642,32 +529,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/shared/models/invoice.model.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/objects/users.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="305">
           <caret line="189" selection-start-line="189" selection-end-line="189" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/objects/invoice.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="219" column="29" selection-start-line="219" selection-start-column="29" selection-end-line="219" selection-end-column="29" />
-          <folding>
-            <element signature="n#read#0;n#Invoice#0;n#!!top" />
-            <element signature="n#count#0;n#Invoice#0;n#!!top" />
-            <element signature="n#count_search#0;n#Invoice#0;n#!!top" />
-            <element signature="n#create#0;n#Invoice#0;n#!!top" />
-            <element signature="n#invoice_number_generator#0;n#Invoice#0;n#!!top" />
-            <element signature="n#readOne#0;n#Invoice#0;n#!!top" />
-            <element signature="n#update#0;n#Invoice#0;n#!!top" />
-            <element signature="n#delete#0;n#Invoice#0;n#!!top" />
-            <element signature="n#search#0;n#Invoice#0;n#!!top" />
-            <element signature="n#readPaging#0;n#Invoice#0;n#!!top" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -779,13 +644,6 @@
         <state relative-caret-position="-86" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_general_setting/readonebyuserid.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="40" column="38" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/company/company-list/company-list.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -793,13 +651,6 @@
           <folding>
             <element signature="e#0#116#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/objects/invoice_general_setting.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="70" column="5" lean-forward="true" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -819,13 +670,6 @@
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_general_setting/create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="40" column="30" lean-forward="true" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -853,19 +697,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" selection-start-line="1" selection-end-line="24" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/company/add-modify/add-modify.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="70" selection-start-line="70" selection-end-line="70" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-            <element signature="n#!!block;n#handleFileInput#0;n#AddModifyComponent#0" />
-            <element signature="n#!!block;n#imageCleanUp#0;n#AddModifyComponent#0" />
-            <element signature="n#!!block;n#preview#0;n#AddModifyComponent#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -900,9 +731,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/shared/services/invoice-rows.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/api/objects/invoice_rows.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
+        <state relative-caret-position="1445">
           <caret line="206" column="104" selection-start-line="206" selection-start-column="104" selection-end-line="206" selection-end-column="104" />
           <folding>
             <element signature="n#countPerInvoice#0;n#Invoice_rows#0;n#!!top" />
@@ -915,63 +756,164 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/shared/services/invoice-rows.service.ts">
+    <entry file="file://$PROJECT_DIR$/api/invoice_general_setting/readonebyuserid.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="187">
+          <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/invoice_general_setting/update.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/invoice_custom_setting/create.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/invoice_custom_setting/readonebyinvoiceid.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="44" column="9" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/objects/estimate_rows.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="185" selection-start-line="185" selection-end-line="186" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/objects/invoice_custom_setting.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="236" selection-start-line="236" selection-end-line="237" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/invoice_custom_setting/delete.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/invoice_custom_setting/update.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="577">
+          <caret line="47" column="23" lean-forward="true" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/invoice_general_setting/create.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-204">
+          <caret line="18" column="39" selection-start-line="18" selection-start-column="39" selection-end-line="18" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/objects/invoice_general_setting.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1648">
+          <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
           <folding>
-            <element signature="e#0#43#0" expanded="true" />
+            <element signature="n#readOneByUserID#0;n#InvoiceGeneralSetting#0;n#!!top" />
+            <element signature="n#create#0;n#InvoiceGeneralSetting#0;n#!!top" />
+            <element signature="n#delete#0;n#InvoiceGeneralSetting#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html">
+    <entry file="file://$PROJECT_DIR$/src/app/shared/models/invoice.model.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/shared/models/invoice-custom-setting.model.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="196" column="52" lean-forward="true" selection-start-line="196" selection-start-column="52" selection-end-line="196" selection-end-column="52" />
+        <state relative-caret-position="153">
+          <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/company/add-modify/add-modify.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="64" column="109" lean-forward="true" selection-start-line="64" selection-start-column="75" selection-end-line="64" selection-end-column="109" />
           <folding>
-            <element signature="n#div#0;n#div#0;n#!!top" />
-            <element signature="n#div#1;n#div#0;n#div#0;n#!!top" />
-            <element signature="n#div#1;n#div#0;n#!!top" />
-            <element signature="n#div#0;n#form#0;n#div#0;n#!!top" />
-            <element signature="n#div#1;n#form#0;n#div#0;n#!!top" />
-            <element signature="n#div#2;n#form#0;n#div#0;n#!!top" />
-            <element signature="n#div#0;n#div#2;n#form#0;n#div#0;n#!!top" />
-            <element signature="n#div#1;n#div#2;n#form#0;n#div#0;n#!!top" />
-            <element signature="n#div#2;n#div#2;n#form#0;n#div#0;n#!!top" />
-            <element signature="n#div#1;n#form#0;n#form#0;n#div#0;n#!!top" />
-            <element signature="n#div#3;n#form#0;n#div#0;n#!!top" />
-            <element signature="n#div#4;n#form#0;n#div#0;n#!!top" />
-            <element signature="n#div#5;n#form#0;n#div#0;n#!!top" />
-            <element signature="n#div#1;n#!!top" />
-            <element signature="n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
-            <element signature="n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
-            <element signature="n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
-            <element signature="n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
-            <element signature="n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
-            <element signature="n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="e#0#48#0" expanded="true" />
+            <element signature="n#!!block;n#handleFileInput#0;n#AddModifyComponent#0" />
+            <element signature="n#!!block;n#imageCleanUp#0;n#AddModifyComponent#0" />
+            <element signature="n#!!block;n#preview#0;n#AddModifyComponent#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/shared/services/tools.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="27" column="25" lean-forward="true" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+            <element signature="n#!!block;n#imageAccept#0;n#ToolsService#0" />
+            <element signature="n#!!block;n#imageSize#0;n#ToolsService#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/objects/invoice.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="175" column="34" lean-forward="true" selection-start-line="175" selection-start-column="18" selection-end-line="175" selection-end-column="34" />
+          <folding>
+            <element signature="n#read#0;n#Invoice#0;n#!!top" />
+            <element signature="n#readByUser#0;n#Invoice#0;n#!!top" />
+            <element signature="n#count#0;n#Invoice#0;n#!!top" />
+            <element signature="n#count_search#0;n#Invoice#0;n#!!top" />
+            <element signature="n#invoice_number_generator#0;n#Invoice#0;n#!!top" />
+            <element signature="n#getInvoiceNumber#0;n#Invoice#0;n#!!top" />
+            <element signature="n#readOne#0;n#Invoice#0;n#!!top" />
+            <element signature="n#update#0;n#Invoice#0;n#!!top" />
+            <element signature="n#delete#0;n#Invoice#0;n#!!top" />
+            <element signature="n#search#0;n#Invoice#0;n#!!top" />
+            <element signature="n#readPaging#0;n#Invoice#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="141" column="3" lean-forward="true" selection-start-line="141" selection-start-column="3" selection-end-line="141" selection-end-column="3" />
+        <state relative-caret-position="150">
+          <caret line="274" column="17" lean-forward="true" selection-start-line="274" selection-start-column="17" selection-end-line="274" selection-end-column="17" />
           <folding>
             <element signature="e#0#59#0" expanded="true" />
-            <element signature="e#1752#1947#0" />
-            <element signature="e#2014#2154#0" />
-            <element signature="e#2334#2917#0" />
+            <element signature="e#1768#1963#0" />
+            <element signature="e#2030#2170#0" />
+            <element signature="e#2414#2997#0" />
+            <element signature="n#!!block;n#ngOnInit#0;n#InvoiceAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onSetInvoiceNumberDefault#0;n#InvoiceAddViewModifyComponent#0" />
-            <element signature="n#!!block;n#getDescription#1;n#InvoiceAddViewModifyComponent#0" />
-            <element signature="n#!!block;n#getComment#1;n#InvoiceAddViewModifyComponent#0" />
+            <element signature="n#!!block;n#getDescription#0;n#InvoiceAddViewModifyComponent#0" />
+            <element signature="n#!!block;n#getComment#0;n#InvoiceAddViewModifyComponent#0" />
+            <element signature="n#!!block;n#getUnitMeasure#0;n#InvoiceAddViewModifyComponent#0" />
             <element signature="n#!!block;n#ngOnDestroy#0;n#InvoiceAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onRowTotal#0;n#InvoiceAddViewModifyComponent#0" />
             <element signature="n#!!block;n#calcSubTotal#0;n#InvoiceAddViewModifyComponent#0" />
-            <element signature="n#!!block;n#initFormNew#0;n#InvoiceAddViewModifyComponent#0" />
+            <element signature="n#!!block;n#calcTotal#0;n#InvoiceAddViewModifyComponent#0" />
             <element signature="n#!!block;n#initSettingForm#0;n#InvoiceAddViewModifyComponent#0" />
             <element signature="n#!!block;n#fillSettingForm#0;n#InvoiceAddViewModifyComponent#0" />
+            <element signature="n#!!block;n#showFormControlName#0;n#InvoiceAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onSaveSetting#0;n#InvoiceAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onSettingCall#0;n#InvoiceAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onCreateRow#0;n#InvoiceAddViewModifyComponent#0" />
@@ -985,8 +927,44 @@
             <element signature="n#!!block;n#onLoadCustomerData#0;n#InvoiceAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onAddCompany#0;n#InvoiceAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onAddCustomer#0;n#InvoiceAddViewModifyComponent#0" />
-            <element signature="n#!!block;n#onRemoveLine#0;n#InvoiceAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onAddLine#0;n#InvoiceAddViewModifyComponent#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="666">
+          <caret line="385" column="57" selection-start-line="385" selection-start-column="57" selection-end-line="385" selection-end-column="57" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#2;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#2;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#2;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#3;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#3;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#4;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#5;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#5;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#!!top" />
+            <element signature="n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
           </folding>
         </state>
       </provider>

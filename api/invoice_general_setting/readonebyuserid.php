@@ -9,7 +9,7 @@
     $database=new Database();
     $db=$database->getConnection();
 
-    $igs= new InvoiceGeneralSetting($db);
+    $igs= new Invoice_general_setting($db);
     $data = json_decode(file_get_contents("php://input"));
     $igs->user_id = $data->user_id;
     $stmt=$igs->readOneByUserID();

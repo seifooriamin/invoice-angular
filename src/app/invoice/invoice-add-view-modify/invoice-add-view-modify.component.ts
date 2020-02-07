@@ -13,6 +13,7 @@ import {ToolsService} from '../../shared/services/tools.service';
 import {InvoiceService} from '../../shared/services/invoice.service';
 import {InvoiceGeneralSettingService} from '../../shared/services/invoice-general-setting.service';
 import {InvoiceGeneralSettingModel} from '../../shared/models/invoice-general-setting.model';
+import {validate} from 'codelyzer/walkerFactory/walkerFn';
 declare var jQuery: any;
 
 @Component({
@@ -46,7 +47,10 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   unitMeasureText: string[] = [];
   rowTotalString: string[] = [];
   rowTotalNumber: number[] = [];
-  invoiceSubTotal: '';
+  invoiceSubTotal = '';
+  invoiceSubTotalDigit = 0;
+  invoiceTotal = '';
+  invoiceTotalDigit: number;
   invoiceSettingElements: InvoiceGeneralSettingModel = {
     id: 0,
     user_id: 0,
@@ -172,6 +176,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     this.rowTotalString.splice(index + 1, this.rowTotalString.length - index);
     this.rowTotalNumber.splice(index + 1, this.rowTotalNumber.length - index);
     this.calcSubTotal();
+    this.calcTotal();
   }
   calcSubTotal() {
     let invoiceSubTotalLocal = 0;
@@ -180,6 +185,70 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     }
     invoiceSubTotalLocal = this.toolsService.showNumberWithDecimal(invoiceSubTotalLocal);
     this.invoiceSubTotal = this.toolsService.numberSeparator(invoiceSubTotalLocal);
+    this.invoiceSubTotalDigit = invoiceSubTotalLocal;
+  }
+  calcTotal() {
+    let deduction1 = 0;
+    let deduction2 = 0;
+    let addition1 = 0;
+    let addition2 = 0;
+    let addition3 = 0;
+    let totalLocal = this.invoiceSubTotalDigit;
+    if (this.invoiceSettingElements.deduction1type === 'D1P' && +this.invoiceSettingElements.deduction1status === 1) {
+      deduction1 = this.toolsService.showNumberWithDecimal(
+          (this.invoiceSubTotalDigit * this.invoiceSettingElements.deduction1percentage) / 100);
+      this.f.deduction1.setValue(this.toolsService.numberSeparator(deduction1));
+    } else {
+      if (+this.invoiceSettingElements.deduction1status === 1) {
+        deduction1 = this.toolsService.showNumberWithDecimal(this.f.deduction1.value);
+        this.f.deduction1.setValue(deduction1);
+      }
+    }
+    totalLocal -= deduction1;
+    if (this.invoiceSettingElements.deduction2type === 'D2P' && +this.invoiceSettingElements.deduction2status === 1) {
+      deduction2 = this.toolsService.showNumberWithDecimal(
+          (totalLocal * this.invoiceSettingElements.deduction2percentage) / 100);
+      this.f.deduction2.setValue(this.toolsService.numberSeparator(deduction2));
+    } else {
+      if (+this.invoiceSettingElements.deduction2status === 1) {
+        deduction2 = this.toolsService.showNumberWithDecimal(this.f.deduction2.value);
+        this.f.deduction2.setValue(deduction2);
+      }
+    }
+    totalLocal -= deduction2;
+    if (this.invoiceSettingElements.addition1type === 'A1P' && +this.invoiceSettingElements.addition1status === 1) {
+      addition1 = this.toolsService.showNumberWithDecimal(
+          (totalLocal * this.invoiceSettingElements.addition1percentage) / 100);
+      this.f.addition1.setValue(this.toolsService.numberSeparator(addition1));
+    } else {
+      if (+this.invoiceSettingElements.addition1status === 1) {
+        addition1 = this.toolsService.showNumberWithDecimal(this.f.addition1.value);
+        this.f.addition1.setValue(addition1);
+      }
+    }
+    if (this.invoiceSettingElements.addition2type === 'A2P' && +this.invoiceSettingElements.addition2status === 1) {
+      addition2 = this.toolsService.showNumberWithDecimal(
+          (totalLocal * this.invoiceSettingElements.addition2percentage) / 100);
+      this.f.addition2.setValue(this.toolsService.numberSeparator(addition2));
+    } else {
+      if (+this.invoiceSettingElements.addition2status === 1) {
+        addition2 = this.toolsService.showNumberWithDecimal(this.f.addition2.value);
+        this.f.addition2.setValue(addition2);
+      }
+    }
+    if (this.invoiceSettingElements.addition3type === 'A3P' && +this.invoiceSettingElements.addition3status === 1) {
+      addition3 = this.toolsService.showNumberWithDecimal(
+          (totalLocal * this.invoiceSettingElements.addition3percentage) / 100);
+      this.f.addition3.setValue(this.toolsService.numberSeparator(addition3));
+    } else {
+      if (+this.invoiceSettingElements.addition3status === 1) {
+        addition3 = this.toolsService.showNumberWithDecimal(this.f.addition3.value);
+        this.f.addition3.setValue(addition3);
+      }
+    }
+    totalLocal = +totalLocal + +addition1 + +addition2 + +addition3;
+    this.invoiceTotalDigit = this.toolsService.showNumberWithDecimal(totalLocal);
+    this.invoiceTotal = this.toolsService.numberSeparator(this.invoiceTotalDigit);
   }
   initFormNew() {
     this.subscription = this.companyService.companyReadByUser(this.jUserID).subscribe(
@@ -198,26 +267,25 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     );
     this.fillForm = this.formBuilder.group({
       date : ['', [Validators.required,
-        Validators.pattern('^(([0-2]+\\d{1})|([3]+[0,1]{1}))-([0,1]+\\d{1})-([1-9]{1}\\d{3})$')]],
-      invoice_no: ['', [Validators.required,
+          Validators.pattern('^(([0-2]+\\d{1})|([3]+[0,1]{1}))-([0,1]+\\d{1})-([1-9]{1}\\d{3})$')]],
+      invoice_number: ['', [Validators.required,
           Validators.pattern('^([a-zA-Z0-9-_\\\\\\/]{0,10})([0-9]{1,6})$')]],
       no: [''],
       year: [''],
-      note: [''],
-      invoice_id: [''],
+      note: ['', Validators.maxLength(256)],
       user_id : [''],
       company_id : ['', Validators.required],
       customer_id : ['', Validators.required],
-      addition1 : [''],
-      addition1Percentage : ['5'],
-      addition2 : [''],
-      addition2Percentage : ['7'],
-      addition3 : [''],
-      addition3Percentage : ['0'],
-      deduction1 : [''],
-      deduction1Percentage : ['0'],
-      deduction2 : [''],
-      deduction2Percentage : ['0'],
+      addition1 : ['0'],
+      addition1Percentage : [''],
+      addition2 : ['0'],
+      addition2Percentage : [''],
+      addition3 : ['0'],
+      addition3Percentage : [''],
+      deduction1 : ['0'],
+      deduction1Percentage : [''],
+      deduction2 : ['0'],
+      deduction2Percentage : [''],
       id: [''],
     });
     this.fillFormRows = this.formBuilder.group({
@@ -277,8 +345,13 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
         }
     );
   }
+  showFormControlName(formControl) {
+    formControl.setValue(this.toolsService.showNumberWithDecimal(formControl.value));
+    this.calcTotal();
+  }
   onSaveSetting() {
     this.invoiceSettingElements = this.settingForm.value;
+    this.calcTotal();
     jQuery('#modalSetting').modal('hide');
   }
   onSettingSubmit() {}
@@ -289,13 +362,16 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     return this.formBuilder.group({
       inx: '',
       invoice_id: '',
-      description: '',
-      comment: [''],
+      description: ['', [Validators.required, Validators.maxLength(70),
+           Validators.pattern('^(\\w*\\.*\\ *\\-*\\_*\\\\*\\/*\\@*\\#*\\%*\\(*\\)*\\&*\\**\\+*\\-*\\=*)*$')]],
+      comment: ['', [Validators.maxLength(70),
+           Validators.pattern('^(\\w*\\.*\\ *\\-*\\_*\\\\*\\/*\\@*\\#*\\%*\\(*\\)*\\&*\\**\\+*\\-*\\=*)*$')]],
       unit_price: ['', [Validators.required,
-          Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$')]],
-      unit_measure: [''],
+           Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$')]],
+      unit_measure: ['', [Validators.pattern('^(\\w*\\.*\\ *\\-*\\_*\\\\*\\/*\\@*\\#*\\%*\\(*\\)*\\&*\\**\\+*\\-*\\=*)*$'),
+           Validators.maxLength(10)]],
       quantity: ['', [Validators.required,
-        Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$')]],
+           Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$')]],
       user_id: ['', Validators.required]
     });
   }
@@ -320,6 +396,10 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     const numDecimal = this.toolsService.showNumberWithDecimal(amount);
     this.s.at(index).get('unit_price').setValue(numDecimal);
 
+  }
+  onNumberCorrection(quantity, index) {
+    const correctedNum = this.toolsService.numberCorrection(quantity);
+    this.s.at(index).get('quantity').setValue(correctedNum);
   }
   onBack() {
     this.router.navigate(['/invoice/invoice-list']);
@@ -356,6 +436,8 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     this.rowTotalString.splice(lineIndex, 1);
     this.rowTotalNumber.splice(lineIndex, 1);
     this.invoiceRows.removeAt(lineIndex);
+    this.calcSubTotal();
+    this.calcTotal();
   }
   onAddLine() {
     this.invoiceRows = this.fillFormRows.get('invoiceRows') as FormArray;

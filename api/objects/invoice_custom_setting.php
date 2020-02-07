@@ -1,13 +1,13 @@
 <?php
 
 
-class Invoice_general_setting
+class Invoice_custom_setting
 {
     private $conn;
-    private $table_name="invoice_general_setting";
+    private $table_name="invoice_custom_setting";
 
     public $id;
-    public $user_id;
+    public $invoice_id;
     public $created;
     public $modified;
     public $deduction1status;
@@ -36,16 +36,18 @@ class Invoice_general_setting
         $this->conn=$db;
     }
 
-    function readOneByUserID(){
+    function readOneByInvoiceID(){
         $query="SELECT *
                 FROM " . $this->table_name . " igs
-                WHERE igs.user_id = ?";
+                WHERE igs.invoice_id = ?";
+
         $stmt=$this->conn->prepare($query);
-        $stmt->bindParam(1, $this->user_id);
+        $stmt->bindParam(1, $this->invoice_id);
         $stmt->execute();
+
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->id = $row['id'];
-        $this->user_id = $row['user_id'];
+        $this->invoice_id = $row['invoice_id'];
         $this->deduction1status = $row['deduction1status'];
         $this->deduction1label = $row['deduction1label'];
         $this->deduction1type = $row['deduction1type'];
@@ -75,7 +77,7 @@ class Invoice_general_setting
         $query = "INSERT INTO
                         " . $this->table_name . "
                     SET
-                        user_id=:user_id,
+                        invoice_id=:invoice_id,
                         deduction1status=:deduction1status,
                         deduction1label=:deduction1label,
                         deduction1type=:deduction1type,
@@ -101,7 +103,7 @@ class Invoice_general_setting
         $stmt = $this->conn->prepare($query);
 
         // sanitize
-        $this->user_id=htmlspecialchars(strip_tags($this->user_id));
+        $this->invoice_id=htmlspecialchars(strip_tags($this->invoice_id));
         $this->deduction1status=htmlspecialchars(strip_tags($this->deduction1status));
         $this->deduction1label=htmlspecialchars(strip_tags($this->deduction1label));
         $this->deduction1type=htmlspecialchars(strip_tags($this->deduction1type));
@@ -124,7 +126,7 @@ class Invoice_general_setting
         $this->addition3percentage=htmlspecialchars(strip_tags($this->addition3percentage));
 
         // bind values
-        $stmt->bindParam(":user_id", $this->user_id);
+        $stmt->bindParam(":invoice_id", $this->invoice_id);
         $stmt->bindParam(":deduction1status", $this->deduction1status);
         $stmt->bindParam(":deduction1label", $this->deduction1label);
         $stmt->bindParam(":deduction1type", $this->deduction1type);
@@ -150,17 +152,12 @@ class Invoice_general_setting
         if($stmt->execute()){
             return true;
         }
-        $errors = $stmt->errorInfo();
-        echo($errors[2]);
         return false;
-
-
     }
     function update(){
 
         // update query
         $query = "UPDATE " . $this->table_name . " SET
-                        user_id=:user_id,
                         deduction1status=:deduction1status,
                         deduction1label=:deduction1label,
                         deduction1type=:deduction1type,
@@ -182,13 +179,12 @@ class Invoice_general_setting
                         addition3type=:addition3type,
                         addition3percentage=:addition3percentage
                     WHERE
-                        id=:id";
+                        invoice_id=:invoice_id";
 
         // prepare query statement
         $stmt = $this->conn->prepare($query);
 
-        $this->user_id=htmlspecialchars(strip_tags($this->user_id));
-        $this->id=htmlspecialchars(strip_tags($this->id));
+        $this->invoice_id=htmlspecialchars(strip_tags($this->invoice_id));
         $this->deduction1status=htmlspecialchars(strip_tags($this->deduction1status));
         $this->deduction1label=htmlspecialchars(strip_tags($this->deduction1label));
         $this->deduction1type=htmlspecialchars(strip_tags($this->deduction1type));
@@ -212,7 +208,7 @@ class Invoice_general_setting
 
 
         // bind new values
-        $stmt->bindParam(":user_id", $this->user_id);
+        $stmt->bindParam(":invoice_id", $this->invoice_id);
         $stmt->bindParam(":deduction1status", $this->deduction1status);
         $stmt->bindParam(":deduction1label", $this->deduction1label);
         $stmt->bindParam(":deduction1type", $this->deduction1type);
@@ -233,27 +229,28 @@ class Invoice_general_setting
         $stmt->bindParam(":addition3label", $this->addition3label);
         $stmt->bindParam(":addition3type", $this->addition3type);
         $stmt->bindParam(":addition3percentage", $this->addition3percentage);
-        $stmt->bindParam(":id", $this->id);
 
         // execute the query
         if($stmt->execute()){
             return true;
         }
+                $errors = $stmt->errorInfo();
+        echo($errors[2]);
         return false;
     }
     function delete(){
 
         // delete query
-        $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+        $query = "DELETE FROM " . $this->table_name . " WHERE invoice_id = ?";
 
         // prepare query
         $stmt = $this->conn->prepare($query);
 
         // sanitize
-        $this->id=htmlspecialchars(strip_tags($this->id));
+        $this->invoice_id=htmlspecialchars(strip_tags($this->invoice_id));
 
         // bind id of record to delete
-        $stmt->bindParam(1, $this->id);
+        $stmt->bindParam(1, $this->invoice_id);
 
         // execute query
         if($stmt->execute()){

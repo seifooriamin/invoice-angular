@@ -45,13 +45,13 @@
                 </div>
                 <div class="col-lg-4 col-6 offset-lg-2">
                     <label for="invoiceNo" class="col-form-label">Invoice Number</label>
-                    <input id="invoiceNo" formControlName="invoice_no" class="form-control"
-                           [ngClass]="{ 'is-invalid': f.invoice_no.touched && f.invoice_no.invalid,
-                                    'is-valid': f.invoice_no.valid}">
-                    <div *ngIf="f.invoice_no.touched && f.invoice_no.errors?.required" class="invalid-feedback">
+                    <input id="invoiceNo" formControlName="invoice_number" class="form-control"
+                           [ngClass]="{ 'is-invalid': f.invoice_number.touched && f.invoice_number.invalid,
+                                    'is-valid': f.invoice_number.valid}">
+                    <div *ngIf="f.invoice_number.touched && f.invoice_number.errors?.required" class="invalid-feedback">
                         Invoice number is mandatory
                     </div>
-                    <div *ngIf="f.invoice_no.touched && f.invoice_no.errors?.pattern" class="invalid-feedback">
+                    <div *ngIf="f.invoice_number.touched && f.invoice_number.errors?.pattern" class="invalid-feedback">
                         Invoice number should be ended by number
                     </div>
                 </div>
@@ -159,31 +159,56 @@
                             <label for="{{'description'+i}}" class="col-form-label">Description</label>
                             <input formControlName="description" id="{{'description'+i}}"
                                    class="form-control" [ngbTypeahead]="searchDescription"
-                                   (change)="onSetInvoiceRowUserId(i)">
+                                   (change)="onSetInvoiceRowUserId(i)"
+                                   [ngClass]="{ 'is-invalid': s.at(i).get('description').touched
+                                   && s.at(i).get('description').invalid,
+                                    'is-valid': s.at(i).get('description').valid}">
+                            <div *ngIf="s.at(i).get('description').touched &&
+                            s.at(i).get('description').errors?.required" class="invalid-feedback">
+                                Description is mandatory
+                            </div>
+                            <div *ngIf="s.at(i).get('description').touched &&
+                            (s.at(i).get('description').errors?.maxlength || s.at(i).get('description').errors?.pattern)"
+                                 class="invalid-feedback">
+                                Maximum allowed characters is 70 and some special characters are not allowed
+                            </div>
                         </div>
                         <div class="col-lg-4 col-12">
                             <label for="{{'comment'+i}}" class="col-form-label">Comment</label>
                             <input formControlName="comment" id="{{'comment'+i}}" class="form-control"
-                                   [ngbTypeahead]="searchComment">
+                                   [ngbTypeahead]="searchComment"
+                                   [ngClass]="{ 'is-invalid': s.at(i).get('comment').touched
+                                   && s.at(i).get('comment').invalid,
+                                    'is-valid': s.at(i).get('comment').valid}">
+                            <div *ngIf="s.at(i).get('comment').touched &&
+                            (s.at(i).get('comment').errors?.maxlength || s.at(i).get('comment').errors?.pattern)"
+                                 class="invalid-feedback">
+                                Maximum allowed characters is 70 and some special characters are not allowed
+                            </div>
                         </div>
                         <div class="col-lg-2 col-6">
                             <label for="{{'unitPrice'+i}}" class="col-form-label">Unit Price</label>
                             <input formControlName="unit_price" id="{{'unitPrice'+i}}" class="form-control text-right"
                                    type="text" placeholder="0.00" (change)="onCurrencyShow($event.target.value, i)"
-                                   (input)="onRowTotal(i)"
+                                   (input)="onRowTotal(i)" (focusout)="onCurrencyShow($event.target.value, i)"
                                    [ngClass]="{ 'is-invalid': s.at(i).get('unit_price').touched
                                    && s.at(i).get('unit_price').invalid,
                                     'is-valid': s.at(i).get('unit_price').valid}">
+                            <div *ngIf="s.at(i).get('unit_price').touched &&
+                            s.at(i).get('unit_price').errors?.required" class="invalid-feedback">
+                                Unit price is mandatory
+                            </div>
                         </div>
                         <div class="col-lg-2 col-6">
                             <label for="{{'quantity'+i}}" class="col-form-label">Quantity</label>
                             <input formControlName="quantity" id="{{'quantity'+i}}" class="form-control"
-                                   (input)="onRowTotal(i)"
+                                   (input)="onRowTotal(i)" (change)="onNumberCorrection($event.target.value, i)"
+                                   (focusout)="onNumberCorrection($event.target.value, i)"
                                    [ngClass]="{ 'is-invalid': s.at(i).get('quantity').touched
                                    && s.at(i).get('quantity').invalid,
                                     'is-valid': s.at(i).get('quantity').valid}">
                             <div *ngIf="s.at(i).get('quantity').touched &&
-                            s.at(i).get('quantity').invalid" class="invalid-feedback">
+                            s.at(i).get('quantity').errors?.required" class="invalid-feedback">
                                 Quantity is mandatory
                             </div>
                         </div>
@@ -192,7 +217,15 @@
                         <div class="col-lg-2 col-4">
                             <label for="{{'unitMeasure'+i}}" class="col-form-label">Unit Measure</label>
                             <input formControlName="unit_measure" id="{{'unitMeasure'+i}}" class="form-control"
-                                   [ngbTypeahead]="searchUnitMeasure">
+                                   [ngbTypeahead]="searchUnitMeasure"
+                                   [ngClass]="{ 'is-invalid': s.at(i).get('unit_measure').touched
+                                   && s.at(i).get('unit_measure').invalid,
+                                    'is-valid': s.at(i).get('unit_measure').valid}">
+                            <div *ngIf="s.at(i).get('unit_measure').touched &&
+                            (s.at(i).get('unit_measure').errors?.maxlength || s.at(i).get('unit_measure').errors?.pattern)"
+                                 class="invalid-feedback">
+                                Maximum allowed characters is 10 and some special characters are not allowed
+                            </div>
                         </div>
                         <div class="col-lg-3 col-5">
                             <label class="col-form-label">Total</label>
@@ -227,12 +260,12 @@
                 <div class="offset-lg-3 col-lg-2 col-3 text-right">
                     <label class="col-form-label">Sub-Total</label>
                 </div>
-                <div class="col-lg-4 col-6 offset-lg-2 offset-3 text-light">
+                <div class="col-lg-4 col-6 offset-lg-2 offset-2 text-light">
                     <input type="text" class="form-control font-weight-bold text-right" disabled
                            value="{{invoiceSubTotal}}">
                 </div>
             </div>
-            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2" *ngIf="invoiceSettingElements.deduction1status == 1">
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2" *ngIf="invoiceSettingElements.deduction1status == 1"> <!-- Deduction 1 -->
                 <div class="offset-lg-4 col-lg-2 col-3 text-right">
                     <label for="deduction1" class="col-form-label ">{{invoiceSettingElements.deduction1label}}</label>
                 </div>
@@ -248,10 +281,11 @@
                 <div class="col-lg-2 col-3"
                      [ngClass]="{'offset-lg-2 offset-3': invoiceSettingElements.deduction1type === 'D1F'}">
                     <input type="text" class="form-control" formControlName="deduction1"
-                           [attr.disabled]="invoiceSettingElements.deduction1type === 'D1P' ? 'disabled' : null">
+                           [attr.disabled]="invoiceSettingElements.deduction1type === 'D1P' ? 'disabled' : null"
+                           (change)="showFormControlName(f.deduction1)">
                 </div>
             </div> <!-- Deduction 1 -->
-            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2" *ngIf="invoiceSettingElements.deduction2status == 1">
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2" *ngIf="invoiceSettingElements.deduction2status == 1"> <!-- Deduction 2 -->
                 <div class="offset-lg-4 col-lg-2 col-3 text-right">
                     <label for="deduction2" class="col-form-label ">{{invoiceSettingElements.deduction2label}}</label>
                 </div>
@@ -267,10 +301,11 @@
                 <div class="col-lg-2 col-3"
                      [ngClass]="{'offset-lg-2 offset-3': invoiceSettingElements.deduction2type === 'D2F'}">
                     <input type="text" class="form-control" formControlName="deduction2"
-                           [attr.disabled]="invoiceSettingElements.deduction2type === 'D2P' ? 'disabled' : null">
+                           [attr.disabled]="invoiceSettingElements.deduction2type === 'D2P' ? 'disabled' : null"
+                           (change)="showFormControlName(f.deduction2)">
                 </div>
             </div> <!-- Deduction 2 -->
-            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2" *ngIf="invoiceSettingElements.addition1status == 1">
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2" *ngIf="invoiceSettingElements.addition1status == 1"> <!-- Addition 1 -->
                 <div class="offset-lg-4 col-lg-2 col-3 text-right">
                     <label for="addition1" class="col-form-label ">{{invoiceSettingElements.addition1label}}</label>
                 </div>
@@ -286,10 +321,11 @@
                 <div class="col-lg-2 col-3"
                      [ngClass]="{'offset-lg-2 offset-3': invoiceSettingElements.addition1type === 'A1F'}">
                     <input type="text" class="form-control" formControlName="addition1"
-                           [attr.disabled]="invoiceSettingElements.addition1type === 'A1P' ? 'disabled' : null">
+                           [attr.disabled]="invoiceSettingElements.addition1type === 'A1P' ? 'disabled' : null"
+                           (change)="showFormControlName(f.addition1)">
                 </div>
             </div> <!-- Addition 1 -->
-            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2" *ngIf="invoiceSettingElements.addition2status == 1">
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2" *ngIf="invoiceSettingElements.addition2status == 1"> <!-- Addition 2 -->
                 <div class="offset-lg-4 col-lg-2 col-3 text-right">
                     <label for="addition2" class="col-form-label ">{{invoiceSettingElements.addition2label}}</label>
                 </div>
@@ -305,10 +341,11 @@
                 <div class="col-lg-2 col-3"
                      [ngClass]="{'offset-lg-2 offset-3': invoiceSettingElements.addition2type === 'A2F'}">
                     <input type="text" class="form-control" formControlName="addition2"
-                           [attr.disabled]="invoiceSettingElements.addition2type === 'A2P' ? 'disabled' : null">
+                           [attr.disabled]="invoiceSettingElements.addition2type === 'A2P' ? 'disabled' : null"
+                           (change)="showFormControlName(f.addition2)">
                 </div>
             </div> <!-- Addition 2 -->
-            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2" *ngIf="invoiceSettingElements.addition3status == 1">
+            <div class="form-row text-light pl-2 pr-2 pt-2 pb-2" *ngIf="invoiceSettingElements.addition3status == 1"><!-- Addition 3 -->
                 <div class="offset-lg-4 col-lg-2 col-3 text-right">
                     <label for="addition3" class="col-form-label ">{{invoiceSettingElements.addition3label}}</label>
                 </div>
@@ -324,15 +361,17 @@
                 <div class="col-lg-2 col-3"
                      [ngClass]="{'offset-lg-2 offset-3': invoiceSettingElements.addition3type === 'A3F'}">
                     <input type="text" class="form-control" formControlName="addition3"
-                           [attr.disabled]="invoiceSettingElements.addition3type === 'A3P' ? 'disabled' : null">
+                           [attr.disabled]="invoiceSettingElements.addition3type === 'A3P' ? 'disabled' : null"
+                           (change)="showFormControlName(f.addition3)">
                 </div>
             </div> <!-- Addition 3 -->
             <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
                 <div class="offset-lg-4 col-lg-2 col-3 text-right">
-                    <p class="font-weight-bold"><p>Total</p>
+                    <label class="col-form-label">Total</label>
                 </div>
-                <div class="col-lg-2 col-3 text-light">
-                    <p class="font-weight-bold">10000$</p>
+                <div class="col-lg-4 col-6 offset-lg-2 offset-2 text-light">
+                    <input type="text" class="form-control font-weight-bold text-right" disabled
+                           value="{{invoiceTotal}}">
                 </div>
             </div>
         </div> <!--Summery Part-->
@@ -340,7 +379,12 @@
             <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
                 <div class="col-12">
                     <label for="notes" class="col-form-label">Notes</label>
-                    <textarea id="notes" class="form-control" rows="10" formControlName="note" rows="3"></textarea>
+                    <textarea id="notes" class="form-control" rows="10" formControlName="note" rows="3"
+                              [ngClass]="{ 'is-invalid': f.note.touched && f.note.invalid,
+                                    'is-valid': f.note.valid}"></textarea>
+                    <div *ngIf="f.note.touched && f.note.invalid" class="invalid-feedback">
+                        Maximum allowed characters is 256
+                    </div>
                 </div>
             </div>
         </div> <!--Invoice Note-->
@@ -503,6 +547,12 @@
                             <div class="col-2">
                                 <input type="text" class="form-control" formControlName="addition3percentage">
                             </div>
+                        </div>
+                        <div class="form-row text-dark mt-1">
+                            <p>* Discount 1  is calculated based on Sub-Total amount<br>
+                               * Discount 2  is calculated based on Sub-Total - Discount 1<br>
+                               * Tax 1, Tax 2 and Tax 3 is calculated based on Sub-Total - Discount 1 - Discount 2</p>
+
                         </div>
                     </form>
                 </div>

@@ -28,6 +28,10 @@ export class ToolsService {
     num = num.toFixed(2);
     return num;
   }
+  numberCorrection(num): number {
+      num = Math.abs(Number(num) || 0);
+      return num;
+  }
   numberSeparator(value) {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }

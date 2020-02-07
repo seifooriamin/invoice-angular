@@ -216,7 +216,6 @@ class Invoice
         $row=$stmt->fetch(PDO::FETCH_ASSOC);
         return ++$row["current_invoice"];
     }
-
     function getInvoiceNumber(){
         $query="SELECT invoice_number FROM ". $this->table_name .  " WHERE user_id = ? ORDER BY id DESC LIMIT 1";
 

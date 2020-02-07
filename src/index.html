@@ -23,7 +23,8 @@
       if (date1 !== undefined) {
         let difference = date2 - date1;
         let diff = ((difference) / 1000).toFixed(0);
-        if (diff > 10) {
+
+        if (diff > 60) {
           localStorage.clear();
           location.reload();
         }
