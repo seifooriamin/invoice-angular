@@ -22,6 +22,7 @@
 
 
     $igs->user_id = $data->user_id;
+    $igs->currency = $data->currency;
     $igs->deduction1status = $data->deduction1status;
     $igs->deduction1label = $data->deduction1label;
     $igs->deduction1type = $data->deduction1type;

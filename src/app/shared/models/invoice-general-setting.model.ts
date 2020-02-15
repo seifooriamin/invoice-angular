@@ -1,6 +1,7 @@
 export class InvoiceGeneralSettingModel {
     id: number;
     user_id: number;
+    currency: string;
     created: Date;
     modified: Date;
     deduction1status: number;

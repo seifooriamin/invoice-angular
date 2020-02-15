@@ -30,7 +30,6 @@ export class AddModifyComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private companyService: CompanyService, private http: HttpClient,
               private toolsService: ToolsService, private router: Router, private route: ActivatedRoute) {
   }
-
   ngOnInit() {
     this.route.params.subscribe(
           (params: Params) => {
@@ -54,7 +53,6 @@ export class AddModifyComponent implements OnInit {
     }
 
   }
-
   initializeFormNew() {
       this.fillForm = this.formBuilder.group({
           name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40),
@@ -109,7 +107,6 @@ export class AddModifyComponent implements OnInit {
       }
 
     }
-
   imageCleanUp() {
         this.fileToUpload = null;
         this.previewUrl = null;
@@ -117,7 +114,6 @@ export class AddModifyComponent implements OnInit {
            logoFile: null
         });
     }
-
   preview() {
         // Show preview
         const mimeType = this.fileToUpload.type;
@@ -131,24 +127,19 @@ export class AddModifyComponent implements OnInit {
             this.previewUrl = reader.result;
         };
     }
-
   get f() { return this.fillForm.controls; }
-
-
   onSetUserId() {
       const jCurrentUser = this.toolsService.getUserID();
       this.fillForm.patchValue({
           user_id: jCurrentUser['id']
       });
   }
-
   onBack() {
       this.router.navigate(['/company/company-list']);
   }
   onModify() {
       this.router.navigate(['/company/' + this.id + '/modify']);
   }
-
   onSubmit() {
       if (this.pageStatus === 'new') {
           if (this.fillForm.valid) {
@@ -174,10 +165,10 @@ export class AddModifyComponent implements OnInit {
                   }
               );
           } else {
+              this.submitMessage = 'Fill all the mandatory fields, stared* fields are mandatory';
               this.submitMessageStatusFail = true;
               setTimeout(() => {
                   this.submitMessageStatusFail = false;
-                  this.submitMessage = 'Fill all the mandatory fields';
               }, 3000);
           }
       } else {
@@ -206,10 +197,10 @@ export class AddModifyComponent implements OnInit {
                   }
               );
           } else {
+              this.submitMessage = 'Fill all the mandatory fields';
               this.submitMessageStatusFail = true;
               setTimeout(() => {
                   this.submitMessageStatusFail = false;
-                  this.submitMessage = 'Fill all the mandatory fields';
               }, 3000);
           }
 

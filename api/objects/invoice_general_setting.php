@@ -8,6 +8,7 @@ class Invoice_general_setting
 
     public $id;
     public $user_id;
+    public $currency;
     public $created;
     public $modified;
     public $deduction1status;
@@ -46,6 +47,7 @@ class Invoice_general_setting
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->id = $row['id'];
         $this->user_id = $row['user_id'];
+        $this->currency = $row['currency'];
         $this->deduction1status = $row['deduction1status'];
         $this->deduction1label = $row['deduction1label'];
         $this->deduction1type = $row['deduction1type'];
@@ -76,6 +78,7 @@ class Invoice_general_setting
                         " . $this->table_name . "
                     SET
                         user_id=:user_id,
+                        currency=:currency,
                         deduction1status=:deduction1status,
                         deduction1label=:deduction1label,
                         deduction1type=:deduction1type,
@@ -102,6 +105,7 @@ class Invoice_general_setting
 
         // sanitize
         $this->user_id=htmlspecialchars(strip_tags($this->user_id));
+        $this->currency=htmlspecialchars(strip_tags($this->currency));
         $this->deduction1status=htmlspecialchars(strip_tags($this->deduction1status));
         $this->deduction1label=htmlspecialchars(strip_tags($this->deduction1label));
         $this->deduction1type=htmlspecialchars(strip_tags($this->deduction1type));
@@ -125,6 +129,7 @@ class Invoice_general_setting
 
         // bind values
         $stmt->bindParam(":user_id", $this->user_id);
+        $stmt->bindParam(":currency", $this->currency);
         $stmt->bindParam(":deduction1status", $this->deduction1status);
         $stmt->bindParam(":deduction1label", $this->deduction1label);
         $stmt->bindParam(":deduction1type", $this->deduction1type);
@@ -161,6 +166,7 @@ class Invoice_general_setting
         // update query
         $query = "UPDATE " . $this->table_name . " SET
                         user_id=:user_id,
+                        currency=:currency,
                         deduction1status=:deduction1status,
                         deduction1label=:deduction1label,
                         deduction1type=:deduction1type,
@@ -188,6 +194,7 @@ class Invoice_general_setting
         $stmt = $this->conn->prepare($query);
 
         $this->user_id=htmlspecialchars(strip_tags($this->user_id));
+        $this->currency=htmlspecialchars(strip_tags($this->currency));
         $this->id=htmlspecialchars(strip_tags($this->id));
         $this->deduction1status=htmlspecialchars(strip_tags($this->deduction1status));
         $this->deduction1label=htmlspecialchars(strip_tags($this->deduction1label));
@@ -213,6 +220,7 @@ class Invoice_general_setting
 
         // bind new values
         $stmt->bindParam(":user_id", $this->user_id);
+        $stmt->bindParam(":currency", $this->currency);
         $stmt->bindParam(":deduction1status", $this->deduction1status);
         $stmt->bindParam(":deduction1label", $this->deduction1label);
         $stmt->bindParam(":deduction1type", $this->deduction1type);

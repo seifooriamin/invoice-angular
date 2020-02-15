@@ -118,10 +118,10 @@ export class AddModifyViewComponent implements OnInit {
               }
         );
       } else {
+        this.submitMessage = 'Fill all the mandatory fields';
         this.submitMessageStatusFail = true;
         setTimeout(() => {
           this.submitMessageStatusFail = false;
-          this.submitMessage = 'Fill all the mandatory fields';
         }, 3000);
       }
     } else {
@@ -141,10 +141,10 @@ export class AddModifyViewComponent implements OnInit {
               }
         );
       } else {
+        this.submitMessage = 'Fill all the mandatory fields';
         this.submitMessageStatusFail = true;
         setTimeout(() => {
           this.submitMessageStatusFail = false;
-          this.submitMessage = 'Fill all the mandatory fields';
         }, 3000);
       }
 

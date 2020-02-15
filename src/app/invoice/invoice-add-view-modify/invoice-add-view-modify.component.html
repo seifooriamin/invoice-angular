@@ -1,3 +1,4 @@
+<ngx-loading-bar></ngx-loading-bar>
 <div class="container mt-4 bg-dark mb-4">
     <div class="row pt-2">
         <div class="col-lg-1 col-md-2 col-3">
@@ -24,14 +25,14 @@
         <div class="border border-light"> <!--Date and Invoice Number-->
             <div class="form-row mt-2 text-light pl-2 pr-2">
                 <div class="col-lg-4 col-6 pb-2">
-                    <label for="date" class="col-form-label">Date</label>
+                    <label for="date" class="col-form-label">Date*</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <button type="button" class="btn btn-primary text-light"
                                     title="Calendar" (click)="d.toggle()"><i class="fas fa-calendar-alt"></i>
                             </button>
                         </div>
-                        <input id="date" formControlName="date" class="form-control" placeholder="DD-MM-YYYY"
+                        <input id="date" formControlName="date" class="form-control" placeholder="YYYY-MM-DD"
                                ngbDatepicker #d="ngbDatepicker" (dateSelect)="onSetYear()"  (change)="onSetYear()"
                                [ngClass]="{ 'is-invalid': f.date.touched && f.date.invalid,
                                     'is-valid': f.date.valid}">
@@ -44,7 +45,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-6 offset-lg-2">
-                    <label for="invoiceNo" class="col-form-label">Invoice Number</label>
+                    <label for="invoiceNo" class="col-form-label">Invoice Number*</label>
                     <input id="invoiceNo" formControlName="invoice_number" class="form-control"
                            [ngClass]="{ 'is-invalid': f.invoice_number.touched && f.invoice_number.invalid,
                                     'is-valid': f.invoice_number.valid}">
@@ -55,7 +56,6 @@
                         Invoice number should be ended by number
                     </div>
                 </div>
-                <input formControlName="no" class="form-control" hidden>
                 <input formControlName="year" class="form-control" hidden>
                 <input formControlName="user_id" class="form-control" hidden>
                 <input formControlName="id" class="form-control" hidden>
@@ -64,7 +64,7 @@
         <div class="border border-light mt-1">  <!--Company Information-->
             <div class="form-row mt-2 text-light pl-2 pr-2">
                 <div class="col-lg-4 col-md-6">
-                    <label for="companyID" class="col-form-label">Company Information</label>
+                    <label for="companyID" class="col-form-label">Company Information*</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <button type="button" class="btn btn-success text-light float-right"
@@ -115,7 +115,7 @@
         <div class="border border-light mt-1">  <!--Customer Information-->
             <div class="form-row mt-2 text-light pl-2 pr-2">
                 <div class="col-lg-4 col-md-6">
-                    <label for="customerID" class="col-form-label">Customer Information</label>
+                    <label for="customerID" class="col-form-label">Customer Information*</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <button type="button" class="btn btn-success text-light float-right"
@@ -156,7 +156,7 @@
                 <div [formGroupName]="i" class="border-bottom border-info pb-2">
                     <div class="form-row text-light pl-2 pr-2">
                         <div class="col-lg-4 col-12">
-                            <label for="{{'description'+i}}" class="col-form-label">Description</label>
+                            <label for="{{'description'+i}}" class="col-form-label">Description*</label>
                             <input formControlName="description" id="{{'description'+i}}"
                                    class="form-control" [ngbTypeahead]="searchDescription"
                                    (change)="onSetInvoiceRowUserId(i)"
@@ -187,7 +187,7 @@
                             </div>
                         </div>
                         <div class="col-lg-2 col-6">
-                            <label for="{{'unitPrice'+i}}" class="col-form-label">Unit Price</label>
+                            <label for="{{'unitPrice'+i}}" class="col-form-label">Unit Price*</label>
                             <input formControlName="unit_price" id="{{'unitPrice'+i}}" class="form-control text-right"
                                    type="text" placeholder="0.00" (change)="onCurrencyShow($event.target.value, i)"
                                    (input)="onRowTotal(i)" (focusout)="onCurrencyShow($event.target.value, i)"
@@ -200,7 +200,7 @@
                             </div>
                         </div>
                         <div class="col-lg-2 col-6">
-                            <label for="{{'quantity'+i}}" class="col-form-label">Quantity</label>
+                            <label for="{{'quantity'+i}}" class="col-form-label">Quantity*</label>
                             <input formControlName="quantity" id="{{'quantity'+i}}" class="form-control"
                                    (input)="onRowTotal(i)" (change)="onNumberCorrection($event.target.value, i)"
                                    (focusout)="onNumberCorrection($event.target.value, i)"
@@ -369,7 +369,7 @@
                 <div class="offset-lg-4 col-lg-2 col-3 text-right">
                     <label class="col-form-label">Total</label>
                 </div>
-                <div class="col-lg-4 col-6 offset-lg-2 offset-2 text-light">
+                <div class="col-lg-4 col-6 offset-lg-2 offset-3 text-light">
                     <input type="text" class="form-control font-weight-bold text-right" disabled
                            value="{{invoiceTotal}}">
                 </div>
@@ -389,21 +389,24 @@
             </div>
         </div> <!--Invoice Note-->
         <div class="form-group row mt-1"> <!--Submition-->
-            <div class="col-md-4 offset-md-4 col-sm-8 text-center">
-                <button type="submit" class="btn btn-primary"
+            <div class="col-md-2 offset-md-5 col-4 offset-4 text-center">
+                <button type="submit" class="btn btn-primary btn-block"
                         [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">{{pageStatus === 'modify' ? 'Modify' : 'Register'}}</button>
+                <button type="button" (click)="showProgress()">Show</button>
             </div>
-            <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual col-md-4 col-sm-4 text-center">
-                {{ submitMessage }}
+            <div class="col-md-5 col-12">
+                <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual text-center">
+                    {{ submitMessage }}
+                </div>
+                <div *ngIf="submitMessageStatusSuccess" class="valid-feedback-manual text-center">
+                    {{ submitMessage }}
+                </div>
             </div>
-            <div *ngIf="submitMessageStatusSuccess" class="valid-feedback-manual col-md-4 col-sm-4 text-center">
-                {{ submitMessage }}
-            </div>
-        </div> <!--Submition-->
+        </div> <!--Submission-->
     </form>
 </div>
 <!--Setting Modal-->
-<div class="modal fade" id="modalSetting" tabindex="-1" role="dialog" aria-labelledby="modalMessage" aria-hidden="true"
+<div class="modal fade" id="modalSetting" tabindex="-1" role="dialog" aria-labelledby="modalSetting" aria-hidden="true"
      data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content">
@@ -438,6 +441,7 @@
                                 <div class="form-check justify-content-center align-content-center text-center">
                                     <input type="checkbox" class="form-check-input mt-3 "
                                            formControlName="deduction1status">
+                                    <input type="text" formControlName="invoice_id" hidden>
                                 </div>
                             </div>
                             <div class="col-2">
@@ -548,6 +552,21 @@
                                 <input type="text" class="form-control" formControlName="addition3percentage">
                             </div>
                         </div>
+                        <div class="form-row text-dark">
+                            <div class="col-3">
+                                <label for="currency" class="col-form-label">Currency</label>
+                            </div>
+                            <div class="col-4">
+                                <select class="form-control" #ch formControlName="currency" id="currency"
+                                        (change)= "changeCurrency(ch.value)">
+                                    <option *ngFor="let cr of currency" value="{{cr.currencyCode}}">
+                                        {{cr.currencySymbol}}  {{cr.currencyName}}</option>
+                                </select>
+                            </div>
+                            <div class="col-1">
+                                <img src="{{selectedCurrencyImage}}" alt="" class="rounded">
+                            </div>
+                        </div>
                         <div class="form-row text-dark mt-1">
                             <p>* Discount 1  is calculated based on Sub-Total amount<br>
                                * Discount 2  is calculated based on Sub-Total - Discount 1<br>
@@ -559,10 +578,11 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCancelSetting()">Cancel</button>
                 <button type="button" class="btn btn-primary" (click)="onSaveSetting()">Save</button>
             </div>
         </div>
     </div>
 </div>
 <!--Setting Modal-->
+

@@ -35,7 +35,7 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.subscribe = this.invoiceService.invoiceReadByUser(userId).subscribe(
         (records: Array<CustomerModel>) => {
           this.data = records['records'];
-          for (let idata of records['records']) {
+          for (const idata of records['records']) {
             this.elements.push({id: idata.id, invoice_number: idata.invoice_number,
               date: idata.date, customer_name: idata.customer_name, company_name: idata.company_name,
               total: idata.total, year: idata.year});

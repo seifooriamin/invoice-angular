@@ -18,6 +18,7 @@
             $igs_arr = array(
                 "id" => $igs->id,
                 "user_id" => $igs->user_id,
+                "currency" => $igs->currency,
                 "deduction1status" => $igs->deduction1status,
                 "deduction1label" => $igs->deduction1label,
                 "deduction1type" => $igs->deduction1type,

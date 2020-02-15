@@ -19,12 +19,13 @@
     $data = json_decode(file_get_contents("php://input"));
     $invoice->user_id = $data->user_id;
 
-    $invoice_number = $invoice->getInvoiceNumber();
+    $invoice->getInvoiceNumber();
 
-    if($invoice_number!=null){
+    if($invoice->id!=null){
         // create array
         $invoice_arr = array(
-            "invoice_number" => $invoice_number
+            "invoice_number" => $invoice->invoice_number,
+            "id" => $invoice->id
         );
 
         // set response code - 200 OK

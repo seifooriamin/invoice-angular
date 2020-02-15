@@ -22,6 +22,7 @@
 
 
     $ics->invoice_id = $data->invoice_id;
+    $ics->currency = $data->currency;
     $ics->deduction1status = $data->deduction1status;
     $ics->deduction1label = $data->deduction1label;
     $ics->deduction1type = $data->deduction1type;

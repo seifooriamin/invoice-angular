@@ -23,6 +23,7 @@
 
     $igs->user_id = $data->user_id;
     $igs->deduction1status = 1;
+    $igs->currency = 'CAD';
     $igs->deduction1label = 'Discount';
     $igs->deduction1type = 'D1P';
     $igs->deduction1percentage = 0;

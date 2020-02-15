@@ -10,6 +10,7 @@ class Invoice_custom_setting
     public $invoice_id;
     public $created;
     public $modified;
+    public $currency;
     public $deduction1status;
     public $deduction1label;
     public $deduction1type;
@@ -48,6 +49,7 @@ class Invoice_custom_setting
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->id = $row['id'];
         $this->invoice_id = $row['invoice_id'];
+        $this->currency = $row['currency'];
         $this->deduction1status = $row['deduction1status'];
         $this->deduction1label = $row['deduction1label'];
         $this->deduction1type = $row['deduction1type'];
@@ -78,6 +80,7 @@ class Invoice_custom_setting
                         " . $this->table_name . "
                     SET
                         invoice_id=:invoice_id,
+                        currency=:currency,
                         deduction1status=:deduction1status,
                         deduction1label=:deduction1label,
                         deduction1type=:deduction1type,
@@ -104,6 +107,7 @@ class Invoice_custom_setting
 
         // sanitize
         $this->invoice_id=htmlspecialchars(strip_tags($this->invoice_id));
+        $this->currency=htmlspecialchars(strip_tags($this->currency));
         $this->deduction1status=htmlspecialchars(strip_tags($this->deduction1status));
         $this->deduction1label=htmlspecialchars(strip_tags($this->deduction1label));
         $this->deduction1type=htmlspecialchars(strip_tags($this->deduction1type));
@@ -127,6 +131,7 @@ class Invoice_custom_setting
 
         // bind values
         $stmt->bindParam(":invoice_id", $this->invoice_id);
+        $stmt->bindParam(":currency", $this->currency);
         $stmt->bindParam(":deduction1status", $this->deduction1status);
         $stmt->bindParam(":deduction1label", $this->deduction1label);
         $stmt->bindParam(":deduction1type", $this->deduction1type);
@@ -158,6 +163,7 @@ class Invoice_custom_setting
 
         // update query
         $query = "UPDATE " . $this->table_name . " SET
+                        currency=:currency,
                         deduction1status=:deduction1status,
                         deduction1label=:deduction1label,
                         deduction1type=:deduction1type,
@@ -185,6 +191,7 @@ class Invoice_custom_setting
         $stmt = $this->conn->prepare($query);
 
         $this->invoice_id=htmlspecialchars(strip_tags($this->invoice_id));
+        $this->currency=htmlspecialchars(strip_tags($this->currency));
         $this->deduction1status=htmlspecialchars(strip_tags($this->deduction1status));
         $this->deduction1label=htmlspecialchars(strip_tags($this->deduction1label));
         $this->deduction1type=htmlspecialchars(strip_tags($this->deduction1type));
@@ -209,6 +216,7 @@ class Invoice_custom_setting
 
         // bind new values
         $stmt->bindParam(":invoice_id", $this->invoice_id);
+        $stmt->bindParam(":currency", $this->currency);
         $stmt->bindParam(":deduction1status", $this->deduction1status);
         $stmt->bindParam(":deduction1label", $this->deduction1label);
         $stmt->bindParam(":deduction1type", $this->deduction1type);

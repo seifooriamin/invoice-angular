@@ -1,6 +1,7 @@
 export class InvoiceCustomSettingModel {
     id: number;
     invoice_id: number;
+    currency: string;
     created: Date;
     modified: Date;
     deduction1status: number;

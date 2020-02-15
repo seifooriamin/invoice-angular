@@ -15,9 +15,9 @@ export class CustomAdapter extends NgbDateAdapter<string> {
         if (value) {
             const date = value.split(this.DELIMITER);
             result = {
-                day : parseInt(date[0], 10),
+                year : parseInt(date[0], 10),
                 month : parseInt(date[1], 10),
-                year : parseInt(date[2], 10)
+                day : parseInt(date[2], 10)
             };
         }
         return result;
@@ -38,7 +38,7 @@ export class CustomAdapter extends NgbDateAdapter<string> {
             } else {
                 mm = date.month;
             }
-            result = dd + this.DELIMITER + mm + this.DELIMITER + date.year;
+            result = date.year + this.DELIMITER + mm + this.DELIMITER + dd;
         }
         return result;
     }

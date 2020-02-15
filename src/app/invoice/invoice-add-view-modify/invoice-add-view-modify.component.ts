@@ -13,7 +13,8 @@ import {ToolsService} from '../../shared/services/tools.service';
 import {InvoiceService} from '../../shared/services/invoice.service';
 import {InvoiceGeneralSettingService} from '../../shared/services/invoice-general-setting.service';
 import {InvoiceGeneralSettingModel} from '../../shared/models/invoice-general-setting.model';
-import {validate} from 'codelyzer/walkerFactory/walkerFn';
+import {CurrencyModel} from '../../shared/models/currency.model';
+import {CurrencyService} from '../../shared/services/currency.service';
 declare var jQuery: any;
 
 @Component({
@@ -51,9 +52,14 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   invoiceSubTotalDigit = 0;
   invoiceTotal = '';
   invoiceTotalDigit: number;
+  selectedCurrencyImage: string;
+  selectedCurrencyCode: string;
+  selectedCurrencySymbol: string;
+  currency: CurrencyModel[] = [];
   invoiceSettingElements: InvoiceGeneralSettingModel = {
     id: 0,
     user_id: 0,
+    currency: '',
     created: this.date,
     modified: this.date,
     deduction1status: 1,
@@ -103,11 +109,11 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private companyService: CompanyService, private formBuilder: FormBuilder,
               private customerService: CustomerService, private invoiceRowsService: InvoiceRowsService,
               private toolsService: ToolsService, private invoiceService: InvoiceService,
-              private igs: InvoiceGeneralSettingService) { }
+              private igs: InvoiceGeneralSettingService, private currencyService: CurrencyService) { }
 
   ngOnInit() {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.jUserID = '{ "user_id" : "' + this.currentUser['id'] + '" }';
+    this.currency = this.currencyService.getCurrency();
+    this.jUserID = this.toolsService.getUserIDJson();
     this.initSettingForm();
     this.fillSettingForm();
     this.initFormNew();
@@ -117,19 +123,17 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     this.onSetInvoiceNumberDefault();
   }
   onSetInvoiceNumberDefault() {
-    this.toolsService.getInvoiceNumber().then(
+    this.invoiceService.setNewInvoiceNumber().then(
         (response) => {
           if (response['invoicePrefix']) {
             this.fillForm.patchValue({
-              no: response['invoiceDigit'],
-              invoice_no: response['invoicePrefix'] + response['invoiceDigit']
+              invoice_number: response['invoicePrefix'] + response['invoiceDigit']
             });
           } else {
             let currentYear = new Date().getFullYear().toString();
             currentYear += '-';
             this.fillForm.patchValue({
-              no: response['invoiceDigit'],
-              invoice_no: currentYear + response['invoiceDigit']
+              invoice_number: currentYear + response['invoiceDigit']
             });
           }
 
@@ -172,11 +176,12 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     const quantity = this.s.at(index).get('quantity').value;
     const rowTotalNumberLocal = this.toolsService.showNumberWithDecimal((unitPrice * quantity));
     this.rowTotalNumber.splice(index, 0, rowTotalNumberLocal);
-    this.rowTotalString.splice(index, 0, this.toolsService.numberSeparator(rowTotalNumberLocal));
-    this.rowTotalString.splice(index + 1, this.rowTotalString.length - index);
+    // this.rowTotalString.splice(index, 0, this.toolsService.numberSeparator(rowTotalNumberLocal));
+    // this.rowTotalString.splice(index + 1, this.rowTotalString.length - index);
     this.rowTotalNumber.splice(index + 1, this.rowTotalNumber.length - index);
     this.calcSubTotal();
     this.calcTotal();
+    this.onAddCurrencySymbol();
   }
   calcSubTotal() {
     let invoiceSubTotalLocal = 0;
@@ -203,6 +208,10 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
         deduction1 = this.toolsService.showNumberWithDecimal(this.f.deduction1.value);
         this.f.deduction1.setValue(deduction1);
       }
+      if (+this.invoiceSettingElements.deduction1status === 0) {
+        deduction1 = this.toolsService.showNumberWithDecimal(this.f.deduction1.value);
+        this.f.deduction1.setValue(0);
+      }
     }
     totalLocal -= deduction1;
     if (this.invoiceSettingElements.deduction2type === 'D2P' && +this.invoiceSettingElements.deduction2status === 1) {
@@ -213,6 +222,10 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
       if (+this.invoiceSettingElements.deduction2status === 1) {
         deduction2 = this.toolsService.showNumberWithDecimal(this.f.deduction2.value);
         this.f.deduction2.setValue(deduction2);
+      }
+      if (+this.invoiceSettingElements.deduction2status === 0) {
+        deduction2 = this.toolsService.showNumberWithDecimal(this.f.deduction2.value);
+        this.f.deduction2.setValue(0);
       }
     }
     totalLocal -= deduction2;
@@ -225,6 +238,10 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
         addition1 = this.toolsService.showNumberWithDecimal(this.f.addition1.value);
         this.f.addition1.setValue(addition1);
       }
+      if (+this.invoiceSettingElements.addition1status === 0) {
+        addition1 = this.toolsService.showNumberWithDecimal(this.f.addition1.value);
+        this.f.addition1.setValue(0);
+      }
     }
     if (this.invoiceSettingElements.addition2type === 'A2P' && +this.invoiceSettingElements.addition2status === 1) {
       addition2 = this.toolsService.showNumberWithDecimal(
@@ -234,6 +251,10 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
       if (+this.invoiceSettingElements.addition2status === 1) {
         addition2 = this.toolsService.showNumberWithDecimal(this.f.addition2.value);
         this.f.addition2.setValue(addition2);
+      }
+      if (+this.invoiceSettingElements.addition2status === 0) {
+        addition2 = this.toolsService.showNumberWithDecimal(this.f.addition2.value);
+        this.f.addition2.setValue(0);
       }
     }
     if (this.invoiceSettingElements.addition3type === 'A3P' && +this.invoiceSettingElements.addition3status === 1) {
@@ -245,10 +266,22 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
         addition3 = this.toolsService.showNumberWithDecimal(this.f.addition3.value);
         this.f.addition3.setValue(addition3);
       }
+      if (+this.invoiceSettingElements.addition3status === 0) {
+        addition3 = this.toolsService.showNumberWithDecimal(this.f.addition3.value);
+        this.f.addition3.setValue(0);
+      }
     }
     totalLocal = +totalLocal + +addition1 + +addition2 + +addition3;
     this.invoiceTotalDigit = this.toolsService.showNumberWithDecimal(totalLocal);
     this.invoiceTotal = this.toolsService.numberSeparator(this.invoiceTotalDigit);
+  }
+  onAddCurrencySymbol() {
+    this.invoiceTotal = this.selectedCurrencySymbol + this.toolsService.numberSeparator(this.invoiceTotalDigit);
+    this.invoiceSubTotal = this.selectedCurrencySymbol + this.toolsService.numberSeparator(this.invoiceSubTotalDigit);
+    for (let rows = 0; rows < this.rowTotalNumber.length; rows++) {
+      const str = this.selectedCurrencySymbol + this.toolsService.numberSeparator(this.rowTotalNumber[rows]);
+      this.rowTotalString.splice(rows, 0, str);
+    }
   }
   initFormNew() {
     this.subscription = this.companyService.companyReadByUser(this.jUserID).subscribe(
@@ -267,10 +300,9 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     );
     this.fillForm = this.formBuilder.group({
       date : ['', [Validators.required,
-          Validators.pattern('^(([0-2]+\\d{1})|([3]+[0,1]{1}))-([0,1]+\\d{1})-([1-9]{1}\\d{3})$')]],
+        Validators.pattern('^([1-9]{1}\\d{3})-([0,1]+\\d{1})-(([0-2]+\\d{1})|([3]+[0,1]{1}))$')]],
       invoice_number: ['', [Validators.required,
           Validators.pattern('^([a-zA-Z0-9-_\\\\\\/]{0,10})([0-9]{1,6})$')]],
-      no: [''],
       year: [''],
       note: ['', Validators.maxLength(256)],
       user_id : [''],
@@ -294,6 +326,8 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   }
   initSettingForm() {
     this.settingForm = this.formBuilder.group({
+      invoice_id: [''],
+      currency: [''],
       deduction1status: [''],
       deduction1label: [''],
       deduction1type: [''],
@@ -320,6 +354,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     this.subscription = this.igs.readInvoiceSetting(this.jUserID).subscribe(
         (response: InvoiceGeneralSettingModel) => {
           this.settingForm.patchValue({
+            currency: response.currency,
             deduction1status: +response.deduction1status === 1,
             deduction1label: response.deduction1label,
             deduction1type: response.deduction1type,
@@ -342,17 +377,57 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
             addition3percentage: response.addition3percentage
           });
           this.invoiceSettingElements = response;
+          this.selectedCurrencyImage = environment.flagUrl +
+              this.currency.find(({currencyCode}) => currencyCode === response.currency).flag;
+          this.selectedCurrencyCode = this.currency.find(({currencyCode}) =>
+              currencyCode === response.currency).currencyCode;
+          this.selectedCurrencySymbol = this.currency.find(({currencyCode}) =>
+              currencyCode === response.currency).currencySymbol;
         }
     );
   }
+  // This function is used for change int to decimal for addition and deduction part
   showFormControlName(formControl) {
     formControl.setValue(this.toolsService.showNumberWithDecimal(formControl.value));
     this.calcTotal();
   }
+  // This function is used for change int to decimal for addition and deduction part
   onSaveSetting() {
     this.invoiceSettingElements = this.settingForm.value;
     this.calcTotal();
     jQuery('#modalSetting').modal('hide');
+    this.onAddCurrencySymbol();
+  }
+  onCancelSetting() {
+    this.settingForm.patchValue({
+      currency: this.invoiceSettingElements.currency,
+      deduction1status: +this.invoiceSettingElements.deduction1status === 1,
+      deduction1label: this.invoiceSettingElements.deduction1label,
+      deduction1type: this.invoiceSettingElements.deduction1type,
+      deduction1percentage: this.invoiceSettingElements.deduction1percentage,
+      deduction2status: +this.invoiceSettingElements.deduction2status === 1,
+      deduction2label: this.invoiceSettingElements.deduction2label,
+      deduction2type: this.invoiceSettingElements.deduction2type,
+      deduction2percentage: this.invoiceSettingElements.deduction2percentage,
+      addition1status: +this.invoiceSettingElements.addition1status === 1,
+      addition1label: this.invoiceSettingElements.addition1label,
+      addition1type: this.invoiceSettingElements.addition1type,
+      addition1percentage: this.invoiceSettingElements.addition1percentage,
+      addition2status: +this.invoiceSettingElements.addition2status === 1,
+      addition2label: this.invoiceSettingElements.addition2label,
+      addition2type: this.invoiceSettingElements.addition2type,
+      addition2percentage: this.invoiceSettingElements.addition2percentage,
+      addition3status: +this.invoiceSettingElements.addition3status === 1,
+      addition3label: this.invoiceSettingElements.addition3label,
+      addition3type: this.invoiceSettingElements.addition3type,
+      addition3percentage: this.invoiceSettingElements.addition3percentage
+    });
+    this.selectedCurrencyImage = environment.flagUrl +
+        this.currency.find(({currencyCode}) => currencyCode === this.invoiceSettingElements.currency).flag;
+    this.selectedCurrencyCode = this.currency.find(
+        ({currencyCode}) => currencyCode === this.invoiceSettingElements.currency).currencyCode;
+    this.selectedCurrencySymbol = this.currency.find(
+        ({currencyCode}) => currencyCode === this.invoiceSettingElements.currency).currencySymbol;
   }
   onSettingSubmit() {}
   onSettingCall() {
@@ -387,7 +462,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   }
   onSetYear() {
     const selectedDate: string = this.f.date.value;
-    const selectedYear = selectedDate.substr(6, 4);
+    const selectedYear = selectedDate.substr(0, 4);
     this.fillForm.patchValue({
       year: selectedYear
     });
@@ -411,8 +486,39 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
 
   }
   onSubmit() {
-    // console.log(this.fillFormRows.controls.invoiceRows.controls[0].value);
-    console.log(this.fillForm.value);
+    if (this.pageStatus === 'new') {
+      if (this.fillForm.valid && this.fillFormRows.valid && this.settingForm.valid) {
+        this.subscription = this.invoiceService.invoiceCreate(this.fillForm.value).subscribe(
+            (response) => {
+              if (response['message'] === 'SUCCESS') {
+                this.subscription = this. subscription = this.invoiceService.getInvoiceNumber(this.jUserID).subscribe(
+                    (invoiceID) => {
+                        this.settingForm.get('invoice_id').setValue(invoiceID['id']);
+                        for (let row = 0; row < this.s.length; row++) {
+                          this.s.at(row).get('invoice_id').setValue(invoiceID['id']);
+                        }
+                        for (const rowData of this.s.value) {
+                          console.log(rowData); //here is the start of the task
+                        }
+                    } , () => {
+                      this.submitMessage = 'Unexpected error occurred, may your invoice has not been saved completely';
+                      this.submitMessageStatusFail = true;
+                      setTimeout(() => {
+                        this.submitMessageStatusFail = false;
+                      }, 3000);
+                    }
+                );
+              }
+            }
+        );
+      } else {
+        this.submitMessage = 'Fill all the mandatory fields, stared* fields are mandatory';
+        this.submitMessageStatusFail = true;
+        setTimeout(() => {
+          this.submitMessageStatusFail = false;
+        }, 3000);
+      }
+    }
   }
   onLoadCompanyData(companyID) {
     this.companyInfo = this.companyList.find(company => company.id === companyID);
@@ -443,5 +549,11 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     this.invoiceRows = this.fillFormRows.get('invoiceRows') as FormArray;
     this.invoiceRows.push(this.onCreateRow());
   }
-
+  changeCurrency(currencySelected) {
+    this.selectedCurrencyImage = environment.flagUrl +
+        this.currency.find(({currencyCode}) => currencyCode === currencySelected).flag;
+    this.selectedCurrencyCode = this.currency.find(({currencyCode}) => currencyCode === currencySelected).currencyCode;
+    this.selectedCurrencySymbol = this.currency.find(({currencyCode}) =>
+        currencyCode === currencySelected).currencySymbol;
+  }
 }

@@ -18,6 +18,7 @@
             $ics_arr = array(
                 "id" => $ics->id,
                 "invoice_id" => $ics->invoice_id,
+                "currency" => $ics->currency,
                 "deduction1status" => $ics->deduction1status,
                 "deduction1label" => $ics->deduction1label,
                 "deduction1type" => $ics->deduction1type,

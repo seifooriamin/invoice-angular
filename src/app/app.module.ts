@@ -26,6 +26,9 @@ import { InvoiceListComponent } from './invoice/invoice-list/invoice-list.compon
 import { InvoiceAddViewModifyComponent } from './invoice/invoice-add-view-modify/invoice-add-view-modify.component';
 import {CustomAdapter} from './shared/tools/dateformatmodal';
 import {NgbDateCustomParserFormatter} from './shared/tools/dateformat';
+import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';
+import {LoadingBarRouterModule} from '@ngx-loading-bar/router';
+import {LoadingBarModule} from '@ngx-loading-bar/core';
 
 
 
@@ -59,6 +62,9 @@ import {NgbDateCustomParserFormatter} from './shared/tools/dateformat';
     FormsModule,
     NgbModule,
     BrowserAnimationsModule,
+    LoadingBarHttpClientModule,
+    LoadingBarRouterModule,
+    LoadingBarModule,
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   entryComponents: [

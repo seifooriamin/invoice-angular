@@ -21,4 +21,7 @@ export class InvoiceRowsService {
   getInvoiceRowsUnitMeasure(userID) {
     return this.httpClient.post(`${environment.apiUrl}invoice_rows/getunitmeasure`, userID);
   }
+  invoiceRowCreate(data) {
+    return this.httpClient.post(`${environment.apiUrl}invoice_rows/create`, data);
+  }
 }
