@@ -1,14 +1,13 @@
+<ngx-loading-bar></ngx-loading-bar>
 <div class="container mt-4 bg-dark mb-4">
     <div class="row pt-2">
         <div class="col-lg-1 col-md-2 col-3">
-            <ng-template #hoverBack><p>Back</p></ng-template>
-            <button type="button" placement="bottom" class="btn btn-block btn-warning text-light" [mdbPopover]="hoverBack"
-                    triggers="hover" (click)="onBack()"><i class="fas fa-arrow-circle-left fa-lg"></i></button>
+            <button type="button" class="btn btn-block btn-warning text-light"
+                    title="Back" (click)="onBack()"><i class="fas fa-arrow-circle-left fa-lg"></i></button>
         </div>
         <div class="col-lg-1 col-md-2 col-3">
-            <ng-template #hoverEdit><p>Edit</p></ng-template>
             <button type="button" class="btn btn-block btn-success text-light"
-                    *ngIf="pageStatus === 'view'" placement="bottom" [mdbPopover]="hoverEdit" triggers="hover"
+                    *ngIf="pageStatus === 'view'" title="Edit"
                     (click)="onModify()">
                 <i class="fas fa-edit fa-lg"></i></button>
         </div>

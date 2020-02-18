@@ -1,8 +1,9 @@
-import {AfterViewInit, ChangeDetectorRef, Component, DoCheck, HostListener, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, DoCheck, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { MdbTablePaginationComponent, MdbTableDirective } from 'node_modules/angular-bootstrap-md';
 import {CompanyService} from '../../shared/services/company.service';
 import {CompanyModel} from '../../shared/models/company.model';
 import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 declare var jQuery: any;
 
@@ -11,7 +12,7 @@ declare var jQuery: any;
   templateUrl: './company-list.component.html',
   styleUrls: ['./company-list.component.css']
 })
-export class CompanyListComponent implements OnInit, AfterViewInit {
+export class CompanyListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
   elements: any = [];
@@ -24,30 +25,37 @@ export class CompanyListComponent implements OnInit, AfterViewInit {
   companyId = '';
   deleteMessageStatus = false;
   deleteMessageText = '';
+  subscription: Subscription;
   constructor(private cdRef: ChangeDetectorRef, private companyService: CompanyService, private router: Router) { }
   @HostListener('input') oninput() { this.searchItems(); }
 
   ngOnInit() {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
       const userId: string = '{ "user_id" : "' + this.currentUser['id'] + '" }';
-          this.companyService.companyReadByUser(userId).subscribe(
-              (records: Array<CompanyModel>) => {
-                  this.data = records['records'];
-                  for (let idata of records['records']) {
-                      this.elements.push({id: idata.id, name: idata.name, phone: idata.phone, email: idata.email});
-                  }
-                  this.mdbTable.setDataSource(this.elements);
-                  this.elements = this.mdbTable.getDataSource();
-                  this.previous = this.mdbTable.getDataSource();
-              }, (e) => {
-                  this.deleteMessageText = 'No record found';
-                  this.deleteMessageStatus = true;
-                  setTimeout(() => {
-                      this.deleteMessageStatus = false;
-                  }, 2000);
+      this.subscription = this.companyService.companyReadByUser(userId).subscribe(
+          (records: Array<CompanyModel>) => {
+              this.data = records['records'];
+              for (let idata of records['records']) {
+                  this.elements.push({id: idata.id, name: idata.name, phone: idata.phone, email: idata.email});
               }
-          );
+              this.mdbTable.setDataSource(this.elements);
+              this.elements = this.mdbTable.getDataSource();
+              this.previous = this.mdbTable.getDataSource();
+          }, (e) => {
+              this.deleteMessageText = 'No record found';
+              this.deleteMessageStatus = true;
+              setTimeout(() => {
+                  this.deleteMessageStatus = false;
+              }, 2000);
+          }
+      );
   }
+  ngOnDestroy(): void {
+      if (this.subscription) {
+          this.subscription.unsubscribe();
+      }
+  }
+
     searchItems() {
         const prev = this.mdbTable.getDataSource();
         if (!this.searchText) {
@@ -59,7 +67,7 @@ export class CompanyListComponent implements OnInit, AfterViewInit {
                 'phone', 'email']);
             this.mdbTable.setDataSource(prev);
         }
-    }
+  }
   ngAfterViewInit() {
     this.mdbTablePagination.setMaxVisibleItemsNumberTo(5);
 

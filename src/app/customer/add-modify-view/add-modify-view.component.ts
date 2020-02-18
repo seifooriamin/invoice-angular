@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {ToolsService} from '../../shared/services/tools.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {CustomerService} from '../../shared/services/customer.service';
 import {CustomerModel} from '../../shared/models/customer.model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-add-modify-view',
   templateUrl: './add-modify-view.component.html',
   styleUrls: ['./add-modify-view.component.css']
 })
-export class AddModifyViewComponent implements OnInit {
+export class AddModifyViewComponent implements OnInit, OnDestroy {
   fillForm: FormGroup;
   submitMessageStatusFail = false;
   submitMessageStatusSuccess = false;
@@ -20,6 +21,7 @@ export class AddModifyViewComponent implements OnInit {
   customerData: CustomerModel;
   pageStatus = 'new';
   pageTitle = 'New Company Registration';
+  subscription: Subscription;
   constructor(private formBuilder: FormBuilder, private customerService: CustomerService, private http: HttpClient,
               private toolsService: ToolsService, private router: Router, private route: ActivatedRoute) { }
 
@@ -34,20 +36,24 @@ export class AddModifyViewComponent implements OnInit {
       const url = this.router.url;
       if (url.slice(-6) === 'modify') {
         this.pageStatus = 'modify';
-        this.pageTitle = 'Modify Company Information';
+        this.pageTitle = 'Modify Customer Information';
       } else {
         this.pageStatus = 'view';
-        this.pageTitle = 'View Company Information';
+        this.pageTitle = 'View Customer Information';
       }
     }
-
-    if (this.pageStatus === 'new') {
-      this.initializeFormNew();
-    } else {
-      this.initializeFormData();
+    this.initializeForm();
+    if (this.pageStatus === 'view' || this.pageStatus === 'modify') {
+      this.fillFormData();
     }
   }
-  initializeFormNew() {
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  initializeForm() {
     this.fillForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50),
         Validators.pattern('(?=.*[a-zA-Z0-9]).{2,}')]],
@@ -59,20 +65,9 @@ export class AddModifyViewComponent implements OnInit {
       id: ['']
     });
   }
-  initializeFormData() {
-    this.fillForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50),
-        Validators.pattern('(?=.*[a-zA-Z0-9]).{2,}')]],
-      address: ['', [Validators.pattern('(?=.*[a-zA-Z0-9]).{2,}')]],
-      phone: ['', [Validators.pattern('(^\\+[0-9]{2})([0-9]{8,13}$)'),
-        Validators.maxLength(15)]],
-      email: ['', [Validators.email, Validators.maxLength(50)]],
-      user_id: ['', Validators.required],
-      id: ['']
-    });
-    this.customerService.customerByID(this.id).subscribe(
+  fillFormData() {
+    this.subscription = this.customerService.customerByID(this.id).subscribe(
         (customer: CustomerModel) => {
-          console.log(customer);
           this.customerData = customer;
           this.id = customer.id;
           this.fillForm.patchValue({

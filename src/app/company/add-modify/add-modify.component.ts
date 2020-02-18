@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {CompanyService} from '../../shared/services/company.service';
 import {ToolsService} from '../../shared/services/tools.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {CompanyModel} from '../../shared/models/company.model';
+import {Subscription} from 'rxjs';
+import {environment} from '../../../environments/environment';
 
 
 
@@ -13,7 +15,7 @@ import {CompanyModel} from '../../shared/models/company.model';
   templateUrl: './add-modify.component.html',
   styleUrls: ['./add-modify.component.css']
 })
-export class AddModifyComponent implements OnInit {
+export class AddModifyComponent implements OnInit, OnDestroy {
   fillForm: FormGroup;
   previewUrl: any = null;
   fileToUpload: File = null;
@@ -25,6 +27,7 @@ export class AddModifyComponent implements OnInit {
   companyData: CompanyModel;
   pageStatus = 'new';
   pageTitle = 'New Company Registration';
+  subscription: Subscription;
 
 
   constructor(private formBuilder: FormBuilder, private companyService: CompanyService, private http: HttpClient,
@@ -53,6 +56,11 @@ export class AddModifyComponent implements OnInit {
     }
 
   }
+  ngOnDestroy(): void {
+      if (this.subscription) {
+          this.subscription.unsubscribe();
+      }
+  }
   initializeFormNew() {
       this.fillForm = this.formBuilder.group({
           name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40),
@@ -70,7 +78,7 @@ export class AddModifyComponent implements OnInit {
       });
   }
   fillFormData() {
-        this.companyService.companyByID(this.id).subscribe(
+        this.subscription = this.companyService.companyByID(this.id).subscribe(
             (company: CompanyModel) => {
                 this.companyData = company;
                 this.id = company.id;
@@ -86,7 +94,7 @@ export class AddModifyComponent implements OnInit {
                     id: company.id
                 });
                 if (company.logo_link) {
-                    this.previewUrl = 'http://localhost/invoice-angular/api/uploads/' + company.logo_link;
+                    this.previewUrl = `${environment.imageUrl}` + company.logo_link;
                 }
 
             }

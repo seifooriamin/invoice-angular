@@ -2,17 +2,13 @@
 <div class="container mt-4 bg-dark mb-4">
     <div class="row pt-2">
         <div class="col-lg-1 col-md-2 col-3">
-            <button type="button" placement="bottom" class="btn btn-block btn-warning text-light "
+            <button type="button" class="btn btn-block btn-warning text-light "
                     title="Back" (click)="onBack()"><i class="fas fa-arrow-circle-left fa-lg"></i></button>
         </div>
         <div class="col-lg-1 col-md-2 col-3">
-
             <button type="button" class="btn btn-block btn-success text-light"
                     *ngIf="pageStatus === 'view'"
-                    ngbPopover="Edit" [openDelay]="200" [closeDelay]="500"
-                    popoverClass="my-popover-class" triggers="mouseenter:mouseleave" placement="bottom"
-                    container="body"
-                    (click)="onModify()">
+                    title="Edit" (click)="onModify()">
                 <i class="fas fa-edit fa-lg"></i></button>
         </div>
     </div>
@@ -26,10 +22,12 @@
             <div class="form-row mt-2 text-light pl-2 pr-2">
                 <div class="col-lg-4 col-6 pb-2">
                     <label for="date" class="col-form-label">Date*</label>
-                    <div class="input-group">
+                    <div class="input-group" [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                         <div class="input-group-prepend">
                             <button type="button" class="btn btn-primary text-light"
-                                    title="Calendar" (click)="d.toggle()"><i class="fas fa-calendar-alt"></i>
+                                    title="Calendar" (click)="d.toggle()"
+                                    [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                                <i class="fas fa-calendar-alt"></i>
                             </button>
                         </div>
                         <input id="date" formControlName="date" class="form-control" placeholder="YYYY-MM-DD"
@@ -48,7 +46,8 @@
                     <label for="invoiceNo" class="col-form-label">Invoice Number*</label>
                     <input id="invoiceNo" formControlName="invoice_number" class="form-control"
                            [ngClass]="{ 'is-invalid': f.invoice_number.touched && f.invoice_number.invalid,
-                                    'is-valid': f.invoice_number.valid}">
+                                    'is-valid': f.invoice_number.valid}"
+                           [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                     <div *ngIf="f.invoice_number.touched && f.invoice_number.errors?.required" class="invalid-feedback">
                         Invoice number is mandatory
                     </div>
@@ -68,14 +67,17 @@
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <button type="button" class="btn btn-success text-light float-right"
-                                    title="Add new company" (click)="onAddCompany()"><i class="fas fa-plus-square"></i>
+                                    title="Add new company" (click)="onAddCompany()"
+                                    [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                                <i class="fas fa-plus-square"></i>
                             </button>
                         </div>
                         <select id="companyID" class="form-control" formControlName="company_id"
                                 (change)="onLoadCompanyData($event.target.value)"
                                 (change)="onSetUserId()"
                                 [ngClass]="{ 'is-invalid': f.company_id.touched && f.company_id.invalid,
-                                    'is-valid': f.company_id.valid}">
+                                    'is-valid': f.company_id.valid}"
+                                [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             <option *ngFor="let company of companyList" value="{{company.id}}">{{company.name}}</option>
                         </select>
                         <div *ngIf="f.company_id.touched && f.company_id.invalid" class="invalid-feedback">
@@ -119,15 +121,16 @@
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <button type="button" class="btn btn-success text-light float-right"
-                                    ngbPopover="Add new company" [openDelay]="200" [closeDelay]="500"
-                                    popoverClass="my-popover-class" triggers="mouseenter:mouseleave" placement="top-left"
-                                    container="body" (click)="onAddCustomer()"><i class="fas fa-plus-square"></i>
+                                    title="Add new customer" (click)="onAddCustomer()"
+                                    [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                                <i class="fas fa-plus-square"></i>
                             </button>
                         </div>
                         <select id="customerID" class="form-control" formControlName="customer_id"
                                 (change)="onLoadCustomerData($event.target.value)"
                                 [ngClass]="{ 'is-invalid': f.customer_id.touched && f.customer_id.invalid,
-                                    'is-valid': f.customer_id.valid}">
+                                    'is-valid': f.customer_id.valid}"
+                                [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             <option *ngFor="let customer of customerList" value="{{customer.id}}">{{customer.name}}</option>
                         </select>
                         <div *ngIf="f.customer_id.touched && f.customer_id.invalid" class="invalid-feedback">
@@ -162,7 +165,8 @@
                                    (change)="onSetInvoiceRowUserId(i)"
                                    [ngClass]="{ 'is-invalid': s.at(i).get('description').touched
                                    && s.at(i).get('description').invalid,
-                                    'is-valid': s.at(i).get('description').valid}">
+                                    'is-valid': s.at(i).get('description').valid}"
+                                   [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             <div *ngIf="s.at(i).get('description').touched &&
                             s.at(i).get('description').errors?.required" class="invalid-feedback">
                                 Description is mandatory
@@ -179,7 +183,8 @@
                                    [ngbTypeahead]="searchComment"
                                    [ngClass]="{ 'is-invalid': s.at(i).get('comment').touched
                                    && s.at(i).get('comment').invalid,
-                                    'is-valid': s.at(i).get('comment').valid}">
+                                    'is-valid': s.at(i).get('comment').valid}"
+                                   [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             <div *ngIf="s.at(i).get('comment').touched &&
                             (s.at(i).get('comment').errors?.maxlength || s.at(i).get('comment').errors?.pattern)"
                                  class="invalid-feedback">
@@ -193,7 +198,8 @@
                                    (input)="onRowTotal(i)" (focusout)="onCurrencyShow($event.target.value, i)"
                                    [ngClass]="{ 'is-invalid': s.at(i).get('unit_price').touched
                                    && s.at(i).get('unit_price').invalid,
-                                    'is-valid': s.at(i).get('unit_price').valid}">
+                                    'is-valid': s.at(i).get('unit_price').valid}"
+                                   [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             <div *ngIf="s.at(i).get('unit_price').touched &&
                             s.at(i).get('unit_price').errors?.required" class="invalid-feedback">
                                 Unit price is mandatory
@@ -206,7 +212,8 @@
                                    (focusout)="onNumberCorrection($event.target.value, i)"
                                    [ngClass]="{ 'is-invalid': s.at(i).get('quantity').touched
                                    && s.at(i).get('quantity').invalid,
-                                    'is-valid': s.at(i).get('quantity').valid}">
+                                    'is-valid': s.at(i).get('quantity').valid}"
+                                   [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             <div *ngIf="s.at(i).get('quantity').touched &&
                             s.at(i).get('quantity').errors?.required" class="invalid-feedback">
                                 Quantity is mandatory
@@ -220,7 +227,8 @@
                                    [ngbTypeahead]="searchUnitMeasure"
                                    [ngClass]="{ 'is-invalid': s.at(i).get('unit_measure').touched
                                    && s.at(i).get('unit_measure').invalid,
-                                    'is-valid': s.at(i).get('unit_measure').valid}">
+                                    'is-valid': s.at(i).get('unit_measure').valid}"
+                                   [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             <div *ngIf="s.at(i).get('unit_measure').touched &&
                             (s.at(i).get('unit_measure').errors?.maxlength || s.at(i).get('unit_measure').errors?.pattern)"
                                  class="invalid-feedback">
@@ -234,20 +242,25 @@
                         </div>
                         <div class="col-lg-1 col-2 offset-lg-6 offset-1 align-self-end">
                               <button type="button" class="btn btn-block btn-danger text-light btn-sm"                                    title="Remove invoice line"
-                                (click)="onRemoveLine(i)"><i class="fas fa-minus-square fa-lg"></i>
+                                (click)="onRemoveLine(i)"
+                                      [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                                  <i class="fas fa-minus-square fa-lg"></i>
                               </button>
                         </div>
                     </div>
-                    <input formControlName="inx" class="form-control" value="{{i}}" hidden>
+                    <input formControlName="inx" class="form-control" hidden>
                     <input formControlName="invoice_id" class="form-control" hidden>
                     <input formControlName="user_id" class="form-control" hidden>
+                    <input formControlName="id" class="form-control" hidden>
                 </div>
             </div>
             <div class="form-row text-light pl-2 pt-2 pb-2 ">
                 <div class="col-lg-1 col-2">
                     <button type="button" class="btn btn-block btn-success text-light btn-sm"
                             title="Add new invoice line"
-                            (click)="onAddLine()"><i class="fas fa-plus fa-lg"></i></button>
+                            (click)="onAddLine()"
+                            [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                        <i class="fas fa-plus fa-lg"></i></button>
                 </div>
             </div>
         </form> <!--Invoice Rows-->
@@ -275,13 +288,16 @@
                 </div>
                 <div class="col-lg-2 col-3" *ngIf="invoiceSettingElements.deduction1type === 'D1P'">
                     <input type="text" class="form-control" formControlName="deduction1Percentage"
-                           [attr.disabled]="invoiceSettingElements.deduction1type === 'D1P' ? 'disabled' : null"
+                           [attr.disabled]="invoiceSettingElements.deduction1type === 'D1P' ? 'disabled' : null ||
+                                            pageStatus === 'view' ? 'disabled' : null"
+
                     value="{{invoiceSettingElements.deduction1percentage}}">
                 </div>
                 <div class="col-lg-2 col-3"
                      [ngClass]="{'offset-lg-2 offset-3': invoiceSettingElements.deduction1type === 'D1F'}">
                     <input type="text" class="form-control" formControlName="deduction1"
-                           [attr.disabled]="invoiceSettingElements.deduction1type === 'D1P' ? 'disabled' : null"
+                           [attr.disabled]="invoiceSettingElements.deduction1type === 'D1P' ? 'disabled' : null ||
+                            pageStatus === 'view' ? 'disabled' : null"
                            (change)="showFormControlName(f.deduction1)">
                 </div>
             </div> <!-- Deduction 1 -->
@@ -295,13 +311,15 @@
                 </div>
                 <div class="col-lg-2 col-3" *ngIf="invoiceSettingElements.deduction2type === 'D2P'">
                     <input type="text" class="form-control" formControlName="deduction2Percentage"
-                           [attr.disabled]="invoiceSettingElements.deduction2type === 'D2P' ? 'disabled' : null"
+                           [attr.disabled]="invoiceSettingElements.deduction2type === 'D2P' ? 'disabled' : null ||
+                            pageStatus === 'view' ? 'disabled' : null"
                            value="{{invoiceSettingElements.deduction2percentage}}">
                 </div>
                 <div class="col-lg-2 col-3"
                      [ngClass]="{'offset-lg-2 offset-3': invoiceSettingElements.deduction2type === 'D2F'}">
                     <input type="text" class="form-control" formControlName="deduction2"
-                           [attr.disabled]="invoiceSettingElements.deduction2type === 'D2P' ? 'disabled' : null"
+                           [attr.disabled]="invoiceSettingElements.deduction2type === 'D2P' ? 'disabled' : null ||
+                            pageStatus === 'view' ? 'disabled' : null"
                            (change)="showFormControlName(f.deduction2)">
                 </div>
             </div> <!-- Deduction 2 -->
@@ -315,13 +333,15 @@
                 </div>
                 <div class="col-lg-2 col-3" *ngIf="invoiceSettingElements.addition1type === 'A1P'">
                     <input type="text" class="form-control" formControlName="addition1Percentage"
-                           [attr.disabled]="invoiceSettingElements.addition1type === 'A1P' ? 'disabled' : null"
+                           [attr.disabled]="invoiceSettingElements.addition1type === 'A1P' ? 'disabled' : null ||
+                            pageStatus === 'view' ? 'disabled' : null"
                            value="{{invoiceSettingElements.addition1percentage}}">
                 </div>
                 <div class="col-lg-2 col-3"
                      [ngClass]="{'offset-lg-2 offset-3': invoiceSettingElements.addition1type === 'A1F'}">
                     <input type="text" class="form-control" formControlName="addition1"
-                           [attr.disabled]="invoiceSettingElements.addition1type === 'A1P' ? 'disabled' : null"
+                           [attr.disabled]="invoiceSettingElements.addition1type === 'A1P' ? 'disabled' : null ||
+                            pageStatus === 'view' ? 'disabled' : null"
                            (change)="showFormControlName(f.addition1)">
                 </div>
             </div> <!-- Addition 1 -->
@@ -335,13 +355,15 @@
                 </div>
                 <div class="col-lg-2 col-3" *ngIf="invoiceSettingElements.addition2type === 'A2P'">
                     <input type="text" class="form-control" formControlName="addition2Percentage"
-                           [attr.disabled]="invoiceSettingElements.addition2type === 'A2P' ? 'disabled' : null"
+                           [attr.disabled]="invoiceSettingElements.addition2type === 'A2P' ? 'disabled' : null ||
+                            pageStatus === 'view' ? 'disabled' : null"
                            value="{{invoiceSettingElements.addition2percentage}}">
                 </div>
                 <div class="col-lg-2 col-3"
                      [ngClass]="{'offset-lg-2 offset-3': invoiceSettingElements.addition2type === 'A2F'}">
                     <input type="text" class="form-control" formControlName="addition2"
-                           [attr.disabled]="invoiceSettingElements.addition2type === 'A2P' ? 'disabled' : null"
+                           [attr.disabled]="invoiceSettingElements.addition2type === 'A2P' ? 'disabled' : null ||
+                            pageStatus === 'view' ? 'disabled' : null"
                            (change)="showFormControlName(f.addition2)">
                 </div>
             </div> <!-- Addition 2 -->
@@ -355,13 +377,15 @@
                 </div>
                 <div class="col-lg-2 col-3" *ngIf="invoiceSettingElements.addition3type === 'A3P'">
                     <input type="text" class="form-control" formControlName="addition3Percentage"
-                           [attr.disabled]="invoiceSettingElements.addition3type === 'A3P' ? 'disabled' : null"
+                           [attr.disabled]="invoiceSettingElements.addition3type === 'A3P' ? 'disabled' : null ||
+                            pageStatus === 'view' ? 'disabled' : null"
                            value="{{invoiceSettingElements.addition3percentage}}">
                 </div>
                 <div class="col-lg-2 col-3"
                      [ngClass]="{'offset-lg-2 offset-3': invoiceSettingElements.addition3type === 'A3F'}">
                     <input type="text" class="form-control" formControlName="addition3"
-                           [attr.disabled]="invoiceSettingElements.addition3type === 'A3P' ? 'disabled' : null"
+                           [attr.disabled]="invoiceSettingElements.addition3type === 'A3P' ? 'disabled' : null ||
+                            pageStatus === 'view' ? 'disabled' : null"
                            (change)="showFormControlName(f.addition3)">
                 </div>
             </div> <!-- Addition 3 -->
@@ -381,18 +405,18 @@
                     <label for="notes" class="col-form-label">Notes</label>
                     <textarea id="notes" class="form-control" rows="10" formControlName="note" rows="3"
                               [ngClass]="{ 'is-invalid': f.note.touched && f.note.invalid,
-                                    'is-valid': f.note.valid}"></textarea>
+                                    'is-valid': f.note.valid}"
+                              [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"></textarea>
                     <div *ngIf="f.note.touched && f.note.invalid" class="invalid-feedback">
                         Maximum allowed characters is 256
                     </div>
                 </div>
             </div>
         </div> <!--Invoice Note-->
-        <div class="form-group row mt-1"> <!--Submition-->
+        <div class="form-group row mt-1"> <!--Submission-->
             <div class="col-md-2 offset-md-5 col-4 offset-4 text-center">
                 <button type="submit" class="btn btn-primary btn-block"
                         [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">{{pageStatus === 'modify' ? 'Modify' : 'Register'}}</button>
-                <button type="button" (click)="showProgress()">Show</button>
             </div>
             <div class="col-md-5 col-12">
                 <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual text-center">
@@ -418,7 +442,7 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form [formGroup]="settingForm" (ngSubmit)="onSettingSubmit()">
+                    <form [formGroup]="settingForm">
                         <div class="form-row text-dark font-weight-bold">
                             <div class="col-1">
                                 <label class="col-form-label">Show</label>
@@ -440,7 +464,8 @@
                             <div class="col-1">
                                 <div class="form-check justify-content-center align-content-center text-center">
                                     <input type="checkbox" class="form-check-input mt-3 "
-                                           formControlName="deduction1status">
+                                           formControlName="deduction1status" value="0"
+                                           [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                                     <input type="text" formControlName="invoice_id" hidden>
                                 </div>
                             </div>
@@ -448,108 +473,124 @@
                                 <label class="col-form-label">Discount 1</label>
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" formControlName="deduction1label">
+                                <input type="text" class="form-control" formControlName="deduction1label"
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             </div>
                             <div class="col-3">
-                                <select class="form-control" formControlName="deduction1type">
+                                <select class="form-control" formControlName="deduction1type"
+                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                                     <option value="D1P">%</option>
                                     <option value="D1F">Flat Rate</option>
                                 </select>
                             </div>
                             <div class="col-2">
-                                <input type="text" class="form-control" formControlName="deduction1percentage">
+                                <input type="text" class="form-control" formControlName="deduction1percentage"
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             </div>
                         </div>
                         <div class="form-row text-dark">
                             <div class="col-1">
                                 <div class="form-check justify-content-center align-content-center text-center">
                                     <input type="checkbox" class="form-check-input mt-3 "
-                                           formControlName="deduction2status">
+                                           formControlName="deduction2status" [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <label class="col-form-label">Discount 2</label>
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" formControlName="deduction2label">
+                                <input type="text" class="form-control" formControlName="deduction2label"
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             </div>
                             <div class="col-3">
-                                <select class="form-control" formControlName="deduction2type">
+                                <select class="form-control" formControlName="deduction2type"
+                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                                     <option value="D2P">%</option>
                                     <option value="D2F">Flat Rate</option>
                                 </select>
                             </div>
                             <div class="col-2">
-                                <input type="text" class="form-control" formControlName="deduction2percentage">
+                                <input type="text" class="form-control" formControlName="deduction2percentage"
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             </div>
                         </div>
                         <div class="form-row text-dark">
                             <div class="col-1">
                                 <div class="form-check justify-content-center align-content-center text-center">
                                     <input type="checkbox" class="form-check-input mt-3 "
-                                           formControlName="addition1status">
+                                           formControlName="addition1status"
+                                           [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <label class="col-form-label">Tax 1</label>
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" formControlName="addition1label">
+                                <input type="text" class="form-control" formControlName="addition1label"
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             </div>
                             <div class="col-3">
-                                <select class="form-control" formControlName="addition1type">
+                                <select class="form-control" formControlName="addition1type"
+                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                                     <option value="A1P">%</option>
                                     <option value="A1F">Flat Rate</option>
                                 </select>
                             </div>
                             <div class="col-2">
-                                <input type="text" class="form-control" formControlName="addition1percentage">
+                                <input type="text" class="form-control" formControlName="addition1percentage"
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             </div>
                         </div>
                         <div class="form-row text-dark">
                             <div class="col-1">
                                 <div class="form-check justify-content-center align-content-center text-center">
                                     <input type="checkbox" class="form-check-input mt-3 "
-                                           formControlName="addition2status">
+                                           formControlName="addition2status" [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <label class="col-form-label">Tax 2</label>
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" formControlName="addition2label">
+                                <input type="text" class="form-control" formControlName="addition2label"
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             </div>
                             <div class="col-3">
-                                <select class="form-control" formControlName="addition2type">
+                                <select class="form-control" formControlName="addition2type"
+                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                                     <option value="A2P">%</option>
                                     <option value="A2F">Flat Rate</option>
                                 </select>
                             </div>
                             <div class="col-2">
-                                <input type="text" class="form-control" formControlName="addition2percentage">
+                                <input type="text" class="form-control" formControlName="addition2percentage"
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             </div>
                         </div>
                         <div class="form-row text-dark">
                             <div class="col-1">
                                 <div class="form-check justify-content-center align-content-center text-center">
                                     <input type="checkbox" class="form-check-input mt-3 "
-                                           formControlName="addition3status">
+                                           formControlName="addition3status" [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <label class="col-form-label">Tax 3</label>
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" formControlName="addition3label">
+                                <input type="text" class="form-control" formControlName="addition3label"
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             </div>
                             <div class="col-3">
-                                <select class="form-control" formControlName="addition3type">
+                                <select class="form-control" formControlName="addition3type"
+                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                                     <option value="A3P">%</option>
                                     <option value="A3F">Flat Rate</option>
                                 </select>
                             </div>
                             <div class="col-2">
-                                <input type="text" class="form-control" formControlName="addition3percentage">
+                                <input type="text" class="form-control" formControlName="addition3percentage"
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             </div>
                         </div>
                         <div class="form-row text-dark">
@@ -558,7 +599,8 @@
                             </div>
                             <div class="col-4">
                                 <select class="form-control" #ch formControlName="currency" id="currency"
-                                        (change)= "changeCurrency(ch.value)">
+                                        (change)= "changeCurrency(ch.value)"
+                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                                     <option *ngFor="let cr of currency" value="{{cr.currencyCode}}">
                                         {{cr.currencySymbol}}  {{cr.currencyName}}</option>
                                 </select>
@@ -579,7 +621,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCancelSetting()">Cancel</button>
-                <button type="button" class="btn btn-primary" (click)="onSaveSetting()">Save</button>
+                <button type="button" class="btn btn-primary" (click)="onSaveSetting()"
+                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">Save</button>
             </div>
         </div>
     </div>

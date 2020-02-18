@@ -23,7 +23,7 @@
     // read the details of product to be edited
     $stmt=$invoice_rows->readPerInvoice();
 
-    $num=$invoice_rows->countPerInvoice();
+    $num=$stmt->rowCount();
 
     if($num>0){
         $invoice_rows_arr=array();

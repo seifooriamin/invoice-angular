@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CompanyModel} from '../models/company.model';
 import {environment} from '../../../environments/environment';
+import {InvoiceModel} from '../models/invoice.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class InvoiceService {
   invoiceCreate(data) {
     return this.httpClient.post(`${environment.apiUrl}invoice/create`, data);
   }
+  invoiceByID(id) {
+    return this.httpClient.get<InvoiceModel>(`${environment.apiUrl}invoice/read_one.php?id=` + id,
+      {responseType: 'json'});
+  }
   async setNewInvoiceNumber(): Promise<{invoiceDigit: string; invoicePrefix: string; }> {
     const q = new Promise<{invoiceDigit: string; invoicePrefix: string; }>((resolve) => {
       let digitPart = '';
@@ -35,20 +40,28 @@ export class InvoiceService {
             const lastInvoiceNumber = response['invoice_number'];
             let separator = 0;
             const invoiceNumberLength = lastInvoiceNumber.length;
-            for (let counter = invoiceNumberLength; counter >= 0; counter--) {
+            const lengthMines = invoiceNumberLength - 1;
+            for (let counter = lengthMines; counter >= 0; counter--) {
               if (!(+lastInvoiceNumber.substr(counter, 1) >= 0) &&
                   !(+lastInvoiceNumber.substr(counter, 1) <= 9)) {
-                separator = ++counter;
-                break;
+                  separator = ++counter;
+                  break;
               }
             }
             const digitPartLength = invoiceNumberLength - separator;
             digitPart = lastInvoiceNumber.substr(separator, digitPartLength);
             realDigit = +digitPart;
+            const previousRealDigit = realDigit;
             ++realDigit;
+            if ((realDigit.toString().length - previousRealDigit.toString().length) > 0) {
+                const reducer = separator + 1;
+                digitPart = lastInvoiceNumber.substr(reducer, digitPartLength);
+            }
             for (let counter = 0; counter < digitPart.length; counter++) {
               if ((digitPart.substr(counter, 1)) === '0') {
                 newDigitPart += digitPart.substr(counter, 1);
+              } else {
+                  break;
               }
             }
             newDigitPart += realDigit;

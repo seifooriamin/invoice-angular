@@ -37,7 +37,7 @@ class Invoice_custom_setting
         $this->conn=$db;
     }
 
-    function readOneByInvoiceID(){
+    function readOneByInvoiceID() {
         $query="SELECT *
                 FROM " . $this->table_name . " igs
                 WHERE igs.invoice_id = ?";

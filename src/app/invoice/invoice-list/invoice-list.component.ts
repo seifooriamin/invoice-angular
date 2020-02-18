@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {InvoiceService} from '../../shared/services/invoice.service';
 import {CustomerModel} from '../../shared/models/customer.model';
 import {InvoiceRowsService} from '../../shared/services/invoice-rows.service';
+import {InvoiceCustomSettingService} from '../../shared/services/invoice-custom-setting.service';
 declare var jQuery: any;
 @Component({
   selector: 'app-invoice-list',
@@ -27,7 +28,7 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
   deleteMessageStatus = false;
   deleteMessageText = '';
   constructor(private cdRef: ChangeDetectorRef, private router: Router, private invoiceService: InvoiceService,
-              private invoiceRowsService: InvoiceRowsService) { }
+              private invoiceRowsService: InvoiceRowsService, private ics: InvoiceCustomSettingService) { }
   @HostListener('input') oninput() { this.searchItems(); }
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -102,6 +103,17 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
                   }, (e) => {
                       this.deleteMessageText = 'Invoice #' + invoiceNumber + ' has been deleted successfully, but some related' +
                           'related records have not been deleted yet, contact ADMINISTRATOR';
+                      this.deleteMessageStatus = true;
+                      setTimeout(() => {
+                          this.deleteMessageStatus = false;
+                      }, 2000);
+                  }
+              );
+              this.ics.deleteInvoiceCustomSetting(invoiceIDJson).subscribe(
+                  (delResponse) => {
+
+                  }, () => {
+                      this.deleteMessageText = 'Invoice #' + invoiceNumber + ' setting record has not been deleted';
                       this.deleteMessageStatus = true;
                       setTimeout(() => {
                           this.deleteMessageStatus = false;

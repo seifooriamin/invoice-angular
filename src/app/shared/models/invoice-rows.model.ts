@@ -1,4 +1,4 @@
-export class InvoiceModel {
+export class InvoiceRowsModel {
     id: number;
     inx: number;
     invoice_id: number;
@@ -6,7 +6,6 @@ export class InvoiceModel {
     comment: string;
     unit_price: number;
     unit_measure: string;
-    total_row_price: number;
     quantity: number;
     created: Date;
     user_id: number;

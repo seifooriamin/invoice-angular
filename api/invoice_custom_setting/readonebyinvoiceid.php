@@ -10,8 +10,7 @@
     $db=$database->getConnection();
 
     $ics= new Invoice_custom_setting($db);
-    $data = json_decode(file_get_contents("php://input"));
-    $ics->invoice_id = $data->invoice_id;
+    $ics->invoice_id = isset($_GET['invoice_id']) ? $_GET['invoice_id'] : die();
     $stmt=$ics->readOneByInvoiceID();
 
     if($ics->id != null){

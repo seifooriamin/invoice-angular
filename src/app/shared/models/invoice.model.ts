@@ -30,5 +30,4 @@ export class InvoiceModel {
     user_first_name: string;
     user_last_name: string;
     year: string;
-    no: number;
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {InvoiceModel} from '../models/invoice.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,9 @@ export class InvoiceRowsService {
   }
   invoiceRowCreate(data) {
     return this.httpClient.post(`${environment.apiUrl}invoice_rows/create`, data);
+  }
+  invoiceRowsByInvoiceID(id) {
+    return this.httpClient.get(`${environment.apiUrl}invoice_rows/read_per_invoice.php?invoice_id=` + id,
+        {responseType: 'json'});
   }
 }

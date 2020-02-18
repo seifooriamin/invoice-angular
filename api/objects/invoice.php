@@ -220,8 +220,8 @@ class Invoice
         $query = "SELECT u.first_name as user_first_name, u.last_name as user_last_name, cu.name as customer_name, cu.address as customer_address,
                        co.name as company_name, co.address as company_address, co.email as company_email, co.phone as company_phone,
                        co.business_no as company_business_no, co.gst_no as company_gst_no, co.website as company_website,
-                       co.logo_link as company_logo_link, i.id, i.invoice_number, i.date, i.company_id, i.customer_id, i.sub_total,
-                       i.addition1, i.addition2, i.addition3, i.deduction1, i.deduction2, i.total, i.note, i.created, i.user_id, i.year
+                       co.logo_link as company_logo_link, i.id, i.invoice_number, i.date, i.company_id, i.customer_id,
+                       i.addition1, i.addition2, i.addition3, i.deduction1, i.deduction2, i.note, i.created, i.user_id, i.year
                 FROM " . $this->table_name . " i
                 LEFT JOIN
                     users u
@@ -264,13 +264,11 @@ class Invoice
         $this->company_gst_no = $row['company_gst_no'];
         $this->company_website = $row['company_website'];
         $this->company_logo_link = $row['company_logo_link'];
-        $this->sub_total = $row['sub_total'];
         $this->addition1 = $row['addition1'];
         $this->addition2 = $row['addition2'];
         $this->addition3 = $row['addition3'];
         $this->deduction1 = $row['deduction1'];
         $this->deduction2 = $row['deduction2'];
-        $this->total = $row['total'];
         $this->note = $row['note'];
         $this->created = $row['created'];
         $this->user_id = $row['user_id'];
