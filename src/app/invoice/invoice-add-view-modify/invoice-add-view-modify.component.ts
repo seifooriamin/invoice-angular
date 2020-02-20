@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CompanyService} from '../../shared/services/company.service';
@@ -18,6 +18,9 @@ import {CurrencyService} from '../../shared/services/currency.service';
 import {InvoiceCustomSettingService} from '../../shared/services/invoice-custom-setting.service';
 import {InvoiceRowsModel} from '../../shared/models/invoice-rows.model';
 import {InvoiceCustomSettingModel} from '../../shared/models/invoice-custom-setting.model';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 declare var jQuery: any;
 
 @Component({
@@ -59,6 +62,8 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   selectedCurrencyImage: string;
   selectedCurrencyCode: string;
   selectedCurrencySymbol: string;
+  savedInvoiceID: number;
+  imgBase64: string;
   currency: CurrencyModel[] = [];
   invoiceSettingElements: InvoiceGeneralSettingModel = {
     id: 0,
@@ -88,6 +93,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     addition3type: '',
     addition3percentage: 0
   };
+
 
   searchDescription = (text$: Observable<string>) =>
       text$.pipe(
@@ -151,9 +157,11 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
       this.fillInvoiceRowsForm();
     }
   }
-  fillInvoiceForm() {
+  async fillInvoiceForm() {
     this.subscription = this.invoiceService.invoiceByID(this.id).subscribe(
         (response) => {
+          this.onLoadCompanyData(response.company_id);
+          this.onLoadCustomerData(response.customer_id);
           this.fillForm.patchValue({
             date: response.date,
             invoice_number: response.invoice_number,
@@ -169,13 +177,11 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
             deduction1: response.deduction1,
             deduction2: response.deduction2
           });
-          this.onLoadCompanyData(response.company_id);
-          this.onLoadCustomerData(response.customer_id);
         }, () => {}
     );
 
   }
-  fillInvoiceRowsForm() {
+  async fillInvoiceRowsForm() {
     this.subscription = this.invoiceRowsService.invoiceRowsByInvoiceID(this.id).subscribe(
         (response: InvoiceRowsModel[]) => {
           let i = 0;
@@ -198,11 +204,13 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
         }, () => {}
     );
   }
-  fillInvoiceSettingForm() {
+  async fillInvoiceSettingForm() {
     this.subscription = this.ics.invoiceSettingByInvoiceID(this.id).subscribe(
         (response: InvoiceCustomSettingModel) => {
           this.settingForm.patchValue({
             currency: response.currency,
+            id: response.id,
+            invoice_id: response.invoice_id,
             deduction1status: +response.deduction1status === 1,
             deduction1label: response.deduction1label,
             deduction1type: response.deduction1type,
@@ -234,7 +242,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
         }, () => {}
     );
   }
-  onSetInvoiceNumberDefault() {
+  async onSetInvoiceNumberDefault() {
     this.invoiceService.setNewInvoiceNumber().then(
         (response) => {
           if (response['invoicePrefix']) {
@@ -254,7 +262,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
           }
         });
   }
-  getDescription() {
+  async getDescription() {
     this.subscription = this.invoiceRowsService.getInvoiceRowsDescription(this.jUserID).subscribe(
         (response) => {
           for (const rowsDescription of response['records']) {
@@ -263,7 +271,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
         }, (e) => {}
     );
   }
-  getComment() {
+  async getComment() {
     this.subscription = this.invoiceRowsService.getInvoiceRowsComment(this.jUserID).subscribe(
         (response) => {
           for (const rowsDescription of response['records']) {
@@ -272,7 +280,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
         }, (e) => {}
     );
   }
-  getUnitMeasure() {
+  async getUnitMeasure() {
     this.subscription = this.invoiceRowsService.getInvoiceRowsUnitMeasure(this.jUserID).subscribe(
         (response) => {
           for (const rowsDescription of response['records']) {
@@ -431,7 +439,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
       });
     }
   }
-  onLoadCompanyCustomerList() {
+  async onLoadCompanyCustomerList() {
     this.subscription = this.companyService.companyReadByUser(this.jUserID).subscribe(
         (response) => {
           this.companyList = response['records'];
@@ -472,7 +480,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
       addition3percentage: [''],
     });
   }
-  fillSettingForm() {
+  async fillSettingForm() {
     this.subscription = this.igs.readInvoiceSetting(this.jUserID).subscribe(
         (response: InvoiceGeneralSettingModel) => {
           this.settingForm.patchValue({
@@ -580,12 +588,15 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   }
   onSetInvoiceRowUserId(index) {
     const jCurrentUser = this.toolsService.getUserID();
-    // this.s.at(index).get('user_id').setValue(jCurrentUser['id']);
-    // this.s.at(index).get('inx').setValue(index);
     this.s.at(index).patchValue({
       user_id: jCurrentUser['id'],
       inx: index
     });
+    if (this.pageStatus === 'modify') {
+      this.s.at(index).patchValue({
+        invoice_id: this.id
+      });
+    }
   }
   onSetYear() {
     const selectedDate: string = this.f.date.value;
@@ -610,7 +621,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   get q() { return this.fillFormRows.controls; }
   get s() {return this.fillFormRows.get('invoiceRows') as FormArray; }
   onModify() {
-
+    this.router.navigate(['/invoice/' + this.id + '/modify']);
   }
   onSubmit() {
     this.rowTotalString = [];
@@ -627,6 +638,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
                 this.subscription = this. subscription = this.invoiceService.getInvoiceNumber(this.jUserID).subscribe(
                     (invoiceID) => {
                         this.settingForm.get('invoice_id').setValue(invoiceID['id']);
+                        this.savedInvoiceID = invoiceID['id'];
                         for (let row = 0; row < this.s.length; row++) {
                           this.s.at(row).get('invoice_id').setValue(invoiceID['id']);
                         }
@@ -659,17 +671,78 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
                 this.submitMessageStatusSuccess = true;
                 setTimeout(() => {
                   this.submitMessageStatusSuccess = false;
+                  this.router.navigate(['/invoice/' + this.savedInvoiceID]);
                   this.onScrollTop();
-                  this.fillForm.reset();
-                  this.fillFormRows.reset();
-                  this.s.clear();
-                  this.onAddLine();
-                  this.fillSettingForm();
-                  this.onSetInvoiceNumberDefault();
-                }, 3000);
+                }, 1500);
               }
             }, () => {
               this.submitMessage = 'Unexpected error occurred, your invoice has not been saved';
+              this.submitMessageStatusFail = true;
+              setTimeout(() => {
+                this.submitMessageStatusFail = false;
+              }, 3000);
+            }
+        );
+      } else {
+        this.submitMessage = 'Fill all the mandatory fields, stared* fields are mandatory';
+        this.submitMessageStatusFail = true;
+        setTimeout(() => {
+          this.submitMessageStatusFail = false;
+        }, 3000);
+      }
+    } else {
+      if (this.fillForm.valid && this.fillFormRows.valid && this.settingForm.valid) {
+        const invoiceIDJson = '{ "invoice_id" : "' + this.id + '" }';
+        this.subscription = this.invoiceRowsService.invoiceRowsDelete(invoiceIDJson).subscribe(
+            (response) => {
+              for (const rowData of this.s.value) {
+                this.subscription = this.invoiceRowsService.invoiceRowCreate(rowData).subscribe(
+                    (responseRow) => {
+                    }, () => {
+                      this.submitMessage = 'Unexpected error occurred, may the invoice row(s) has not been updated.';
+                      this.submitMessageStatusFail = true;
+                      setTimeout(() => {
+                        this.submitMessageStatusFail = false;
+                      }, 3000);
+                    }
+                );
+              }
+            }, () => {
+              this.submitMessage = 'Unexpected error occurred, may the invoice row(s) has not been updated.';
+              this.submitMessageStatusFail = true;
+              setTimeout(() => {
+                this.submitMessageStatusFail = false;
+              }, 3000);
+            }
+        );
+
+        this.invoiceService.invoiceUpdate(this.fillForm.value).subscribe(
+            (response) => {
+              if (response['message'] === 'SUCCESS') {
+                this.ics.updateInvoiceCustomSetting(this.settingForm.value).subscribe(
+                    (resSetting) => {
+                      if (resSetting['message'] === 'SUCCESS') {
+                        this.submitMessage = 'The invoice has been updated successfully';
+                        this.submitMessageStatusSuccess = true;
+                        setTimeout(() => {
+                          this.submitMessageStatusSuccess = false;
+                          this.router.navigate(['/invoice/' + this.id]);
+                          this.onScrollTop();
+                        }, 1500);
+                      }
+                    }, () => {
+                      this.submitMessage = 'The invoice has been updated, but its setting has not been updated.';
+                      this.submitMessageStatusFail = true;
+                      setTimeout(() => {
+                        this.submitMessageStatusFail = false;
+                        this.router.navigate(['/invoice/' + this.id]);
+                        this.onScrollTop();
+                      }, 3000);
+                    }
+                );
+              }
+            }, () => {
+              this.submitMessage = 'Unexpected error occurred, your invoice has not been updated.';
               this.submitMessageStatusFail = true;
               setTimeout(() => {
                 this.submitMessageStatusFail = false;
@@ -689,6 +762,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     this.companyInfo = this.companyList.find(company => company.id === companyID);
     if (this.companyInfo.logo_link) {
       this.imgUrl = `${environment.imageUrl}` + this.companyInfo.logo_link;
+      this.getBase64();
     } else {
       this.imgUrl = `${environment.imageDefault}`;
     }
@@ -730,5 +804,115 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
         window.clearInterval(scrollToTop);
       }
     }, 16);
+  }
+  onDownloadInvoice() {
+      const documentDefinition = this.getDocumentDefinition();
+      pdfMake.createPdf(documentDefinition).open();
+  }
+  getDocumentDefinition() {
+      return {
+          content: [
+              {columns: [
+                    [{
+                        text: 'INVOICE',
+                        bold: true,
+                        fontSize: 20,
+                        alignment: 'left',
+                        margin: [0, 15, 0, 0]
+                    }],
+                    [
+                        this.getCompanyLogo()
+                    ]
+                  ]
+
+              },
+              {columns: [
+                 [
+                     this.getBusinessNo()
+                 // {
+                 //    text: this.companyInfo.name,
+                 //    margin: [ 0, 0, 0, 2 ]
+                 // }, {
+                 //    text: this.companyInfo.address,
+                 //    margin: [ 0, 0, 0, 2 ]
+                 // }, {
+                 //     text: this.companyInfo.website,
+                 //     margin: [ 0, 0, 0, 2 ]
+                 // }, {
+                 //     text: this.companyInfo.email,
+                 //     margin: [ 0, 0, 0, 2 ]
+                 // }
+                 ]
+               ]},
+              {columns: [
+
+              ]}
+          ]
+      };
+  }
+  getBusinessNo() {
+      if (this.companyInfo.business_no) {
+          return[
+          {
+              text: this.companyInfo.name,
+                  margin: [ 0, 0, 0, 2 ]
+          }, {
+              text: this.companyInfo.address,
+                  margin: [ 0, 0, 0, 2 ]
+          }, {
+              text: this.companyInfo.website,
+                  margin: [ 0, 0, 0, 2 ]
+          }, {
+              text: this.companyInfo.email,
+                  margin: [ 0, 0, 0, 2 ]
+          }, {
+              text: 'Business No.: ' + this.companyInfo.business_no
+          }];
+      } else {
+          return[
+              {
+                  text: this.companyInfo.name,
+                  margin: [ 0, 0, 0, 2 ]
+              }, {
+                  text: this.companyInfo.address,
+                  margin: [ 0, 0, 0, 2 ]
+              }, {
+                  text: this.companyInfo.website,
+                  margin: [ 0, 0, 0, 2 ]
+              }, {
+                  text: this.companyInfo.email,
+                  margin: [ 0, 0, 0, 2 ]
+              }
+            ];
+      }
+  }
+  getCompanyLogo() {
+      if (this.companyInfo.logo_link) {
+          return {
+              image: this.imgBase64,
+              width: 75,
+              alignment : 'right'
+          };
+      } else {
+          return null;
+      }
+  }
+  async getBase64() {
+      if (this.companyInfo.logo_link) {
+          const res = await fetch(`${environment.imageUrl}` + this.companyInfo.logo_link);
+          const blob = await res.blob();
+          const reader = new FileReader();
+          reader.readAsDataURL(blob);
+          reader.onload = () => {
+              this.imgBase64 = reader.result as string;
+          };
+          reader.onerror = (error) => {
+              console.log('Error: ', error);
+          };
+      }
+  }
+
+  onPrintInvoice() {
+
   }
 }

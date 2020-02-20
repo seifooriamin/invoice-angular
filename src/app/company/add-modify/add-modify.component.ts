@@ -28,6 +28,7 @@ export class AddModifyComponent implements OnInit, OnDestroy {
   pageStatus = 'new';
   pageTitle = 'New Company Registration';
   subscription: Subscription;
+  logoStatus = false;
 
 
   constructor(private formBuilder: FormBuilder, private companyService: CompanyService, private http: HttpClient,
@@ -95,6 +96,8 @@ export class AddModifyComponent implements OnInit, OnDestroy {
                 });
                 if (company.logo_link) {
                     this.previewUrl = `${environment.imageUrl}` + company.logo_link;
+                    this.getFile(`${environment.imageUrl}` + company.logo_link, company.logo_link);
+                    this.logoStatus = true;
                 }
 
             }
@@ -105,6 +108,7 @@ export class AddModifyComponent implements OnInit, OnDestroy {
           this.fileToUpload = files.item(0);
           if (this.toolsService.imageAccept(this.fileToUpload.type) && this.toolsService.imageSize(this.fileToUpload.size)) {
               this.imageHint = false;
+              this.logoStatus = true;
               this.preview();
           } else {
               this.imageHint = true;
@@ -118,6 +122,7 @@ export class AddModifyComponent implements OnInit, OnDestroy {
   imageCleanUp() {
         this.fileToUpload = null;
         this.previewUrl = null;
+        this.logoStatus = false;
         this.fillForm.patchValue({
            logoFile: null
         });
@@ -191,7 +196,8 @@ export class AddModifyComponent implements OnInit, OnDestroy {
                           this.router.navigate(['/company/' + this.id]);
                       } else {
                           if (response['message'] === 'SINU') {
-                              this.submitMessage = 'The company information has been successfully updated, the logo has not been uploaded';
+                              this.submitMessage = 'The company information has been successfully updated,' +
+                                  ' but the logo has not been uploaded';
                               this.router.navigate(['/company/' + this.id]);
                               // this.fillForm.reset();
                               // this.imageCleanUp();
@@ -214,5 +220,11 @@ export class AddModifyComponent implements OnInit, OnDestroy {
 
       }
   }
+  async getFile(url: string, fn: string) {
+        const res = await fetch(url);
+        const blob = await res.blob();
+        this.fileToUpload = new File([blob], fn);
+    }
+
 
 }

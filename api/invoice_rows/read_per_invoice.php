@@ -39,7 +39,9 @@
                 "unit_measure" => $unit_measure,
                 "quantity" => $quantity,
                 "total_row_price" => $quantity*$unit_price,
-                "user_id" => $user_id
+                "user_id" => $user_id,
+                "invoice_id" => $invoice_id,
+                "id" => $id
             );
             array_push($invoice_rows_arr["records"],$invoice_rows_item);
         }

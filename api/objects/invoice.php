@@ -283,13 +283,11 @@ class Invoice
                         date = :date,
                         customer_id = :customer_id,
                         company_id = :company_id,
-                        sub_total = :sub_total,
                         addition1 = :addition1,
                         addition2 = :addition2,
                         addition3 = :addition3,
                         deduction1 = :deduction1,
                         deduction2 = :deduction2,
-                        total = :total,
                         note = :note,
                         user_id = :user_id
                     WHERE
@@ -302,13 +300,11 @@ class Invoice
         $this->date=htmlspecialchars(strip_tags($this->date));
         $this->customer_id=htmlspecialchars(strip_tags($this->customer_id));
         $this->company_id=htmlspecialchars(strip_tags($this->company_id));
-        $this->sub_total=htmlspecialchars(strip_tags($this->sub_total));
         $this->addition1=htmlspecialchars(strip_tags($this->addition1));
         $this->addition2=htmlspecialchars(strip_tags($this->addition2));
         $this->addition3=htmlspecialchars(strip_tags($this->addition3));
         $this->deduction1=htmlspecialchars(strip_tags($this->deduction1));
         $this->deduction2=htmlspecialchars(strip_tags($this->deduction2));
-        $this->total=htmlspecialchars(strip_tags($this->total));
         $this->note=htmlspecialchars(strip_tags($this->note));
         $this->user_id=htmlspecialchars(strip_tags($this->user_id));
         $this->id=htmlspecialchars(strip_tags($this->id));
@@ -317,13 +313,11 @@ class Invoice
         $stmt->bindParam(":date", $this->date);
         $stmt->bindParam(":customer_id", $this->customer_id);
         $stmt->bindParam(":company_id", $this->company_id);
-        $stmt->bindParam(":sub_total", $this->sub_total);
         $stmt->bindParam(":addition1", $this->addition1);
         $stmt->bindParam(":addition2", $this->addition2);
         $stmt->bindParam(":addition3", $this->addition3);
         $stmt->bindParam(":deduction1", $this->deduction1);
         $stmt->bindParam(":deduction2", $this->deduction2);
-        $stmt->bindParam(":total", $this->total);
         $stmt->bindParam(":note", $this->note);
         $stmt->bindParam(":user_id", $this->user_id);
         $stmt->bindParam(":id", $this->id);

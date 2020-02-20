@@ -32,7 +32,7 @@ class Invoice_rows
         return $stmt;
     }
     function readPerInvoice(){
-        $query="SELECT inx,invoice_id,description,comment,unit_price,unit_measure,quantity,user_id
+        $query="SELECT inx,invoice_id,description,comment,unit_price,unit_measure,quantity,user_id,id
                 FROM " . $this->table_name . " WHERE invoice_id = ? ORDER BY inx ASC";
 
         $stmt=$this->conn->prepare($query);

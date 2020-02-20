@@ -103,11 +103,21 @@
                 </div>
                 <div class="form-row text-light img-box">
                     <div class="form-group col-8">
-                        <input type="file" name="image" formControlName="logoFile" accept="image/jpeg,image/png,image/gif"
-                               (change)="handleFileInput($event.target.files)"
-                               [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
-                        <div *ngIf="imageHint" class="invalid-feedback-manual">
-                            Accepted image format is PNG, JPEG, GIF and size should be less than 2MB
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <button type="button" class="btn btn-danger text-light float-right"
+                                        title="Add new company" (click)="imageCleanUp()"
+                                        [attr.disabled] = "!logoStatus ? 'disabled' : null">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                            <input type="file" name="image" formControlName="logoFile" accept="image/jpeg,image/png,image/gif"
+                                   class="btn btn-outline-light"
+                                   (change)="handleFileInput($event.target.files)"
+                                   [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                            <div *ngIf="imageHint" class="invalid-feedback-manual">
+                                Accepted image format is PNG, JPEG, GIF and size should be less than 2MB
+                            </div>
                         </div>
                     </div>
                     <div class="col-4">

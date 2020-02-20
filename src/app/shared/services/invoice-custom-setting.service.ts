@@ -19,4 +19,7 @@ export class InvoiceCustomSettingService {
     return this.httpClient.get(`${environment.apiUrl}invoice_custom_setting/readonebyinvoiceid.php?invoice_id=` + id,
         {responseType: 'json'});
   }
+  updateInvoiceCustomSetting(data: any) {
+    return this.httpClient.patch(`${environment.apiUrl}invoice_custom_setting/update`, data);
+  }
 }

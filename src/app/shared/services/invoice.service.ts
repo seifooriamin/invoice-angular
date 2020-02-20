@@ -27,6 +27,9 @@ export class InvoiceService {
     return this.httpClient.get<InvoiceModel>(`${environment.apiUrl}invoice/read_one.php?id=` + id,
       {responseType: 'json'});
   }
+  invoiceUpdate(data) {
+      return this.httpClient.patch(`${environment.apiUrl}invoice/update`, data);
+  }
   async setNewInvoiceNumber(): Promise<{invoiceDigit: string; invoicePrefix: string; }> {
     const q = new Promise<{invoiceDigit: string; invoicePrefix: string; }>((resolve) => {
       let digitPart = '';

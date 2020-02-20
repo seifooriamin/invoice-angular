@@ -27,13 +27,11 @@
     $invoice->date = $data->date;
     $invoice->customer_id = $data->customer_id;
     $invoice->company_id = $data->company_id;
-    $invoice->sub_total = $data->sub_total;
     $invoice->addition1 = $data->addition1;
     $invoice->addition2 = $data->addition2;
     $invoice->addition3 = $data->addition3;
     $invoice->deduction1 = $data->deduction1;
     $invoice->deduction2 = $data->deduction2;
-    $invoice->total = $data->total;
     $invoice->note = $data->note;
     $invoice->user_id = $data->user_id;
 
@@ -44,7 +42,7 @@
         http_response_code(200);
 
         // tell the user
-        echo json_encode(array("message" => "Invoice Information has been updated."));
+        echo json_encode(array("message" => "SUCCESS"));
     }
 
     // if unable to update the product, tell the user
@@ -54,6 +52,6 @@
         http_response_code(503);
 
         // tell the user
-        echo json_encode(array("message" => "Unable to update invoice information."));
+        echo json_encode(array("message" => "FAIL"));
     }
 ?>

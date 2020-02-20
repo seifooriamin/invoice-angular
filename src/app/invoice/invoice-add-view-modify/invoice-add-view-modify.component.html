@@ -11,6 +11,18 @@
                     title="Edit" (click)="onModify()">
                 <i class="fas fa-edit fa-lg"></i></button>
         </div>
+        <div class="col-lg-1 col-md-2 col-3">
+            <button type="button" class="btn btn-block btn-primary text-light"
+                    *ngIf="pageStatus === 'view'"
+                    title="Print Invoice" (click)="onDownloadInvoice()">
+                <i class="fas fa-print fa-lg"></i></button>
+        </div>
+        <div class="col-lg-1 col-md-2 col-3">
+            <button type="button" class="btn btn-block btn-danger text-light"
+                    *ngIf="pageStatus === 'view'"
+                    title="Download Invoice PDF" (click)="onPrintInvoice()">
+                <i class="fas fa-file-pdf fa-lg"></i></button>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-6 col-12">
@@ -47,7 +59,7 @@
                     <input id="invoiceNo" formControlName="invoice_number" class="form-control"
                            [ngClass]="{ 'is-invalid': f.invoice_number.touched && f.invoice_number.invalid,
                                     'is-valid': f.invoice_number.valid}"
-                           [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                           [attr.disabled] = "pageStatus === 'view' || pageStatus === 'modify' ? 'disabled' : null">
                     <div *ngIf="f.invoice_number.touched && f.invoice_number.errors?.required" class="invalid-feedback">
                         Invoice number is mandatory
                     </div>

@@ -51,7 +51,8 @@
             "created" => $invoice->created,
             "user_id" => $invoice->user_id,
             "user_full_name" => $invoice->user_first_name." ".$invoice->user_last_name,
-            "year" => $invoice->year
+            "year" => $invoice->year,
+            "id" => $invoice->id
         );
 
         // set response code - 200 OK
