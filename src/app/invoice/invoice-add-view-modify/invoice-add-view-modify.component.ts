@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CompanyService} from '../../shared/services/company.service';
@@ -20,6 +20,8 @@ import {InvoiceRowsModel} from '../../shared/models/invoice-rows.model';
 import {InvoiceCustomSettingModel} from '../../shared/models/invoice-custom-setting.model';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import {InvoiceModel} from '../../shared/models/invoice.model';
+import {log} from 'util';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 declare var jQuery: any;
 
@@ -93,6 +95,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     addition3type: '',
     addition3percentage: 0
   };
+  invoiceInfo: InvoiceModel;
 
 
   searchDescription = (text$: Observable<string>) =>
@@ -177,6 +180,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
             deduction1: response.deduction1,
             deduction2: response.deduction2
           });
+          this.invoiceInfo = response;
         }, () => {}
     );
 
@@ -233,12 +237,18 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
             addition3percentage: response.addition3percentage
           });
           this.invoiceSettingElements = response;
-          this.selectedCurrencyImage = environment.flagUrl +
-              this.currency.find(({currencyCode}) => currencyCode === response.currency).flag;
-          this.selectedCurrencyCode = this.currency.find(({currencyCode}) =>
-              currencyCode === response.currency).currencyCode;
-          this.selectedCurrencySymbol = this.currency.find(({currencyCode}) =>
-              currencyCode === response.currency).currencySymbol;
+          try {
+              this.selectedCurrencyImage = environment.flagUrl +
+                  this.currency.find(({currencyCode}) => currencyCode === response.currency).flag;
+              this.selectedCurrencyCode = this.currency.find(({currencyCode}) =>
+                  currencyCode === response.currency).currencyCode;
+              this.selectedCurrencySymbol = this.currency.find(({currencyCode}) =>
+                  currencyCode === response.currency).currencySymbol;
+          } catch {
+                console.log('this is catch');
+              window.location.reload();
+          }
+
         }, () => {}
     );
   }
@@ -507,12 +517,18 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
             addition3percentage: response.addition3percentage
           });
           this.invoiceSettingElements = response;
-          this.selectedCurrencyImage = environment.flagUrl +
-              this.currency.find(({currencyCode}) => currencyCode === response.currency).flag;
-          this.selectedCurrencyCode = this.currency.find(({currencyCode}) =>
-              currencyCode === response.currency).currencyCode;
-          this.selectedCurrencySymbol = this.currency.find(({currencyCode}) =>
-              currencyCode === response.currency).currencySymbol;
+          try {
+              this.selectedCurrencyImage = environment.flagUrl +
+                  this.currency.find(({currencyCode}) => currencyCode === response.currency).flag;
+              this.selectedCurrencyCode = this.currency.find(({currencyCode}) =>
+                  currencyCode === response.currency).currencyCode;
+              this.selectedCurrencySymbol = this.currency.find(({currencyCode}) =>
+                  currencyCode === response.currency).currencySymbol;
+          } catch {
+              console.log('this is catch');
+              window.location.reload();
+          }
+
         }
     );
   }
@@ -552,12 +568,18 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
       addition3type: this.invoiceSettingElements.addition3type,
       addition3percentage: this.invoiceSettingElements.addition3percentage
     });
-    this.selectedCurrencyImage = environment.flagUrl +
-        this.currency.find(({currencyCode}) => currencyCode === this.invoiceSettingElements.currency).flag;
-    this.selectedCurrencyCode = this.currency.find(
-        ({currencyCode}) => currencyCode === this.invoiceSettingElements.currency).currencyCode;
-    this.selectedCurrencySymbol = this.currency.find(
-        ({currencyCode}) => currencyCode === this.invoiceSettingElements.currency).currencySymbol;
+    try {
+        this.selectedCurrencyImage = environment.flagUrl +
+            this.currency.find(({currencyCode}) => currencyCode === this.invoiceSettingElements.currency).flag;
+        this.selectedCurrencyCode = this.currency.find(
+            ({currencyCode}) => currencyCode === this.invoiceSettingElements.currency).currencyCode;
+        this.selectedCurrencySymbol = this.currency.find(
+            ({currencyCode}) => currencyCode === this.invoiceSettingElements.currency).currencySymbol;
+    } catch {
+        console.log('this is catch');
+        window.location.reload();
+    }
+
   }
   onSettingCall() {
       jQuery('#modalSetting').modal('show');
@@ -759,7 +781,13 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     }
   }
   onLoadCompanyData(companyID) {
-    this.companyInfo = this.companyList.find(company => company.id === companyID);
+    try {
+        this.companyInfo = this.companyList.find(company => company.id === companyID);
+    } catch {
+        console.log('this is catch');
+        window.location.reload();
+    }
+
     if (this.companyInfo.logo_link) {
       this.imgUrl = `${environment.imageUrl}` + this.companyInfo.logo_link;
       this.getBase64();
@@ -768,7 +796,13 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     }
   }
   onLoadCustomerData(customerID) {
-    this.customerInfo = this.customerList.find(customer => customer.id === customerID);
+      try {
+          this.customerInfo = this.customerList.find(customer => customer.id === customerID);
+      } catch {
+          console.log('this is catch');
+          window.location.reload();
+      }
+
   }
   onAddCompany() {
     this.router.navigate(['/company/new']);
@@ -789,11 +823,16 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     this.invoiceRows.push(this.onCreateRow());
   }
   changeCurrency(currencySelected) {
-    this.selectedCurrencyImage = environment.flagUrl +
-        this.currency.find(({currencyCode}) => currencyCode === currencySelected).flag;
-    this.selectedCurrencyCode = this.currency.find(({currencyCode}) => currencyCode === currencySelected).currencyCode;
-    this.selectedCurrencySymbol = this.currency.find(({currencyCode}) =>
-        currencyCode === currencySelected).currencySymbol;
+    try {
+        this.selectedCurrencyImage = environment.flagUrl +
+            this.currency.find(({currencyCode}) => currencyCode === currencySelected).flag;
+        this.selectedCurrencyCode = this.currency.find(({currencyCode}) => currencyCode === currencySelected).currencyCode;
+        this.selectedCurrencySymbol = this.currency.find(({currencyCode}) =>
+            currencyCode === currencySelected).currencySymbol;
+    } catch {
+        console.log('this is catch');
+        window.location.reload();
+    }
   }
   onScrollTop() {
     const scrollToTop = window.setInterval(() => {
@@ -805,10 +844,6 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
       }
     }, 16);
   }
-  onDownloadInvoice() {
-      const documentDefinition = this.getDocumentDefinition();
-      pdfMake.createPdf(documentDefinition).open();
-  }
   getDocumentDefinition() {
       return {
           content: [
@@ -818,72 +853,306 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
                         bold: true,
                         fontSize: 20,
                         alignment: 'left',
-                        margin: [0, 15, 0, 0]
+                        margin: [0, 15, 0, 15]
                     }],
                     [
                         this.getCompanyLogo()
                     ]
                   ]
-
               },
               {columns: [
-                 [
-                     this.getBusinessNo()
-                 // {
-                 //    text: this.companyInfo.name,
-                 //    margin: [ 0, 0, 0, 2 ]
-                 // }, {
-                 //    text: this.companyInfo.address,
-                 //    margin: [ 0, 0, 0, 2 ]
-                 // }, {
-                 //     text: this.companyInfo.website,
-                 //     margin: [ 0, 0, 0, 2 ]
-                 // }, {
-                 //     text: this.companyInfo.email,
-                 //     margin: [ 0, 0, 0, 2 ]
-                 // }
-                 ]
+                     {
+                         width: '70%',
+                         text: this.companyInfo.name,
+                         margin: [ 0, 5, 0, 2 ]
+                     },
+                     {
+                         width: '30%',
+                         text: 'Date: ' + this.invoiceInfo.date,
+                         margin: [ 0, 5, 0, 2 ]
+                     }
                ]},
               {columns: [
+                      {
+                          width: '70%',
+                          text: this.companyInfo.address,
+                          margin: [ 0, 0, 0, 2 ]
+                      },
+                      {
+                          width: '30%',
+                          text: 'Invoice No.: ' + this.invoiceInfo.invoice_number,
+                          margin: [ 0, 0, 0, 2 ]
+                      }
+                  ]
+              },
+              {columns: [
+                      {
+                          text: this.companyInfo.website,
+                          margin: [ 0, 0, 0, 2 ]
+                      }
+              ]},
+              {columns: [
+                      {
+                          text: this.companyInfo.email,
+                          margin: [ 0, 0, 0, 2 ]
+                      }
+              ]},
+              {columns: [
+                    this.getBusinessNo()
+              ]},
+              {columns: [
+                    this.getGSTNo()
+              ]},
+              {columns: [
+                      [{
+                          text: 'Bill to:',
+                          bold: 'true',
+                          margin: [0, 10, 0, 5],
+                          decoration: 'underline'
+                      },
+                      {
+                          text: this.customerInfo.name,
+                          margin: [ 0, 0, 0, 2 ]
+                      },
+                      {
+                          text: this.customerInfo.address,
+                          margin: [ 0, 0, 0, 2 ]
+                      },
+                      {
+                          text: this.customerInfo.phone,
+                          margin: [ 0, 0, 0, 2 ]
+                      },
+                      {
+                          text: this.customerInfo.email,
+                          margin: [ 0, 0, 0, 5 ]
+                      }]
+              ]},
+                this.getInvoiceData(),
+              {
+                  columns: [
+                      {
+                          text: 'Notes',
+                          margin: [0, 5, 0, 2],
+                          bold: 'true',
+                          decoration: 'underline'
+                      }
 
-              ]}
-          ]
+                  ]
+              },
+              {    columns: [
+                      {
+                          text: this.invoiceInfo.note,
+                          alignment: 'justify'
+
+                      }
+                  ]
+              }
+              ],
+              info: {
+                  title: this.invoiceInfo.invoice_number + '_INVOICE',
+                  author: this.companyInfo.name,
+                  subject: 'INVOICE',
+                  creator: 'Easy Invoice Maker www.einvoicemaker.com',
+                  producer: 'Easy Invoice Maker www.einvoicemaker.com',
+                  keywords: 'INVOICE, ONLINE INVOICE',
+              },
+              styles: {
+                  tableHeader: {
+                      alignment: 'center',
+                      bold: 'true',
+                      fillColor: '#e6e6e6'
+                  }
+
+              }
+      };
+  }
+  getInvoiceData() {
+      const row = [];
+
+      for (let count = 0; count < this.s.length; count++) {
+        // row.push(
+        //     {description: this.s.at(count).get('description').value,comment: this.s.at(count).get('comment').value,
+        //      unitPrice: this.s.at(count).get('unit_price').value,
+        //      quantity: this.s.at(count).get('quantity').value, total: this.s.at(count).get('quantity').value}
+        // );
+          row.push(
+              [{
+                text: this.s.at(count).get('description').value +  '\n' + this.s.at(count).get('comment').value,
+                fillColor: (count % 2 !== 0) ? '#D0DCF8' : null
+              },
+              {
+                text: this.s.at(count).get('unit_price').value + ' ' +  this.s.at(count).get('unit_measure').value,
+                fillColor: (count % 2 !== 0) ? '#D0DCF8' : null,
+                alignment: 'center'
+              },
+              {
+                text: this.s.at(count).get('quantity').value,
+                fillColor: (count % 2 !== 0) ? '#D0DCF8' : null,
+                alignment: 'center'
+              },
+              {
+                text: this.rowTotalString[count],
+                fillColor: (count % 2 !== 0) ? '#D0DCF8' : null,
+                alignment: 'right'
+              }]
+          );
+      }
+      return {
+          table: {
+              widths: ['50%', '15%', '15%', '20%'],
+              body: [
+                  [
+                      {
+                      text: 'Description/Comment',
+                      style: 'tableHeader'
+                      },
+                      {
+                          text: 'Unit Price',
+                          style: 'tableHeader'
+                      },
+                      {
+                          text: 'Qty',
+                          style: 'tableHeader'
+                      },
+                      {
+                          text: 'Total',
+                          style: 'tableHeader'
+                      },
+                  ],
+                    ...row
+                  , [
+                      {
+                          text: 'Sub-Total',
+                          colSpan: '3',
+                          alignment: 'right',
+                          border: [true, false, true, false],
+                      },
+                      '',
+                      '',
+                      {
+                          text: this.invoiceSubTotal,
+                          alignment: 'right',
+                          border: [true, false, true, false],
+                      }
+                  ],
+                  [
+                      {
+                          text: +this.invoiceSettingElements.deduction1status === 1 ?
+                              this.invoiceSettingElements.deduction1label : null,
+                          colSpan: '3',
+                          alignment: 'right',
+                          border: [true, false, true, false],
+                      },
+                      '',
+                      '',
+                      {
+                          text: +this.invoiceSettingElements.deduction1status === 1 ?
+                              this.f.deduction1.value : null,
+                          alignment: 'right',
+                          border: [true, false, true, false],
+                      }
+                  ],
+                  [
+                      {
+                          text: +this.invoiceSettingElements.deduction2status === 1 ?
+                              this.invoiceSettingElements.deduction2label : null,
+                          colSpan: '3',
+                          alignment: 'right',
+                          border: [true, false, true, false],
+                      },
+                      '',
+                      '',
+                      {
+                          text: +this.invoiceSettingElements.deduction2status === 1 ?
+                              this.f.deduction2.value : null,
+                          alignment: 'right',
+                          border: [true, false, true, false],
+                      }
+                  ],
+                  [
+                      {
+                          text: +this.invoiceSettingElements.addition1status === 1 ?
+                              this.invoiceSettingElements.addition1label : null,
+                          colSpan: '3',
+                          alignment: 'right',
+                          border: [true, false, true, false],
+                      },
+                      '',
+                      '',
+                      {
+                          text: +this.invoiceSettingElements.addition1status === 1 ?
+                              this.f.addition1.value : null,
+                          alignment: 'right',
+                          border: [true, false, true, false],
+                      }
+                  ],
+                  [
+                      {
+                          text: +this.invoiceSettingElements.addition2status === 1 ?
+                              this.invoiceSettingElements.addition2label : null,
+                          colSpan: '3',
+                          alignment: 'right',
+                          border: [true, false, true, false],
+                      },
+                      '',
+                      '',
+                      {
+                          text: +this.invoiceSettingElements.addition2status === 1 ?
+                              this.f.addition2.value : null,
+                          alignment: 'right',
+                          border: [true, false, true, false],
+                      }
+                  ],
+                  [
+                      {
+                          text: +this.invoiceSettingElements.addition3status === 1 ?
+                              this.invoiceSettingElements.addition3label : null,
+                          colSpan: '3',
+                          alignment: 'right',
+                          border: [true, false, true, false],
+                      },
+                      '',
+                      '',
+                      {
+                          text: +this.invoiceSettingElements.addition3status === 1 ?
+                              this.f.addition3.value : null,
+                          alignment: 'right',
+                          border: [true, false, true, false],
+                      }
+                  ],
+                  [
+                      {
+                          text: 'Total',
+                          colSpan: '3',
+                          alignment: 'right',
+                          border: [true, false, true, true],
+                      },
+                      '',
+                      '',
+                      {
+                          text: this.invoiceTotal,
+                          alignment: 'right',
+                          border: [true, false, true, true],
+                      }
+                  ]
+              ]
+          }
       };
   }
   getBusinessNo() {
       if (this.companyInfo.business_no) {
-          return[
-          {
-              text: this.companyInfo.name,
-                  margin: [ 0, 0, 0, 2 ]
-          }, {
-              text: this.companyInfo.address,
-                  margin: [ 0, 0, 0, 2 ]
-          }, {
-              text: this.companyInfo.website,
-                  margin: [ 0, 0, 0, 2 ]
-          }, {
-              text: this.companyInfo.email,
-                  margin: [ 0, 0, 0, 2 ]
-          }, {
-              text: 'Business No.: ' + this.companyInfo.business_no
-          }];
-      } else {
-          return[
-              {
-                  text: this.companyInfo.name,
-                  margin: [ 0, 0, 0, 2 ]
-              }, {
-                  text: this.companyInfo.address,
-                  margin: [ 0, 0, 0, 2 ]
-              }, {
-                  text: this.companyInfo.website,
-                  margin: [ 0, 0, 0, 2 ]
-              }, {
-                  text: this.companyInfo.email,
-                  margin: [ 0, 0, 0, 2 ]
-              }
-            ];
+          return {
+              text: 'Business No.: ' + this.companyInfo.business_no,
+              margin: [0, 0, 0, 2]
+          };
+      }
+  }
+  getGSTNo() {
+      if (this.companyInfo.gst_no) {
+          return {
+              text: 'GST No.: ' + this.companyInfo.gst_no,
+              margin: [0, 0, 0, 2]
+          };
       }
   }
   getCompanyLogo() {
@@ -911,8 +1180,16 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
           };
       }
   }
-
   onPrintInvoice() {
-
+      const documentDefinition = this.getDocumentDefinition();
+      pdfMake.createPdf(documentDefinition).print();
   }
+  onOpenInvoice() {
+      const documentDefinition = this.getDocumentDefinition();
+      pdfMake.createPdf(documentDefinition).open();
+  }
+    onDownloadInvoice() {
+        const documentDefinition = this.getDocumentDefinition();
+        pdfMake.createPdf(documentDefinition).download(this.invoiceInfo.invoice_number + '_INVOICE');
+    }
 }

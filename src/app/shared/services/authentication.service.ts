@@ -38,25 +38,22 @@ export class AuthenticationService {
     return this.http.post<any>(`${environment.apiUrl}users/login`, data)
         .pipe(map(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            if (user['message'] === 'Successful login.'){
+            if (user['message'] === 'Successful login.') {
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
                 return user;
             }
         }));
   }
-
   public logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     this.router.navigate(['signin']);
   }
-
-    public get currentUserValue(): UserModel {
-        return this.currentUserSubject.value;
-    }
-
-    async tokenValidate(): Promise<any> {
+   public get currentUserValue(): UserModel {
+       return this.currentUserSubject.value;
+   }
+   async tokenValidate(): Promise<any> {
       const jTokenValue = JSON.parse(localStorage.getItem('currentUser'));
       const tokenValue = jTokenValue['jwt'];
 

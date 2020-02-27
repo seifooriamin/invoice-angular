@@ -14,14 +14,20 @@
         <div class="col-lg-1 col-md-2 col-3">
             <button type="button" class="btn btn-block btn-primary text-light"
                     *ngIf="pageStatus === 'view'"
-                    title="Print Invoice" (click)="onDownloadInvoice()">
+                    title="Print invoice" (click)="onPrintInvoice()">
                 <i class="fas fa-print fa-lg"></i></button>
         </div>
         <div class="col-lg-1 col-md-2 col-3">
             <button type="button" class="btn btn-block btn-danger text-light"
                     *ngIf="pageStatus === 'view'"
-                    title="Download Invoice PDF" (click)="onPrintInvoice()">
+                    title="Download invoice PDF" (click)="onDownloadInvoice()">
                 <i class="fas fa-file-pdf fa-lg"></i></button>
+        </div>
+        <div class="col-lg-1 col-md-2 col-3">
+            <button type="button" class="btn btn-block btn-info text-light"
+                    *ngIf="pageStatus === 'view'"
+                    title="Open Invoice in browser" (click)="onOpenInvoice()">
+                <i class="fab fa-chrome fa-lg"></i></button>
         </div>
     </div>
     <div class="row">

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {AuthenticationService} from '../shared/services/authentication.service';
 
 
@@ -22,7 +22,8 @@ export class SigninComponent implements OnInit {
               private formBuilder: FormBuilder,
               private authentication: AuthenticationService) {
     if (this.authentication.currentUserValue) {
-      this.router.navigate(['/']);
+      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+      this.router.navigate([this.returnUrl]);
     }
   }
 
@@ -34,7 +35,6 @@ export class SigninComponent implements OnInit {
     });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
-
   onSubmit() {
     this.authentication.login(this.fillForm.value).subscribe(
         // (response) => {
@@ -53,7 +53,6 @@ export class SigninComponent implements OnInit {
   onSignup() {
     this.router.navigate(['signup']);
   }
-
   get f() { return this.fillForm.controls; }
 
 }
