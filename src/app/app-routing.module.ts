@@ -15,6 +15,9 @@ import {AddModifyViewComponent} from './customer/add-modify-view/add-modify-view
 import {InvoiceComponent} from './invoice/invoice.component';
 import {InvoiceListComponent} from './invoice/invoice-list/invoice-list.component';
 import {InvoiceAddViewModifyComponent} from './invoice/invoice-add-view-modify/invoice-add-view-modify.component';
+import {EstimateComponent} from './estimate/estimate.component';
+import {EstimateListComponent} from './estimate/estimate-list/estimate-list.component';
+import {EstimateAddViewModifyComponent} from './estimate/estimate-add-view-modify/estimate-add-view-modify.component';
 
 
 const routes: Routes = [
@@ -39,6 +42,13 @@ const routes: Routes = [
       {path: 'new', component: InvoiceAddViewModifyComponent},
       {path: ':id', component: InvoiceAddViewModifyComponent},
       {path: ':id/modify', component: InvoiceAddViewModifyComponent},
+
+    ]},
+  {path: 'estimate', component: EstimateComponent, canActivate: [AuthGuard], children: [
+      {path: 'estimate-list', component: EstimateListComponent},
+      {path: 'new', component: EstimateAddViewModifyComponent},
+      {path: ':id', component: EstimateAddViewModifyComponent},
+      {path: ':id/modify', component: EstimateAddViewModifyComponent},
 
     ]},
   {path: 'users', component: UsersComponent},

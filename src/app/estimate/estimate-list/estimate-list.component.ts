@@ -1,19 +1,19 @@
 import {AfterViewInit, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
-import {Subscription} from 'rxjs';
 import {InvoiceModel} from '../../shared/models/invoice.model';
+import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {InvoiceService} from '../../shared/services/invoice.service';
-import {CustomerModel} from '../../shared/models/customer.model';
 import {InvoiceRowsService} from '../../shared/services/invoice-rows.service';
 import {InvoiceCustomSettingService} from '../../shared/services/invoice-custom-setting.service';
+import {CustomerModel} from '../../shared/models/customer.model';
 declare var jQuery: any;
 @Component({
-  selector: 'app-invoice-list',
-  templateUrl: './invoice-list.component.html',
+  selector: 'app-estimate-list',
+  templateUrl: './estimate-list.component.html',
   styleUrls: ['../../app.component.css']
 })
-export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
+export class EstimateListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
   elements: any = [];
@@ -53,6 +53,17 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
         }
     );
   }
+  ngAfterViewInit(): void {
+    this.mdbTablePagination.setMaxVisibleItemsNumberTo(5);
+    this.mdbTablePagination.calculateFirstItemIndex();
+    this.mdbTablePagination.calculateLastItemIndex();
+    this.cdRef.detectChanges();
+  }
+  ngOnDestroy(): void {
+    if (this.subscribe) {
+      this.subscribe.unsubscribe();
+    }
+  }
   searchItems() {
     const prev = this.mdbTable.getDataSource();
     if (!this.searchText) {
@@ -64,18 +75,6 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
         'data', 'customer_name', 'company_name', 'total', 'year' ]);
       this.mdbTable.setDataSource(prev);
     }
-  }
-  ngOnDestroy(): void {
-    if (this.subscribe) {
-      this.subscribe.unsubscribe();
-    }
-  }
-  ngAfterViewInit() {
-    this.mdbTablePagination.setMaxVisibleItemsNumberTo(5);
-
-    this.mdbTablePagination.calculateFirstItemIndex();
-    this.mdbTablePagination.calculateLastItemIndex();
-    this.cdRef.detectChanges();
   }
   onModalShow(invoiceNumber, invoiceIndex, invoiceID) {
     this.invoiceNumber = invoiceNumber;
@@ -91,35 +90,35 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.subscribe = this.invoiceService.invoiceDelete(idJson).subscribe(
         (response) => {
           if (response['message'] === 'SUCCESS') {
-              this.subscribe = this.invoiceRowsService.invoiceRowsDelete(invoiceIDJson).subscribe(
-                  (responseRows) => {
-                      if (responseRows['message'] === 'SUCCESS') {
-                          this.deleteMessageText = 'Invoice #' + invoiceNumber + ' has been deleted successfully';
-                          this.deleteMessageStatus = true;
-                          setTimeout(() => {
-                              this.deleteMessageStatus = false;
-                          }, 2000);
-                      }
-                  }, (e) => {
-                      this.deleteMessageText = 'Invoice #' + invoiceNumber + ' has been deleted successfully, but some related' +
-                          'related records have not been deleted yet, contact ADMINISTRATOR';
-                      this.deleteMessageStatus = true;
-                      setTimeout(() => {
-                          this.deleteMessageStatus = false;
-                      }, 2000);
+            this.subscribe = this.invoiceRowsService.invoiceRowsDelete(invoiceIDJson).subscribe(
+                (responseRows) => {
+                  if (responseRows['message'] === 'SUCCESS') {
+                    this.deleteMessageText = 'Invoice #' + invoiceNumber + ' has been deleted successfully';
+                    this.deleteMessageStatus = true;
+                    setTimeout(() => {
+                      this.deleteMessageStatus = false;
+                    }, 2000);
                   }
-              );
-              this.ics.deleteInvoiceCustomSetting(invoiceIDJson).subscribe(
-                  (delResponse) => {
+                }, (e) => {
+                  this.deleteMessageText = 'Invoice #' + invoiceNumber + ' has been deleted successfully, but some related' +
+                      'related records have not been deleted yet, contact ADMINISTRATOR';
+                  this.deleteMessageStatus = true;
+                  setTimeout(() => {
+                    this.deleteMessageStatus = false;
+                  }, 2000);
+                }
+            );
+            this.ics.deleteInvoiceCustomSetting(invoiceIDJson).subscribe(
+                (delResponse) => {
 
-                  }, () => {
-                      this.deleteMessageText = 'Invoice #' + invoiceNumber + ' setting record has not been deleted';
-                      this.deleteMessageStatus = true;
-                      setTimeout(() => {
-                          this.deleteMessageStatus = false;
-                      }, 2000);
-                  }
-              );
+                }, () => {
+                  this.deleteMessageText = 'Invoice #' + invoiceNumber + ' setting record has not been deleted';
+                  this.deleteMessageStatus = true;
+                  setTimeout(() => {
+                    this.deleteMessageStatus = false;
+                  }, 2000);
+                }
+            );
           }
         }, (e) => {
           this.deleteMessageText = 'Due to technical issue invoice #' + invoiceNumber + ' has not been deleted.';

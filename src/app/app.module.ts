@@ -29,6 +29,9 @@ import {NgbDateCustomParserFormatter} from './shared/tools/dateformat';
 import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';
 import {LoadingBarRouterModule} from '@ngx-loading-bar/router';
 import {LoadingBarModule} from '@ngx-loading-bar/core';
+import { EstimateComponent } from './estimate/estimate.component';
+import { EstimateListComponent } from './estimate/estimate-list/estimate-list.component';
+import { EstimateAddViewModifyComponent } from './estimate/estimate-add-view-modify/estimate-add-view-modify.component';
 
 
 
@@ -52,6 +55,9 @@ import {LoadingBarModule} from '@ngx-loading-bar/core';
     InvoiceComponent,
     InvoiceListComponent,
     InvoiceAddViewModifyComponent,
+    EstimateComponent,
+    EstimateListComponent,
+    EstimateAddViewModifyComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),

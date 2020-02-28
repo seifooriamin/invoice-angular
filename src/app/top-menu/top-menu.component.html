@@ -5,10 +5,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item " [routerLinkActive]="['active']">
-                <a class="nav-link" routerLink="/">Home</a>
-            </li>
-            <li class="nav-item " [routerLinkActive]="['active']">
+            <li class="nav-item" [routerLinkActive]="['active']">
                 <a class="nav-link" routerLink="/dashboard">Dashboard</a>
             </li>
             <li class="nav-item " [routerLinkActive]="['active']">
@@ -17,11 +14,25 @@
             <li class="nav-item " [routerLinkActive]="['active']">
                 <a class="nav-link" routerLink="/customer/customer-list">Customer</a>
             </li>
-            <li class="nav-item " [routerLinkActive]="['active']">
-                <a class="nav-link" routerLink="/invoice/invoice-list">Invoice</a>
+            <li class="nav-item dropdown" [routerLinkActive]="['active']">
+                <a class="nav-link dropdown-toggle" href="#" id="invoiceDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Invoice
+                </a>
+                <div class="dropdown-menu submenu-color" aria-labelledby="invoiceDropdown">
+                    <a class="dropdown-item submenu-item-color" routerLink="/invoice/invoice-list">List</a>
+                    <a class="dropdown-item submenu-item-color" routerLink="/invoice/new">Create New</a>
+                </div>
             </li>
-            <li class="nav-item " [routerLinkActive]="['active']">
-                <a class="nav-link" routerLink="/invoice">Invoice Main</a>
+            <li class="nav-item dropdown" [routerLinkActive]="['active']">
+                <a class="nav-link dropdown-toggle" href="#" id="estimateDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Estimate
+                </a>
+                <div class="dropdown-menu submenu-color" aria-labelledby="estimateDropdown">
+                    <a class="dropdown-item submenu-item-color" routerLink="/estimate/estimate-list">List</a>
+                    <a class="dropdown-item submenu-item-color" routerLink="/estimate/new">Create New</a>
+                </div>
             </li>
             <li class="nav-item " [routerLinkActive]="['active']">
                 <a class="nav-link" (click)="onSignOut()">Sign out</a>
