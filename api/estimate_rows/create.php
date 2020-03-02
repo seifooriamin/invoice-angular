@@ -24,7 +24,6 @@
 
     // make sure data is not empty
     if(
-        !empty($data->inx) &&
         !empty($data->estimate_id) &&
         !empty($data->description) &&
         !empty($data->unit_price) &&
@@ -32,7 +31,7 @@
         !empty($data->user_id)
     ){
 
-        $estimate_rows->inx = $data->inx;
+        $estimate_rows->inx = $data->inx ? $data->inx : 0;
         $estimate_rows->estimate_id = $data->estimate_id;
         $estimate_rows->description = $data->description;
         $estimate_rows->comment = $data->comment;
@@ -47,7 +46,7 @@
             http_response_code(201);
 
             // tell the user
-            echo json_encode(array("message" => "New estimate row has been registered."));
+            echo json_encode(array("message" => "SUCCESS"));
         }
 
         // if unable to create the product, tell the user
@@ -57,7 +56,7 @@
             http_response_code(503);
 
             // tell the user
-            echo json_encode(array("message" => "Unable to register new estimate row."));
+            echo json_encode(array("message" => "FAIL"));
         }
     }
 
@@ -68,6 +67,6 @@
         http_response_code(400);
 
         // tell the user
-        echo json_encode(array("message" => "Fill all the mandatory fields."));
+        echo json_encode(array("message" => "INCOMPLETE"));
     }
 ?>

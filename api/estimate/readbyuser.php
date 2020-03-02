@@ -10,9 +10,11 @@
     $db=$database->getConnection();
 
     $estimate= new Estimate($db);
-    $stmt=$estimate->read();
+    $data = json_decode(file_get_contents("php://input"));
+    $estimate->user_id = $data->user_id;
+    $stmt=$estimate->readByUser();
 
-    $num=$estimate->count();
+    $num=$stmt->rowCount();
 
     if($num>0){
         $estimate_arr=array();
@@ -22,6 +24,7 @@
             extract($row);
             $estimate_item=array(
                 "id" => $id,
+                "estimate_number" => $estimate_number,
                 "date" => $date,
                 "customer_id" => $customer_id,
                 "customer_name" => $customer_name,
@@ -35,8 +38,14 @@
                 "company_gst_no" => $company_gst_no,
                 "company_website" => $company_website,
                 "company_logo_link" => $company_logo_link,
-                "total_price" => $total_price,
-                "gst" => $gst,
+                "sub_total" => round($sub_total,2,PHP_ROUND_HALF_UP),
+                "addition1" => round($addition1,2,PHP_ROUND_HALF_UP),
+                "addition2" => round($addition2,2, PHP_ROUND_HALF_UP),
+                "addition3" => round($addition3,2, PHP_ROUND_HALF_UP),
+                "deduction1" => round($deduction1, 2, PHP_ROUND_HALF_UP),
+                "deduction2" => round($deduction2,2,PHP_ROUND_HALF_UP),
+                "total" => round($total,2, PHP_ROUND_HALF_UP),
+                "note" => $note,
                 "created" => $created,
                 "user_id" => $user_id,
                 "user_full_name" => $user_first_name." ".$user_last_name,
@@ -47,6 +56,6 @@
         echo json_encode($estimate_arr);
     }else{
         http_response_code(404);
-        echo json_encode(array("message" => "no record found"));
+        echo json_encode(array("message" => "FAIL"));
     }
 

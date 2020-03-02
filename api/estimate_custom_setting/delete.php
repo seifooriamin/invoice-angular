@@ -8,29 +8,29 @@
 
     // include database and object file
     include_once '../config/database.php';
-    include_once '../objects/estimate_rows.php';
+    include_once '../objects/estimate_custom_setting.php';
 
     // get database connection
     $database = new Database();
     $db = $database->getConnection();
 
     // prepare product object
-    $estimate_rows = new Estimate_rows($db);
+    $ecs = new Estimate_custom_setting($db);
 
     // get product id
     $data = json_decode(file_get_contents("php://input"));
 
     // set product id to be deleted
-    $estimate_rows->id = $data->id;
+    $ecs->estimate_id = $data->estimate_id;
 
     // delete the product
-    if($estimate_rows->delete()){
+    if($ecs->delete()){
 
         // set response code - 200 ok
         http_response_code(200);
 
         // tell the user
-        echo json_encode(array("message" => "Estimate row has been deleted."));
+        echo json_encode(array("message" => "SUCCESS"));
     }
 
     // if unable to delete the product
@@ -40,6 +40,6 @@
         http_response_code(503);
 
         // tell the user
-        echo json_encode(array("message" => "Unable to delete estimate row."));
+        echo json_encode(array("message" => "FAIL"));
     }
 ?>

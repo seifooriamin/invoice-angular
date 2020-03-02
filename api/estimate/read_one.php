@@ -23,9 +23,10 @@
     // read the details of product to be edited
     $estimate->readOne();
 
-    if($estimate->date!=null){
+    if($estimate->estimate_number!=null){
         // create array
         $estimate_arr = array(
+            "estimate_number" => $estimate->estimate_number,
             "date" => $estimate->date,
             "customer_id" => $estimate->customer_id,
             "customer_name" => $estimate->customer_name,
@@ -39,11 +40,18 @@
             "company_gst_no" => $estimate->company_gst_no,
             "company_website" => $estimate->company_website,
             "company_logo_link" => $estimate->company_logo_link,
-            "total_price" => $estimate->total_price,
-            "gst" => $estimate->gst,
+            "sub_total" => $estimate->sub_total,
+            "addition1" => $estimate->addition1,
+            "addition2" => $estimate->addition2,
+            "addition3" => $estimate->addition3,
+            "deduction1" => $estimate->deduction1,
+            "deduction2" => $estimate->deduction2,
+            "total" => $estimate->total,
+            "note" => $estimate->note,
             "created" => $estimate->created,
             "user_id" => $estimate->user_id,
             "user_full_name" => $estimate->user_first_name." ".$estimate->user_last_name,
+            "id" => $estimate->id
         );
 
         // set response code - 200 OK
@@ -58,6 +66,6 @@
         http_response_code(404);
 
         // tell the user product does not exist
-        echo json_encode(array("message" => "estimate does not exist."));
+        echo json_encode(array("message" => "invoice does not exist."));
     }
 ?>

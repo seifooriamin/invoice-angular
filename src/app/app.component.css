@@ -39,3 +39,25 @@ table tbody tr:nth-child(even) {
 th{
     cursor: pointer;
 }
+.my-popover-class{
+    background: #DCE9F6;
+    font-size: 50%;
+}
+.my-popover-class .arrow::after {
+    border-top-color: #DCE9F6;
+}
+.invalid-feedback-manual{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+.valid-feedback-manual{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #28a745;
+}
+ul li a {
+    cursor: pointer;
+}

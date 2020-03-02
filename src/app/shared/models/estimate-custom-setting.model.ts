@@ -1,8 +1,7 @@
-export class InvoiceGeneralSettingModel {
+export class EstimateCustomSettingModel {
     id: number;
-    user_id: number;
-    invoice_id: number;
     estimate_id: number;
+    user_id: number;
     currency: string;
     created: Date;
     modified: Date;

@@ -1,12 +1,11 @@
 import {AfterViewInit, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
-import {InvoiceModel} from '../../shared/models/invoice.model';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
-import {InvoiceService} from '../../shared/services/invoice.service';
-import {InvoiceRowsService} from '../../shared/services/invoice-rows.service';
-import {InvoiceCustomSettingService} from '../../shared/services/invoice-custom-setting.service';
-import {CustomerModel} from '../../shared/models/customer.model';
+import {EstimateModel} from '../../shared/models/estimate.model';
+import {EstimateService} from '../../shared/services/estimate.service';
+import {EstimateRowsService} from '../../shared/services/estimate-rows.service';
+import {EstimateCustomSettingService} from '../../shared/services/estimate-custom-setting.service';
 declare var jQuery: any;
 @Component({
   selector: 'app-estimate-list',
@@ -18,28 +17,28 @@ export class EstimateListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
   elements: any = [];
   previous: any = [];
-  data: InvoiceModel[];
+  // data: EstimateModel[];
   currentUser: any;
   subscribe: Subscription;
   searchText = '';
-  invoiceNumber = '';
-  invoiceIndex = '';
-  invoiceId = '';
+  estimateNumber = '';
+  estimateIndex = '';
+  estimateId = '';
   deleteMessageStatus = false;
   deleteMessageText = '';
-  constructor(private cdRef: ChangeDetectorRef, private router: Router, private invoiceService: InvoiceService,
-              private invoiceRowsService: InvoiceRowsService, private ics: InvoiceCustomSettingService) { }
+  constructor(private cdRef: ChangeDetectorRef, private router: Router, private estimateService: EstimateService,
+              private estimateRowsService: EstimateRowsService, private ecs: EstimateCustomSettingService) { }
   @HostListener('input') oninput() { this.searchItems(); }
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId: string = '{ "user_id" : "' + this.currentUser['id'] + '" }';
-    this.subscribe = this.invoiceService.invoiceReadByUser(userId).subscribe(
-        (records: Array<CustomerModel>) => {
-          this.data = records['records'];
+    this.subscribe = this.estimateService.estimateReadByUser(userId).subscribe(
+        (records: Array<EstimateModel>) => {
+          // this.data = records['records'];
           for (const idata of records['records']) {
-            this.elements.push({id: idata.id, invoice_number: idata.invoice_number,
+            this.elements.push({id: idata.id, estimate_number: idata.estimate_number,
               date: idata.date, customer_name: idata.customer_name, company_name: idata.company_name,
-              total: idata.total, year: idata.year});
+              total: idata.total});
           }
           this.mdbTable.setDataSource(this.elements);
           this.elements = this.mdbTable.getDataSource();
@@ -71,36 +70,36 @@ export class EstimateListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.elements = this.mdbTable.getDataSource();
     }
     if (this.searchText) {
-      this.elements = this.mdbTable.searchLocalDataByMultipleFields(this.searchText, ['invoice_number',
-        'data', 'customer_name', 'company_name', 'total', 'year' ]);
+      this.elements = this.mdbTable.searchLocalDataByMultipleFields(this.searchText, ['estimate_number',
+        'data', 'customer_name', 'company_name', 'total' ]);
       this.mdbTable.setDataSource(prev);
     }
   }
-  onModalShow(invoiceNumber, invoiceIndex, invoiceID) {
-    this.invoiceNumber = invoiceNumber;
-    this.invoiceIndex = invoiceIndex;
-    this.invoiceId = invoiceID;
+  onModalShow(estimateNumber, estimateIndex, estimateID) {
+    this.estimateNumber = estimateNumber;
+    this.estimateIndex = estimateIndex;
+    this.estimateId = estimateID;
     jQuery('#modalMessage').modal('show');
   }
-  onDeleteInvoice(index, id, invoiceNumber) {
+  onDeleteInvoice(index, id, estimateNumber) {
     jQuery('#modalMessage').modal('hide');
     this.mdbTable.removeRow(index);
     const idJson = '{ "id" : "' + id + '" }';
-    const invoiceIDJson = '{ "invoice_id" : "' + id + '" }';
-    this.subscribe = this.invoiceService.invoiceDelete(idJson).subscribe(
+    const estimateIDJson = '{ "estimate_id" : "' + id + '" }';
+    this.subscribe = this.estimateService.estimateDelete(idJson).subscribe(
         (response) => {
           if (response['message'] === 'SUCCESS') {
-            this.subscribe = this.invoiceRowsService.invoiceRowsDelete(invoiceIDJson).subscribe(
+            this.subscribe = this.estimateRowsService.estimateRowsDelete(estimateIDJson).subscribe(
                 (responseRows) => {
                   if (responseRows['message'] === 'SUCCESS') {
-                    this.deleteMessageText = 'Invoice #' + invoiceNumber + ' has been deleted successfully';
+                    this.deleteMessageText = 'Estimate #' + estimateNumber + ' has been deleted successfully';
                     this.deleteMessageStatus = true;
                     setTimeout(() => {
                       this.deleteMessageStatus = false;
                     }, 2000);
                   }
                 }, (e) => {
-                  this.deleteMessageText = 'Invoice #' + invoiceNumber + ' has been deleted successfully, but some related' +
+                  this.deleteMessageText = 'Invoice #' + estimateNumber + ' has been deleted successfully, but some related' +
                       'related records have not been deleted yet, contact ADMINISTRATOR';
                   this.deleteMessageStatus = true;
                   setTimeout(() => {
@@ -108,11 +107,11 @@ export class EstimateListComponent implements OnInit, AfterViewInit, OnDestroy {
                   }, 2000);
                 }
             );
-            this.ics.deleteInvoiceCustomSetting(invoiceIDJson).subscribe(
+            this.ecs.deleteEstimateCustomSetting(estimateIDJson).subscribe(
                 (delResponse) => {
 
                 }, () => {
-                  this.deleteMessageText = 'Invoice #' + invoiceNumber + ' setting record has not been deleted';
+                  this.deleteMessageText = 'Estimate #' + estimateNumber + ' setting record has not been deleted';
                   this.deleteMessageStatus = true;
                   setTimeout(() => {
                     this.deleteMessageStatus = false;
@@ -121,7 +120,7 @@ export class EstimateListComponent implements OnInit, AfterViewInit, OnDestroy {
             );
           }
         }, (e) => {
-          this.deleteMessageText = 'Due to technical issue invoice #' + invoiceNumber + ' has not been deleted.';
+          this.deleteMessageText = 'Due to technical issue invoice #' + estimateNumber + ' has not been deleted.';
           this.deleteMessageStatus = true;
           setTimeout(() => {
             this.deleteMessageStatus = false;
@@ -130,6 +129,6 @@ export class EstimateListComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
   onAddNew() {
-    this.router.navigate(['invoice/new']);
+    this.router.navigate(['estimate/new']);
   }
 }

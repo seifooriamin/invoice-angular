@@ -27,8 +27,12 @@
     $estimate->date = $data->date;
     $estimate->customer_id = $data->customer_id;
     $estimate->company_id = $data->company_id;
-    $estimate->total_price = $data->total_price;
-    $estimate->gst = $data->gst;
+    $estimate->addition1 = $data->addition1;
+    $estimate->addition2 = $data->addition2;
+    $estimate->addition3 = $data->addition3;
+    $estimate->deduction1 = $data->deduction1;
+    $estimate->deduction2 = $data->deduction2;
+    $estimate->note = $data->note;
     $estimate->user_id = $data->user_id;
 
     // update the product
@@ -38,7 +42,7 @@
         http_response_code(200);
 
         // tell the user
-        echo json_encode(array("message" => "Estimate Information has been updated."));
+        echo json_encode(array("message" => "SUCCESS"));
     }
 
     // if unable to update the product, tell the user
@@ -48,6 +52,6 @@
         http_response_code(503);
 
         // tell the user
-        echo json_encode(array("message" => "Unable to update estimate information."));
+        echo json_encode(array("message" => "FAIL"));
     }
 ?>

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {CompanyModel} from '../models/company.model';
 import {environment} from '../../../environments/environment';
 import {InvoiceModel} from '../models/invoice.model';
 
@@ -11,7 +10,7 @@ export class InvoiceService {
 
   constructor(private httpClient: HttpClient) { }
   invoiceReadByUser(userId) {
-    return this.httpClient.post<Array<CompanyModel>>
+    return this.httpClient.post<Array<InvoiceModel>>
     (`${environment.apiUrl}invoice/readbyuser`, userId, {responseType: 'json'});
   }
   invoiceDelete(id) {

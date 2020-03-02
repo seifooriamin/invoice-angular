@@ -1,0 +1,32 @@
+export class EstimateModel {
+    id: number;
+    estimate_number: string;
+    date: Date;
+    customer_id: number;
+    customer_name: string;
+    customer_address: string;
+    customer_phone: string;
+    customer_email: string;
+    company_id: number;
+    company_name: string;
+    company_address: string;
+    company_phone: string;
+    company_email: string;
+    company_website: string;
+    company_business_no: string;
+    company_gst_no: string;
+    company_logo_link: string;
+    sub_total: number;
+    addition1: number;
+    addition2: number;
+    addition3: number;
+    deduction1: number;
+    deduction2: number;
+    total: number;
+    note: string;
+    created: Date;
+    modified: Date;
+    user_id: number;
+    user_first_name: string;
+    user_last_name: string;
+}

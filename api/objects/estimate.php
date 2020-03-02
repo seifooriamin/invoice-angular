@@ -7,10 +7,13 @@ class Estimate
     private $table_name="estimate";
 
     public $id;
+    public $estimate_number;
     public $date;
     public $customer_id;
     public $customer_name;
     public $customer_address;
+    public $customer_phone;
+    public $customer_email;
     public $company_id;
     public $company_name;
     public $company_address;
@@ -20,8 +23,14 @@ class Estimate
     public $company_business_no;
     public $company_gst_no;
     public $company_logo_link;
-    public $total_price;
-    public $gst;
+    public $sub_total;
+    public $addition1;
+    public $addition2;
+    public $addition3;
+    public $deduction1;
+    public $deduction2;
+    public $total;
+    public $note;
     public $created;
     public $user_id;
     public $user_first_name;
@@ -32,12 +41,16 @@ class Estimate
         $this->conn=$db;
     }
 
-    function read(){
-        $query="SELECT u.first_name as user_first_name, u.last_name as user_last_name, cu.name as customer_name, cu.address as customer_address,
+    function readByUser(){
+        $query="SELECT u.first_name as user_first_name, u.last_name as user_last_name, cu.name as customer_name,
+                       cu.address as customer_address, cu.phone as customer_phone, cu.email as customer_email,
                        co.name as company_name, co.address as company_address, co.email as company_email, co.phone as company_phone,
                        co.business_no as company_business_no, co.gst_no as company_gst_no, co.website as company_website,
-                       co.logo_link as company_logo_link, e.id, e.date, e.company_id, e.customer_id, e.total_price,
-                       e.gst, e.created, e.user_id
+                       co.logo_link as company_logo_link, e.id, e.estimate_number, e.date, e.company_id, e.customer_id,
+                       e.addition1, e.addition2, e.addition3, e.deduction1, e.deduction2, e.note, e.created, e.user_id,
+                       (SELECT SUM((quantity*unit_price)) FROM estimate_rows er WHERE e.id = er.estimate_id) as sub_total,
+                       ((SELECT SUM((quantity*unit_price)) FROM estimate_rows er WHERE e.id = er.estimate_id)-
+                       (e.deduction1+e.deduction2)+(e.addition1+e.addition2+e.addition3)) as total
                 FROM " . $this->table_name . " e
                 LEFT JOIN
                     users u
@@ -47,47 +60,16 @@ class Estimate
                     ON e.customer_id=cu.id
                 LEFT JOIN
                     companies co
-                    ON e.company_id=co.id        
+                    ON e.company_id=co.id
+                WHERE e.user_id = ?    
+                GROUP BY e.id            
                 ORDER BY e.created DESC";
         $stmt=$this->conn->prepare($query);
+        $stmt->bindParam(1, $this->user_id);
         $stmt->execute();
+//        $errors = $stmt->errorInfo();
+//        echo($errors[2]);
         return $stmt;
-    }
-
-    function count(){
-        $query="SELECT COUNT(*) as total_rows FROM " . $this->table_name . "";
-        $stmt=$this->conn->prepare($query);
-
-        $stmt->execute();
-        $row=$stmt->fetch(PDO::FETCH_ASSOC);
-        return $row["total_rows"];
-
-    }
-
-    function count_search($keywords){
-        $query="SELECT COUNT(*) as total_rows FROM " . $this->table_name . " e
-                    LEFT JOIN
-                        users u
-                        ON e.user_id=u.id
-                    LEFT JOIN
-                        customers cu
-                        ON e.customer_id=cu.id
-                    LEFT JOIN
-                        companies co
-                        ON e.company_id=co.id    
-                    WHERE
-                        cu.name LIKE ? OR co.name LIKE ?";
-        $stmt=$this->conn->prepare($query);
-
-        $keywords=htmlspecialchars(strip_tags($keywords));
-        $keywords = "%{$keywords}%";
-
-        $stmt->bindParam(1, $keywords);
-        $stmt->bindParam(2, $keywords);
-
-        $stmt->execute();
-        $row=$stmt->fetch(PDO::FETCH_ASSOC);
-        return $row["total_rows"];
     }
 
     function create(){
@@ -96,50 +78,75 @@ class Estimate
         $query = "INSERT INTO
                         " . $this->table_name . "
                     SET
+                        estimate_number=:estimate_number,
                         date=:date,
                         customer_id=:customer_id,
                         company_id=:company_id,
-                        total_price=:total_price,
-                        gst=:gst,
+                        addition1=:addition1,
+                        addition2=:addition2,
+                        addition3=:addition3,
+                        deduction1=:deduction1,
+                        deduction2=:deduction2,
+                        note=:note,
                         user_id=:user_id";
 
         // prepare query
         $stmt = $this->conn->prepare($query);
 
         // sanitize
+        $this->estimate_number=htmlspecialchars(strip_tags($this->estimate_number));
         $this->date=htmlspecialchars(strip_tags($this->date));
         $this->customer_id=htmlspecialchars(strip_tags($this->customer_id));
         $this->company_id=htmlspecialchars(strip_tags($this->company_id));
-        $this->total_price=htmlspecialchars(strip_tags($this->total_price));
-        $this->gst=htmlspecialchars(strip_tags($this->gst));
+        $this->addition1=htmlspecialchars(strip_tags($this->addition1));
+        $this->addition2=htmlspecialchars(strip_tags($this->addition2));
+        $this->addition3=htmlspecialchars(strip_tags($this->addition3));
+        $this->deduction1=htmlspecialchars(strip_tags($this->deduction1));
+        $this->deduction2=htmlspecialchars(strip_tags($this->deduction2));
+        $this->note=htmlspecialchars(strip_tags($this->note));
         $this->user_id=htmlspecialchars(strip_tags($this->user_id));
 
-
         // bind values
+        $stmt->bindParam(":estimate_number", $this->estimate_number);
         $stmt->bindParam(":date", $this->date);
         $stmt->bindParam(":customer_id", $this->customer_id);
         $stmt->bindParam(":company_id", $this->company_id);
-        $stmt->bindParam(":total_price", $this->total_price);
-        $stmt->bindParam(":gst", $this->gst);
+        $stmt->bindParam(":addition1", $this->addition1);
+        $stmt->bindParam(":addition2", $this->addition2);
+        $stmt->bindParam(":addition3", $this->addition3);
+        $stmt->bindParam(":deduction1", $this->deduction1);
+        $stmt->bindParam(":deduction2", $this->deduction2);
+        $stmt->bindParam(":note", $this->note);
         $stmt->bindParam(":user_id", $this->user_id);
 
         // execute query
         if($stmt->execute()){
             return true;
         }
-
+        $errors = $stmt->errorInfo();
+        echo($errors[2]);
         return false;
 
-    }
 
+    }
+    function getEstimateNumber(){
+        $query="SELECT estimate_number, id FROM ". $this->table_name .  " WHERE user_id = ? ORDER BY id DESC LIMIT 1";
+
+        $stmt=$this->conn->prepare($query);
+        $stmt->bindParam(1, $this->user_id);
+        $stmt->execute();
+        $row=$stmt->fetch(PDO::FETCH_ASSOC);
+        $this->estimate_number = $row["estimate_number"];
+        $this->id = $row["id"];
+    }
     function readOne(){
 
         // query to read single record
         $query = "SELECT u.first_name as user_first_name, u.last_name as user_last_name, cu.name as customer_name, cu.address as customer_address,
                        co.name as company_name, co.address as company_address, co.email as company_email, co.phone as company_phone,
                        co.business_no as company_business_no, co.gst_no as company_gst_no, co.website as company_website,
-                       co.logo_link as company_logo_link, e.id, e.date, e.company_id, e.customer_id, e.total_price,
-                       e.gst, e.created, e.user_id
+                       co.logo_link as company_logo_link, e.id, e.estimate_number, e.date, e.company_id, e.customer_id,
+                       e.addition1, e.addition2, e.addition3, e.deduction1, e.deduction2, e.note, e.created, e.user_id
                 FROM " . $this->table_name . " e
                 LEFT JOIN
                     users u
@@ -168,6 +175,7 @@ class Estimate
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // set values to object properties
+        $this->estimate_number = $row['estimate_number'];
         $this->date = $row['date'];
         $this->customer_id = $row['customer_id'];
         $this->customer_name = $row['customer_name'];
@@ -181,14 +189,18 @@ class Estimate
         $this->company_gst_no = $row['company_gst_no'];
         $this->company_website = $row['company_website'];
         $this->company_logo_link = $row['company_logo_link'];
-        $this->total_price = $row['total_price'];
-        $this->gst = $row['gst'];
+        $this->addition1 = $row['addition1'];
+        $this->addition2 = $row['addition2'];
+        $this->addition3 = $row['addition3'];
+        $this->deduction1 = $row['deduction1'];
+        $this->deduction2 = $row['deduction2'];
+        $this->note = $row['note'];
         $this->created = $row['created'];
         $this->user_id = $row['user_id'];
         $this->user_first_name = $row['user_first_name'];
         $this->user_last_name = $row['user_last_name'];
-    }
 
+    }
     function update(){
 
         // update query
@@ -196,8 +208,12 @@ class Estimate
                         date = :date,
                         customer_id = :customer_id,
                         company_id = :company_id,
-                        total_price = :total_price,
-                        gst = :gst,
+                        addition1 = :addition1,
+                        addition2 = :addition2,
+                        addition3 = :addition3,
+                        deduction1 = :deduction1,
+                        deduction2 = :deduction2,
+                        note = :note,
                         user_id = :user_id
                     WHERE
                         id = :id";
@@ -209,8 +225,12 @@ class Estimate
         $this->date=htmlspecialchars(strip_tags($this->date));
         $this->customer_id=htmlspecialchars(strip_tags($this->customer_id));
         $this->company_id=htmlspecialchars(strip_tags($this->company_id));
-        $this->total_price=htmlspecialchars(strip_tags($this->total_price));
-        $this->gst=htmlspecialchars(strip_tags($this->gst));
+        $this->addition1=htmlspecialchars(strip_tags($this->addition1));
+        $this->addition2=htmlspecialchars(strip_tags($this->addition2));
+        $this->addition3=htmlspecialchars(strip_tags($this->addition3));
+        $this->deduction1=htmlspecialchars(strip_tags($this->deduction1));
+        $this->deduction2=htmlspecialchars(strip_tags($this->deduction2));
+        $this->note=htmlspecialchars(strip_tags($this->note));
         $this->user_id=htmlspecialchars(strip_tags($this->user_id));
         $this->id=htmlspecialchars(strip_tags($this->id));
 
@@ -218,8 +238,12 @@ class Estimate
         $stmt->bindParam(":date", $this->date);
         $stmt->bindParam(":customer_id", $this->customer_id);
         $stmt->bindParam(":company_id", $this->company_id);
-        $stmt->bindParam(":total_price", $this->total_price);
-        $stmt->bindParam(":gst", $this->gst);
+        $stmt->bindParam(":addition1", $this->addition1);
+        $stmt->bindParam(":addition2", $this->addition2);
+        $stmt->bindParam(":addition3", $this->addition3);
+        $stmt->bindParam(":deduction1", $this->deduction1);
+        $stmt->bindParam(":deduction2", $this->deduction2);
+        $stmt->bindParam(":note", $this->note);
         $stmt->bindParam(":user_id", $this->user_id);
         $stmt->bindParam(":id", $this->id);
 
@@ -230,7 +254,6 @@ class Estimate
 
         return false;
     }
-
     function delete(){
 
         // delete query
@@ -254,84 +277,4 @@ class Estimate
 
     }
 
-    function search($keywords,$from_record_num, $records_per_page){
-
-        // select all query
-        $query = "SELECT u.first_name as user_first_name, u.last_name as user_last_name, cu.name as customer_name, cu.address as customer_address,
-                       co.name as company_name, co.address as company_address, co.email as company_email, co.phone as company_phone,
-                       co.business_no as company_business_no, co.gst_no as company_gst_no, co.website as company_website,
-                       co.logo_link as company_logo_link, e.id, e.date, e.company_id, e.customer_id, e.total_price,
-                       e.gst, e.created, e.user_id
-                    FROM
-                        " . $this->table_name . " e
-                    LEFT JOIN
-                        users u
-                        ON e.user_id=u.id
-                    LEFT JOIN
-                        customers cu
-                        ON e.customer_id=cu.id
-                    LEFT JOIN
-                        companies co
-                        ON e.company_id=co.id    
-                    WHERE
-                        cu.name LIKE ? OR co.name LIKE ?
-                    ORDER BY
-                        e.created DESC
-                        LIMIT ?, ?";
-
-        // prepare query statement
-        $stmt = $this->conn->prepare($query);
-
-        // sanitize
-        $keywords=htmlspecialchars(strip_tags($keywords));
-        $keywords = "%{$keywords}%";
-
-        // bind
-        $stmt->bindParam(1, $keywords);
-        $stmt->bindParam(2, $keywords);
-        $stmt->bindParam(3, $from_record_num, PDO::PARAM_INT);
-        $stmt->bindParam(4, $records_per_page, PDO::PARAM_INT);
-
-        // execute query
-        $stmt->execute();
-
-        return $stmt;
-    }
-
-    function readPaging($from_record_num, $records_per_page){
-
-        // select query
-        $query = "SELECT
-                       u.first_name as user_first_name, u.last_name as user_last_name, cu.name as customer_name, cu.address as customer_address,
-                       co.name as company_name, co.address as company_address, co.email as company_email, co.phone as company_phone,
-                       co.business_no as company_business_no, co.gst_no as company_gst_no, co.website as company_website,
-                       co.logo_link as company_logo_link, e.id, e.date, e.company_id, e.customer_id, e.total_price,
-                       e.gst, e.created, e.user_id
-                    FROM
-                        " . $this->table_name . " e
-                   LEFT JOIN
-                    users u
-                    ON e.user_id=u.id
-                   LEFT JOIN
-                    customers cu
-                    ON e.customer_id=cu.id
-                   LEFT JOIN
-                    companies co
-                    ON e.company_id=co.id   
-                    ORDER BY e.created DESC
-                    LIMIT ?, ?";
-
-        // prepare query statement
-        $stmt = $this->conn->prepare( $query );
-
-        // bind variable values
-        $stmt->bindParam(1, $from_record_num, PDO::PARAM_INT);
-        $stmt->bindParam(2, $records_per_page, PDO::PARAM_INT);
-
-        // execute query
-        $stmt->execute();
-
-        // return values from database
-        return $stmt;
-    }
 }

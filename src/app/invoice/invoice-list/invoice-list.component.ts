@@ -18,7 +18,7 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
   elements: any = [];
   previous: any = [];
-  data: InvoiceModel[];
+  // data: InvoiceModel[];
   currentUser: any;
   subscribe: Subscription;
   searchText = '';
@@ -34,8 +34,8 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId: string = '{ "user_id" : "' + this.currentUser['id'] + '" }';
     this.subscribe = this.invoiceService.invoiceReadByUser(userId).subscribe(
-        (records: Array<CustomerModel>) => {
-          this.data = records['records'];
+        (records: Array<InvoiceModel>) => {
+          // this.data = records['records'];
           for (const idata of records['records']) {
             this.elements.push({id: idata.id, invoice_number: idata.invoice_number,
               date: idata.date, customer_name: idata.customer_name, company_name: idata.company_name,

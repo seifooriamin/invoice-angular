@@ -17,18 +17,16 @@ import {CurrencyModel} from '../../shared/models/currency.model';
 import {CurrencyService} from '../../shared/services/currency.service';
 import {InvoiceCustomSettingService} from '../../shared/services/invoice-custom-setting.service';
 import {InvoiceRowsModel} from '../../shared/models/invoice-rows.model';
-import {InvoiceCustomSettingModel} from '../../shared/models/invoice-custom-setting.model';
 import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {InvoiceModel} from '../../shared/models/invoice.model';
-import {log} from 'util';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 declare var jQuery: any;
 
 @Component({
   selector: 'app-invoice-add-view-modify',
   templateUrl: './invoice-add-view-modify.component.html',
-  styleUrls: ['./invoice-add-view-modify.component.css'],
+  styleUrls: ['../../app.component.css'],
 })
 export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   id = 0;
@@ -70,6 +68,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   invoiceSettingElements: InvoiceGeneralSettingModel = {
     id: 0,
     invoice_id: 0,
+    estimate_id: 0,
     user_id: 0,
     currency: '',
     created: this.date,
@@ -160,6 +159,11 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
       this.fillInvoiceRowsForm();
     }
   }
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
   async fillInvoiceForm() {
     this.subscription = this.invoiceService.invoiceByID(this.id).subscribe(
         (response) => {
@@ -210,7 +214,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   }
   async fillInvoiceSettingForm() {
     this.subscription = this.ics.invoiceSettingByInvoiceID(this.id).subscribe(
-        (response: InvoiceCustomSettingModel) => {
+        (response: InvoiceGeneralSettingModel) => {
           this.settingForm.patchValue({
             currency: response.currency,
             id: response.id,
@@ -298,11 +302,6 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
           }
         }, (e) => {}
     );
-  }
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
   onRowTotal(index) {
     const unitPrice = this.s.at(index).get('unit_price').value;
@@ -1188,7 +1187,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
       const documentDefinition = this.getDocumentDefinition();
       pdfMake.createPdf(documentDefinition).open();
   }
-    onDownloadInvoice() {
+  onDownloadInvoice() {
         const documentDefinition = this.getDocumentDefinition();
         pdfMake.createPdf(documentDefinition).download(this.invoiceInfo.invoice_number + '_INVOICE');
     }

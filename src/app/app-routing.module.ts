@@ -21,7 +21,7 @@ import {EstimateAddViewModifyComponent} from './estimate/estimate-add-view-modif
 
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [AuthGuard]},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'company', component: CompanyComponent, canActivate: [AuthGuard], children: [
       {path: 'company-list', component: CompanyListComponent},

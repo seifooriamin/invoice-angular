@@ -17,27 +17,22 @@
     // prepare product object
     $estimate_rows = new Estimate_rows($db);
 
-    // set ID property of record to read
-    $estimate_rows->id = isset($_GET['id']) ? $_GET['id'] : die();
-
+    $data = json_decode(file_get_contents("php://input"));
+    $estimate_rows->user_id=$data->user_id;
     // read the details of product to be edited
-    $estimate_rows->readOne();
+    $stmt=$estimate_rows->getUnitMeasureText();
+    $num=$stmt->rowCount();
+    if($num>0){
+        $estimate_rows_arr=array();
+        $estimate_rows_arr["records"]=array();
 
-    if($estimate_rows->estimate_id!=null){
-        // create array
-        $estimate_rows_arr = array(
-            "id" => $estimate_rows->id,
-            "invoice_id" => $estimate_rows->estimate_id,
-            "inx" => $estimate_rows->inx,
-            "description" => $estimate_rows->description,
-            "comment" => $estimate_rows->comment,
-            "unit_price" => $estimate_rows->unit_price,
-            "unit_measure" => $estimate_rows->unit_measure,
-            "quantity" => $estimate_rows->quantity,
-            "created" => $estimate_rows->created,
-            "user_id" => $estimate_rows->user_id,
-        );
-
+        while ($row=$stmt->fetch(PDO::FETCH_ASSOC)) {
+            extract($row);
+            $estimate_rows_item = array(
+                "unit_measure" => $unit_measure
+            );
+            array_push($estimate_rows_arr["records"], $estimate_rows_item);
+        }
         // set response code - 200 OK
         http_response_code(200);
 
@@ -50,6 +45,6 @@
         http_response_code(404);
 
         // tell the user product does not exist
-        echo json_encode(array("message" => "estimate row does not exist."));
+        echo json_encode(array("message" => "FAIL"));
     }
 ?>
