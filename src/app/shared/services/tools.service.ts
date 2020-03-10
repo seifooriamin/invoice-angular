@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import {InvoiceService} from './invoice.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToolsService {
 
-  constructor(private invoiceService: InvoiceService) { }
+  constructor() { }
 
   imageAccept(imageType: string) {
     if ((imageType === 'image/gif') || (imageType === 'image/jpeg') || (imageType === 'image/png')) {

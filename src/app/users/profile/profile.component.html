@@ -1,0 +1,124 @@
+<ngx-loading-bar></ngx-loading-bar>
+<div class="container mt-4 bg-dark mb-4">
+    <div class="row pt-2">
+        <div class="col-lg-1 col-md-2 col-3">
+            <button type="button" class="btn btn-block btn-warning text-light "
+                    title="Back" (click)="onBack()"><i class="fas fa-arrow-circle-left fa-lg"></i></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h3 class="text-light pt-1">{{pageTitle}}</h3>
+        </div>
+    </div>
+    <form class="pl-2 pr-2 mt-1 bg-dark border-dark border" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <div class="border border-light">
+            <div class="form-row text-light pl-2 pr-2"> <!--First & Last Name block-->
+                <div class="form-group col-6">
+                    <label for="firstName" class="col-form-label">First Name*</label>
+                    <input type="text" class="form-control" id="firstName" formControlName="first_name"
+                           [ngClass]="{ 'is-invalid': f.first_name.touched && f.first_name.invalid,
+                                    'is-valid': f.first_name.valid}">
+                    <div *ngIf="f.first_name.touched && f.first_name.invalid" class="invalid-feedback">
+                        First name is mandatory and only alphabets are allowed (max 50 characters)
+                    </div>
+                    <input type="text" formControlName="id" hidden>
+                </div>
+                <div class="form-group col-6">
+                    <label for="lastName" class="col-form-label">Last Name*</label>
+                    <input type="email" class="form-control" id="lastName" formControlName="last_name"
+                           [ngClass]="{ 'is-invalid': f.last_name.touched && f.last_name.invalid,
+                                    'is-valid': f.last_name.valid}">
+                    <div *ngIf="f.last_name.touched && f.last_name.invalid" class="invalid-feedback">
+                        Last name is mandatory and only alphabets are allowed (max 50 characters)
+                    </div>
+                </div>
+            </div><!--First & Last Name block-->
+            <div class="form-row text-light pl-2 pr-2"> <!--Email Block-->
+                <div class="form-group col-6">
+                    <label for="email" class="col-form-label">Email</label>
+                    <input type="text" class="form-control" id="email" formControlName="email"
+                    [attr.disabled]="'disabled'">
+                </div>
+                <div class="form-group col-6">
+                    <label for="contactNumber" class="col-form-label">Contact Number</label>
+                    <input type="email" class="form-control" id="contactNumber" formControlName="contact_number"
+                           [ngClass]="{ 'is-invalid': f.contact_number.touched && f.contact_number.invalid,
+                                    'is-valid': f.contact_number.valid}">
+                    <div *ngIf="f.contact_number.touched && f.contact_number.invalid" class="invalid-feedback">
+                        Invalid phone number acceptable format +11111111111 (max 13 digit plus +)
+                    </div>
+                </div>
+            </div><!--Email & Contact Block-->
+            <div class="form-row text-light pl-2 pr-2"> <!--Address 1 Block-->
+                <div class="form-group col-12">
+                    <label for="address1" class="col-form-label">Address 1</label>
+                    <input type="text" class="form-control" id="address1" formControlName="address1"
+                           [ngClass]="{ 'is-invalid': f.address1.touched && f.address1.invalid,
+                                    'is-valid': f.address1.touched && f.address1.valid}">
+                    <div *ngIf="f.address1.touched && f.address1.invalid" class="invalid-feedback">
+                        Special characters are not allowed (max 100 characters)
+                    </div>
+                </div>
+            </div><!--Address 1 block-->
+            <div class="form-row text-light pl-2 pr-2"> <!--Address 2 Block-->
+                <div class="form-group col-12">
+                    <label for="address2" class="col-form-label">Address 2</label>
+                    <input type="text" class="form-control" id="address2" formControlName="address2"
+                           [ngClass]="{ 'is-invalid': f.address2.touched && f.address2.invalid,
+                                    'is-valid': f.address2.touched && f.address2.valid}">
+                    <div *ngIf="f.address2.touched && f.address2.invalid" class="invalid-feedback">
+                        Special characters are not allowed (max 100 characters)
+                    </div>
+                </div>
+            </div><!--Address 2 block-->
+            <div class="form-row text-light pl-2 pr-2"> <!--Country & Province Block-->
+                <div class="form-group col-6">
+                    <label class="col-form-label">Country</label>
+                    <mdb-select [filterEnabled]="true" [options]="iconsSelect" placeholder="Choose your option"
+                                class="form-control" formControlName="country"></mdb-select>
+                </div>
+                <div class="form-group col-6">
+                    <label for="province" class="col-form-label">Province</label>
+                    <input type="text" class="form-control" id="province" formControlName="province"
+                           [ngClass]="{ 'is-invalid': f.province.touched && f.province.invalid,
+                                    'is-valid': f.province.valid}">
+                    <div *ngIf="f.province.touched && f.province.invalid" class="invalid-feedback">
+                        Special characters are not allowed (max 50 characters)
+                    </div>
+                </div>
+            </div><!--Country & Province Block-->
+            <div class="form-row text-light pl-2 pr-2 mb-2"><!--City & Postal Code Block-->
+                <div class="form-group col-6">
+                    <label for="postalCode" class="col-form-label">Postal Code</label>
+                    <input type="email" class="form-control" id="postalCode" formControlName="postal_code"
+                           [ngClass]="{ 'is-invalid': f.postal_code.touched && f.postal_code.invalid,
+                                    'is-valid': f.postal_code.valid}">
+                    <div *ngIf="f.postal_code.touched && f.postal_code.invalid" class="invalid-feedback">
+                        Special characters are not allowed (max 10 characters)
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label for="city" class="col-form-label">City</label>
+                    <input type="email" class="form-control" id="city" formControlName="city"
+                           [ngClass]="{ 'is-invalid': f.city.touched && f.city.invalid,
+                                    'is-valid': f.city.valid}">
+                    <div *ngIf="f.city.touched && f.city.invalid" class="invalid-feedback">
+                        Special characters are not allowed (max 50 characters)
+                    </div>
+                </div>
+            </div><!--City & Postal Code Block-->
+        </div>
+            <div class="form-group row mt-1">
+                <div class="col-md-4 offset-md-4 col-sm-8 text-center">
+                    <button type="submit" class="btn btn-primary">Modify</button>
+                </div>
+                <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual col-md-4 col-sm-4 text-center">
+                    {{ submitMessage }}
+                </div>
+                <div *ngIf="submitMessageStatusSuccess" class="valid-feedback-manual col-md-4 col-sm-4 text-center">
+                    {{ submitMessage }}
+                </div>
+            </div>
+    </form>
+</div>

@@ -1,13 +1,18 @@
-import {Component, HostListener, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ToolsService} from './shared/services/tools.service';
+import {AuthGuard} from './shared/tools/auth.guard';
+import {ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import {AuthenticationService} from './shared/services/authentication.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnInit {
 
-  ngOnDestroy(): void {
+  constructor(private authenticationService: AuthenticationService) {}
+  ngOnInit(): void {
 
   }
 
@@ -23,5 +28,5 @@ export class AppComponent implements OnDestroy {
   //   localStorage.removeItem('jwt');
   // });
 
-  title = 'invoice-angular';
+  title = 'Easy Invoice Maker';
 }

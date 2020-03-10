@@ -20,7 +20,7 @@ export class CurrencyService {
   ];
   constructor() { }
 
-  getCurrency(): CurrencyModel[]{
+  getCurrency(): CurrencyModel[] {
     return this.cur;
   }
 }

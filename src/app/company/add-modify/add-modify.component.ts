@@ -13,7 +13,7 @@ import {environment} from '../../../environments/environment';
 @Component({
   selector: 'app-add-modify',
   templateUrl: './add-modify.component.html',
-  styleUrls: ['./add-modify.component.css']
+  styleUrls: ['../../../my-style.css']
 })
 export class AddModifyComponent implements OnInit, OnDestroy {
   fillForm: FormGroup;

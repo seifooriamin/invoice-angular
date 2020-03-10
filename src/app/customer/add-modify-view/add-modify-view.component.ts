@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs';
 @Component({
   selector: 'app-add-modify-view',
   templateUrl: './add-modify-view.component.html',
-  styleUrls: ['./add-modify-view.component.css']
+  styleUrls: ['../../../my-style.css']
 })
 export class AddModifyViewComponent implements OnInit, OnDestroy {
   fillForm: FormGroup;

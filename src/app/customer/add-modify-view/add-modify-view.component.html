@@ -18,57 +18,59 @@
         </div>
     </div>
     <form class="pl-2 pr-2 mt-1 bg-dark border-dark border" [formGroup]="fillForm" (ngSubmit)="onSubmit()">
-        <div class="form-row mt-2 text-light">
-            <div class="form-group col-8">
-                <label for="name" class="col-form-label">Customer Name</label>
-                <input type="text" class="form-control" id="name" formControlName="name"
-                       [ngClass]="{ 'is-invalid': f.name.touched && f.name.invalid,
+        <div class="border border-light">
+            <div class="form-row mt-2 text-light pl-2 pr-2">
+                <div class="form-group col-8">
+                    <label for="name" class="col-form-label">Customer Name</label>
+                    <input type="text" class="form-control" id="name" formControlName="name"
+                           [ngClass]="{ 'is-invalid': f.name.touched && f.name.invalid,
                                     'is-valid': f.name.touched && f.name.valid}" (change)="onSetUserId()"
-                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
-                <div *ngIf="f.name.touched && f.name.invalid" class="invalid-feedback">
-                    Customer name is a mandatory field
+                           [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                    <div *ngIf="f.name.touched && f.name.invalid" class="invalid-feedback">
+                        Customer name is a mandatory field
+                    </div>
+                    <input type="text" class="form-control" formControlName="user_id" hidden>
+                    <input type="text" class="form-control" formControlName="id" hidden>
                 </div>
-                <input type="text" class="form-control" formControlName="user_id" hidden>
-                <input type="text" class="form-control" formControlName="id" hidden>
             </div>
-        </div>
-        <div class="form-row text-light">
-            <div class="form-group col-12">
-                <label for="address" class="col-form-label">Address</label>
-                <input type="text" class="form-control" id="address" formControlName="address"
-                       [ngClass]="{ 'is-invalid': f.address.touched && f.address.invalid,
+            <div class="form-row text-light pl-2 pr-2">
+                <div class="form-group col-12">
+                    <label for="address" class="col-form-label">Address</label>
+                    <input type="text" class="form-control" id="address" formControlName="address"
+                           [ngClass]="{ 'is-invalid': f.address.touched && f.address.invalid,
                                     'is-valid': f.address.touched && f.address.valid}"
-                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
-                <div *ngIf="f.address.touched && f.address.invalid" class="invalid-feedback">
-                    Just alphabet and numbers allowed
+                           [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                    <div *ngIf="f.address.touched && f.address.invalid" class="invalid-feedback">
+                        Just alphabet and numbers are allowed
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="form-row text-light">
-            <div class="form-group col-6">
-                <label for="phone" class="col-form-label">Phone</label>
-                <input type="text" class="form-control" id="phone" formControlName="phone"
-                       [ngClass]="{ 'is-invalid': f.phone.touched && f.phone.invalid,
+            <div class="form-row text-light pl-2 pr-2 mb-2">
+                <div class="form-group col-6">
+                    <label for="phone" class="col-form-label">Phone</label>
+                    <input type="text" class="form-control" id="phone" formControlName="phone"
+                           [ngClass]="{ 'is-invalid': f.phone.touched && f.phone.invalid,
                                     'is-valid': f.phone.valid}"
-                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
-                <div *ngIf="f.phone.touched && f.phone.invalid" class="invalid-feedback">
-                    Invalid phone number acceptable format +11111111111 (max 13 digit plus +)
+                           [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                    <div *ngIf="f.phone.touched && f.phone.invalid" class="invalid-feedback">
+                        Invalid phone number acceptable format +11111111111 (max 13 digit plus +)
+                    </div>
                 </div>
-            </div>
-            <div class="form-group col-6">
-                <label for="email" class="col-form-label">Email</label>
-                <input type="email" class="form-control" id="email" formControlName="email"
-                       [ngClass]="{ 'is-invalid': f.email.touched && f.email.invalid,
+                <div class="form-group col-6">
+                    <label for="email" class="col-form-label">Email</label>
+                    <input type="email" class="form-control" id="email" formControlName="email"
+                           [ngClass]="{ 'is-invalid': f.email.touched && f.email.invalid,
                                     'is-valid': f.email.valid}"
-                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
-                <div *ngIf="f.email.touched && f.email.invalid" class="invalid-feedback">
-                    Invalid email format
+                           [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                    <div *ngIf="f.email.touched && f.email.invalid" class="invalid-feedback">
+                        Invalid email format
+                    </div>
                 </div>
             </div>
         </div>
         <div class="form-group row mt-1">
-            <div class="col-md-4 offset-md-4 col-sm-8 text-center">
-                <button type="submit" class="btn btn-primary"
+            <div class="col-md-2 offset-md-5 col-4 offset-4 text-center">
+                <button type="submit" class="btn btn-primary btn-block"
                         [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">{{pageStatus === 'modify' ? 'Modify' : 'Register'}}</button>
             </div>
             <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual col-md-4 col-sm-4 text-center">

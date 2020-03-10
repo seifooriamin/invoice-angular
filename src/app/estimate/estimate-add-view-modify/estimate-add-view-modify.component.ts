@@ -26,7 +26,7 @@ declare var jQuery: any;
 @Component({
   selector: 'app-estimate-add-view-modify',
   templateUrl: './estimate-add-view-modify.component.html',
-  styleUrls: ['../../app.component.css']
+  styleUrls: ['../../../my-style.css']
 })
 export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
   id = 0;

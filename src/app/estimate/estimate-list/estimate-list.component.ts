@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
+import {MdbTableDirective, MdbTablePaginationComponent} from 'node_modules/ng-uikit-pro-standard';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {EstimateModel} from '../../shared/models/estimate.model';
@@ -10,7 +10,7 @@ declare var jQuery: any;
 @Component({
   selector: 'app-estimate-list',
   templateUrl: './estimate-list.component.html',
-  styleUrls: ['../../app.component.css']
+  styleUrls: ['../../../my-style.css']
 })
 export class EstimateListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;

@@ -18,15 +18,32 @@ export class UserService {
     // return this.httpClient.post('http://www.einvoicemaker.com/invoice/api/users/create.php', data);
     return this.httpClient.post(`${environment.apiUrl}users/create.php`, data);
   }
+  userUpdate(data) {
+    return this.httpClient.patch(`${environment.apiUrl}users/update.php`, data);
+  }
   emailVerify(token) {
     // return this.httpClient.post('http://www.einvoicemaker.com/invoice/api/users/verify.php', token);
     return this.httpClient.post(`${environment.apiUrl}users/verify.php`, token);
   }
+  // Checking whether JWT is valid or not
   tokenCheck(token) {
     // return this.httpClient.post('http://www.einvoicemaker.com/invoice/api/users/validate_token.php', token);
     return this.httpClient.post(`${environment.apiUrl}users/validate_token.php`, token);
   }
+  // To be used for create new user General Setting file
   getLastUserID() {
     return this.httpClient.get(`${environment.apiUrl}users/getlastuserid.php`);
+  }
+  getUserByID(data) {
+    return this.httpClient.post(`${environment.apiUrl}users/read_one`, data);
+  }
+  changePassword(data) {
+    return this.httpClient.patch(`${environment.apiUrl}users/change_password`, data);
+  }
+  checkOldEmail(data) {
+    return this.httpClient.post(`${environment.apiUrl}users/password_check`, data);
+  }
+  emailSender(data) {
+    return this.httpClient.post(`${environment.apiUrl}libs/email_sender/mailsender`, data);
   }
 }

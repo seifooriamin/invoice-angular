@@ -1,17 +1,16 @@
 import {AfterViewInit, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
+import {MdbTableDirective, MdbTablePaginationComponent} from 'node_modules/ng-uikit-pro-standard';
 import {Subscription} from 'rxjs';
 import {InvoiceModel} from '../../shared/models/invoice.model';
 import {Router} from '@angular/router';
 import {InvoiceService} from '../../shared/services/invoice.service';
-import {CustomerModel} from '../../shared/models/customer.model';
 import {InvoiceRowsService} from '../../shared/services/invoice-rows.service';
 import {InvoiceCustomSettingService} from '../../shared/services/invoice-custom-setting.service';
 declare var jQuery: any;
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoice-list.component.html',
-  styleUrls: ['../../app.component.css']
+  styleUrls: ['../../../my-style.css']
 })
 export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;

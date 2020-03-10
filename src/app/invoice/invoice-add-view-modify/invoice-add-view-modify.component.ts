@@ -26,7 +26,7 @@ declare var jQuery: any;
 @Component({
   selector: 'app-invoice-add-view-modify',
   templateUrl: './invoice-add-view-modify.component.html',
-  styleUrls: ['../../app.component.css'],
+  styleUrls: ['../../../my-style.css'],
 })
 export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   id = 0;

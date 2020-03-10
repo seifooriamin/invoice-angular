@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
+import {MdbTableDirective, MdbTablePaginationComponent} from 'node_modules/ng-uikit-pro-standard';
 import {CompanyModel} from '../../shared/models/company.model';
 import {Router} from '@angular/router';
 import {CustomerService} from '../../shared/services/customer.service';
@@ -9,7 +9,7 @@ declare var jQuery: any;
 @Component({
   selector: 'app-customer-list',
   templateUrl: './customer-list.component.html',
-  styleUrls: ['./customer-list.component.css']
+  styleUrls: ['../../../my-style.css']
 })
 export class CustomerListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;

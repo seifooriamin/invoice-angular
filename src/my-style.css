@@ -1,0 +1,70 @@
+/* You can add global styles to this file, and also import other style files */
+h1,h2,h3,h4,h5,h6{
+    font-family: "Helvetica Neue";
+}
+body{
+    overflow: hidden !important;
+}
+.dropdown-menu {
+    margin: 0.01rem 0 0 !important;
+}
+.submenu-color {
+    background-color: #17a2b8 !important;
+}
+.submenu-item-color {
+    color: rgba(255, 255, 255, 0.5) !important;
+    background-color: #17a2b8 !important;
+}
+.submenu-item-color:hover{
+    color: rgba(255, 255, 255, 0.75) !important;
+    background-color: #117888 !important;
+}
+.dropdown-item:active .dropdown-item.active {
+    color: rgba(255, 255, 255, 0.75) !important;
+    background-color: #117888 !important;
+}
+.nav-link:hover{
+    background-color: #117888 !important;
+}
+.nav-item.active{
+    background-color: #117888 !important;
+}
+table tbody tr:nth-child(even) {
+    background-color: #e6e6e5 !important;
+}
+.invalid-feedback-manual{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+th{
+    cursor: pointer;
+}
+.my-popover-class{
+    background: #DCE9F6;
+    font-size: 50%;
+}
+.my-popover-class .arrow::after {
+    border-top-color: #DCE9F6;
+}
+.valid-feedback-manual{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #28a745;
+}
+ul li a {
+    cursor: pointer;
+}
+.container-full-page{
+    background-color: #737373 !important;
+    height: 100vh;
+}
+.border-color{
+    border-color: #737373 !important;
+}
+.img-box{
+    height: 80px;
+}
+

@@ -1,4 +1,5 @@
 <?php
+
 class Utils{
 
     
@@ -12,7 +13,6 @@ class Utils{
     }
     return $token;
 }
- 
     function crypto_rand_secure($min, $max) {
         $range = $max - $min;
         if ($range < 0) return $min; // not so random...
@@ -26,8 +26,6 @@ class Utils{
         } while ($rnd >= $range);
         return $min + $rnd;
     }
-    
-    // send email using built in php mailer
     public function sendEmailViaPhpMail($send_to_email, $subject, $body){
 
         $from_name="NO-REPLY";
@@ -44,6 +42,6 @@ class Utils{
 //        }
         return true;
     }
- 
+
 }
 ?>

@@ -143,8 +143,6 @@ class Customers
         $this->created = $row['created'];
     }
     function update(){
-
-        // update query
         $query = "UPDATE
                         " . $this->table_name . "
                     SET

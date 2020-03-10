@@ -40,7 +40,7 @@
     $decryption_key = "AminSeifooriPegahMaktabi";
     // generate jwt will be here
     // check if email exists and if password is correct
-    if($email_exists && $email_validated && password_verify($data->password, $user->password )){
+    if($email_exists && $email_validated && password_verify($data->password, $user->password)){
 
         $token = array(
            "iss" => $iss,
@@ -53,7 +53,8 @@
                "last_name" => $user->last_name,
                "email" => $user->email,
                "access_code" => $user->access_code,
-               "access_level" => $user->access_level
+               "access_level" => $user->access_level,
+               "password" => $user->password
            )
         );
 
@@ -69,6 +70,7 @@
                     "access_level" => openssl_decrypt($user->access_level, $ciphering,$decryption_key, $options, $decryption_iv),
                     "first_name" => $user->first_name,
                     "last_name" => $user->last_name,
+                    "email" => $user->email,
                     "id" => $user->id
                 )
             );

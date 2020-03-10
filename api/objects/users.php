@@ -76,7 +76,6 @@
             // return false if email does not exist in the database
             return false;
         }
-
         function emailValidated(){
 
             // query to check if email exists
@@ -110,12 +109,7 @@
             // return false if email does not exist in the database
             return false;
         }
-
-        // create new user record
         function create(){
-
-
-            // insert query
             $query = "INSERT INTO " . $this->table_name . "
                 SET
             first_name = :first_name,
@@ -192,7 +186,6 @@
             $row=$stmt->fetch(PDO::FETCH_ASSOC);
             return $row["ID"];
         }
-        // read all user records
         function readAll($from_record_num, $records_per_page){
 
             // query to read all user records, with limit clause for pagination
@@ -221,12 +214,10 @@
             // return values
             return $stmt;
         }
-
-        // used for paging users
         public function countAll(){
 
             // query to select all user records
-            $query = "SELECT id FROM " . $this->table_name . "";
+            $query = "SELECT id FROM " . $this->table_name . " ";
 
             // prepare query statement
             $stmt = $this->conn->prepare($query);
@@ -240,8 +231,6 @@
             // return row count
             return $num;
         }
-
-        // used in email verification feature
         function updateStatusByAccessCode(){
 
             // update query
@@ -267,8 +256,6 @@
 
             return false;
         }
-
-        // check if given access_code exist in the database
         function accessCodeExists(){
 
             // query to check if access_code exists
@@ -303,7 +290,6 @@
             return false;
 
         }
-        // used in forgot password feature
         function updateAccessCode(){
 
             // update query
@@ -332,7 +318,6 @@
 
             return false;
         }
-        // used in forgot password feature
         function updatePassword(){
 
             // update query
@@ -358,6 +343,100 @@
             }
 
             return false;
+        }
+        function readByID() {
+            $query = "SELECT * FROM " . $this->table_name . " WHERE id = ? LIMIT 0,1";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(1, $this->id);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $this->first_name = $row['first_name'];
+            $this->last_name = $row['last_name'];
+            $this->email = $row['email'];
+            $this->address1 = $row['address1'];
+            $this->address2 = $row['address2'];
+            $this->city = $row['city'];
+            $this->province = $row['province'];
+            $this->country = $row['country'];
+            $this->postal_code = $row['postal_code'];
+            $this->contact_number = $row['contact_number'];
+        }
+        function update() {
+            $query = "UPDATE
+                        " . $this->table_name . "
+                    SET
+                        first_name = :first_name,
+                        last_name = :last_name,
+                        contact_number = :contact_number,
+                        address1 = :address1,
+                        address2 = :address2,
+                        city = :city,
+                        province = :province,
+                        country = :country,
+                        postal_code = :postal_code
+                    WHERE
+                        id = :id";
+
+            // prepare query statement
+            $stmt = $this->conn->prepare($query);
+
+            // sanitize
+            $this->first_name=htmlspecialchars(strip_tags($this->first_name));
+            $this->last_name=htmlspecialchars(strip_tags($this->last_name));
+            $this->contact_number=htmlspecialchars(strip_tags($this->contact_number));
+            $this->address1=htmlspecialchars(strip_tags($this->address1));
+            $this->address2=htmlspecialchars(strip_tags($this->address2));
+            $this->city=htmlspecialchars(strip_tags($this->city));
+            $this->province=htmlspecialchars(strip_tags($this->province));
+            $this->country=htmlspecialchars(strip_tags($this->country));
+            $this->postal_code=htmlspecialchars(strip_tags($this->postal_code));
+            $this->id=htmlspecialchars(strip_tags($this->id));
+
+            // bind new values
+            $stmt->bindParam(':first_name', $this->first_name);
+            $stmt->bindParam(':last_name', $this->last_name);
+            $stmt->bindParam(':contact_number', $this->contact_number);
+            $stmt->bindParam(':address1', $this->address1);
+            $stmt->bindParam(':address2', $this->address2);
+            $stmt->bindParam(':city', $this->city);
+            $stmt->bindParam(':province', $this->province);
+            $stmt->bindParam(':country', $this->country);
+            $stmt->bindParam(':postal_code', $this->postal_code);
+            $stmt->bindParam(':id', $this->id);
+
+            // execute the query
+            if($stmt->execute()){
+                return true;
+            }
+//            $errors = $stmt->errorInfo();
+//            echo($errors[2]);
+            return false;
+
+        }
+        function changePassword() {
+            $query = "UPDATE " . $this->table_name . " SET password=:password WHERE id=:id";
+            $stmt = $this->conn->prepare($query);
+
+            $this->id = htmlspecialchars(strip_tags($this->id));
+            $this->password = htmlspecialchars(strip_tags($this->password));
+
+            $stmt->bindParam(':id', $this->id);
+            $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
+            $stmt->bindParam(':password', $password_hash);
+
+            if($stmt->execute()) {
+                return true;
+            }
+            return false;
+        }
+        function passwordCheck() {
+            $query = "SELECT password FROM " . $this->table_name . " WHERE id=:id LIMIT 0,1";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':id', $this->id);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $this->password = $row['password'];
+
         }
 
 

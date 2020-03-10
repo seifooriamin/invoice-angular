@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
-  styleUrls: ['./company.component.css']
+  styleUrls: ['../../my-style.css']
 })
 export class CompanyComponent implements OnInit {
 

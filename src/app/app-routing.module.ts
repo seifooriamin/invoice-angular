@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {SigninComponent} from './signin/signin.component';
-import {SignupComponent} from './signup/signup.component';
-import {VerifyComponent} from './verify/verify.component';
+import {SigninComponent} from './users/signin/signin.component';
+import {SignupComponent} from './users/signup/signup.component';
+import {VerifyComponent} from './users/verify/verify.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {AuthGuard} from './shared/tools/auth.guard';
 import {UsersComponent} from './users/users.component';
@@ -18,6 +18,8 @@ import {InvoiceAddViewModifyComponent} from './invoice/invoice-add-view-modify/i
 import {EstimateComponent} from './estimate/estimate.component';
 import {EstimateListComponent} from './estimate/estimate-list/estimate-list.component';
 import {EstimateAddViewModifyComponent} from './estimate/estimate-add-view-modify/estimate-add-view-modify.component';
+import {ProfileComponent} from './users/profile/profile.component';
+
 
 
 const routes: Routes = [
@@ -51,10 +53,12 @@ const routes: Routes = [
       {path: ':id/modify', component: EstimateAddViewModifyComponent},
 
     ]},
-  {path: 'users', component: UsersComponent},
-  {path: 'signin', component: SigninComponent},
-  {path: 'signup', component: SignupComponent},
-  {path: 'verify', component: VerifyComponent},
+  {path: 'users', component: UsersComponent, children: [
+          {path: 'signin', component: SigninComponent},
+          {path: 'signup', component: SignupComponent},
+          {path: 'verify', component: VerifyComponent},
+          {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+    ]},
   {path: '**', redirectTo: ''},
 ];
 

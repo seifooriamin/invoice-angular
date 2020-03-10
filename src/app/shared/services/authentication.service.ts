@@ -48,7 +48,7 @@ export class AuthenticationService {
   public logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    this.router.navigate(['signin']);
+    this.router.navigate(['/users/signin']);
   }
    public get currentUserValue(): UserModel {
        return this.currentUserSubject.value;
@@ -57,7 +57,7 @@ export class AuthenticationService {
       const jTokenValue = JSON.parse(localStorage.getItem('currentUser'));
       const tokenValue = jTokenValue['jwt'];
 
-      const q = new Promise((resolve, reject) => {
+      const q = new Promise((resolve) => {
               if (!tokenValue) {
                   resolve('TE');
               } else {

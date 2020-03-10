@@ -8,14 +8,14 @@ export function CheckEmailExist(control: AbstractControl): Promise<any> {
 
     clearTimeout(this.debouncedTimeout);
 
-    const q = new Promise((resolve, reject) => {
+    const q = new Promise((resolve) => {
         this.debouncedTimeout = setTimeout(() => {
             const email: string = '{ "email" : "' + this.f.email.value + '" }';
             this.userService.getEmailExist(email).subscribe(
                 (response) => {
                     if (response['message'] === 'new email') {
                         resolve(null);
-                        this.emailexist=false;
+                        this.emailexist = false;
                     } else {
                         resolve({'usernameUnique': false });
                         this.emailexist = true;

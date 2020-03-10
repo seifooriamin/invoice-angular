@@ -1,5 +1,5 @@
-import {AfterViewInit, ChangeDetectorRef, Component, DoCheck, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import { MdbTablePaginationComponent, MdbTableDirective } from 'node_modules/angular-bootstrap-md';
+import {AfterViewInit, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { MdbTablePaginationComponent, MdbTableDirective } from 'node_modules/ng-uikit-pro-standard';
 import {CompanyService} from '../../shared/services/company.service';
 import {CompanyModel} from '../../shared/models/company.model';
 import {Router} from '@angular/router';
@@ -10,7 +10,7 @@ declare var jQuery: any;
 @Component({
   selector: 'app-company-list',
   templateUrl: './company-list.component.html',
-  styleUrls: ['./company-list.component.css']
+  styleUrls: ['../../../my-style.css']
 })
 export class CompanyListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {CompanyService} from '../shared/services/company.service';
+
 
 
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
-  styleUrls: ['./invoice.component.css']
+  styleUrls: ['../../my-style.css']
 })
 export class InvoiceComponent implements OnInit {
 
