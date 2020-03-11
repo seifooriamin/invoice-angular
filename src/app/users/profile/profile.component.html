@@ -72,13 +72,18 @@
                     </div>
                 </div>
             </div><!--Address 2 block-->
-            <div class="form-row text-light pl-2 pr-2"> <!--Country & Province Block-->
-                <div class="form-group col-6">
-                    <label class="col-form-label">Country</label>
-                    <mdb-select [filterEnabled]="true" [options]="iconsSelect" placeholder="Choose your option"
-                                class="form-control" formControlName="country"></mdb-select>
+            <div class="form-row text-light pl-2 pr-2 align-items-end"> <!--Country & Province Block-->
+                <div class="form-group col-md-5 col-5">
+                    <label for="country" class="col-form-label">Country</label>
+                    <select class="form-control" #ch formControlName="country" id="country"
+                            (change)= "changeCountry(ch.value)">
+                        <option *ngFor="let cr of countryList" value="{{cr.countryCode}}">{{cr.countryName}}</option>
+                    </select>
                 </div>
-                <div class="form-group col-6">
+                <div class="col-md-1 col-2">
+                    <img src="{{selectedCountryImage}}" alt="" class="rounded img mb-custom">
+                </div>
+                <div class="form-group col-md-6 col-5">
                     <label for="province" class="col-form-label">Province</label>
                     <input type="text" class="form-control" id="province" formControlName="province"
                            [ngClass]="{ 'is-invalid': f.province.touched && f.province.invalid,

@@ -19,6 +19,7 @@ import {EstimateComponent} from './estimate/estimate.component';
 import {EstimateListComponent} from './estimate/estimate-list/estimate-list.component';
 import {EstimateAddViewModifyComponent} from './estimate/estimate-add-view-modify/estimate-add-view-modify.component';
 import {ProfileComponent} from './users/profile/profile.component';
+import {GeneralSettingComponent} from './users/general-setting/general-setting.component';
 
 
 
@@ -58,6 +59,7 @@ const routes: Routes = [
           {path: 'signup', component: SignupComponent},
           {path: 'verify', component: VerifyComponent},
           {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+          {path: 'generalsetting', component: GeneralSettingComponent, canActivate: [AuthGuard]},
     ]},
   {path: '**', redirectTo: ''},
 ];

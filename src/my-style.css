@@ -68,3 +68,7 @@ ul li a {
     height: 80px;
 }
 
+.mb-custom {
+    margin-bottom: 0.7rem !important;
+}
+

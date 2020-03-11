@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
   optionsSelect: Array<any>;
 
   // Chart one variable
-  public chartType1: string = 'bar';
+  public chartType1 = 'bar';
 
   public chartDatasets1: Array<any> = [
     { data: [65, 59, 80, 81, 56, 55, 40, 11, 22, 33, 44, 55], label: 'My First dataset' }

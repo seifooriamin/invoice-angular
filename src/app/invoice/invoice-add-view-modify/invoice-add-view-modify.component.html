@@ -613,18 +613,19 @@
                         </div>
                         <div class="form-row text-dark">
                             <div class="col-3">
-                                <label for="currency" class="col-form-label">Currency</label>
+                                <label class="col-form-label">Currency</label>
                             </div>
                             <div class="col-4">
                                 <select class="form-control" #ch formControlName="currency" id="currency"
                                         (change)= "changeCurrency(ch.value)"
                                         [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                                     <option *ngFor="let cr of currency" value="{{cr.currencyCode}}">
-                                        {{cr.currencySymbol}}  {{cr.currencyName}}</option>
+                                        {{cr.currencyName}}</option>
                                 </select>
                             </div>
-                            <div class="col-1">
-                                <img src="{{selectedCurrencyImage}}" alt="" class="rounded">
+                            <div class="col-4">
+                                <p>{{selectedCurrencyCode}} {{selectedCurrencySymbol}}
+                                    <img src="{{selectedCurrencyImage}}" alt="" class="rounded "></p>
                             </div>
                         </div>
                         <div class="form-row text-dark mt-1">

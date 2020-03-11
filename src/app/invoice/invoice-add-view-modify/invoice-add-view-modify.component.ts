@@ -250,7 +250,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
                   currencyCode === response.currency).currencySymbol;
           } catch {
                 console.log('this is catch');
-              window.location.reload();
+                window.location.reload();
           }
 
         }, () => {}

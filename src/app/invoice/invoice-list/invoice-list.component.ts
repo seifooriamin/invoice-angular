@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MdbTableDirective, MdbTablePaginationComponent} from 'node_modules/ng-uikit-pro-standard';
+import {MdbTableDirective, MdbTablePaginationComponent} from 'node_modules/angular-bootstrap-md';
 import {Subscription} from 'rxjs';
 import {InvoiceModel} from '../../shared/models/invoice.model';
 import {Router} from '@angular/router';

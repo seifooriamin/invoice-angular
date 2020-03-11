@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   subscription: Subscription;
   countryList: CountryModel[] = [];
-  iconsSelect = [];
+  selectedCountryImage = '';
 
   constructor(private router: Router, private formBuilder: FormBuilder, private userService: UserService,
               private toolsService: ToolsService, private countryService: CountryService) { }
@@ -31,9 +31,6 @@ export class ProfileComponent implements OnInit {
     this.initForm();
     this.fillForm();
     this.countryList = this.countryService.getCountry();
-    for (const cl of this.countryList) {
-      this.iconsSelect.push({value: cl.countryCode, label: cl.countryName, icon: environment.flagUrl + cl.flag});
-    }
   }
   initForm() {
     this.profileForm = this.formBuilder.group({
@@ -70,6 +67,10 @@ export class ProfileComponent implements OnInit {
             postal_code: response.postal_code,
             contact_number: response.contact_number
           });
+          if (response.country) {
+            this.selectedCountryImage = environment.flagUrl +
+                this.countryList.find(({countryCode}) => countryCode === response.country).flag;
+          }
         }
     );
   }
@@ -86,13 +87,12 @@ export class ProfileComponent implements OnInit {
               setTimeout(() => {
                 this.submitMessageStatusSuccess = false;
               }, 5000);
-            }}
-            // , () => {
-            // this.submitMessage = 'Due to technical issue your profile has not been updated';
-            // this.submitMessageStatusFail = true;
-            // setTimeout(() => {
-            //   this.submitMessageStatusFail = false;
-            // }, 5000); }
+            }}, () => {
+            this.submitMessage = 'Due to technical issue your profile has not been updated';
+            this.submitMessageStatusFail = true;
+            setTimeout(() => {
+              this.submitMessageStatusFail = false;
+            }, 5000); }
           );
 
     } else {
@@ -101,6 +101,17 @@ export class ProfileComponent implements OnInit {
       setTimeout(() => {
         this.submitMessageStatusFail = false;
       }, 5000);
+    }
+  }
+  changeCountry(selectedCountry) {
+    try {
+      if (selectedCountry) {
+        this.selectedCountryImage = environment.flagUrl +
+            this.countryList.find(({countryCode}) => countryCode === selectedCountry).flag;
+      }
+    } catch {
+      console.log('this is catch');
+      window.location.reload();
     }
   }
   get f() { return this.profileForm.controls; }

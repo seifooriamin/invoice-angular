@@ -59,7 +59,7 @@
                      aria-labelledby="userDropdown">
                     <a class="dropdown-item submenu-item-color" routerLink="/users/profile"><i class="fas fa-user"></i> My Account</a>
                     <a class="dropdown-item submenu-item-color" (click)="onShowPassChange()"><i class="fas fa-key"></i> Change Password</a>
-                    <a class="dropdown-item submenu-item-color" href="#"><i class="fas fa-cog"></i> Setting</a>
+                    <a class="dropdown-item submenu-item-color" routerLink="/users/generalsetting"><i class="fas fa-cog"></i> Setting</a>
                     <a class="dropdown-item submenu-item-color" (click)="onSignOut()"><i class="fas fa-sign-out-alt"></i> Log out</a>
                 </div>
             </li>
@@ -131,7 +131,6 @@
             </div>
             <div class="modal-footer bg-dark">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-secondary" (click)="sendEmail()">Send Email</button>
                 <button type="button" class="btn btn-primary" (click)="onSubmit()">Save</button>
             </div>
         </div>

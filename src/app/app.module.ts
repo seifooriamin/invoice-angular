@@ -13,7 +13,8 @@ import {HttpErrorInterceptor} from './shared/tools/httperror.interceptor';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { VerifyComponent } from './users/verify/verify.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { TableModule, ChartsModule, SelectModule, MDBSpinningPreloader } from 'ng-uikit-pro-standard';
+// import { TableModule, ChartsModule } from 'angular-bootstrap-md';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CompanyComponent } from './company/company.component';
 import { UsersComponent } from './users/users.component';
 import { CompanyListComponent } from './company/company-list/company-list.component';
@@ -33,6 +34,7 @@ import { EstimateComponent } from './estimate/estimate.component';
 import { EstimateListComponent } from './estimate/estimate-list/estimate-list.component';
 import { EstimateAddViewModifyComponent } from './estimate/estimate-add-view-modify/estimate-add-view-modify.component';
 import { ProfileComponent } from './users/profile/profile.component';
+import { GeneralSettingComponent } from './users/general-setting/general-setting.component';
 
 @NgModule({
   declarations: [
@@ -57,11 +59,12 @@ import { ProfileComponent } from './users/profile/profile.component';
     EstimateListComponent,
     EstimateAddViewModifyComponent,
     ProfileComponent,
+    GeneralSettingComponent,
   ],
   imports: [
-    TableModule,
-    ChartsModule,
-    SelectModule,
+    // TableModule,
+    // ChartsModule,
+    MDBBootstrapModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -83,7 +86,6 @@ import { ProfileComponent } from './users/profile/profile.component';
   //   useClass: HttpErrorInterceptor,
   //   multi: true
   // },
-    MDBSpinningPreloader,
     {provide: NgbDateAdapter, useClass: CustomAdapter},
     {provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}],
 

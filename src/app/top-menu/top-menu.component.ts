@@ -71,7 +71,7 @@ export class TopMenuComponent implements OnInit {
               this.submitMessageStatusSuccess = false;
             }, 5000);
           }, () => {
-            this.submitMessage = 'Error: Password has not been changed';
+            this.submitMessage = 'Password has not been changed';
             this.submitMessageStatusFail = true;
             setTimeout(() => {
               this.submitMessageStatusFail = false;
@@ -79,7 +79,8 @@ export class TopMenuComponent implements OnInit {
           }
       );
     } else {
-      this.submitMessage = 'Error: Fill all the mandatory fields';
+      this.submitMessage = 'Fill all the mandatory fields';
+      this.markFormGroupTouched(this.changePasswordForm);
       this.submitMessageStatusFail = true;
       this.formInvalidSubmit =  true;
       setTimeout(() => {
@@ -89,11 +90,14 @@ export class TopMenuComponent implements OnInit {
 
   }
   get f() { return this.changePasswordForm.controls; }
-  sendEmail() {
-    const jCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
-    const data =  '{ "email" : "' + jCurrentUser.email + '", "subject" : "Change Password", "name" : ' +
-        jCurrentUser.first_name + ' ' + jCurrentUser.last_name + '"}';
-    console.log(data);
+  private markFormGroupTouched(form: FormGroup) {
+    Object.values(form.controls).forEach(control => {
+      control.markAsTouched();
+
+      if ((control as any).controls) {
+        this.markFormGroupTouched(control as FormGroup);
+      }
+    });
   }
 
 }

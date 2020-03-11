@@ -7,7 +7,8 @@ import {CountryModel} from '../models/country.model';
 export class CountryService {
   country: CountryModel[] = [
     {countryName: 'Afghanistan', countryCode: 'AFG', flag: 'Afghanistan.png'},
-    {countryName: 'Albania', countryCode: 'ALB', flag: 'Albania.png'}
+    {countryName: 'Albania', countryCode: 'ALB', flag: 'Albania.png'},
+    {countryName: "Côte d'Ivoire", countryCode: 'ALB', flag: 'Albania.png'}
   ];
   constructor() { }
   getCountry(): CountryModel[] {
