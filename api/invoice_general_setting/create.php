@@ -25,23 +25,23 @@
     $igs->deduction1status = 1;
     $igs->currency = 'CAD';
     $igs->deduction1label = 'Discount';
-    $igs->deduction1type = 'D1P';
+    $igs->deduction1type = 'P';
     $igs->deduction1percentage = 0;
     $igs->deduction2status = 0;
     $igs->deduction2label = 'Promotion';
-    $igs->deduction2type = 'D2F';
+    $igs->deduction2type = 'P';
     $igs->deduction2percentage = 0;
     $igs->addition1status = 1;
     $igs->addition1label = 'TAX';
-    $igs->addition1type = 'A1P';
+    $igs->addition1type = 'P';
     $igs->addition1percentage = 5;
     $igs->addition2status = 0;
     $igs->addition2label = 'PST';
-    $igs->addition2type = 'A2P';
+    $igs->addition2type = 'P';
     $igs->addition2percentage = 7;
     $igs->addition3status = 0;
     $igs->addition3label = 'Service';
-    $igs->addition3type = 'A3F';
+    $igs->addition3type = 'F';
     $igs->addition3percentage = 0;
     if($igs->create()){
 

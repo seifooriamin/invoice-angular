@@ -114,16 +114,18 @@
                 </div>
             </div><!--City & Postal Code Block-->
         </div>
-            <div class="form-group row mt-1">
-                <div class="col-md-4 offset-md-4 col-sm-8 text-center">
-                    <button type="submit" class="btn btn-primary">Modify</button>
-                </div>
-                <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual col-md-4 col-sm-4 text-center">
+        <div class="form-group row mt-1">
+            <div class="col-md-2 offset-md-5 col-4 offset-4 text-center">
+                <button type="submit" class="btn btn-primary btn-block">Modify</button>
+            </div>
+            <div class="col-md-5 col-12">
+                <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual text-center">
                     {{ submitMessage }}
                 </div>
-                <div *ngIf="submitMessageStatusSuccess" class="valid-feedback-manual col-md-4 col-sm-4 text-center">
+                <div *ngIf="submitMessageStatusSuccess" class="valid-feedback-manual text-center">
                     {{ submitMessage }}
                 </div>
             </div>
+        </div>
     </form>
 </div>

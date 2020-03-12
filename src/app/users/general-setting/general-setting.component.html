@@ -1,12 +1,285 @@
-<div class="row">
-    <div class="col-6 mt-4">
-<!--        <ngx-select-dropdown (searchChange)="searchChange($event)" tabindex="0" [multiple]="false"-->
-<!--                             [(ngModel)]="singleSelect" [config]="config" [options]="options"></ngx-select-dropdown>-->
-        <ngx-select-dropdown tabindex="0" [multiple]="false"
-                             [config]="config" [options]="options"></ngx-select-dropdown>
+<ngx-loading-bar></ngx-loading-bar>
+<div class="container mt-4 bg-dark mb-4">
+    <div class="row pt-2">
+        <div class="col-lg-1 col-md-2 col-3">
+            <button type="button" class="btn btn-block btn-warning text-light "
+                    title="Back" (click)="onBack()"><i class="fas fa-arrow-circle-left fa-lg"></i></button>
+        </div>
     </div>
-    <div class="col-6 mt-4">
-        <input type="text" class="form-control">
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h3 class="text-light pt-1">{{pageTitle}}</h3>
+        </div>
     </div>
+    <form class="pl-2 pr-2 mt-1 bg-dark border-dark border" [formGroup]="settingForm" (ngSubmit)="onSubmit()">
+        <div class="border border-light">
+            <div class="form-row text-light pl-2 pr-2 font-weight-bold"> <!--Title-->
+                <div class="col-1">
+                    <label class="col-form-label">Activate</label>
+                </div>
+                <div class="col-2">
+                    <label class="col-form-label">Current Label</label>
+                </div>
+                <div class="col-4">
+                    <label class="col-form-label">New Label</label>
+                </div>
+                <div class="col-3">
+                    <label class="col-form-label">Type</label>
+                </div>
+                <div class="col-2">
+                    <label  class="col-form-label">Percentage</label>
+                </div>
+            </div> <!--Title-->
+            <div class="form-row pl-2 pr-2 text-light"> <!--Discount 1-->
+                <div class="col-1">
+                    <div class="form-check justify-content-center align-content-center text-center">
+                        <input type="checkbox" class="form-check-input mt-3 "
+                               formControlName="deduction1status" value="0">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <label class="col-form-label">{{currentLabel[0].d1}}</label>
+                </div>
+                <div class="col-4">
+                    <input type="text" class="form-control" formControlName="deduction1label"
+                           [ngClass]="{ 'is-invalid': f.deduction1label.touched && f.deduction1label.invalid,
+                                    'is-valid': f.deduction1label.valid}">
+                    <div *ngIf="f.deduction1label.touched && f.deduction1label.errors?.required" class="invalid-feedback">
+                        Label is mandatory
+                    </div>
+                    <div *ngIf="f.deduction1label.touched && f.deduction1label.errors?.maxlength" class="invalid-feedback">
+                        Maximum 30 characters
+                    </div>
+                    <div *ngIf="f.deduction1label.touched && f.deduction1label.errors?.pattern" class="invalid-feedback">
+                        Special characters are not allowed
+                    </div>
+                </div>
+                <div class="col-3">
+                    <select class="form-control" formControlName="deduction1type"
+                            (change)="onSetPercentage('deduction1percentage', $event)">
+                        <option *ngFor="let topt of typeOptions" value="{{topt.typeCode}}">{{topt.typeName}}</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <input type="number" class="form-control" formControlName="deduction1percentage"
+                           [ngClass]="{ 'is-invalid': f.deduction1percentage.touched && f.deduction1percentage.invalid,
+                                    'is-valid': f.deduction1percentage.valid}"
+                                    [attr.disabled]="f.deduction1type.value === 'F' ? 'disabled' : null">
+                    <div *ngIf="f.deduction1percentage.touched && f.deduction1percentage.errors?.max" class="invalid-feedback">
+                        Maximum allowed value is 100.00
+                    </div>
+                    <div *ngIf="f.deduction1percentage.touched && f.deduction1percentage.errors?.pattern" class="invalid-feedback">
+                        Invalid percentage
+                    </div>
+                </div>
+            </div> <!--Discount 1-->
+            <div class="form-row pl-2 pr-2 text-light"> <!--Discount 2-->
+                <div class="col-1">
+                    <div class="form-check justify-content-center align-content-center text-center">
+                        <input type="checkbox" class="form-check-input mt-3 "
+                               formControlName="deduction2status">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <label class="col-form-label">{{currentLabel[0].d2}}</label>
+                </div>
+                <div class="col-4">
+                    <input type="text" class="form-control" formControlName="deduction2label"
+                           [ngClass]="{ 'is-invalid': f.deduction2label.touched && f.deduction2label.invalid,
+                                    'is-valid': f.deduction2label.valid}">
+                    <div *ngIf="f.deduction2label.touched && f.deduction2label.errors?.required" class="invalid-feedback">
+                        Label is mandatory
+                    </div>
+                    <div *ngIf="f.deduction2label.touched && f.deduction2label.errors?.maxlength" class="invalid-feedback">
+                        Maximum 30 characters
+                    </div>
+                    <div *ngIf="f.deduction2label.touched && f.deduction2label.errors?.pattern" class="invalid-feedback">
+                        Special characters are not allowed
+                    </div>
+                </div>
+                <div class="col-3">
+                    <select class="form-control" formControlName="deduction2type"
+                            (change)="onSetPercentage('deduction2percentage', $event)">
+                        <option *ngFor="let topt of typeOptions" value="{{topt.typeCode}}">{{topt.typeName}}</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <input type="number" class="form-control" formControlName="deduction2percentage"
+                           [ngClass]="{ 'is-invalid': f.deduction2percentage.touched && f.deduction2percentage.invalid,
+                                    'is-valid': f.deduction2percentage.valid}"
+                           [attr.disabled]="f.deduction2type.value === 'F' ? 'disabled' : null">
+                    <div *ngIf="f.deduction2percentage.touched && f.deduction2percentage.errors?.max" class="invalid-feedback">
+                        Maximum allowed value is 100.00
+                    </div>
+                    <div *ngIf="f.deduction2percentage.touched && f.deduction2percentage.errors?.pattern" class="invalid-feedback">
+                        Invalid percentage
+                    </div>
+                </div>
+            </div> <!--Discount 2-->
+            <div class="form-row pl-2 pr-2 text-light"> <!--Tax 1-->
+                <div class="col-1">
+                    <div class="form-check justify-content-center align-content-center text-center">
+                        <input type="checkbox" class="form-check-input mt-3 "
+                               formControlName="addition1status">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <label class="col-form-label">{{currentLabel[0].a1}}</label>
+                </div>
+                <div class="col-4">
+                    <input type="text" class="form-control" formControlName="addition1label"
+                           [ngClass]="{ 'is-invalid': f.addition1label.touched && f.addition1label.invalid,
+                                    'is-valid': f.addition1label.valid}">
+                    <div *ngIf="f.addition1label.touched && f.addition1label.errors?.required" class="invalid-feedback">
+                        Label is mandatory
+                    </div>
+                    <div *ngIf="f.addition1label.touched && f.addition1label.errors?.maxlength" class="invalid-feedback">
+                        Maximum 30 characters
+                    </div>
+                    <div *ngIf="f.addition1label.touched && f.addition1label.errors?.pattern" class="invalid-feedback">
+                        Special characters are not allowed
+                    </div>
+                </div>
+                <div class="col-3">
+                    <select class="form-control" formControlName="addition1type"
+                            (change)="onSetPercentage('addition1percentage', $event)">
+                        <option *ngFor="let topt of typeOptions" value="{{topt.typeCode}}">{{topt.typeName}}</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <input type="number" class="form-control" formControlName="addition1percentage"
+                           [ngClass]="{ 'is-invalid': f.addition1percentage.touched && f.addition1percentage.invalid,
+                                    'is-valid': f.addition1percentage.valid}"
+                           [attr.disabled]="f.addition1type.value === 'F' ? 'disabled' : null">
+                    <div *ngIf="f.addition1percentage.touched && f.addition1percentage.errors?.max" class="invalid-feedback">
+                        Maximum allowed value is 100.00
+                    </div>
+                    <div *ngIf="f.addition1percentage.touched && f.addition1percentage.errors?.pattern" class="invalid-feedback">
+                        Invalid percentage
+                    </div>
+                </div>
+            </div> <!--Tax 1-->
+            <div class="form-row pl-2 pr-2 text-light"> <!--Tax 2-->
+                <div class="col-1">
+                    <div class="form-check justify-content-center align-content-center text-center">
+                        <input type="checkbox" class="form-check-input mt-3" formControlName="addition2status">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <label class="col-form-label">{{currentLabel[0].a2}}</label>
+                </div>
+                <div class="col-4">
+                    <input type="text" class="form-control" formControlName="addition2label"
+                           [ngClass]="{ 'is-invalid': f.addition2label.touched && f.addition2label.invalid,
+                                    'is-valid': f.addition2label.valid}">
+                    <div *ngIf="f.addition2label.touched && f.addition2label.errors?.required" class="invalid-feedback">
+                        Label is mandatory
+                    </div>
+                    <div *ngIf="f.addition2label.touched && f.addition2label.errors?.maxlength" class="invalid-feedback">
+                        Maximum 30 characters
+                    </div>
+                    <div *ngIf="f.addition2label.touched && f.addition2label.errors?.pattern" class="invalid-feedback">
+                        Special characters are not allowed
+                    </div>
+                </div>
+                <div class="col-3">
+                    <select class="form-control" formControlName="addition2type"
+                            (change)="onSetPercentage('addition2percentage', $event)">
+                        <option *ngFor="let topt of typeOptions" value="{{topt.typeCode}}">{{topt.typeName}}</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <input type="number" class="form-control" formControlName="addition2percentage"
+                           [ngClass]="{ 'is-invalid': f.addition2percentage.touched && f.addition2percentage.invalid,
+                                    'is-valid': f.addition2percentage.valid}"
+                           [attr.disabled]="f.addition2type.value === 'F' ? 'disabled' : null">
+                    <div *ngIf="f.addition2percentage.touched && f.addition2percentage.errors?.max" class="invalid-feedback">
+                        Maximum allowed value is 100.00
+                    </div>
+                    <div *ngIf="f.addition2percentage.touched && f.addition2percentage.errors?.pattern" class="invalid-feedback">
+                        Invalid percentage
+                    </div>
+                </div>
+            </div> <!--Tax 2-->
+            <div class="form-row pl-2 pr-2 text-light"> <!--Tax 3-->
+                <div class="col-1">
+                    <div class="form-check justify-content-center align-content-center text-center">
+                        <input type="checkbox" class="form-check-input mt-3" formControlName="addition3status">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <label class="col-form-label">{{currentLabel[0].a3}}</label>
+                </div>
+                <div class="col-4">
+                    <input type="text" class="form-control" formControlName="addition3label"
+                           [ngClass]="{ 'is-invalid': f.addition3label.touched && f.addition3label.invalid,
+                                    'is-valid': f.addition3label.valid}">
+                    <div *ngIf="f.addition3label.touched && f.addition3label.errors?.required" class="invalid-feedback">
+                        Label is mandatory
+                    </div>
+                    <div *ngIf="f.addition3label.touched && f.addition3label.errors?.maxlength" class="invalid-feedback">
+                        Maximum 30 characters
+                    </div>
+                    <div *ngIf="f.addition3label.touched && f.addition3label.errors?.pattern" class="invalid-feedback">
+                        Special characters are not allowed
+                    </div>
+                </div>
+                <div class="col-3">
+                    <select class="form-control" formControlName="addition3type"
+                            (change)="onSetPercentage('addition3percentage', $event)">
+                        <option *ngFor="let topt of typeOptions" value="{{topt.typeCode}}">{{topt.typeName}}</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <input type="number" class="form-control" formControlName="addition3percentage"
+                           [ngClass]="{ 'is-invalid': f.addition3percentage.touched && f.addition3percentage.invalid,
+                                    'is-valid': f.addition3percentage.valid}"
+                           [attr.disabled]="f.addition3type.value === 'F' ? 'disabled' : null">
+                    <div *ngIf="f.addition3percentage.touched && f.addition3percentage.errors?.max" class="invalid-feedback">
+                        Maximum allowed value is 100.00
+                    </div>
+                    <div *ngIf="f.addition3percentage.touched && f.addition3percentage.errors?.pattern" class="invalid-feedback">
+                        Invalid percentage
+                    </div>
+                </div>
+            </div> <!--Tax 3-->
+            <div class="form-row pl-2 pr-2 text-light"> <!--Currency-->
+                <div class="col-2 offset-1">
+                    <label for="currency" class="col-form-label">Currency</label>
+                </div>
+                    <div class="col-4">
+                        <select class="form-control" #ch formControlName="currency" id="currency"
+                                (change)= "changeCurrency(ch.value)">
+                            <option *ngFor="let cr of currency" value="{{cr.currencyCode}}">
+                               {{cr.currencyName}}</option>
+                        </select>
+                        <input type="text" formControlName="id" hidden>
+                    </div>
+                <div class="col-4">
+                    <p>{{selectedCurrencyCode}} {{selectedCurrencySymbol}}
+                        <img src="{{selectedCurrencyImage}}" alt="" class="rounded "></p>
+                </div>
+            </div> <!--Currency-->
+            <div class="form-row pl-2 pr-2 text-light mt-1"> <!--Legend-->
+                <p>* Discount 1  is calculated based on Sub-Total amount<br>
+                    * Discount 2  is calculated based on Sub-Total - Discount 1<br>
+                    * Tax 1, Tax 2 and Tax 3 is calculated based on Sub-Total - Discount 1 - Discount 2<br>
+                    * This setting is implemented on new Invoice\Estimate (each saved Invoice\Estimate have their saved setting)
+                </p>
+            </div> <!--Legend-->
+        </div>
+        <div class="form-group row mt-1">
+            <div class="col-md-2 offset-md-5 col-4 offset-4 text-center">
+                <button type="submit" class="btn btn-primary btn-block">Modify</button>
+            </div>
+            <div class="col-md-5 col-12">
+                <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual text-center">
+                    {{ submitMessage }}
+                </div>
+                <div *ngIf="submitMessageStatusSuccess" class="valid-feedback-manual text-center">
+                    {{ submitMessage }}
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
-
