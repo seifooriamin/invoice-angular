@@ -16,4 +16,7 @@ export class InvoiceGeneralSettingService {
     return this.httpClient.post(`${environment.apiUrl}invoice_general_setting/readonebyuserid`, data,
         {responseType: 'json'});
   }
+  updateInvoiceSetting(data: any) {
+    return this.httpClient.post(`${environment.apiUrl}invoice_general_setting/update`, data);
+  }
 }

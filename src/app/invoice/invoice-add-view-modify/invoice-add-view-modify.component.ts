@@ -95,6 +95,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     addition3percentage: 0
   };
   invoiceInfo: InvoiceModel;
+  typeOptions = [{typeCode: 'P', typeName: 'Percentage'}, {typeCode: 'F', typeName: 'Flat Rate'}];
 
 
   searchDescription = (text$: Observable<string>) =>
@@ -329,7 +330,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     let addition2 = 0;
     let addition3 = 0;
     let totalLocal = this.invoiceSubTotalDigit;
-    if (this.invoiceSettingElements.deduction1type === 'D1P' && +this.invoiceSettingElements.deduction1status === 1) {
+    if (this.invoiceSettingElements.deduction1type === 'P' && +this.invoiceSettingElements.deduction1status === 1) {
       deduction1 = this.toolsService.showNumberWithDecimal(
           (this.invoiceSubTotalDigit * this.invoiceSettingElements.deduction1percentage) / 100);
       this.f.deduction1.setValue(this.toolsService.numberSeparator(deduction1));
@@ -344,7 +345,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
       }
     }
     totalLocal -= deduction1;
-    if (this.invoiceSettingElements.deduction2type === 'D2P' && +this.invoiceSettingElements.deduction2status === 1) {
+    if (this.invoiceSettingElements.deduction2type === 'P' && +this.invoiceSettingElements.deduction2status === 1) {
       deduction2 = this.toolsService.showNumberWithDecimal(
           (totalLocal * this.invoiceSettingElements.deduction2percentage) / 100);
       this.f.deduction2.setValue(this.toolsService.numberSeparator(deduction2));
@@ -359,7 +360,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
       }
     }
     totalLocal -= deduction2;
-    if (this.invoiceSettingElements.addition1type === 'A1P' && +this.invoiceSettingElements.addition1status === 1) {
+    if (this.invoiceSettingElements.addition1type === 'P' && +this.invoiceSettingElements.addition1status === 1) {
       addition1 = this.toolsService.showNumberWithDecimal(
           (totalLocal * this.invoiceSettingElements.addition1percentage) / 100);
       this.f.addition1.setValue(this.toolsService.numberSeparator(addition1));
@@ -373,7 +374,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
         this.f.addition1.setValue(0);
       }
     }
-    if (this.invoiceSettingElements.addition2type === 'A2P' && +this.invoiceSettingElements.addition2status === 1) {
+    if (this.invoiceSettingElements.addition2type === 'P' && +this.invoiceSettingElements.addition2status === 1) {
       addition2 = this.toolsService.showNumberWithDecimal(
           (totalLocal * this.invoiceSettingElements.addition2percentage) / 100);
       this.f.addition2.setValue(this.toolsService.numberSeparator(addition2));
@@ -387,7 +388,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
         this.f.addition2.setValue(0);
       }
     }
-    if (this.invoiceSettingElements.addition3type === 'A3P' && +this.invoiceSettingElements.addition3status === 1) {
+    if (this.invoiceSettingElements.addition3type === 'P' && +this.invoiceSettingElements.addition3status === 1) {
       addition3 = this.toolsService.showNumberWithDecimal(
           (totalLocal * this.invoiceSettingElements.addition3percentage) / 100);
       this.f.addition3.setValue(this.toolsService.numberSeparator(addition3));
@@ -468,25 +469,35 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
       id: [''],
       currency: [''],
       deduction1status: [''],
-      deduction1label: [''],
+      deduction1label: ['', [Validators.required, Validators.pattern('^(\\w*\\ *\\.*\\-*)*$'),
+        Validators.maxLength(30)]],
       deduction1type: [''],
-      deduction1percentage: [''],
+      deduction1percentage: ['', [Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$'),
+          Validators.max(100), Validators.required]],
       deduction2status: [''],
-      deduction2label: [''],
+      deduction2label: ['', [Validators.required, Validators.pattern('^(\\w*\\ *\\.*\\-*)*$'),
+        Validators.maxLength(30)]],
       deduction2type: [''],
-      deduction2percentage: [''],
+      deduction2percentage: ['', [Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$'),
+        Validators.max(100), Validators.required]],
       addition1status: [''],
-      addition1label: [''],
+      addition1label: ['', [Validators.required, Validators.pattern('^(\\w*\\ *\\.*\\-*)*$'),
+        Validators.maxLength(30)]],
       addition1type: [''],
-      addition1percentage: [''],
+      addition1percentage: ['', [Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$'),
+        Validators.max(100), Validators.required]],
       addition2status: [''],
-      addition2label: [''],
+      addition2label: ['', [Validators.required, Validators.pattern('^(\\w*\\ *\\.*\\-*)*$'),
+        Validators.maxLength(30)]],
       addition2type: [''],
-      addition2percentage: [''],
+      addition2percentage: ['', [Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$'),
+        Validators.max(100), Validators.required]],
       addition3status: [''],
-      addition3label: [''],
+      addition3label: ['', [Validators.required, Validators.pattern('^(\\w*\\ *\\.*\\-*)*$'),
+        Validators.maxLength(30)]],
       addition3type: [''],
-      addition3percentage: [''],
+      addition3percentage: ['', [Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$'),
+        Validators.max(100), Validators.required]],
     });
   }
   async fillSettingForm() {
@@ -641,6 +652,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   get f() { return this.fillForm.controls; }
   get q() { return this.fillFormRows.controls; }
   get s() {return this.fillFormRows.get('invoiceRows') as FormArray; }
+  get g() { return this.settingForm.controls; }
   onModify() {
     this.router.navigate(['/invoice/' + this.id + '/modify']);
   }
@@ -1191,4 +1203,11 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
         const documentDefinition = this.getDocumentDefinition();
         pdfMake.createPdf(documentDefinition).download(this.invoiceInfo.invoice_number + '_INVOICE');
     }
+  onSetPercentage(control, value) {
+    if (value.target.value === 'F') {
+      this.settingForm.get(control).setValue(0);
+    } else {
+      this.settingForm.get(control).setValue(this.invoiceSettingElements[control]);
+    }
+  }
 }

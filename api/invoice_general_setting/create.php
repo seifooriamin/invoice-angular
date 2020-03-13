@@ -32,7 +32,7 @@
     $igs->deduction2type = 'P';
     $igs->deduction2percentage = 0;
     $igs->addition1status = 1;
-    $igs->addition1label = 'TAX';
+    $igs->addition1label = 'GST';
     $igs->addition1type = 'P';
     $igs->addition1percentage = 5;
     $igs->addition2status = 0;

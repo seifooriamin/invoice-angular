@@ -95,7 +95,7 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
     addition3percentage: 0
   };
   estimateInfo: EstimateModel;
-
+  typeOptions = [{typeCode: 'P', typeName: 'Percentage'}, {typeCode: 'F', typeName: 'Flat Rate'}];
 
   searchDescription = (text$: Observable<string>) =>
       text$.pipe(
@@ -328,7 +328,7 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
     let addition2 = 0;
     let addition3 = 0;
     let totalLocal = this.invoiceSubTotalDigit;
-    if (this.estimateSettingElements.deduction1type === 'D1P' && +this.estimateSettingElements.deduction1status === 1) {
+    if (this.estimateSettingElements.deduction1type === 'P' && +this.estimateSettingElements.deduction1status === 1) {
       deduction1 = this.toolsService.showNumberWithDecimal(
           (this.invoiceSubTotalDigit * this.estimateSettingElements.deduction1percentage) / 100);
       this.f.deduction1.setValue(this.toolsService.numberSeparator(deduction1));
@@ -343,7 +343,7 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
       }
     }
     totalLocal -= deduction1;
-    if (this.estimateSettingElements.deduction2type === 'D2P' && +this.estimateSettingElements.deduction2status === 1) {
+    if (this.estimateSettingElements.deduction2type === 'P' && +this.estimateSettingElements.deduction2status === 1) {
       deduction2 = this.toolsService.showNumberWithDecimal(
           (totalLocal * this.estimateSettingElements.deduction2percentage) / 100);
       this.f.deduction2.setValue(this.toolsService.numberSeparator(deduction2));
@@ -358,7 +358,7 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
       }
     }
     totalLocal -= deduction2;
-    if (this.estimateSettingElements.addition1type === 'A1P' && +this.estimateSettingElements.addition1status === 1) {
+    if (this.estimateSettingElements.addition1type === 'P' && +this.estimateSettingElements.addition1status === 1) {
       addition1 = this.toolsService.showNumberWithDecimal(
           (totalLocal * this.estimateSettingElements.addition1percentage) / 100);
       this.f.addition1.setValue(this.toolsService.numberSeparator(addition1));
@@ -372,7 +372,7 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
         this.f.addition1.setValue(0);
       }
     }
-    if (this.estimateSettingElements.addition2type === 'A2P' && +this.estimateSettingElements.addition2status === 1) {
+    if (this.estimateSettingElements.addition2type === 'P' && +this.estimateSettingElements.addition2status === 1) {
       addition2 = this.toolsService.showNumberWithDecimal(
           (totalLocal * this.estimateSettingElements.addition2percentage) / 100);
       this.f.addition2.setValue(this.toolsService.numberSeparator(addition2));
@@ -386,7 +386,7 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
         this.f.addition2.setValue(0);
       }
     }
-    if (this.estimateSettingElements.addition3type === 'A3P' && +this.estimateSettingElements.addition3status === 1) {
+    if (this.estimateSettingElements.addition3type === 'P' && +this.estimateSettingElements.addition3status === 1) {
       addition3 = this.toolsService.showNumberWithDecimal(
           (totalLocal * this.estimateSettingElements.addition3percentage) / 100);
       this.f.addition3.setValue(this.toolsService.numberSeparator(addition3));
@@ -466,25 +466,35 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
       id: [''],
       currency: [''],
       deduction1status: [''],
-      deduction1label: [''],
+      deduction1label: ['', [Validators.required, Validators.pattern('^(\\w*\\ *\\.*\\-*)*$'),
+        Validators.maxLength(30)]],
       deduction1type: [''],
-      deduction1percentage: [''],
+      deduction1percentage: ['', [Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$'),
+        Validators.max(100), Validators.required]],
       deduction2status: [''],
-      deduction2label: [''],
+      deduction2label: ['', [Validators.required, Validators.pattern('^(\\w*\\ *\\.*\\-*)*$'),
+        Validators.maxLength(30)]],
       deduction2type: [''],
-      deduction2percentage: [''],
+      deduction2percentage: ['', [Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$'),
+        Validators.max(100), Validators.required]],
       addition1status: [''],
-      addition1label: [''],
+      addition1label: ['', [Validators.required, Validators.pattern('^(\\w*\\ *\\.*\\-*)*$'),
+        Validators.maxLength(30)]],
       addition1type: [''],
-      addition1percentage: [''],
+      addition1percentage: ['', [Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$'),
+        Validators.max(100), Validators.required]],
       addition2status: [''],
-      addition2label: [''],
+      addition2label: ['', [Validators.required, Validators.pattern('^(\\w*\\ *\\.*\\-*)*$'),
+        Validators.maxLength(30)]],
       addition2type: [''],
-      addition2percentage: [''],
+      addition2percentage: ['', [Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$'),
+        Validators.max(100), Validators.required]],
       addition3status: [''],
-      addition3label: [''],
+      addition3label: ['', [Validators.required, Validators.pattern('^(\\w*\\ *\\.*\\-*)*$'),
+        Validators.maxLength(30)]],
       addition3type: [''],
-      addition3percentage: [''],
+      addition3percentage: ['', [Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$'),
+        Validators.max(100), Validators.required]],
     });
   }
   async fillSettingForm() {
@@ -514,18 +524,7 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
             addition3percentage: response.addition3percentage
           });
           this.estimateSettingElements = response;
-          try {
-            this.selectedCurrencyImage = environment.flagUrl +
-                this.currency.find(({currencyCode}) => currencyCode === response.currency).flag;
-            this.selectedCurrencyCode = this.currency.find(({currencyCode}) =>
-                currencyCode === response.currency).currencyCode;
-            this.selectedCurrencySymbol = this.currency.find(({currencyCode}) =>
-                currencyCode === response.currency).currencySymbol;
-          } catch {
-            console.log('this is catch');
-            window.location.reload();
-          }
-
+          this.changeCurrency(response.currency);
         }
     );
   }
@@ -536,10 +535,12 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
   }
   // This function is used for change int to decimal for addition and deduction part
   onSaveSetting() {
-    this.estimateSettingElements = this.settingForm.value;
-    this.calcTotal();
-    jQuery('#modalSetting').modal('hide');
-    this.onAddCurrencySymbol();
+    if (this.settingForm.valid) {
+      this.estimateSettingElements = this.settingForm.value;
+      this.calcTotal();
+      jQuery('#modalSetting').modal('hide');
+      this.onAddCurrencySymbol();
+    }
   }
   onCancelSetting() {
     this.settingForm.patchValue({
@@ -631,7 +632,8 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
   }
   get f() { return this.fillForm.controls; }
   get q() { return this.fillFormRows.controls; }
-  get s() {return this.fillFormRows.get('estimateRows') as FormArray; }
+  get s() { return this.fillFormRows.get('estimateRows') as FormArray; }
+  get g() { return this.settingForm.controls; }
   onModify() {
     this.router.navigate(['/estimate/' + this.id + '/modify']);
   }
@@ -1185,6 +1187,12 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
     const documentDefinition = this.getDocumentDefinition();
     pdfMake.createPdf(documentDefinition).download(this.estimateInfo.estimate_number + '_ESTIMATE');
   }
-
+  onSetPercentage(control, value) {
+    if (value.target.value === 'F') {
+      this.settingForm.get(control).setValue(0);
+    } else {
+      this.settingForm.get(control).setValue(this.estimateSettingElements[control]);
+    }
+  }
 
 }

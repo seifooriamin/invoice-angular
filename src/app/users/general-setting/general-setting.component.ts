@@ -27,7 +27,7 @@ export class GeneralSettingComponent implements OnInit {
     currency: CurrencyModel[] = [];
     subscription: Subscription;
     typeOptions = [{typeCode: 'P', typeName: 'Percentage'}, {typeCode: 'F', typeName: 'Flat Rate'}];
-    currentLabel = [{d1: '', d2: '', a1: '', a2: '', a3: ''}];
+    settingInfo: InvoiceGeneralSettingModel;
 
     constructor(private router: Router, private formBuilder: FormBuilder, private toolsService: ToolsService,
                 private igs: InvoiceGeneralSettingService, private currencyService: CurrencyService) {}
@@ -44,31 +44,31 @@ export class GeneralSettingComponent implements OnInit {
                 Validators.maxLength(30)]],
             deduction1type: [''],
             deduction1percentage: ['', [Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$'),
-                Validators.max(100)]],
+                Validators.max(100), Validators.required]],
             deduction2status: [''],
             deduction2label: ['', [Validators.required, Validators.pattern('^(\\w*\\ *\\.*\\-*)*$'),
                 Validators.maxLength(30)]],
             deduction2type: [''],
             deduction2percentage: ['', [Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$'),
-                Validators.max(100)]],
+                Validators.max(100), Validators.required]],
             addition1status: [''],
             addition1label: ['', [Validators.required, Validators.pattern('^(\\w*\\ *\\.*\\-*)*$'),
                 Validators.maxLength(30)]],
             addition1type: [''],
             addition1percentage: ['', [Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$'),
-                Validators.max(100)]],
+                Validators.max(100), Validators.required]],
             addition2status: [''],
             addition2label: ['', [Validators.required, Validators.pattern('^(\\w*\\ *\\.*\\-*)*$'),
                 Validators.maxLength(30)]],
             addition2type: [''],
             addition2percentage: ['', [Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$'),
-                Validators.max(100)]],
+                Validators.max(100), Validators.required]],
             addition3status: [''],
             addition3label: ['', [Validators.required, Validators.pattern('^(\\w*\\ *\\.*\\-*)*$'),
                 Validators.maxLength(30)]],
             addition3type: [''],
             addition3percentage: ['', [Validators.pattern('^(\\d{1,12}?[.]{0,1}?\\d{0,2}?)$'),
-                Validators.max(100)]],
+                Validators.max(100), Validators.required]],
             currency: ['']
         });
     }
@@ -101,27 +101,16 @@ export class GeneralSettingComponent implements OnInit {
                         addition3percentage: response.addition2percentage,
                         currency: response.currency
                     });
-                this.currentLabel = [{d1: response.deduction1label, d2: response.deduction2label, a1: response.addition1label,
-                    a2: response.addition2label, a3: response.addition3label}];
-                try {
-                    this.selectedCurrencyImage = environment.flagUrl +
-                        this.currency.find(({currencyCode}) => currencyCode === response.currency).flag;
-                    this.selectedCurrencyCode = this.currency.find(({currencyCode}) =>
-                        currencyCode === response.currency).currencyCode;
-                    this.selectedCurrencySymbol = this.currency.find(({currencyCode}) =>
-                        currencyCode === response.currency).currencySymbol;
-                } catch {
-                    console.log('this is catch');
-                    window.location.reload();
-                }
+                this.settingInfo = response;
+                this.changeCurrency(response.currency);
             }
         );
     }
     onSetPercentage(control, value) {
         if (value.target.value === 'F') {
-            this.settingForm.get(control).setValue('');
-        } else {
             this.settingForm.get(control).setValue(0);
+        } else {
+            this.settingForm.get(control).setValue(this.settingInfo[control]);
         }
     }
     onBack() {
@@ -140,7 +129,41 @@ export class GeneralSettingComponent implements OnInit {
         }
     }
     onSubmit() {
+        if (this.settingForm.valid) {
+            this.igs.updateInvoiceSetting(this.settingForm.value).subscribe(
+                (response) => {
+                    if (response['message'] === 'SUCCESS') {
+                        this.submitMessageStatusSuccess = true;
+                        this.submitMessage = 'The General Setting has been successfully updated';
+                        setTimeout(() => {
+                            this.submitMessageStatusSuccess = false;
+                        }, 5000);
+                    }}
+                    // , () => {
+                    // this.submitMessage = 'Due to technical issue the general setting record has not been updated';
+                    // this.submitMessageStatusFail = true;
+                    // setTimeout(() => {
+                    //     this.submitMessageStatusFail = false;
+                    // }, 5000); }
+            );
 
+        } else {
+            this.submitMessage = 'Fill all the mandatory fields';
+            this.markFormGroupTouched(this.settingForm);
+            this.submitMessageStatusFail = true;
+            setTimeout(() => {
+                this.submitMessageStatusFail = false;
+            }, 5000);
+        }
+    }
+    private markFormGroupTouched(form: FormGroup) {
+        Object.values(form.controls).forEach(control => {
+            control.markAsTouched();
+
+            if ((control as any).controls) {
+                this.markFormGroupTouched(control as FormGroup);
+            }
+        });
     }
     get f() { return this.settingForm.controls; }
 

@@ -20,26 +20,24 @@
     // get id of product to be edited
     $data = json_decode(file_get_contents("php://input"));
 
-
-    $igs->user_id = $data->user_id;
     $igs->currency = $data->currency;
-    $igs->deduction1status = $data->deduction1status;
+    $igs->deduction1status = $data->deduction1status ? 1 : 0;
     $igs->deduction1label = $data->deduction1label;
     $igs->deduction1type = $data->deduction1type;
     $igs->deduction1percentage = $data->deduction1percentage;
-    $igs->deduction2status = $data->deduction2status;
+    $igs->deduction2status = $data->deduction2status ? 1 : 0;
     $igs->deduction2label = $data->deduction2label;
     $igs->deduction2type = $data->deduction2type;
     $igs->deduction2percentage = $data->deduction2percentage;
-    $igs->addition1status = $data->addition1status;
+    $igs->addition1status = $data->addition1status ? 1 : 0;
     $igs->addition1label = $data->addition1label;
     $igs->addition1type = $data->addition1type;
     $igs->addition1percentage = $data->addition1percentage;
-    $igs->addition2status = $data->addition2status;
+    $igs->addition2status = $data->addition2status ? 1 : 0;
     $igs->addition2label = $data->addition2label;
     $igs->addition2type = $data->addition2type;
     $igs->addition2percentage = $data->addition2percentage;
-    $igs->addition3status = $data->addition3status;
+    $igs->addition3status = $data->addition3status ? 1 : 0;
     $igs->addition3label = $data->addition3label;
     $igs->addition3type = $data->addition3type;
     $igs->addition3percentage = $data->addition3percentage;

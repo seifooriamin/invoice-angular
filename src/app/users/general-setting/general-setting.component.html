@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    <label class="col-form-label">{{currentLabel[0].d1}}</label>
+                    <label class="col-form-label">{{settingInfo?.deduction1label}}</label>
                 </div>
                 <div class="col-4">
                     <input type="text" class="form-control" formControlName="deduction1label"
@@ -57,7 +57,7 @@
                 <div class="col-3">
                     <select class="form-control" formControlName="deduction1type"
                             (change)="onSetPercentage('deduction1percentage', $event)">
-                        <option *ngFor="let topt of typeOptions" value="{{topt.typeCode}}">{{topt.typeName}}</option>
+                        <option *ngFor="let tOption of typeOptions" value="{{tOption.typeCode}}">{{tOption.typeName}}</option>
                     </select>
                 </div>
                 <div class="col-2">
@@ -71,6 +71,9 @@
                     <div *ngIf="f.deduction1percentage.touched && f.deduction1percentage.errors?.pattern" class="invalid-feedback">
                         Invalid percentage
                     </div>
+                    <div *ngIf="f.deduction1percentage.touched && f.deduction1percentage.errors?.required" class="invalid-feedback">
+                        Percentage is mandatory (between 0 to 100)
+                    </div>
                 </div>
             </div> <!--Discount 1-->
             <div class="form-row pl-2 pr-2 text-light"> <!--Discount 2-->
@@ -81,7 +84,7 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    <label class="col-form-label">{{currentLabel[0].d2}}</label>
+                    <label class="col-form-label">{{settingInfo?.deduction2label}}</label>
                 </div>
                 <div class="col-4">
                     <input type="text" class="form-control" formControlName="deduction2label"
@@ -114,6 +117,9 @@
                     <div *ngIf="f.deduction2percentage.touched && f.deduction2percentage.errors?.pattern" class="invalid-feedback">
                         Invalid percentage
                     </div>
+                    <div *ngIf="f.deduction2percentage.touched && f.deduction2percentage.errors?.required" class="invalid-feedback">
+                        Percentage is mandatory (between 0 to 100)
+                    </div>
                 </div>
             </div> <!--Discount 2-->
             <div class="form-row pl-2 pr-2 text-light"> <!--Tax 1-->
@@ -124,7 +130,7 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    <label class="col-form-label">{{currentLabel[0].a1}}</label>
+                    <label class="col-form-label">{{settingInfo?.addition1label}}</label>
                 </div>
                 <div class="col-4">
                     <input type="text" class="form-control" formControlName="addition1label"
@@ -157,6 +163,9 @@
                     <div *ngIf="f.addition1percentage.touched && f.addition1percentage.errors?.pattern" class="invalid-feedback">
                         Invalid percentage
                     </div>
+                    <div *ngIf="f.addition1percentage.touched && f.addition1percentage.errors?.required" class="invalid-feedback">
+                        Percentage is mandatory (between 0 to 100)
+                    </div>
                 </div>
             </div> <!--Tax 1-->
             <div class="form-row pl-2 pr-2 text-light"> <!--Tax 2-->
@@ -166,7 +175,7 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    <label class="col-form-label">{{currentLabel[0].a2}}</label>
+                    <label class="col-form-label">{{settingInfo?.addition2label}}</label>
                 </div>
                 <div class="col-4">
                     <input type="text" class="form-control" formControlName="addition2label"
@@ -199,6 +208,9 @@
                     <div *ngIf="f.addition2percentage.touched && f.addition2percentage.errors?.pattern" class="invalid-feedback">
                         Invalid percentage
                     </div>
+                    <div *ngIf="f.addition2percentage.touched && f.addition2percentage.errors?.required" class="invalid-feedback">
+                        Percentage is mandatory (between 0 to 100)
+                    </div>
                 </div>
             </div> <!--Tax 2-->
             <div class="form-row pl-2 pr-2 text-light"> <!--Tax 3-->
@@ -208,7 +220,7 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    <label class="col-form-label">{{currentLabel[0].a3}}</label>
+                    <label class="col-form-label">{{settingInfo?.addition3label}}</label>
                 </div>
                 <div class="col-4">
                     <input type="text" class="form-control" formControlName="addition3label"
@@ -227,7 +239,7 @@
                 <div class="col-3">
                     <select class="form-control" formControlName="addition3type"
                             (change)="onSetPercentage('addition3percentage', $event)">
-                        <option *ngFor="let topt of typeOptions" value="{{topt.typeCode}}">{{topt.typeName}}</option>
+                        <option *ngFor="let tOption of typeOptions" value="{{tOption.typeCode}}">{{tOption.typeName}}</option>
                     </select>
                 </div>
                 <div class="col-2">
@@ -240,6 +252,9 @@
                     </div>
                     <div *ngIf="f.addition3percentage.touched && f.addition3percentage.errors?.pattern" class="invalid-feedback">
                         Invalid percentage
+                    </div>
+                    <div *ngIf="f.addition3percentage.touched && f.addition3percentage.errors?.required" class="invalid-feedback">
+                        Percentage is mandatory (between 0 to 100)
                     </div>
                 </div>
             </div> <!--Tax 3-->
@@ -261,9 +276,10 @@
                 </div>
             </div> <!--Currency-->
             <div class="form-row pl-2 pr-2 text-light mt-1"> <!--Legend-->
-                <p>* Discount 1  is calculated based on Sub-Total amount<br>
-                    * Discount 2  is calculated based on Sub-Total - Discount 1<br>
-                    * Tax 1, Tax 2 and Tax 3 is calculated based on Sub-Total - Discount 1 - Discount 2<br>
+                <p>* <strong>{{settingInfo?.deduction1label}}</strong> is calculated based on Sub-Total amount<br>
+                    * <strong>{{settingInfo?.deduction2label}}</strong>  is calculated based on Sub-Total - Discount 1<br>
+                    * <strong>{{settingInfo?.addition1label}}</strong>, <strong>{{settingInfo?.addition2label}}</strong>
+                    and <strong>{{settingInfo?.addition3label}}</strong> is calculated based on Sub-Total - Discount 1 - Discount 2<br>
                     * This setting is implemented on new Invoice\Estimate (each saved Invoice\Estimate have their saved setting)
                 </p>
             </div> <!--Legend-->

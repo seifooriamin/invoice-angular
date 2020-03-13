@@ -301,19 +301,19 @@
                 </div>
                 <div class="col-lg-2 col-3">
                     <input type="text" class="form-control" [attr.disabled]="true" id="deduction1"
-                           value="{{estimateSettingElements.deduction1type === 'D1P' ? 'Percentage' : 'Flat Rate'}}">
+                           value="{{estimateSettingElements.deduction1type === 'P' ? 'Percentage' : 'Flat Rate'}}">
                 </div>
-                <div class="col-lg-2 col-3" *ngIf="estimateSettingElements.deduction1type === 'D1P'">
+                <div class="col-lg-2 col-3" *ngIf="estimateSettingElements.deduction1type === 'P'">
                     <input type="text" class="form-control" formControlName="deduction1Percentage"
-                           [attr.disabled]="estimateSettingElements.deduction1type === 'D1P' ? 'disabled' : null ||
+                           [attr.disabled]="estimateSettingElements.deduction1type === 'P' ? 'disabled' : null ||
                                             pageStatus === 'view' ? 'disabled' : null"
 
                            value="{{estimateSettingElements.deduction1percentage}}">
                 </div>
                 <div class="col-lg-2 col-3"
-                     [ngClass]="{'offset-lg-2 offset-3': estimateSettingElements.deduction1type === 'D1F'}">
+                     [ngClass]="{'offset-lg-2 offset-3': estimateSettingElements.deduction1type === 'F'}">
                     <input type="text" class="form-control" formControlName="deduction1"
-                           [attr.disabled]="estimateSettingElements.deduction1type === 'D1P' ? 'disabled' : null ||
+                           [attr.disabled]="estimateSettingElements.deduction1type === 'P' ? 'disabled' : null ||
                             pageStatus === 'view' ? 'disabled' : null"
                            (change)="showFormControlName(f.deduction1)">
                 </div>
@@ -324,18 +324,18 @@
                 </div>
                 <div class="col-lg-2 col-3">
                     <input type="text" class="form-control" [attr.disabled]="true" id="deduction2"
-                           value="{{estimateSettingElements.deduction2type === 'D2P' ? 'Percentage' : 'Flat Rate'}}">
+                           value="{{estimateSettingElements.deduction2type === 'P' ? 'Percentage' : 'Flat Rate'}}">
                 </div>
-                <div class="col-lg-2 col-3" *ngIf="estimateSettingElements.deduction2type === 'D2P'">
+                <div class="col-lg-2 col-3" *ngIf="estimateSettingElements.deduction2type === 'P'">
                     <input type="text" class="form-control" formControlName="deduction2Percentage"
-                           [attr.disabled]="estimateSettingElements.deduction2type === 'D2P' ? 'disabled' : null ||
+                           [attr.disabled]="estimateSettingElements.deduction2type === 'P' ? 'disabled' : null ||
                             pageStatus === 'view' ? 'disabled' : null"
                            value="{{estimateSettingElements.deduction2percentage}}">
                 </div>
                 <div class="col-lg-2 col-3"
-                     [ngClass]="{'offset-lg-2 offset-3': estimateSettingElements.deduction2type === 'D2F'}">
+                     [ngClass]="{'offset-lg-2 offset-3': estimateSettingElements.deduction2type === 'F'}">
                     <input type="text" class="form-control" formControlName="deduction2"
-                           [attr.disabled]="estimateSettingElements.deduction2type === 'D2P' ? 'disabled' : null ||
+                           [attr.disabled]="estimateSettingElements.deduction2type === 'P' ? 'disabled' : null ||
                             pageStatus === 'view' ? 'disabled' : null"
                            (change)="showFormControlName(f.deduction2)">
                 </div>
@@ -346,18 +346,18 @@
                 </div>
                 <div class="col-lg-2 col-3">
                     <input type="text" class="form-control" [attr.disabled]="true" id="addition1"
-                           value="{{estimateSettingElements.addition1type === 'A1P' ? 'Percentage' : 'Flat Rate'}}">
+                           value="{{estimateSettingElements.addition1type === 'P' ? 'Percentage' : 'Flat Rate'}}">
                 </div>
-                <div class="col-lg-2 col-3" *ngIf="estimateSettingElements.addition1type === 'A1P'">
+                <div class="col-lg-2 col-3" *ngIf="estimateSettingElements.addition1type === 'P'">
                     <input type="text" class="form-control" formControlName="addition1Percentage"
-                           [attr.disabled]="estimateSettingElements.addition1type === 'A1P' ? 'disabled' : null ||
+                           [attr.disabled]="estimateSettingElements.addition1type === 'P' ? 'disabled' : null ||
                             pageStatus === 'view' ? 'disabled' : null"
                            value="{{estimateSettingElements.addition1percentage}}">
                 </div>
                 <div class="col-lg-2 col-3"
-                     [ngClass]="{'offset-lg-2 offset-3': estimateSettingElements.addition1type === 'A1F'}">
+                     [ngClass]="{'offset-lg-2 offset-3': estimateSettingElements.addition1type === 'F'}">
                     <input type="text" class="form-control" formControlName="addition1"
-                           [attr.disabled]="estimateSettingElements.addition1type === 'A1P' ? 'disabled' : null ||
+                           [attr.disabled]="estimateSettingElements.addition1type === 'P' ? 'disabled' : null ||
                             pageStatus === 'view' ? 'disabled' : null"
                            (change)="showFormControlName(f.addition1)">
                 </div>
@@ -368,18 +368,18 @@
                 </div>
                 <div class="col-lg-2 col-3">
                     <input type="text" class="form-control" [attr.disabled]="true" id="addition2"
-                           value="{{estimateSettingElements.addition2type === 'A2P' ? 'Percentage' : 'Flat Rate'}}">
+                           value="{{estimateSettingElements.addition2type === 'P' ? 'Percentage' : 'Flat Rate'}}">
                 </div>
-                <div class="col-lg-2 col-3" *ngIf="estimateSettingElements.addition2type === 'A2P'">
+                <div class="col-lg-2 col-3" *ngIf="estimateSettingElements.addition2type === 'P'">
                     <input type="text" class="form-control" formControlName="addition2Percentage"
-                           [attr.disabled]="estimateSettingElements.addition2type === 'A2P' ? 'disabled' : null ||
+                           [attr.disabled]="estimateSettingElements.addition2type === 'P' ? 'disabled' : null ||
                             pageStatus === 'view' ? 'disabled' : null"
                            value="{{estimateSettingElements.addition2percentage}}">
                 </div>
                 <div class="col-lg-2 col-3"
-                     [ngClass]="{'offset-lg-2 offset-3': estimateSettingElements.addition2type === 'A2F'}">
+                     [ngClass]="{'offset-lg-2 offset-3': estimateSettingElements.addition2type === 'F'}">
                     <input type="text" class="form-control" formControlName="addition2"
-                           [attr.disabled]="estimateSettingElements.addition2type === 'A2P' ? 'disabled' : null ||
+                           [attr.disabled]="estimateSettingElements.addition2type === 'P' ? 'disabled' : null ||
                             pageStatus === 'view' ? 'disabled' : null"
                            (change)="showFormControlName(f.addition2)">
                 </div>
@@ -390,18 +390,18 @@
                 </div>
                 <div class="col-lg-2 col-3">
                     <input type="text" class="form-control" [attr.disabled]="true" id="addition3"
-                           value="{{estimateSettingElements.addition3type === 'A3P' ? 'Percentage' : 'Flat Rate'}}">
+                           value="{{estimateSettingElements.addition3type === 'P' ? 'Percentage' : 'Flat Rate'}}">
                 </div>
-                <div class="col-lg-2 col-3" *ngIf="estimateSettingElements.addition3type === 'A3P'">
+                <div class="col-lg-2 col-3" *ngIf="estimateSettingElements.addition3type === 'P'">
                     <input type="text" class="form-control" formControlName="addition3Percentage"
-                           [attr.disabled]="estimateSettingElements.addition3type === 'A3P' ? 'disabled' : null ||
+                           [attr.disabled]="estimateSettingElements.addition3type === 'P' ? 'disabled' : null ||
                             pageStatus === 'view' ? 'disabled' : null"
                            value="{{estimateSettingElements.addition3percentage}}">
                 </div>
                 <div class="col-lg-2 col-3"
-                     [ngClass]="{'offset-lg-2 offset-3': estimateSettingElements.addition3type === 'A3F'}">
+                     [ngClass]="{'offset-lg-2 offset-3': estimateSettingElements.addition3type === 'F'}">
                     <input type="text" class="form-control" formControlName="addition3"
-                           [attr.disabled]="estimateSettingElements.addition3type === 'A3P' ? 'disabled' : null ||
+                           [attr.disabled]="estimateSettingElements.addition3type === 'P' ? 'disabled' : null ||
                             pageStatus === 'view' ? 'disabled' : null"
                            (change)="showFormControlName(f.addition3)">
                 </div>
@@ -487,22 +487,27 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                                <label class="col-form-label">Discount 1</label>
+                                <label class="col-form-label">{{estimateSettingElements?.deduction1label}}</label>
                             </div>
                             <div class="col-4">
                                 <input type="text" class="form-control" formControlName="deduction1label"
-                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
+                                       [ngClass]="{ 'is-invalid': g.deduction1label.touched && g.deduction1label.invalid,
+                                    'is-valid': g.deduction1label.valid}">
                             </div>
                             <div class="col-3">
                                 <select class="form-control" formControlName="deduction1type"
-                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
-                                    <option value="D1P">%</option>
-                                    <option value="D1F">Flat Rate</option>
+                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
+                                        (change)="onSetPercentage('deduction1percentage', $event)">
+                                    <option *ngFor="let tOption of typeOptions" value="{{tOption.typeCode}}">{{tOption.typeName}}</option>
                                 </select>
                             </div>
                             <div class="col-2">
                                 <input type="text" class="form-control" formControlName="deduction1percentage"
-                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null ||
+                                       g.deduction1type.value === 'F' ? 'disabled' : null"
+                                       [ngClass]="{ 'is-invalid': g.deduction1percentage.touched && g.deduction1percentage.invalid,
+                                    'is-valid': g.deduction1percentage.valid}">
                             </div>
                         </div>
                         <div class="form-row text-dark">
@@ -513,22 +518,27 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                                <label class="col-form-label">Discount 2</label>
+                                <label class="col-form-label">{{estimateSettingElements?.deduction2label}}</label>
                             </div>
                             <div class="col-4">
                                 <input type="text" class="form-control" formControlName="deduction2label"
-                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
+                                       [ngClass]="{ 'is-invalid': g.deduction2label.touched && g.deduction2label.invalid,
+                                    'is-valid': g.deduction2label.valid}">
                             </div>
                             <div class="col-3">
                                 <select class="form-control" formControlName="deduction2type"
-                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
-                                    <option value="D2P">%</option>
-                                    <option value="D2F">Flat Rate</option>
+                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
+                                        (change)="onSetPercentage('deduction2percentage', $event)">
+                                    <option *ngFor="let tOption of typeOptions" value="{{tOption.typeCode}}">{{tOption.typeName}}</option>
                                 </select>
                             </div>
                             <div class="col-2">
                                 <input type="text" class="form-control" formControlName="deduction2percentage"
-                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null ||
+                                       g.deduction2type.value === 'F' ? 'disabled' : null"
+                                       [ngClass]="{ 'is-invalid': g.deduction2percentage.touched && g.deduction2percentage.invalid,
+                                    'is-valid': g.deduction2percentage.valid}">
                             </div>
                         </div>
                         <div class="form-row text-dark">
@@ -540,22 +550,27 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                                <label class="col-form-label">Tax 1</label>
+                                <label class="col-form-label">{{estimateSettingElements?.addition1label}}</label>
                             </div>
                             <div class="col-4">
                                 <input type="text" class="form-control" formControlName="addition1label"
-                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
+                                       [ngClass]="{ 'is-invalid': g.addition1label.touched && g.addition1label.invalid,
+                                    'is-valid': g.addition1label.valid}">
                             </div>
                             <div class="col-3">
                                 <select class="form-control" formControlName="addition1type"
-                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
-                                    <option value="A1P">%</option>
-                                    <option value="A1F">Flat Rate</option>
+                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
+                                        (change)="onSetPercentage('addition1percentage', $event)">
+                                    <option *ngFor="let tOption of typeOptions" value="{{tOption.typeCode}}">{{tOption.typeName}}</option>
                                 </select>
                             </div>
                             <div class="col-2">
                                 <input type="text" class="form-control" formControlName="addition1percentage"
-                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null ||
+                                       g.addition1type.value === 'F' ? 'disabled' : null"
+                                       [ngClass]="{ 'is-invalid': g.addition1percentage.touched && g.addition1percentage.invalid,
+                                    'is-valid': g.addition1percentage.valid}">
                             </div>
                         </div>
                         <div class="form-row text-dark">
@@ -566,22 +581,27 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                                <label class="col-form-label">Tax 2</label>
+                                <label class="col-form-label">{{estimateSettingElements?.addition2label}}</label>
                             </div>
                             <div class="col-4">
                                 <input type="text" class="form-control" formControlName="addition2label"
-                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
+                                       [ngClass]="{ 'is-invalid': g.addition2label.touched && g.addition2label.invalid,
+                                    'is-valid': g.addition2label.valid}">
                             </div>
                             <div class="col-3">
                                 <select class="form-control" formControlName="addition2type"
-                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
-                                    <option value="A2P">%</option>
-                                    <option value="A2F">Flat Rate</option>
+                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
+                                        (change)="onSetPercentage('addition2percentage', $event)">
+                                    <option *ngFor="let tOption of typeOptions" value="{{tOption.typeCode}}">{{tOption.typeName}}</option>
                                 </select>
                             </div>
                             <div class="col-2">
                                 <input type="text" class="form-control" formControlName="addition2percentage"
-                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null ||
+                                       g.addition2type.value === 'F' ? 'disabled' : null"
+                                       [ngClass]="{ 'is-invalid': g.addition2percentage.touched && g.addition2percentage.invalid,
+                                    'is-valid': g.addition2percentage.valid}">
                             </div>
                         </div>
                         <div class="form-row text-dark">
@@ -592,22 +612,27 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                                <label class="col-form-label">Tax 3</label>
+                                <label class="col-form-label">{{estimateSettingElements?.addition3label}}</label>
                             </div>
                             <div class="col-4">
                                 <input type="text" class="form-control" formControlName="addition3label"
-                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
+                                       [ngClass]="{ 'is-invalid': g.addition3label.touched && g.addition3label.invalid,
+                                    'is-valid': g.addition3label.valid}">
                             </div>
                             <div class="col-3">
                                 <select class="form-control" formControlName="addition3type"
-                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
-                                    <option value="A3P">%</option>
-                                    <option value="A3F">Flat Rate</option>
+                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
+                                        (change)="onSetPercentage('addition3percentage', $event)">
+                                    <option *ngFor="let tOption of typeOptions" value="{{tOption.typeCode}}">{{tOption.typeName}}</option>
                                 </select>
                             </div>
                             <div class="col-2">
                                 <input type="text" class="form-control" formControlName="addition3percentage"
-                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null ||
+                                       g.addition3type.value === 'F' ? 'disabled' : null"
+                                       [ngClass]="{ 'is-invalid': g.addition3percentage.touched && g.addition3percentage.invalid,
+                                    'is-valid': g.addition3percentage.valid}">
                             </div>
                         </div>
                         <div class="form-row text-dark">
@@ -628,10 +653,11 @@
                             </div>
                         </div>
                         <div class="form-row text-dark mt-1">
-                            <p>* Discount 1  is calculated based on Sub-Total amount<br>
-                                * Discount 2  is calculated based on Sub-Total - Discount 1<br>
-                                * Tax 1, Tax 2 and Tax 3 is calculated based on Sub-Total - Discount 1 - Discount 2</p>
-
+                            <p>* <strong>{{estimateSettingElements?.deduction1label}}</strong> is calculated based on Sub-Total amount<br>
+                                * <strong>{{estimateSettingElements?.deduction2label}}</strong>  is calculated based on Sub-Total - Discount 1<br>
+                                * <strong>{{estimateSettingElements?.addition1label}}</strong>, <strong>{{estimateSettingElements?.addition2label}}</strong>
+                                and <strong>{{estimateSettingElements?.addition3label}}</strong> is calculated based on Sub-Total - Discount 1 - Discount 2
+                            </p>
                         </div>
                     </form>
                 </div>
@@ -640,7 +666,8 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCancelSetting()">Cancel</button>
                 <button type="button" class="btn btn-primary" (click)="onSaveSetting()"
-                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">Save</button>
+                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null ||
+                        !settingForm.valid ? 'disabled' : null">Save</button>
             </div>
         </div>
     </div>

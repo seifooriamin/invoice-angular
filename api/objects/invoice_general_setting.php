@@ -155,8 +155,8 @@ class Invoice_general_setting
         if($stmt->execute()){
             return true;
         }
-        $errors = $stmt->errorInfo();
-        echo($errors[2]);
+//        $errors = $stmt->errorInfo();
+//        echo($errors[2]);
         return false;
 
 
@@ -165,7 +165,6 @@ class Invoice_general_setting
 
         // update query
         $query = "UPDATE " . $this->table_name . " SET
-                        user_id=:user_id,
                         currency=:currency,
                         deduction1status=:deduction1status,
                         deduction1label=:deduction1label,
@@ -193,7 +192,6 @@ class Invoice_general_setting
         // prepare query statement
         $stmt = $this->conn->prepare($query);
 
-        $this->user_id=htmlspecialchars(strip_tags($this->user_id));
         $this->currency=htmlspecialchars(strip_tags($this->currency));
         $this->id=htmlspecialchars(strip_tags($this->id));
         $this->deduction1status=htmlspecialchars(strip_tags($this->deduction1status));
@@ -219,7 +217,6 @@ class Invoice_general_setting
 
 
         // bind new values
-        $stmt->bindParam(":user_id", $this->user_id);
         $stmt->bindParam(":currency", $this->currency);
         $stmt->bindParam(":deduction1status", $this->deduction1status);
         $stmt->bindParam(":deduction1label", $this->deduction1label);
@@ -247,7 +244,10 @@ class Invoice_general_setting
         if($stmt->execute()){
             return true;
         }
+        $errors = $stmt->errorInfo();
+        echo($errors[2]);
         return false;
+
     }
     function delete(){
 

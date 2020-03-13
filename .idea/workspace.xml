@@ -2,14 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c4c7dfe-6670-4a27-8f34-d59f1855566a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/invoice_general_setting/create.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_general_setting/create.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/invoice_general_setting/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_general_setting/update.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/objects/invoice_general_setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/objects/invoice_general_setting.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/shared/services/invoice-general-setting.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/invoice-general-setting.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/users/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/profile/profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Afghanistan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Afghanistan.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/my-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/my-style.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -30,11 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="438" selection-start-line="438" selection-end-line="438" selection-end-column="41" />
+            <state relative-caret-position="381">
+              <caret line="404" column="87" selection-start-line="404" selection-start-column="87" selection-end-line="404" selection-end-column="87" />
             </state>
           </provider>
         </entry>
@@ -42,8 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="593" column="60" lean-forward="true" selection-start-line="593" selection-start-column="28" selection-end-line="593" selection-end-column="60" />
+            <state relative-caret-position="239">
+              <caret line="1190" column="34" selection-start-line="1190" selection-start-column="31" selection-end-line="1190" selection-end-column="34" />
               <folding>
                 <element signature="e#0#59#0" expanded="true" />
                 <element signature="n#!!block;n#ngOnDestroy#0;n#EstimateAddViewModifyComponent#0" />
@@ -56,8 +58,8 @@
                 <element signature="n#!!block;n#getUnitMeasure#0;n#EstimateAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onRowTotal#0;n#EstimateAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#calcSubTotal#0;n#EstimateAddViewModifyComponent#0" />
-                <element signature="n#!!block;n#calcTotal#0;n#EstimateAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onSettingCall#0;n#EstimateAddViewModifyComponent#0" />
+                <element signature="n#!!block;n#onCreateRow#0;n#EstimateAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onSetUserId#0;n#EstimateAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onSetInvoiceRowUserId#0;n#EstimateAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onCurrencyShow#0;n#EstimateAddViewModifyComponent#0" />
@@ -65,7 +67,6 @@
                 <element signature="n#!!block;n#onBack#0;n#EstimateAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onModify#0;n#EstimateAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onLoadCompanyDataSetUserId#0;n#EstimateAddViewModifyComponent#0" />
-                <element signature="n#!!block;n#onSubmit#0;n#EstimateAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onLoadCompanyData#0;n#EstimateAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onLoadCustomerData#0;n#EstimateAddViewModifyComponent#0" />
                 <element signature="n#!!block;n#onAddCompany#0;n#EstimateAddViewModifyComponent#0" />
@@ -90,47 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3384">
-              <caret line="623" column="34" lean-forward="true" selection-start-line="623" selection-start-column="34" selection-end-line="623" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/users/profile/profile.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="41" column="63" lean-forward="true" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="63" />
-              <folding>
-                <element signature="e#0#50#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/users/profile/profile.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-459">
-              <caret line="21" selection-start-line="21" selection-end-line="23" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="228" column="64" selection-start-line="228" selection-start-column="64" selection-end-line="228" selection-end-column="64" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/my-style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="505">
-              <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
+            <state relative-caret-position="287">
+              <caret line="669" column="63" selection-start-line="668" selection-start-column="84" selection-end-line="669" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -138,34 +100,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="595" column="63" selection-start-line="595" selection-start-column="31" selection-end-line="595" selection-end-column="63" />
+            <state relative-caret-position="457">
+              <caret line="1210" column="5" selection-start-line="1210" selection-start-column="5" selection-end-line="1210" selection-end-column="5" />
               <folding>
                 <element signature="e#0#59#0" expanded="true" />
                 <element signature="e#3191#3831#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/shared/services/invoice-general-setting.service.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#43#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="120" column="30" selection-start-line="120" selection-start-column="30" selection-end-line="120" selection-end-column="30" />
-              <folding>
-                <element signature="e#0#50#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -183,18 +122,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.border</find>
-      <find>.border-secondary</find>
-      <find>.pl-3</find>
-      <find>.pr-3</find>
-      <find>.font-weight-bold</find>
-      <find>justify-content-center</find>
-      <find>list-group</find>
-      <find>.list-group</find>
-      <find>.list-group-horizontal</find>
-      <find>.text-danger</find>
-      <find>.text-primary</find>
-      <find>.text-inf</find>
       <find>.text-prim</find>
       <find>.text-dan</find>
       <find>.text-dar</find>
@@ -213,6 +140,18 @@
       <find>fillInvoicerows</find>
       <find>createrow</find>
       <find>createro</find>
+      <find>settingForm</find>
+      <find>initsettingForm</find>
+      <find>onset</find>
+      <find>fillSettingForm</find>
+      <find>onSaveSetting</find>
+      <find>D1P</find>
+      <find>A2P</find>
+      <find>A3F</find>
+      <find>onsetper</find>
+      <find>'P'</find>
+      <find>'F'</find>
+      <find>A3P</find>
     </findStrings>
     <dirStrings>
       <dir>C:\wamp64\www\invoice-angular\node_modules\ng-uikit-pro-standard\assets\scss\core\msc</dir>
@@ -226,10 +165,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/app/users/users.component.ts" />
-        <option value="$PROJECT_DIR$/src/app/users/verify/verify.component.css" />
-        <option value="$PROJECT_DIR$/src/index.html" />
-        <option value="$PROJECT_DIR$/src/app/users/signin/signin.component.ts" />
         <option value="$PROJECT_DIR$/api/users/update_user.php" />
         <option value="$PROJECT_DIR$/api/objects/customers.php" />
         <option value="$PROJECT_DIR$/api/users/update.php" />
@@ -260,8 +195,6 @@
         <option value="$PROJECT_DIR$/src/app/top-menu/top-menu.component.html" />
         <option value="$PROJECT_DIR$/src/app/shared/services/country.service.ts" />
         <option value="$PROJECT_DIR$/src/app/shared/services/currency.service.ts" />
-        <option value="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts" />
-        <option value="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html" />
         <option value="$PROJECT_DIR$/angular.json" />
         <option value="$PROJECT_DIR$/src/app/dashboard/dashboard.component.ts" />
         <option value="$PROJECT_DIR$/src/app/estimate/estimate-list/estimate-list.component.ts" />
@@ -271,12 +204,18 @@
         <option value="$PROJECT_DIR$/src/app/users/profile/profile.component.ts" />
         <option value="$PROJECT_DIR$/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/src/app/top-menu/top-menu.component.ts" />
-        <option value="$PROJECT_DIR$/api/invoice_general_setting/create.php" />
         <option value="$PROJECT_DIR$/src/my-style.css" />
-        <option value="$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.html" />
         <option value="$PROJECT_DIR$/src/app/users/profile/profile.component.html" />
+        <option value="$PROJECT_DIR$/api/invoice_general_setting/update.php" />
+        <option value="$PROJECT_DIR$/src/app/shared/services/invoice-general-setting.service.ts" />
+        <option value="$PROJECT_DIR$/api/invoice_general_setting/create.php" />
+        <option value="$PROJECT_DIR$/api/objects/invoice_general_setting.php" />
         <option value="$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.ts" />
         <option value="$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.html" />
+        <option value="$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.html" />
+        <option value="$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html" />
       </list>
     </option>
   </component>
@@ -366,44 +305,6 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="invoice" type="462c0819:PsiDirectoryNode" />
               <item name="invoice-add-view-modify" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
-              <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="shared" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
-              <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="shared" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
-              <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="users" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
-              <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="users" type="462c0819:PsiDirectoryNode" />
-              <item name="general-setting" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
-              <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="users" type="462c0819:PsiDirectoryNode" />
-              <item name="profile" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -506,12 +407,12 @@
       <workItem from="1583295660706" duration="3751000" />
       <workItem from="1583300060950" duration="24537000" />
       <workItem from="1583468607400" duration="72662000" />
-      <workItem from="1583907662732" duration="18830000" />
+      <workItem from="1583907662732" duration="32414000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="850375000" />
+    <option name="totallyTimeSpent" value="863959000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="702" extended-state="7" />
@@ -567,22 +468,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/api/libs/php/vendor/composer/LICENSE" />
-    <entry file="file://$PROJECT_DIR$/api/libs/php/mailsender.php" />
-    <entry file="file://$PROJECT_DIR$/src/app/shared/services/tools.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="36" selection-start-line="36" selection-end-line="37" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="63" selection-start-line="63" selection-end-line="64" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/users/emailexist.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -810,44 +695,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/top-menu/top-menu.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="100" column="3" selection-start-line="100" selection-start-column="3" selection-end-line="100" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/invoice_general_setting/readonebyuserid.php">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_custom_setting/create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-204" />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/objects/invoice_custom_setting.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3366">
           <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_general_setting/create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="43" column="28" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/shared/services/invoice-general-setting.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -858,20 +712,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="438" selection-start-line="438" selection-end-line="438" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3384">
-          <caret line="623" column="34" lean-forward="true" selection-start-line="623" selection-start-column="34" selection-end-line="623" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/users/profile/profile.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-459">
@@ -879,31 +719,100 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/api/invoice_general_setting/update.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="22" selection-start-line="22" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/users/profile/profile.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="41" column="63" lean-forward="true" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="63" />
+        <state relative-caret-position="454">
+          <caret line="103" column="5" lean-forward="true" selection-start-line="80" selection-end-line="103" selection-end-column="5" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts">
+    <entry file="file://$PROJECT_DIR$/src/app/shared/services/invoice-general-setting.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="595" column="63" selection-start-line="595" selection-start-column="31" selection-end-line="595" selection-end-column="63" />
+        <state relative-caret-position="323">
+          <caret line="19" column="93" selection-start-line="19" selection-start-column="93" selection-end-line="19" selection-end-column="93" />
           <folding>
-            <element signature="e#0#59#0" expanded="true" />
-            <element signature="e#3191#3831#0" />
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/objects/invoice_general_setting.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="247" column="25" selection-start-line="247" selection-start-column="25" selection-end-line="247" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/invoice_custom_setting/create.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="25" column="60" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/invoice_custom_setting/update.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-255" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/invoice_general_setting/create.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-101">
+          <caret line="34" column="31" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/top-menu/top-menu.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="82" selection-start-line="82" selection-end-line="82" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/users.component.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="108" selection-start-line="108" selection-end-line="114" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="66" column="103" selection-start-line="66" selection-start-column="53" selection-end-line="66" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="669" column="63" selection-start-line="668" selection-start-column="84" selection-end-line="669" selection-end-column="63" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="593" column="60" lean-forward="true" selection-start-line="593" selection-start-column="28" selection-end-line="593" selection-end-column="60" />
+        <state relative-caret-position="239">
+          <caret line="1190" column="34" selection-start-line="1190" selection-start-column="31" selection-end-line="1190" selection-end-column="34" />
           <folding>
             <element signature="e#0#59#0" expanded="true" />
             <element signature="n#!!block;n#ngOnDestroy#0;n#EstimateAddViewModifyComponent#0" />
@@ -916,8 +825,8 @@
             <element signature="n#!!block;n#getUnitMeasure#0;n#EstimateAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onRowTotal#0;n#EstimateAddViewModifyComponent#0" />
             <element signature="n#!!block;n#calcSubTotal#0;n#EstimateAddViewModifyComponent#0" />
-            <element signature="n#!!block;n#calcTotal#0;n#EstimateAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onSettingCall#0;n#EstimateAddViewModifyComponent#0" />
+            <element signature="n#!!block;n#onCreateRow#0;n#EstimateAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onSetUserId#0;n#EstimateAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onSetInvoiceRowUserId#0;n#EstimateAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onCurrencyShow#0;n#EstimateAddViewModifyComponent#0" />
@@ -925,7 +834,6 @@
             <element signature="n#!!block;n#onBack#0;n#EstimateAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onModify#0;n#EstimateAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onLoadCompanyDataSetUserId#0;n#EstimateAddViewModifyComponent#0" />
-            <element signature="n#!!block;n#onSubmit#0;n#EstimateAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onLoadCompanyData#0;n#EstimateAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onLoadCustomerData#0;n#EstimateAddViewModifyComponent#0" />
             <element signature="n#!!block;n#onAddCompany#0;n#EstimateAddViewModifyComponent#0" />
@@ -946,20 +854,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.ts">
+    <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="120" column="30" selection-start-line="120" selection-start-column="30" selection-end-line="120" selection-end-column="30" />
+        <state relative-caret-position="457">
+          <caret line="1210" column="5" selection-start-line="1210" selection-start-column="5" selection-end-line="1210" selection-end-column="5" />
           <folding>
-            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#0#59#0" expanded="true" />
+            <element signature="e#3191#3831#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.html">
+    <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="228" column="64" selection-start-line="228" selection-start-column="64" selection-end-line="228" selection-end-column="64" />
+        <state relative-caret-position="381">
+          <caret line="404" column="87" selection-start-line="404" selection-start-column="87" selection-end-line="404" selection-end-column="87" />
         </state>
       </provider>
     </entry>
