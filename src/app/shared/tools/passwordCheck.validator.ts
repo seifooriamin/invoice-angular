@@ -7,10 +7,11 @@ export function PasswordCheck(control: AbstractControl): Promise<any> {
     }
 
     clearTimeout(this.debouncedTimeout);
-
     const q = new Promise((resolve) => {
         this.debouncedTimeout = setTimeout(() => {
-            this.userService.checkOldEmail(this.changePasswordForm.value).subscribe(
+            const password: string = '{ "old_password" : "' + this.f.old_password.value + '", "id" : "'
+                + this.f.id.value + '" }';
+            this.userService.checkOldEmail(password).subscribe(
                 (response) => {
                     if (response['message'] === 'PASSWORDOK') {
                         resolve(null);

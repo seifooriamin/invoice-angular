@@ -8,11 +8,15 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 
+include_once '../../config/core.php';
+
 $mail = new PHPMailer(true);
 $data = json_decode(file_get_contents("php://input"));
 $to = $data->email;
 $subject = $data->subject;
 $user = $data->name;
+$module = $data->module;
+
 
 try{
 
@@ -22,11 +26,24 @@ try{
     $mail->isHTML(true);
 //    $mail->addEmbeddedImage('email_template/images/logo.png', 'logo_p2t');
     $mail->addEmbeddedImage('email_template/images/logo-text.png', 'logo_p2t');
-    $mail->addEmbeddedImage('email_template/images/instagram.png', 'instagram');
-    $mail->addEmbeddedImage('email_template/images/facebook.png', 'facebook');
-    $mail->addEmbeddedImage('email_template/images/twitter.png', 'twitter');
-    $message = file_get_contents('email_template/email_template.html');
-    $message = str_replace('%user%', $user, $message);
+//    $mail->addEmbeddedImage('email_template/images/instagram.png', 'instagram');
+//    $mail->addEmbeddedImage('email_template/images/facebook.png', 'facebook');
+//    $mail->addEmbeddedImage('email_template/images/twitter.png', 'twitter');
+    switch ($module) {
+        case 'CP':
+            $message = file_get_contents('email_template/change_password.html');
+            $message = str_replace('%user%', $user, $message);
+            break;
+        case 'RP':
+            $token = $data->token;
+//            $url = '<a href="http://localhost:4200/users/resetpassword?access_code=' . $token . '>Click Here</a>';
+            $message = file_get_contents('email_template/reset_password.html');
+            $message = str_replace('%token%', $token, $message);
+            $message = str_replace('%user%', $user, $message);
+
+            break;
+    }
+
     $mail->msgHTML($message);
 //    $mail->AltBody=strip_tags($message);
     /* SMTP parameters. */

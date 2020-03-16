@@ -20,6 +20,8 @@ import {EstimateListComponent} from './estimate/estimate-list/estimate-list.comp
 import {EstimateAddViewModifyComponent} from './estimate/estimate-add-view-modify/estimate-add-view-modify.component';
 import {ProfileComponent} from './users/profile/profile.component';
 import {GeneralSettingComponent} from './users/general-setting/general-setting.component';
+import {ResetPasswordRequestComponent} from './users/reset-password-request/reset-password-request.component';
+import {ResetPasswordComponent} from './users/reset-password/reset-password.component';
 
 
 
@@ -57,6 +59,8 @@ const routes: Routes = [
   {path: 'users', component: UsersComponent, children: [
           {path: 'signin', component: SigninComponent},
           {path: 'signup', component: SignupComponent},
+          {path: 'forgetpassword', component: ResetPasswordRequestComponent},
+          {path: 'resetpassword', component: ResetPasswordComponent},
           {path: 'verify', component: VerifyComponent},
           {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
           {path: 'generalsetting', component: GeneralSettingComponent, canActivate: [AuthGuard]},

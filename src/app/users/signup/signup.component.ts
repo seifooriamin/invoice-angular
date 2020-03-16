@@ -5,13 +5,14 @@ import {CheckEmailExist} from '../../shared/tools/checkemailExist.validator';
 import {MustMatch} from '../../shared/tools/mustmatch.validator';
 import {Router} from '@angular/router';
 import {InvoiceGeneralSettingService} from '../../shared/services/invoice-general-setting.service';
+import {AuthenticationService} from '../../shared/services/authentication.service';
 
 declare var jQuery: any;
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['../../../my-style.css']
 })
 export class SignupComponent implements OnInit {
   fillForm: FormGroup;
@@ -21,9 +22,13 @@ export class SignupComponent implements OnInit {
   modalBody = '';
   userID: string;
 
-
   constructor(private userService: UserService, private formBuilder: FormBuilder, private router: Router,
-              private invoiceGeneralSettingService: InvoiceGeneralSettingService) {}
+              private invoiceGeneralSettingService: InvoiceGeneralSettingService, private authentication: AuthenticationService,
+              ) {
+      if (this.authentication.currentUserValue) {
+          this.router.navigate(['/']);
+      }
+  }
 
   ngOnInit() {
     // this.initForm();

@@ -23,10 +23,12 @@
     // get posted data
     $data = json_decode(file_get_contents("php://input"));
     $user->email = $data->email;
-        if(($user->emailExists())){
+        if(($user->emailExists())) {
             http_response_code(200);
-            echo json_encode(array("message" => "email exist"));
-        }else{
+            echo json_encode(array("message" => "email exist",
+                "first_name" => $user->first_name,
+                "last_name" => $user->last_name));
+        } else {
 //            http_response_code(400);
 //            echo json_encode(array("message" => "new email"));
             http_response_code(200);

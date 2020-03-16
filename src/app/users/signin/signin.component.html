@@ -1,6 +1,6 @@
 <div class="container">
-    <div class="row m-t-3 justify-content-center">
-        <h1>Easy Invoice Builder Sign in Page</h1>
+    <div class="row mt-3 justify-content-center">
+        <h1>Easy Invoice Maker Sign in Page</h1>
     </div>
     <div class="row">
         <div class="col-md-4 offset-4 signin-head mt-2">
@@ -36,10 +36,10 @@
             </form>
         </div>
         <div class="col-md-4 offset-4">
-            <a href="#" class="text-primary">Forget Password</a>
+            <a [routerLink]="['/users/forgetpassword']" class="text-primary">Forget Password</a>
 <!--            <p>If you have not already registered,<a [routerLink]="['/signup']" class="text-primary"> sign up here</a></p>-->
 <!--            <p>If you have not already registered,<a routerLink="/signup" class="text-primary"> sign up here</a></p>-->
-            <p>If you have not already registered,<a class="text-primary" (click)="onSignup()"> sign up here</a>
+            <p>If you have not already registered,<a class="text-primary" [routerLink]="['/users/signup']"> sign up here</a>
         </div>
     </div>
 

@@ -7,7 +7,8 @@ import {AuthenticationService} from '../../shared/services/authentication.servic
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+  styleUrls: ['../../../my-style.css']
+  // styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
   fillForm: FormGroup;
@@ -49,9 +50,6 @@ export class SigninComponent implements OnInit {
           this.loading = false;
         }
     );
-  }
-  onSignup() {
-    this.router.navigate(['/users/signup']);
   }
   get f() { return this.fillForm.controls; }
 

@@ -10,8 +10,17 @@
     // files needed to connect to database
     include_once '../config/database.php';
     include_once '../objects/users.php';
+    include_once '../config/core.php';
+    include_once '../libs/php-jwt-master/src/BeforeValidException.php';
+    include_once '../libs/php-jwt-master/src/ExpiredException.php';
+    include_once '../libs/php-jwt-master/src/SignatureInvalidException.php';
+    include_once '../libs/php-jwt-master/src/JWT.php';
+    use \Firebase\JWT\JWT;
 
-    // get database connection
+    $ciphering = "AES-128-CTR";
+    $options = 0;
+    $decryption_iv = '0098916611423595';
+    $decryption_key = "AminSeifooriPegahMaktabi";
     $database = new Database();
     $db = $database->getConnection();
 
@@ -28,16 +37,7 @@
     $email_validated = $user->emailValidated();
     // files for jwt will be here
     // generate json web token
-    include_once '../config/core.php';
-    include_once '../libs/php-jwt-master/src/BeforeValidException.php';
-    include_once '../libs/php-jwt-master/src/ExpiredException.php';
-    include_once '../libs/php-jwt-master/src/SignatureInvalidException.php';
-    include_once '../libs/php-jwt-master/src/JWT.php';
-    use \Firebase\JWT\JWT;
-    $ciphering = "AES-128-CTR";
-    $options = 0;
-    $decryption_iv = '0098916611423595';
-    $decryption_key = "AminSeifooriPegahMaktabi";
+
     // generate jwt will be here
     // check if email exists and if password is correct
     if($email_exists && $email_validated && password_verify($data->password, $user->password)){

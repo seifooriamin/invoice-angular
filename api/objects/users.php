@@ -21,6 +21,7 @@
         public $postal_code;
         public $access_level;
         public $access_code;
+        public $new_access_code;
         public $status;
         public $created;
         public $modified;
@@ -259,7 +260,7 @@
         function accessCodeExists(){
 
             // query to check if access_code exists
-            $query = "SELECT id
+            $query = "SELECT id, first_name, last_name, email
                 FROM " . $this->table_name . "
                 WHERE access_code = ?
                 LIMIT 0,1";
@@ -281,8 +282,10 @@
 
             // if access_code exists
             if($num>0){
-
-                // return true because access_code exists in the database
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->first_name = $row['first_name'];
+                $this->last_name = $row['last_name'];
+                $this->email = $row['email'];
                 return true;
             }
 
@@ -322,7 +325,9 @@
 
             // update query
             $query = "UPDATE " . $this->table_name . "
-                SET password = :password
+                SET 
+                    password = :password,
+                    access_code = :new_access_code
                 WHERE access_code = :access_code";
 
             // prepare the query
@@ -336,12 +341,12 @@
             $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
             $stmt->bindParam(':password', $password_hash);
             $stmt->bindParam(':access_code', $this->access_code);
+            $stmt->bindParam(':new_access_code', $this->new_access_code);
 
             // execute the query
             if($stmt->execute()){
                 return true;
             }
-
             return false;
         }
         function readByID() {
@@ -438,7 +443,5 @@
             $this->password = $row['password'];
 
         }
-
-
     }
 ?>

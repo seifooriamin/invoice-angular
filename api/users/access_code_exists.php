@@ -15,22 +15,22 @@
     $db = $database->getConnection();
 
     // prepare product object
-    $users = new Users($db);
-
+    $user = new Users($db);
     $data = json_decode(file_get_contents("php://input"));
-    $users->id = $data->id;
-    $old_password = $data->old_password;
+    $user->access_code = $data->access_code;
 
-    // read the details of product to be edited
-    $users->passwordCheck();
-//
-    if($users->password!=null && password_verify($old_password, $users->password)){
+    if($user->accessCodeExists()){
+
         http_response_code(200);
-        echo json_encode(array("message" => 'PASSWORDOK'));
-    }else{
-//            http_response_code(400);
-//            echo json_encode(array("message" => "new email"));
-        http_response_code(200);
-        echo json_encode(array("message" => 'PASSWORDFAIL'));
+//        echo json_encode(array("message" => "SUCCESS"));
+        echo json_encode(array("message" => "SUCCESS",
+            "first_name" => $user->first_name,
+            "last_name" => $user->last_name,
+            "email" => $user->email));
+    }
+
+    else{
+        http_response_code(404);
+        echo json_encode(array("message" => "FAIL"));
     }
 ?>

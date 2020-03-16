@@ -31,7 +31,6 @@ export class TopMenuComponent implements OnInit {
       jQuery(this).find('.dropdown-menu').hide();
     });
     this.initForm();
-    this.setUserId();
   }
   initForm() {
     this.changePasswordForm = this.formBuilder.group({
@@ -50,6 +49,8 @@ export class TopMenuComponent implements OnInit {
     this.authenticationService.logout();
   }
   onShowPassChange() {
+    this.changePasswordForm.reset();
+    this.setUserId();
     jQuery('#modalChangePassword').modal('show');
   }
   onSubmit() {
@@ -59,12 +60,12 @@ export class TopMenuComponent implements OnInit {
             this.submitMessage = 'Password has been changed successfully';
             this.submitMessageStatusSuccess = true;
             this.changePasswordForm.reset();
+            this.setUserId();
             const jCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
             const data =  '{ "email" : "' + jCurrentUser.email + '", "subject" : "Change Password", "name" : "' +
-                jCurrentUser.first_name + ' ' + jCurrentUser.last_name + '"}';
+                jCurrentUser.first_name + ' ' + jCurrentUser.last_name + '", "module" : "CP" }';
             this.userService.emailSender(data).subscribe(
                 () => {
-
                 }, () => {}
             );
             setTimeout(() => {
@@ -80,7 +81,7 @@ export class TopMenuComponent implements OnInit {
       );
     } else {
       this.submitMessage = 'Fill all the mandatory fields';
-      this.markFormGroupTouched(this.changePasswordForm);
+      this.toolsService.markFormGroupTouched(this.changePasswordForm);
       this.submitMessageStatusFail = true;
       this.formInvalidSubmit =  true;
       setTimeout(() => {
@@ -90,14 +91,5 @@ export class TopMenuComponent implements OnInit {
 
   }
   get f() { return this.changePasswordForm.controls; }
-  private markFormGroupTouched(form: FormGroup) {
-    Object.values(form.controls).forEach(control => {
-      control.markAsTouched();
-
-      if ((control as any).controls) {
-        this.markFormGroupTouched(control as FormGroup);
-      }
-    });
-  }
 
 }

@@ -9,6 +9,7 @@
     // include database and object files
     include_once '../config/database.php';
     include_once '../objects/users.php';
+    include_once '../libs/php/utils.php';
 
     // get database connection
     $database = new Database();
@@ -16,21 +17,19 @@
 
     // prepare product object
     $users = new Users($db);
+    $utility = new Utils();
 
     $data = json_decode(file_get_contents("php://input"));
-    $users->id = $data->id;
-    $old_password = $data->old_password;
+    $users->password = $data->password;
+    $users->access_code = $data->access_code;
+    $users->new_access_code = $utility->getToken();
 
-    // read the details of product to be edited
-    $users->passwordCheck();
-//
-    if($users->password!=null && password_verify($old_password, $users->password)){
+    if($users->updatePassword()){
         http_response_code(200);
-        echo json_encode(array("message" => 'PASSWORDOK'));
-    }else{
-//            http_response_code(400);
-//            echo json_encode(array("message" => "new email"));
-        http_response_code(200);
-        echo json_encode(array("message" => 'PASSWORDFAIL'));
+        echo json_encode(array("message" => "SUCCESS"));
+    } else {
+        http_response_code(503);
+        echo json_encode(array("message" => "FAIL"));
     }
+
 ?>

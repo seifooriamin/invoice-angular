@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {UserService} from '../../shared/services/user.service';
+import {AuthenticationService} from '../../shared/services/authentication.service';
 
 @Component({
   selector: 'app-verify',
@@ -12,7 +13,12 @@ export class VerifyComponent implements OnInit {
   token: string;
   sub: Subscription;
   situation = '';
-  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router,
+              private authentication: AuthenticationService) {
+      if (this.authentication.currentUserValue) {
+          this.router.navigate(['/']);
+      }
+  }
 
   ngOnInit() {
     this.sub = this.route.queryParams.subscribe(

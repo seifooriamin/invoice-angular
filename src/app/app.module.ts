@@ -35,6 +35,8 @@ import { EstimateListComponent } from './estimate/estimate-list/estimate-list.co
 import { EstimateAddViewModifyComponent } from './estimate/estimate-add-view-modify/estimate-add-view-modify.component';
 import { ProfileComponent } from './users/profile/profile.component';
 import { GeneralSettingComponent } from './users/general-setting/general-setting.component';
+import { ResetPasswordRequestComponent } from './users/reset-password-request/reset-password-request.component';
+import { ResetPasswordComponent } from './users/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { GeneralSettingComponent } from './users/general-setting/general-setting
     EstimateAddViewModifyComponent,
     ProfileComponent,
     GeneralSettingComponent,
+    ResetPasswordRequestComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     // TableModule,

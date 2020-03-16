@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 h1,h2,h3,h4,h5,h6{
-    font-family: "Helvetica Neue";
+    /*font-family: "Helvetica Neue";*/
+    font-family: "Segoe UI";
 }
 body{
     overflow: hidden !important;
@@ -73,5 +74,14 @@ ul li a {
 }
 .mt-custom {
     margin-bottom: 0.7rem !important;
+}
+.signin-head{
+    background-color: #000033;
+}
+p a:hover{
+    cursor: pointer;
+}
+.user-header-h1 {
+    font-size: 1.17em;
 }
 

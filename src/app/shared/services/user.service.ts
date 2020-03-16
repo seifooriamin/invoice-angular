@@ -46,4 +46,13 @@ export class UserService {
   emailSender(data) {
     return this.httpClient.post(`${environment.apiUrl}libs/email_sender/mailsender`, data);
   }
+  updateAccessCode(data) {
+    return this.httpClient.patch(`${environment.apiUrl}users/update_access_code`, data);
+  }
+  accessCodeExists(data) {
+    return this.httpClient.patch(`${environment.apiUrl}users/access_code_exists`, data);
+  }
+  updatePassword(data) {
+    return this.httpClient.patch(`${environment.apiUrl}users/update_password`, data);
+  }
 }
