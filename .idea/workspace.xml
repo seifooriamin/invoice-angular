@@ -2,44 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c4c7dfe-6670-4a27-8f34-d59f1855566a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/api/libs/email_sender/email_template/reset_password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/users/access_code_exists.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/users/update_access_code.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/users/update_password.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/libs/email_sender/email_template/activation_email.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/libs/email_sender/email_template/email_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/libs/email_sender/email_template/change_password.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/libs/email_sender/mailsender.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/libs/email_sender/mailsender.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/objects/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/objects/users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/users/change_password_email.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/users/emailexist.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/users/emailexist.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/users/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/users/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/users/password_check.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/users/password_check.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/shared/services/tools.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/tools.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/users/create.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/users/create.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/users/getlastuserid.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/users/getlastuserid.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/shared/services/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/user.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/shared/tools/passwordCheck.validator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/tools/passwordCheck.validator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/top-menu/top-menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/top-menu/top-menu.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/users/signin/signin.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/signin/signin.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/users/signin/signin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/signin/signin.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/users/signin/signin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/signin/signin.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/users/signup/signup.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/users/signup/signup.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/signup/signup.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/users/signup/signup.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/signup/signup.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/users/verify/verify.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/verify/verify.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/fonts/Helvetica.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/fonts/Helvetica.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/fonts/Helvetica.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/fonts/Helvetica.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/fonts/Magneto .TTF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/fonts/Magneto .eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/fonts/Magneto .woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/fonts/Magneto .woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/fonts/times.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/fonts/times.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/fonts/times.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/fonts/times.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/my-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/my-style.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -61,19 +35,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/users/signin/signin.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="41" column="50" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/users/signup/signup.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="67" selection-start-line="10" selection-start-column="67" selection-end-line="10" selection-end-column="67" />
+            <state relative-caret-position="335">
+              <caret line="123" column="61" selection-start-line="123" selection-start-column="61" selection-end-line="123" selection-end-column="61" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
               </folding>
@@ -82,24 +47,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.ts">
+        <entry file="file://$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="11" column="36" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="36" />
+            <state relative-caret-position="68">
+              <caret line="4" column="89" selection-start-line="4" selection-start-column="89" selection-end-line="4" selection-end-column="89" />
               <folding>
-                <element signature="e#0#59#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/users/signup/signup.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="20" column="21" lean-forward="true" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#50#0" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -108,10 +61,83 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="12" selection-end-column="10" />
+            <state relative-caret-position="68">
+              <caret line="4" column="89" selection-start-line="4" selection-start-column="89" selection-end-line="4" selection-end-column="89" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#form#0;n#div#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/users/signup/signup.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-223">
+              <caret line="84" column="54" selection-start-line="84" selection-start-column="54" selection-end-line="84" selection-end-column="54" />
+              <folding>
+                <element signature="e#0#59#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/shared/services/user.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="307">
+              <caret line="32" column="56" lean-forward="true" selection-start-line="32" selection-start-column="56" selection-end-line="32" selection-end-column="56" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/users/getlastuserid.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/users/read_one.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret line="27" selection-start-line="27" selection-end-line="39" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/libs/email_sender/email_template/activation_email.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="219" column="59" selection-start-line="219" selection-start-column="59" selection-end-line="219" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/libs/email_sender/mailsender.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="355">
+              <caret line="63" selection-start-line="63" selection-end-line="65" selection-end-column="43" />
+              <folding>
+                <element signature="e#0#59#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -172,10 +198,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/api/libs/php/utils.php" />
-        <option value="$PROJECT_DIR$/api/libs/email_sender/email_template/email_template.html" />
-        <option value="$PROJECT_DIR$/src/app/top-menu/top-menu.component.html" />
-        <option value="$PROJECT_DIR$/src/app/shared/services/country.service.ts" />
         <option value="$PROJECT_DIR$/src/app/shared/services/currency.service.ts" />
         <option value="$PROJECT_DIR$/angular.json" />
         <option value="$PROJECT_DIR$/src/app/dashboard/dashboard.component.ts" />
@@ -205,24 +227,28 @@
         <option value="$PROJECT_DIR$/api/users/update_access_code.php" />
         <option value="$PROJECT_DIR$/api/users/login.php" />
         <option value="$PROJECT_DIR$/api/users/emailexist.php" />
-        <option value="$PROJECT_DIR$/api/libs/email_sender/mailsender.php" />
         <option value="$PROJECT_DIR$/api/libs/email_sender/email_template/reset_password.html" />
         <option value="$PROJECT_DIR$/src/app/app-routing.module.ts" />
         <option value="$PROJECT_DIR$/api/users/update_password.php" />
-        <option value="$PROJECT_DIR$/src/app/shared/services/user.service.ts" />
         <option value="$PROJECT_DIR$/src/my-style.css" />
-        <option value="$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.html" />
-        <option value="$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.html" />
         <option value="$PROJECT_DIR$/src/app/users/signin/signin.component.ts" />
         <option value="$PROJECT_DIR$/src/app/users/verify/verify.component.ts" />
         <option value="$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.ts" />
-        <option value="$PROJECT_DIR$/api/objects/users.php" />
         <option value="$PROJECT_DIR$/api/users/access_code_exists.php" />
-        <option value="$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.ts" />
         <option value="$PROJECT_DIR$/api/libs/email_sender/email_template/change_password.html" />
         <option value="$PROJECT_DIR$/src/app/users/signin/signin.component.html" />
-        <option value="$PROJECT_DIR$/src/app/users/signup/signup.component.ts" />
+        <option value="$PROJECT_DIR$/api/users/create.php" />
+        <option value="$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.ts" />
+        <option value="$PROJECT_DIR$/api/objects/users.php" />
+        <option value="$PROJECT_DIR$/api/users/read_one.php" />
+        <option value="$PROJECT_DIR$/api/users/getlastuserid.php" />
+        <option value="$PROJECT_DIR$/src/app/shared/services/user.service.ts" />
+        <option value="$PROJECT_DIR$/api/libs/email_sender/mailsender.php" />
+        <option value="$PROJECT_DIR$/api/libs/email_sender/email_template/activation_email.html" />
+        <option value="$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.html" />
+        <option value="$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.html" />
         <option value="$PROJECT_DIR$/src/app/users/signup/signup.component.html" />
+        <option value="$PROJECT_DIR$/src/app/users/signup/signup.component.ts" />
       </list>
     </option>
   </component>
@@ -365,6 +391,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="shared" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
+              <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="shared" type="462c0819:PsiDirectoryNode" />
               <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -453,7 +487,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/api/libs/email_sender/email_template" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -465,16 +499,16 @@
     <property name="ts.external.directory.path" value="C:\wamp64\www\invoice-angular\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\invoice-angular\api\users" />
-      <recent name="C:\wamp64\www\invoice-angular\api\libs\email_sender\email_template" />
-      <recent name="C:\wamp64\www\invoice-angular\api\libs\email_sender" />
-      <recent name="C:\wamp64\www\invoice-angular\api\libs\php" />
-      <recent name="C:\wamp64\www\invoice-angular\api\libs" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\invoice-angular\src\app\users" />
       <recent name="C:\wamp64\www\invoice-angular\src\app" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\invoice-angular\api\libs\email_sender\email_template" />
+      <recent name="C:\wamp64\www\invoice-angular\api\users" />
+      <recent name="C:\wamp64\www\invoice-angular\api\libs\email_sender" />
+      <recent name="C:\wamp64\www\invoice-angular\api\libs\php" />
+      <recent name="C:\wamp64\www\invoice-angular\api\libs" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -546,12 +580,12 @@
       <workItem from="1583300060950" duration="24537000" />
       <workItem from="1583468607400" duration="72662000" />
       <workItem from="1583907662732" duration="74663000" />
-      <workItem from="1584340771140" duration="265000" />
+      <workItem from="1584340771140" duration="11343000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="906473000" />
+    <option name="totallyTimeSpent" value="917551000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="702" extended-state="6" />
@@ -607,21 +641,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/api/users/change_password_email.php" />
-    <entry file="file://$PROJECT_DIR$/src/app/shared/tools/checkemailExist.validator.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="79" lean-forward="true" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/shared/tools/passwordCheck.validator.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/users/password_check.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -634,23 +653,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/users/signin/signin.component.css">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/users/profile/profile.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/users/profile/profile.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="116" column="47" lean-forward="true" selection-start-line="116" selection-start-column="2" selection-end-line="116" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/top-menu/top-menu.component.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -667,18 +669,6 @@
             <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/libs/php/utils.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/read_one.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-306" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/invoice_rows/deletebyinvoiceid.php">
@@ -728,30 +718,6 @@
     <entry file="file://$PROJECT_DIR$/api/config/core.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="55" column="155" selection-start-line="55" selection-start-column="94" selection-end-line="55" selection-end-column="155" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/libs/email_sender/mailsender.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/app-routing.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="62" column="67" selection-start-line="62" selection-start-column="67" selection-end-line="62" selection-end-column="67" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/users/users.component.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -787,16 +753,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="26" column="33" lean-forward="true" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/shared/services/user.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -859,60 +815,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/objects/users.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5">
-          <caret line="268" column="51" lean-forward="true" selection-start-line="268" selection-start-column="51" selection-end-line="268" selection-end-column="51" />
-          <folding>
-            <element signature="n#emailValidated#0;n#Users#0;n#!!top" />
-            <element signature="n#create#0;n#Users#0;n#!!top" />
-            <element signature="n#getLastUserID#0;n#Users#0;n#!!top" />
-            <element signature="n#readAll#0;n#Users#0;n#!!top" />
-            <element signature="n#countAll#0;n#Users#0;n#!!top" />
-            <element signature="n#updateStatusByAccessCode#0;n#Users#0;n#!!top" />
-            <element signature="n#updateAccessCode#0;n#Users#0;n#!!top" />
-            <element signature="n#updatePassword#0;n#Users#0;n#!!top" />
-            <element signature="n#readByID#0;n#Users#0;n#!!top" />
-            <element signature="n#update#0;n#Users#0;n#!!top" />
-            <element signature="n#changePassword#0;n#Users#0;n#!!top" />
-            <element signature="n#passwordCheck#0;n#Users#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/access_code_exists.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/libs/email_sender/email_template/change_password.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="220" column="14" lean-forward="true" selection-start-line="220" selection-start-column="14" selection-end-line="220" selection-end-column="14" />
           <folding>
             <element signature="n#style#0;n#a#0;n#p#1;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="74" selection-start-line="74" selection-end-line="74" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="60" column="88" selection-start-line="60" selection-start-column="88" selection-end-line="60" selection-end-column="88" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -927,42 +835,174 @@
     <entry file="file://$PROJECT_DIR$/src/app/users/signup/signup.component.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.html">
+    <entry file="file://$PROJECT_DIR$/api/users/create.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="12" selection-end-column="10" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="170">
+          <caret line="52" column="68" selection-start-line="52" selection-start-column="68" selection-end-line="52" selection-end-column="68" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.ts">
+    <entry file="file://$PROJECT_DIR$/src/app/users/profile/profile.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="11" column="36" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-204">
+          <caret selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/users/signup/signup.component.ts">
+    <entry file="file://$PROJECT_DIR$/src/app/users/profile/profile.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="20" column="21" lean-forward="true" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+        <state relative-caret-position="222">
+          <caret line="36" column="84" selection-start-line="36" selection-start-column="65" selection-end-line="36" selection-end-column="84" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/users/signup/signup.component.html">
+    <entry file="file://$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="67" selection-start-line="10" selection-start-column="67" selection-end-line="10" selection-end-column="67" />
+        <state relative-caret-position="304">
+          <caret line="82" column="69" lean-forward="true" selection-start-line="82" selection-start-column="6" selection-end-line="82" selection-end-column="69" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/libs/php/utils.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-294">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/invoice/create.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-663" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app-routing.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="63" column="24" selection-start-line="63" selection-start-column="18" selection-end-line="63" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/users/access_code_exists.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/objects/users.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="186" column="29" lean-forward="true" selection-start-line="186" selection-start-column="29" selection-end-line="186" selection-end-column="29" />
+          <folding>
+            <element signature="n#emailValidated#0;n#Users#0;n#!!top" />
+            <element signature="n#create#0;n#Users#0;n#!!top" />
+            <element signature="n#readAll#0;n#Users#0;n#!!top" />
+            <element signature="n#countAll#0;n#Users#0;n#!!top" />
+            <element signature="n#updateStatusByAccessCode#0;n#Users#0;n#!!top" />
+            <element signature="n#accessCodeExists#0;n#Users#0;n#!!top" />
+            <element signature="n#updateAccessCode#0;n#Users#0;n#!!top" />
+            <element signature="n#updatePassword#0;n#Users#0;n#!!top" />
+            <element signature="n#update#0;n#Users#0;n#!!top" />
+            <element signature="n#changePassword#0;n#Users#0;n#!!top" />
+            <element signature="n#passwordCheck#0;n#Users#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/users/read_one.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="27" selection-start-line="27" selection-end-line="39" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/users/getlastuserid.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/shared/services/user.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="32" column="56" lean-forward="true" selection-start-line="32" selection-start-column="56" selection-end-line="32" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/libs/email_sender/mailsender.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/libs/email_sender/email_template/activation_email.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="219" column="59" selection-start-line="219" selection-start-column="59" selection-end-line="219" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="89" selection-start-line="4" selection-start-column="89" selection-end-line="4" selection-end-column="89" />
           <folding>
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="89" selection-start-line="4" selection-start-column="89" selection-end-line="4" selection-end-column="89" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#form#0;n#div#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="63" selection-start-line="63" selection-end-line="65" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/signup/signup.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="123" column="61" selection-start-line="123" selection-start-column="61" selection-end-line="123" selection-end-column="61" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/signup/signup.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-223">
+          <caret line="84" column="54" selection-start-line="84" selection-start-column="54" selection-end-line="84" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
           </folding>
         </state>
       </provider>

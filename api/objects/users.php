@@ -181,11 +181,13 @@
 
         }
         function getLastUserID(){
-            $query="SELECT ID FROM ". $this->table_name .  " ORDER BY id DESC LIMIT 1";
+            $query="SELECT id, access_code FROM ". $this->table_name .  " WHERE email=:email ORDER BY id DESC LIMIT 1";
             $stmt=$this->conn->prepare($query);
+            $stmt->bindParam(':email', $this->email);
             $stmt->execute();
             $row=$stmt->fetch(PDO::FETCH_ASSOC);
-            return $row["ID"];
+            $this->id = $row["id"];
+            $this->access_code = $row["access_code"];
         }
         function readAll($from_record_num, $records_per_page){
 

@@ -1,0 +1,240 @@
+<html lang="en">
+<head>
+    <style type="text/css">
+        .container {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .img-size {
+            height: 32px;
+        }
+        @media (min-width: 576px) {
+            .container {
+                max-width: 540px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+        .row {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+        .bg-secondary {
+            background-color: #6c757d !important;
+        }
+
+        a.bg-secondary:hover, a.bg-secondary:focus,
+        button.bg-secondary:hover,
+        button.bg-secondary:focus {
+            background-color: #545b62 !important;
+        }
+        .col-4, .col-12 {
+            position: relative;
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        .col-4 {
+            -ms-flex: 0 0 33.333333%;
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+        }
+        /*.col-1 {*/
+        /*    -ms-flex: 0 0 8.333333%;*/
+        /*    flex: 0 0 8.333333%;*/
+        /*    max-width: 8.333333%;*/
+        /*}*/
+        .pt-2 {
+            padding-top: 0.5rem !important;
+        }
+        .pb-2 {
+            padding-bottom: 0.5rem !important;
+        }
+        .pl-2 {
+            padding-left: 0.5rem !important;
+        }
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+        .text-decoration-none {
+            text-decoration: none !important;
+        }
+        /*.text-dark {*/
+        /*    color: #343a40 !important;*/
+        /*}*/
+        /*.text-center {*/
+        /*    text-align: center !important;*/
+        /*}*/
+        .border {
+            border: 1px solid #dee2e6 !important;
+        }
+        .border-secondary {
+            border-color: #6c757d !important;
+        }
+        .pl-3 {
+            padding-left: 1rem !important;
+        }
+        .pr-3 {
+            padding-right: 1rem !important;
+        }
+        .font-weight-bold {
+            font-weight: 700 !important;
+        }
+        /*.justify-content-center {*/
+        /*    -ms-flex-pack: center !important;*/
+        /*    justify-content: center !important;*/
+        /*}*/
+        .list-group {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        .list-group-horizontal {
+            -ms-flex-direction: row;
+            flex-direction: row;
+        }
+
+        .list-group-horizontal .list-group-item {
+            margin-right: -1px;
+            margin-bottom: 0;
+        }
+
+        /*.list-group-horizontal .list-group-item:first-child {*/
+        /*    border-top-left-radius: 0.25rem;*/
+        /*    border-bottom-left-radius: 0.25rem;*/
+        /*    border-top-right-radius: 0;*/
+        /*}*/
+
+        .list-group-horizontal .list-group-item:last-child {
+            margin-right: 0;
+            /*border-top-right-radius: 0.25rem;*/
+            /*border-bottom-right-radius: 0.25rem;*/
+            /*border-bottom-left-radius: 0;*/
+        }
+
+        .list-group-item {
+            position: relative;
+            display: block;
+            padding: 0.75rem 1.25rem;
+            margin-bottom: -1px;
+            background-color: #6c757d;
+            /*border: 1px solid rgba(0, 0, 0, 0.125);*/
+        }
+
+        /*.list-group-item:first-child {*/
+        /*    border-top-left-radius: 0.25rem;*/
+        /*    border-top-right-radius: 0.25rem;*/
+        /*}*/
+
+        .list-group-item:last-child {
+            margin-bottom: 0;
+            /*border-bottom-right-radius: 0.25rem;*/
+            /*border-bottom-left-radius: 0.25rem;*/
+        }
+
+        .list-group-item.disabled, .list-group-item:disabled {
+            color: #6c757d;
+            pointer-events: none;
+            background-color: #6c757d;
+        }
+
+        .list-group-item.active {
+            z-index: 2;
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .text-danger {
+            color: #dc3545 !important;
+        }
+        .text-primary {
+            color: #007bff !important;
+        }
+        .text-info {
+            color: #17a2b8 !important;
+        }
+        a.text-info:hover, a.text-info:focus {
+            color: #0f6674 !important;
+        }
+        a.text-primary:hover, a.text-primary:focus {
+            color: #0056b3 !important;
+        }
+        a.text-danger:hover, a.text-danger:focus {
+            color: #a71d2a !important;
+        }
+        a.text-dark:hover, a.text-dark:focus {
+            color: #121416 !important;
+        }
+        /*.justify-content-center {*/
+        /*    -ms-flex-pack: center !important;*/
+        /*    justify-content: center !important;*/
+        /*}*/
+        .offset-4 {
+            margin-left: 33.333333%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row bg-secondary">
+        <div class="col-12 pt-2 pb-2 pl-2">
+            <img src="cid:logo_p2t" class="img-fluid" alt="easy_invoice_maker_logo">
+        </div>
+<!--        <div class="col-11 pt-2 pb-2">-->
+<!--            <a href="www.einvoicemaker.com" target="_blank" class="text-decoration-none text-dark"><h1 class="text-center">Easy Invoice Maker</h1></a>-->
+<!--        </div>-->
+    </div>
+    <div class="row">
+        <div class="col-12 pt-2 pb-2 pl-3 pr-3">
+            <p class="font-weight-bold">Dear %user%,</p>
+            <p>Thank you for choosing <a href="http://www.einvoicemaker.com" style="text-decoration: none"> Easy Invoice Maker</a>,
+            based on your request we have successfully created your FREE Easy Invoice Maker account.<br>
+                To complete your sign up, please validate your email address
+                <a href="http://localhost:4200/users/verify?access_code=%token%">Here</a>.<br>
+                By clicking on <a href="http://localhost:4200/users/verify?access_code=%token%">THIS LINK</a>
+                your account would be activated, then you can benefit of all the Easy Invoice Maker facilities.<br><br>
+
+                Thank you<br>
+                Easy Invoice Maker User Services.
+            </p>
+        </div>
+    </div>
+<!--    <div class="row bg-secondary ">-->
+<!--        <div class="col-4 offset-4">-->
+<!--            <ul class="list-group list-group-horizontal">-->
+<!--                <li class="list-group-item bg-secondary text-danger"><a href="#"><img src="cid:instagram" alt="instagram"  class="img-size"></a></li>-->
+<!--                <li class="list-group-item bg-secondary text-primary"> <a href="#"><img src="cid:facebook" alt="facebook"  class="img-size"></a></li>-->
+<!--                <li class="list-group-item bg-secondary text-info"><a href="#"><img src="cid:twitter" alt="twitter"  class="img-size"></a></li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+</div>
+</body>
+</html>

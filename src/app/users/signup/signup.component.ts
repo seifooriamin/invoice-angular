@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../shared/services/user.service';
 import {CheckEmailExist} from '../../shared/tools/checkemailExist.validator';
@@ -6,6 +6,8 @@ import {MustMatch} from '../../shared/tools/mustmatch.validator';
 import {Router} from '@angular/router';
 import {InvoiceGeneralSettingService} from '../../shared/services/invoice-general-setting.service';
 import {AuthenticationService} from '../../shared/services/authentication.service';
+import {Subscription} from 'rxjs';
+import {ToolsService} from '../../shared/services/tools.service';
 
 declare var jQuery: any;
 
@@ -14,38 +16,46 @@ declare var jQuery: any;
   templateUrl: './signup.component.html',
   styleUrls: ['../../../my-style.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
   fillForm: FormGroup;
   emailexist = false;
-  invalidSubmit = false;
   modalTitle: string;
   modalBody = '';
   userID: string;
+  successStatus = false;
+  failStatus = false;
+  errorMessage = '';
+  subscription: Subscription;
 
   constructor(private userService: UserService, private formBuilder: FormBuilder, private router: Router,
               private invoiceGeneralSettingService: InvoiceGeneralSettingService, private authentication: AuthenticationService,
-              ) {
+              private toolsService: ToolsService) {
       if (this.authentication.currentUserValue) {
           this.router.navigate(['/']);
       }
   }
-
+  ngOnDestroy(): void {
+      if (this.subscription) {
+         this.subscription.unsubscribe();
+      }
+  }
   ngOnInit() {
-    // this.initForm();
+    this.initForm();
+  }
+  initForm() {
       this.fillForm = this.formBuilder.group({
-          first_name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20),
-              Validators.pattern('(?=.*[a-zA-Z]).{2,}')]],
+          first_name: ['', [Validators.required, Validators.maxLength(50),
+              Validators.pattern('^[a-zA-Z\\ *\\-*]*$')]],
           // firstName: ['', Validators.required],
-          last_name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20),
-              Validators.pattern('(?=.*[a-zA-Z]).{2,}')]],
-          email: new FormControl('',
-              Validators.compose([Validators.required, Validators.email]),
-              Validators.composeAsync([CheckEmailExist.bind(this)])),
-          password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15),
+          last_name: ['', [Validators.required, Validators.maxLength(50),
+              Validators.pattern('^[a-zA-Z\\ *\\-*]*$')]],
+          email: ['', Validators.compose([Validators.required, Validators.email]),
+              Validators.composeAsync([CheckEmailExist.bind(this)])],
+          password: ['', Validators.compose([Validators.required,
               Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$')])],
           confirmPassword: ['', Validators.required],
           // confirm_email: new FormControl('', [Validators.required, Validators.email]),
-          confirmEmail: new FormControl('', [Validators.required, Validators.email]),
+          confirmEmail: new FormControl('', [Validators.required]),
           contact_number: new FormControl(''),
           address1: new FormControl(''),
           address2: new FormControl(''),
@@ -55,68 +65,57 @@ export class SignupComponent implements OnInit {
           postal_code: new FormControl('')
       }, {
           validator: [MustMatch('password', 'confirmPassword'),
-                      MustMatch('email', 'confirmEmail')]
+              MustMatch('email', 'confirmEmail')]
       });
   }
-
-
   onSubmit() {
-      if (this.fillForm.invalid) {
-          this.invalidSubmit = true;
-          setTimeout(() => {
-              this.invalidSubmit = false;
-                 }, 2000);
-          return;
+      if (this.fillForm.valid) {
+          this.subscription = this.userService.userCreate(this.fillForm.value).subscribe(
+              () => {
+                  const emailJson = '{ "email" : "' + this.f.email.value + '" }';
+                  this.subscription = this.userService.getLastUserID(emailJson).subscribe(
+                      (response) => {
+                          this.userID = '{ "user_id" : "' + response['id'] + '" }';
+                          const fullName = this.f.first_name.value + ' ' + this.f.last_name.value;
+                          const accessCode = response['access_code'];
+                          this.subscription = this.invoiceGeneralSettingService.createInvoiceSetting(this.userID).subscribe(
+                              () => {
+                                  const data =  '{ "email" : "' + this.f.email.value + '", "subject" : "Activation Email", ' +
+                                      '"name" : "' + fullName + '", "module" : "AE", "token" : "' + accessCode + '" }';
+                                  this.subscription = this.userService.emailSender(data).subscribe(
+                                      () => {
+                                          this.fillForm.reset();
+                                          this.successStatus = true;
+                                          this.errorMessage = '<p class="card-text text-success">' +
+                                              'Your account has been successfully created, your activation email has been ' +
+                                              'sent, to complete your sign up check your email.<br>' +
+                                              'If you will not receive your activation email in your Inbox shortly, ' +
+                                              'check your Spam box</p>';
+                                      }, () => {
+                                          this.errorMessage = '<p class="card-text text-danger">Unexpected error, contact ' +
+                                              '<a href="mailto: userservice@einvoicemaker.com">User Services</a></p>';
+                                          this.failStatus = true;
+                                      });
+                                  }, () => {
+                                  this.errorMessage = '<p class="card-text text-danger">Unexpected error, contact ' +
+                                      '<a href="mailto: userservice@einvoicemaker.com">User Services</a></p>';
+                                  this.failStatus = true;
+                              });
+                      }, () => {
+                          this.errorMessage = '<p class="card-text text-danger">Unexpected error, contact ' +
+                              '<a href="mailto: userservice@einvoicemaker.com">User Services</a></p>';
+                          this.failStatus = true;
+                      });
+              }, () => {
+                  this.errorMessage = '<p class="card-text text-danger">Unexpected error, contact ' +
+                      '<a href="mailto: userservice@einvoicemaker.com">User Services</a></p>';
+                  this.failStatus = true;
+              });
       } else {
-          this.userService.userCreate(this.fillForm.value).subscribe(
-              (response) => {
-                  if (response['message'] === 'UWCES') {
-                      this.onCreateUserSetting();
-                      this.fillForm.reset();
-                      this.modalBody += 'Your account has been successfully registered and verification email has been ' +
-                          'sent, to continue please verify your email via the provided link';
-                      this.modalTitle = 'Confirmation';
-                      jQuery('#modalMessage').modal('show');
-                  } else {
-                      if (response['message'] === 'UWCENS') {
-                          this.onCreateUserSetting();
-                          this.fillForm.reset();
-                          this.modalBody += 'Your account has been successfully registered but verification email has not been ' +
-                              'sent, to continue please contact submit@einvoicemaker.com';
-                          this.modalTitle = 'Confirmation - Verify Fail';
-                          jQuery('#modalMessage').modal('show');
-                      } else {
-                          this.modalBody = 'Due to technical issue your account has not been registered, ' +
-                              'please contact submit@einvoicemaker.com';
-                          this.modalTitle = 'Failure';
-                          jQuery('#modalMessage').modal('show');
-                      }
-                  }
-                  }
-          );
+          this.toolsService.markFormGroupTouched(this.fillForm);
       }
 
   }
   get f() { return this.fillForm.controls; }
-  onCreateUserSetting() {
-      this.userService.getLastUserID().subscribe(
-          (response) => {
-              this.userID = '{ "user_id" : "' + response['ID'] + '" }';
-              this.invoiceGeneralSettingService.createInvoiceSetting(this.userID).subscribe(
-                  (message) => {
-                      if (message['message'] === 'SUCCESS') {
-                          this.modalBody += '-';
-                      }
-                  }, (err) => {
-                      this.modalBody += '*';
-                  }
-              );
-          }, (e) => {
-          }
-      );
 
-  }
-  onSignin() {
-      this.router.navigate(['/signin']);
-  }
 }

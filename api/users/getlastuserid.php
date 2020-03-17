@@ -15,21 +15,24 @@
     $db = $database->getConnection();
 
     // prepare product object
-    $user = new Users($db);
+    $users = new Users($db);
 
-    $user_id = $user->getLastUserID();
+    $data = json_decode(file_get_contents("php://input"));
+    $users->email = $data->email;
 
-    if($user_id!=null){
-        // create array
-        $user_arr = array(
-            "ID" => $user_id
+    $users->getLastUserID();
+
+    if($users->id!=null){
+        $users_arr = array(
+            "id" => $users->id,
+            "access_code" => $users->access_code,
         );
 
         // set response code - 200 OK
         http_response_code(200);
 
         // make it json format
-        echo json_encode($user_arr);
+        echo json_encode($users_arr);
     }
 
     else{

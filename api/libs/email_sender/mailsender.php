@@ -36,11 +36,15 @@ try{
             break;
         case 'RP':
             $token = $data->token;
-//            $url = '<a href="http://localhost:4200/users/resetpassword?access_code=' . $token . '>Click Here</a>';
             $message = file_get_contents('email_template/reset_password.html');
             $message = str_replace('%token%', $token, $message);
             $message = str_replace('%user%', $user, $message);
-
+            break;
+        case 'AE':
+            $token = $data->token;
+            $message = file_get_contents('email_template/activation_email.html');
+            $message = str_replace('%token%', $token, $message);
+            $message = str_replace('%user%', $user, $message);
             break;
     }
 

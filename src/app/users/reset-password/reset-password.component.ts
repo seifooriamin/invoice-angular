@@ -53,8 +53,7 @@ export class ResetPasswordComponent implements OnInit {
   }
   initForm() {
     this.resetPasswordForm = this.formBuilder.group({
-      password : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15),
-        Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$')]],
+      password : ['', [Validators.required, Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$')]],
       confirmPassword: ['', Validators.required],
       access_code : ['']
     }, {validator: [MustMatch('password', 'confirmPassword')]});

@@ -31,8 +31,8 @@ export class UserService {
     return this.httpClient.post(`${environment.apiUrl}users/validate_token.php`, token);
   }
   // To be used for create new user General Setting file
-  getLastUserID() {
-    return this.httpClient.get(`${environment.apiUrl}users/getlastuserid.php`);
+  getLastUserID(data) {
+    return this.httpClient.post(`${environment.apiUrl}users/getlastuserid.php`, data);
   }
   getUserByID(data) {
     return this.httpClient.post(`${environment.apiUrl}users/read_one`, data);
