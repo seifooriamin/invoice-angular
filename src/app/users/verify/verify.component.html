@@ -1,17 +1,34 @@
-<div class="container">
+<ngx-loading-bar></ngx-loading-bar>
+<div class="container-fluid" style="height: 100vh">
+    <div class="row bg-dark">
+        <div class="col-12">
+            <a href="http://www.einvoicemaker.com"><img src="../../../assets/sitelogo.png"
+                                                        class="img-fluid img pt-2 pb-2" alt="Easy_Invoice_Maker"></a>
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-12 text-center mt-5 mb-md-3">
+            <h1 class="user-header-h1"><i class="fas fa-user-plus fa-1x"></i> Easy Invoice Maker - Email Verification</h1>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-12 maring-top">
-            <div class="alert alert-success fade show mt-1 " role="alert" *ngIf="situation==='success'">
-                <strong>Account Activated</strong> Your email has been verified, <a class="alert-success stretched-link" (click)="onSignin()">Sign-in here</a>
-            </div>
-            <div class="alert alert-warning fade show mt-1" role="alert" *ngIf="situation==='notFound'">
-                <strong>Token Invalid</strong> The activation link is not valid
-            </div>
-            <div class="alert alert-danger fade show mt-1" role="alert" *ngIf="situation==='failure'">
-                <strong>Activation Failed</strong> The activation process has been failed, contact
-                <a class="text-dark stretched-link" href="mailto:submit@einvoicemaker.com">Site Admin</a>
+        <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12" *ngIf="failStatus || successStatus">
+            <div class="card border"
+                 [ngClass]="{ 'border-danger': failStatus, 'border-success': successStatus}">
+                <div class="card-header"
+                     [ngClass]="{ 'text-danger': failStatus, 'text-success': successStatus}">
+                    <h5 *ngIf="failStatus"><i class="fas fa-exclamation-triangle fa-1x"></i> Error</h5>
+                    <h5 *ngIf="successStatus"><i class="far fa-check-circle fa-1x"></i> Activation Successful</h5>
+                </div>
+                <div class="card-body" [innerHTML] = "errorMessage">
+                </div>
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12 mt-2">
+            <p class="pl-2 pr-2">Already have an active account? <a [routerLink]="['/users/signin']">Sign in</a> | <a [routerLink]="['/users/signup']">Sign up</a> |
+                <a href="http://www.einvoicemaker.com">Home</a></p>
+        </div>
+    </div>
 </div>

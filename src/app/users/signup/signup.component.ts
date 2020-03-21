@@ -19,13 +19,12 @@ declare var jQuery: any;
 export class SignupComponent implements OnInit, OnDestroy {
   fillForm: FormGroup;
   emailexist = false;
-  modalTitle: string;
-  modalBody = '';
   userID: string;
   successStatus = false;
   failStatus = false;
   errorMessage = '';
   subscription: Subscription;
+  progressing = false;
 
   constructor(private userService: UserService, private formBuilder: FormBuilder, private router: Router,
               private invoiceGeneralSettingService: InvoiceGeneralSettingService, private authentication: AuthenticationService,
@@ -56,13 +55,6 @@ export class SignupComponent implements OnInit, OnDestroy {
           confirmPassword: ['', Validators.required],
           // confirm_email: new FormControl('', [Validators.required, Validators.email]),
           confirmEmail: new FormControl('', [Validators.required]),
-          contact_number: new FormControl(''),
-          address1: new FormControl(''),
-          address2: new FormControl(''),
-          city: new FormControl(''),
-          province: new FormControl(''),
-          country: new FormControl(''),
-          postal_code: new FormControl('')
       }, {
           validator: [MustMatch('password', 'confirmPassword'),
               MustMatch('email', 'confirmEmail')]
@@ -70,6 +62,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
   onSubmit() {
       if (this.fillForm.valid) {
+          this.progressing = true;
           this.subscription = this.userService.userCreate(this.fillForm.value).subscribe(
               () => {
                   const emailJson = '{ "email" : "' + this.f.email.value + '" }';
@@ -86,6 +79,7 @@ export class SignupComponent implements OnInit, OnDestroy {
                                       () => {
                                           this.fillForm.reset();
                                           this.successStatus = true;
+                                          this.progressing = false;
                                           this.errorMessage = '<p class="card-text text-success">' +
                                               'Your account has been successfully created, your activation email has been ' +
                                               'sent, to complete your sign up check your email.<br>' +
@@ -95,21 +89,25 @@ export class SignupComponent implements OnInit, OnDestroy {
                                           this.errorMessage = '<p class="card-text text-danger">Unexpected error, contact ' +
                                               '<a href="mailto: userservice@einvoicemaker.com">User Services</a></p>';
                                           this.failStatus = true;
+                                          this.progressing = false;
                                       });
                                   }, () => {
                                   this.errorMessage = '<p class="card-text text-danger">Unexpected error, contact ' +
                                       '<a href="mailto: userservice@einvoicemaker.com">User Services</a></p>';
                                   this.failStatus = true;
+                                  this.progressing = false;
                               });
                       }, () => {
                           this.errorMessage = '<p class="card-text text-danger">Unexpected error, contact ' +
                               '<a href="mailto: userservice@einvoicemaker.com">User Services</a></p>';
                           this.failStatus = true;
+                          this.progressing = false;
                       });
               }, () => {
                   this.errorMessage = '<p class="card-text text-danger">Unexpected error, contact ' +
                       '<a href="mailto: userservice@einvoicemaker.com">User Services</a></p>';
                   this.failStatus = true;
+                  this.progressing = false;
               });
       } else {
           this.toolsService.markFormGroupTouched(this.fillForm);

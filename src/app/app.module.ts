@@ -13,8 +13,7 @@ import {HttpErrorInterceptor} from './shared/tools/httperror.interceptor';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { VerifyComponent } from './users/verify/verify.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-// import { TableModule, ChartsModule } from 'angular-bootstrap-md';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { TableModule, ChartsModule, WavesModule, CardsModule } from 'angular-bootstrap-md';
 import { CompanyComponent } from './company/company.component';
 import { UsersComponent } from './users/users.component';
 import { CompanyListComponent } from './company/company-list/company-list.component';
@@ -66,9 +65,10 @@ import { ResetPasswordComponent } from './users/reset-password/reset-password.co
     ResetPasswordComponent,
   ],
   imports: [
-    // TableModule,
-    // ChartsModule,
-    MDBBootstrapModule.forRoot(),
+    CardsModule,
+    TableModule,
+    ChartsModule,
+    WavesModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,

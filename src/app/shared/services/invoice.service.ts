@@ -29,6 +29,12 @@ export class InvoiceService {
   invoiceUpdate(data) {
       return this.httpClient.patch(`${environment.apiUrl}invoice/update`, data);
   }
+  invoiceYear(data) {
+      return this.httpClient.patch(`${environment.apiUrl}invoice/getyear`, data);
+  }
+  invoiceStatistics(data) {
+      return this.httpClient.post(`${environment.apiUrl}invoice/invoice_statistics`, data);
+  }
   async setNewInvoiceNumber(): Promise<{invoiceDigit: string; invoicePrefix: string; }> {
     const q = new Promise<{invoiceDigit: string; invoicePrefix: string; }>((resolve) => {
       let digitPart = '';

@@ -4,124 +4,73 @@
             <h6>Hi {{userName}}, welcome to your Easy Invoice Maker profile</h6>
         </div>
     </div>
-    <div class="row mt-2">
-        <div class="col-md-1 col-2">
-            <label for="yearselect">Year</label>
+    <form [formGroup]="dashboardForm" (ngSubmit)="onSubmit()">
+        <div class="form-row mt-2">
+            <div class="col-md-1 col-3">
+                <label for="yearSelect">Year</label>
+            </div>
+            <div class="col-md-3 col-8">
+                <select class="browser-default custom-select" id="yearSelect" formControlName="year"
+                        (change)="onSubmit()">
+                    <option *ngFor="let years of invoiceYear" value="{{years}}">{{years}}</option>
+                </select>
+                <input type="text" formControlName="user_id" hidden>
+            </div>
+            <div class="col-1">
+                <ngx-loading-bar ref="http" [color]="'blue'" [fixed]="false"></ngx-loading-bar>
+            </div>
         </div>
-        <div class="col-md-3 col-8">
-            <select class="browser-default custom-select" id="yearselect">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
+        <div class="form-row mt-2">
+            <div class="col-md-1 col-3">
+                <label for="companySelect">Company</label>
+            </div>
+            <div class="col-md-3 col-8">
+                <select class="browser-default custom-select" id="companySelect" formControlName="company_id"
+                        (change)="onSubmit()">
+                    <option *ngFor="let company of companyList" value="{{company.id}}">{{company.name}}</option>
+                </select>
+            </div>
         </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-md-1 col-2">
-            <label for="companySelect">Company</label>
-        </div>
-        <div class="col-md-3 col-8">
-            <select class="browser-default custom-select" id="companySelect">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-        </div>
-    </div>
+    </form>
     <div class="row mt-2 align-items-center">
         <div class="col-md-6 col-12">
-            <div style="display: block">
-                <canvas mdbChart
-                        [chartType]="chartType1"
-                        [datasets]="chartDatasets1"
-                        [labels]="chartLabels1"
-                        [colors]="chartColors1"
-                        [options]="chartOptions1"
-                        [legend]="true"
-                        (chartHover)="chartHovered1($event)"
-                        (chartClick)="chartClicked1($event)">
-                </canvas>
-            </div>
-        </div>
-        <div class="col-md-3 col-6">
-            <div class="ih-item circle effect10 top_to_bottom"><a href="#">
-                <div class="img"><img src="assets/images/Desert.jpg" alt="img"></div>
-                <div class="info">
-                    <h3>New Invoice</h3>
-                    <p>to make a new invoice click here</p>
-                </div></a>
-            </div>
-        </div>
-        <div class="col-md-3 col-6">
-            <div class="ih-item circle effect10 top_to_bottom"><a href="#">
-                <div class="img"><img src="assets/images/Desert.jpg" alt="img"></div>
-                <div class="info">
-                    <h3>New Estimate</h3>
-                    <p>to make a new estimate click here</p>
-                </div></a>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-2 align-items-center">
-        <div class="col-md-6 col-12">
-            <div style="display: block">
-                <canvas mdbChart
-                        [chartType]="chartType2"
-                        [datasets]="chartDatasets2"
-                        [labels]="chartLabels2"
-                        [colors]="chartColors2"
-                        [options]="chartOptions2"
-                        [legend]="true"
-                        (chartHover)="chartHovered2($event)"
-                        (chartClick)="chartClicked2($event)">
-                </canvas>
-            </div>
-        </div>
-        <div class="col-md-3 col-6 ">
-<!--            <div class="ih-item circle effect10 top_to_bottom"><a href="#">-->
-<!--                <div class="img"><img src="assets/images/Desert.jpg" alt="img"></div>-->
-<!--                <div class="info">-->
-<!--                    <h3>New Invoice</h3>-->
-<!--                    <p>to make a new invoice click here</p>-->
-<!--                </div></a>-->
-<!--            </div>-->
-            <!--Card-->
-            <mdb-card cascade="true" class="cascading-admin-card">
-
-                <!--Card Data-->
-                <div class="admin-up">
-                    <mdb-icon fas icon="chart-bar" class="red accent-2"></mdb-icon>
-                    <div class="data">
-                        <p>ORGANIC TRAFFIC</p>
-                        <h4><strong>2000</strong></h4>
-                    </div>
-                </div>
-                <!--/.Card Data-->
-
-                <!--Card content-->
+            <mdb-card>
+                <h5 class="card-header">Amount of Issued Invoice</h5>
                 <mdb-card-body>
-                    <div class="progress">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 25%" aria-valuenow="25"
-                             aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="d-block">
+                        <canvas mdbChart
+                                [chartType]="chartType"
+                                [datasets]="chartDatasetsAmount"
+                                [labels]="chartLabels"
+                                [colors]="chartColors"
+                                [options]="chartOptions"
+                                [legend]="false"
+                                (chartHover)="chartHovered1($event)"
+                                (chartClick)="chartClicked1($event)">
+                        </canvas>
                     </div>
-                    <!--Text-->
-                    <p class="card-text">Better than last week (25%)</p>
                 </mdb-card-body>
-                <!--/.Card content-->
-
             </mdb-card>
-            <!--/.Card-->
         </div>
-        <div class="col-md-3 col-6 align-middle">
-            <div class="ih-item circle effect10 top_to_bottom"><a href="#">
-                <div class="img"><img src="assets/images/Desert.jpg" alt="img"></div>
-                <div class="info">
-                    <h3>New Estimate</h3>
-                    <p>to make a new estimate click here</p>
-                </div></a>
-            </div>
+        <div class="col-md-6 col-12">
+            <mdb-card>
+                <h5 class="card-header">Number of Issued Invoice</h5>
+                <mdb-card-body>
+                    <div class="d-block">
+                        <canvas mdbChart
+                                [chartType]="chartType"
+                                [datasets]="chartDatasetsCount"
+                                [labels]="chartLabels"
+                                [colors]="chartColors"
+                                [options]="chartOptions"
+                                [legend]="false"
+                                (chartHover)="chartHovered2($event)"
+                                (chartClick)="chartClicked2($event)">
+                        </canvas>
+                    </div>
+                </mdb-card-body>
+            </mdb-card>
         </div>
     </div>
+
 </div>

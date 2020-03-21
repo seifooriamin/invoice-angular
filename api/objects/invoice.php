@@ -396,7 +396,7 @@ class Invoice
 
         return $stmt;
     }
-    public function readPaging($from_record_num, $records_per_page){
+    function readPaging($from_record_num, $records_per_page){
 
         // select query
         $query = "SELECT
@@ -433,4 +433,29 @@ class Invoice
         // return values from database
         return $stmt;
     }
+    function getYear(){
+        $query="SELECT year FROM " . $this->table_name . " WHERE user_id = ? GROUP BY year ORDER BY year DESC";
+        $stmt=$this->conn->prepare($query);
+        $stmt->bindParam(1, $this->user_id);
+        $stmt->execute();
+        return $stmt;
+    }
+    function invoiceStatistics() {
+        $query = "SELECT 
+                    SUM((SELECT SUM((quantity*unit_price)) FROM invoice_rows ir WHERE i.id = ir.invoice_id)) as sub_total,
+                    SUM((SELECT SUM((quantity*unit_price)) FROM invoice_rows ir WHERE i.id = ir.invoice_id)-
+                    (i.deduction1+i.deduction2)+(i.addition1+i.addition2+i.addition3)) as total, COUNT(id) as invoiceCount, month(date) as imonth
+                    FROM " . $this->table_name . " i WHERE user_id = :user_id && year(date) = :year && 
+                    (company_id = :company_id || (:company_id is Null)) GROUP BY month(date)";
+
+        $stmt=$this->conn->prepare($query);
+        $stmt->bindParam(":user_id", $this->user_id);
+        $stmt->bindParam(":year", $this->year);
+        $stmt->bindParam(":company_id", $this->company_id);
+        $stmt->execute();
+        $errors = $stmt->errorInfo();
+        echo($errors[2]);
+        return $stmt;
+    }
+
 }

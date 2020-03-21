@@ -1,109 +1,183 @@
-import { Component, OnInit } from '@angular/core';
-import {AuthenticationService} from '../shared/services/authentication.service';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {CompanyModel} from '../shared/models/company.model';
+import {CompanyService} from '../shared/services/company.service';
+import {ToolsService} from '../shared/services/tools.service';
+import {InvoiceService} from '../shared/services/invoice.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {StatisticsModel} from '../shared/models/statistics.model';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['../../my-style.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
   userName: string;
-  optionsSelect: Array<any>;
-
+  subscription: Subscription;
+  companyList: CompanyModel[];
+  dashboardForm: FormGroup;
+  jUserID: string;
+  date = new Date();
+  invoiceYear: string[] = [];
+  amountData: number[] = [];
+  countData: number[] = [];
   // Chart one variable
-  public chartType1 = 'bar';
-
-  public chartDatasets1: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 55, 40, 11, 22, 33, 44, 55], label: 'My First dataset' }
+  public chartType = 'bar';
+  public chartDatasetsAmount: Array<any> = [
+    { data: this.amountData, label: 'Amount of Issued Invoice' }
   ];
-
-  public chartLabels1: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-  public chartColors1: Array<any> = [
+  public chartLabels: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  public chartColors: Array<any> = [
     {
       backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(0, 204, 0, 0.2)',
+        'rgba(0, 204, 0, 0.2)',
+        'rgba(0, 204, 0, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
         'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(0, 204, 0,0.2)'
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(255, 206, 86, 0.2)'
       ],
       borderColor: [
-        'rgba(255,99,132,1)',
         'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(0, 204, 0, 1)',
+        'rgba(0, 204, 0, 1)',
+        'rgba(0, 204, 0, 1)',
+        'rgba(255, 99, 132, 1)',
+        'rgba(255, 99, 132, 1)',
+        'rgba(255, 99, 132, 1)',
         'rgba(255, 159, 64, 1)',
-        '#00cc00'
+        'rgba(255, 159, 64, 1)',
+        'rgba(255, 159, 64, 1)'
       ],
-      borderWidth1: 2,
+      borderWidth: 2,
     }
   ];
-
-  public chartOptions1: any = {
+  public chartOptions: any = {
     responsive: true
   };
-  public chartClicked1(e: any): void { }
-  public chartHovered1(e: any): void { }
-  // End of chart one variable
-
-  // Chart two variable
-  public chartType2: string = 'bar';
-
-  public chartDatasets2: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 55, 40, 11, 22, 33, 44, 55], label: 'My First dataset' }
+  public chartDatasetsCount: Array<any> = [
+    { data: this.countData, label: 'Number of Issued Invoice' }
   ];
 
-  public chartLabels2: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  public chartColors2: Array<any> = [
-    {
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(0, 204, 0,0.2)'
-      ],
-      borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-        '#00cc00'
-      ],
-      borderWidth2: 2,
-    }
-  ];
-
-  public chartOptions2: any = {
-    responsive: true
-  };
-  public chartClicked2(e: any): void { }
-  public chartHovered2(e: any): void { }
-  // End of chart one variable
-
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private companyService: CompanyService, private toolsService: ToolsService,
+              private invoiceService: InvoiceService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-
     const jCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.userName = jCurrentUser['first_name'];
-    this.optionsSelect = [
-      { value: '1', label: 'Option 1' },
-      { value: '2', label: 'Option 2' },
-      { value: '3', label: 'Option 3' },
-    ];
+    this.userName = jCurrentUser.first_name;
+    this.jUserID = this.toolsService.getUserIDJson();
+    this.initForm();
+    this.onLoadLists();
+    this.dashboardForm.get('user_id').setValue(jCurrentUser.id);
+
   }
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+  ngAfterViewInit(): void {
 
+  }
+  initForm() {
 
-
-
+    this.dashboardForm = this.formBuilder.group({
+      user_id : [''],
+      year: [''],
+      company_id: [0]
+    });
+  }
+  public chartClicked1(e: any): void { }
+  public chartHovered1(e: any): void { }
+  public chartClicked2(e: any): void { }
+  public chartHovered2(e: any): void { }
+  async onLoadLists() {
+    this.subscription = this.companyService.companyReadByUser(this.jUserID).subscribe(
+        (response) => {
+          this.companyList = response['records'];
+          this.companyList.push({id: 0, name: 'ALL', address: '', logo_link: '', email: '', business_no: '',
+            gst_no: '', website: '', user_id: 0, phone: '', created: this.date, first_name: '', last_name: '', modified: this.date});
+          this.subscription = this.invoiceService.invoiceYear(this.jUserID).subscribe(
+              (responseYear) => {
+                for (const rowsYear of responseYear['records']) {
+                  this.invoiceYear.push(rowsYear.year);
+                }
+                this.dashboardForm.get('year').setValue(this.invoiceYear[0]);
+                this.subscription = this.invoiceService.invoiceStatistics(this.dashboardForm.value).subscribe(
+                    (responseChart: StatisticsModel) => {
+                      let finder = false;
+                      for (let monthSelector = 1; monthSelector <= 12; monthSelector++) {
+                        finder = false;
+                        for (const forData of responseChart['records']) {
+                          if (+forData.month === monthSelector) {
+                            this.amountData.push(forData.total);
+                            this.countData.push(forData.invoiceCount);
+                            finder = true;
+                          }
+                        }
+                        if (finder === false) {
+                          this.amountData.push(0);
+                          this.countData.push(0);
+                        }
+                      }
+                      this.chartDatasetsAmount = [
+                        { data: this.amountData, label: 'Amount of Issued Invoice' }
+                      ];
+                      this.chartDatasetsCount = [
+                        { data: this.countData, label: 'Number of Issued Invoice' }
+                      ];
+                    }, () => {}
+                );
+              }, (e) => {}
+          );
+        }, (e) => {
+        }
+    );
+  }
+  async onSubmit() {
+    this.amountData = [];
+    this.countData = [];
+    this.subscription = this.invoiceService.invoiceStatistics(this.dashboardForm.value).subscribe(
+        (responseChart: StatisticsModel) => {
+          let finder = false;
+          for (let monthSelector = 1; monthSelector <= 12; monthSelector++) {
+            finder = false;
+            for (const forData of responseChart['records']) {
+              if (+forData.month === monthSelector) {
+                this.amountData.push(forData.total);
+                this.countData.push(forData.invoiceCount);
+                finder = true;
+              }
+            }
+            if (finder === false) {
+              this.amountData.push(0);
+              this.countData.push(0);
+            }
+          }
+          this.chartDatasetsAmount = [
+            { data: this.amountData, label: 'Amount of Issued Invoice' }
+          ];
+          this.chartDatasetsCount = [
+            { data: this.countData, label: 'Number of Issued Invoice' }
+          ];
+        }, () => {
+          this.chartDatasetsAmount = [
+            { data: this.amountData, label: 'Amount of Issued Invoice' }
+          ];
+          this.chartDatasetsCount = [
+            { data: this.countData, label: 'Number of Issued Invoice' }
+          ];
+        }
+        );
+  }
 }

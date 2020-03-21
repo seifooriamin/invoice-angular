@@ -1,4 +1,3 @@
-<ngx-loading-bar></ngx-loading-bar>
 <div class="container-fluid" style="height: 100vh">
     <div class="row bg-dark">
         <div class="col-12">
@@ -11,7 +10,8 @@
             <h1 class="user-header-h1"><i class="fas fa-user-plus fa-1x"></i> Easy Invoice Maker - Sign up</h1>
         </div>
     </div>
-    <form class="bg-dark text-light border-dark border col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12" [formGroup]="fillForm" (ngSubmit)="onSubmit()">
+    <form class="bg-dark text-light border-dark border col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12"
+          [formGroup]="fillForm" (ngSubmit)="onSubmit()">
         <div class="row">
             <div class="form-group col-md-6 col-sm-12">
                 <label for="firstName" class="col-form-label">First Name*</label>
@@ -100,18 +100,12 @@
                     Password mismatch
                 </div>
             </div>
-
-            <input type="text" class="form-control" id="contact_number" formControlName="contact_number" hidden>
-            <input type="text" class="form-control" id="address1" formControlName="address1" hidden>
-            <input type="text" class="form-control" id="address2" formControlName="address2" hidden>
-            <input type="text" class="form-control" id="city" formControlName="city" hidden>
-            <input type="text" class="form-control" id="province" formControlName="province" hidden>
-            <input type="text" class="form-control" id="country" formControlName="country" hidden>
-            <input type="text" class="form-control" id="postalCode" formControlName="postal_code" hidden>
         </div>
         <div class="form-group row mt-2">
-            <div class="col-md-4 offset-md-4 col-sm-12 text-center">
-                <button type="submit" class="btn btn-primary btn-block" >Sign up</button>
+            <div class="col-md-4 offset-md-4 col-sm-12 text-center mb-1">
+                <button type="submit" class="btn btn-primary btn-block mb-1"
+                        [attr.disabled]="progressing ? 'disabled' : null">Sign up</button>
+                <ngx-loading-bar ref="http" [color]="'blue'" [fixed]="false"></ngx-loading-bar>
             </div>
         </div>
     </form>

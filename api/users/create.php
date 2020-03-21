@@ -38,37 +38,19 @@
                 $user->last_name = $data->last_name;
                 $user->email = $data->email;
                 $user->password = $data->password;
-                $user->address1 = $data->address1;
-                $user->address2 = $data->address2;
-                $user->city = $data->city;
-                $user->province = $data->province;
-                $user->country = $data->country;
-                $user->postal_code = $data->postal_code;
-                $user->contact_number = $data->contact_number;
+                $user->address1 = '';
+                $user->address2 = '';
+                $user->city = '';
+                $user->province = '';
+                $user->country = '';
+                $user->postal_code = '';
+                $user->contact_number = '';
                 $user->access_level = "1";
                 $user->access_code = $utility->getToken();
                 $user->status = "0";
                 if($user->create()) {
                     http_response_code(200);
                     echo json_encode(array("message" => "SUCCESS"));
-
-//                    $send_to_email = $user->email;
-//                    $body = "Hi {$user->first_name} {$user->last_name}.<br /><br />";
-////                    $body .= "Please click the following link to verify your email and login: {$home_url}verify?access_code={$user->access_code}";
-//                    $body .= "Please click the following link to verify your email and login: http://localhost:4200/verify?access_code={$user->access_code}";
-//                    $subject = "Verification Email";
-//                    if ($utility->sendEmailViaPhpMail($send_to_email, $subject, $body)) {
-//                        $email_has_sent=true;
-//                    } else {
-//                        $email_has_sent=false;
-//                    }
-//                    if($email_has_sent){
-
-//                    }else{
-//                        http_response_code(200);
-//                        echo json_encode(array("message" => "UWCENS"));
-//                    }
-
                 }
                 // message if unable to create user
                 else{

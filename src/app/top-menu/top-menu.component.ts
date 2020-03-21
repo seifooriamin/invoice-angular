@@ -25,7 +25,8 @@ export class TopMenuComponent implements OnInit {
 
   ngOnInit() {
     jQuery('ul.navbar-nav li.dropdown').hover(function() {
-      jQuery(this).find('.dropdown-menu').fadeIn(500);
+      // jQuery(this).find('.dropdown-menu').fadeIn(500);
+      jQuery(this).find('.dropdown-menu').show();
     },
     function() {
       jQuery(this).find('.dropdown-menu').hide();
