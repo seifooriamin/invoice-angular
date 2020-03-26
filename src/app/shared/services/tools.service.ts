@@ -31,7 +31,7 @@ export class ToolsService {
       num = Math.abs(Number(num) || 0);
       return num;
   }
-  numberSeparator(value) {
+  numberSeparator(value): string {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
   getUserIDJson(): string {

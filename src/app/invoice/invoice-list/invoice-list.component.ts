@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {InvoiceService} from '../../shared/services/invoice.service';
 import {InvoiceRowsService} from '../../shared/services/invoice-rows.service';
 import {InvoiceCustomSettingService} from '../../shared/services/invoice-custom-setting.service';
+import {ToolsService} from '../../shared/services/tools.service';
 declare var jQuery: any;
 @Component({
   selector: 'app-invoice-list',
@@ -27,7 +28,7 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
   deleteMessageStatus = false;
   deleteMessageText = '';
   constructor(private cdRef: ChangeDetectorRef, private router: Router, private invoiceService: InvoiceService,
-              private invoiceRowsService: InvoiceRowsService, private ics: InvoiceCustomSettingService) { }
+              private toolsService: ToolsService) { }
   @HostListener('input') oninput() { this.searchItems(); }
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -38,7 +39,7 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
           for (const idata of records['records']) {
             this.elements.push({id: idata.id, invoice_number: idata.invoice_number,
               date: idata.date, customer_name: idata.customer_name, company_name: idata.company_name,
-              total: idata.total, year: idata.year});
+              total: this.toolsService.numberSeparator(this.toolsService.showNumberWithDecimal(idata.total)), year: idata.year});
           }
           this.mdbTable.setDataSource(this.elements);
           this.elements = this.mdbTable.getDataSource();
@@ -86,46 +87,20 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
     jQuery('#modalMessage').modal('hide');
     this.mdbTable.removeRow(index);
     const idJson = '{ "id" : "' + id + '" }';
-    const invoiceIDJson = '{ "invoice_id" : "' + id + '" }';
     this.subscribe = this.invoiceService.invoiceDelete(idJson).subscribe(
-        (response) => {
-          if (response['message'] === 'SUCCESS') {
-              this.subscribe = this.invoiceRowsService.invoiceRowsDelete(invoiceIDJson).subscribe(
-                  (responseRows) => {
-                      if (responseRows['message'] === 'SUCCESS') {
-                          this.deleteMessageText = 'Invoice #' + invoiceNumber + ' has been deleted successfully';
-                          this.deleteMessageStatus = true;
-                          setTimeout(() => {
-                              this.deleteMessageStatus = false;
-                          }, 2000);
-                      }
-                  }, (e) => {
-                      this.deleteMessageText = 'Invoice #' + invoiceNumber + ' has been deleted successfully, but some related' +
-                          'related records have not been deleted yet, contact ADMINISTRATOR';
-                      this.deleteMessageStatus = true;
-                      setTimeout(() => {
-                          this.deleteMessageStatus = false;
-                      }, 2000);
-                  }
-              );
-              this.ics.deleteInvoiceCustomSetting(invoiceIDJson).subscribe(
-                  (delResponse) => {
-
-                  }, () => {
-                      this.deleteMessageText = 'Invoice #' + invoiceNumber + ' setting record has not been deleted';
-                      this.deleteMessageStatus = true;
-                      setTimeout(() => {
-                          this.deleteMessageStatus = false;
-                      }, 2000);
-                  }
-              );
-          }
-        }, (e) => {
-          this.deleteMessageText = 'Due to technical issue invoice #' + invoiceNumber + ' has not been deleted.';
+        () => {
+              this.deleteMessageText = 'Invoice #' + invoiceNumber + ' has been deleted successfully.';
+              this.deleteMessageStatus = true;
+              setTimeout(() => {
+                  this.deleteMessageStatus = false;
+              }, 5000);
+        }, () => {
+          this.deleteMessageText = 'Unexpected error, invoice #' + invoiceNumber +  ' has not been deleted;' +
+              ' Contact User Support.';
           this.deleteMessageStatus = true;
           setTimeout(() => {
             this.deleteMessageStatus = false;
-          }, 2000);
+          }, 5000);
         }
     );
   }

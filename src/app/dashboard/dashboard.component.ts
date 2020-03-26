@@ -22,6 +22,10 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
   invoiceYear: string[] = [];
   amountData: number[] = [];
   countData: number[] = [];
+  totalAmount = 0;
+  totalNumber = 0;
+  totalAmountStr = '';
+  totalNumberStr = '';
   // Chart one variable
   public chartType = 'bar';
   public chartDatasetsAmount: Array<any> = [
@@ -121,7 +125,9 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
                         for (const forData of responseChart['records']) {
                           if (+forData.month === monthSelector) {
                             this.amountData.push(forData.total);
+                            this.totalAmount += +forData.total;
                             this.countData.push(forData.invoiceCount);
+                            this.totalNumber += +forData.invoiceCount;
                             finder = true;
                           }
                         }
@@ -136,17 +142,28 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
                       this.chartDatasetsCount = [
                         { data: this.countData, label: 'Number of Issued Invoice' }
                       ];
-                    }, () => {}
+                      this.totalAmountNumber();
+                    }, () => {
+                      this.chartDatasetsAmount = [
+                        { data: this.amountData, label: 'Amount of Issued Invoice' }
+                      ];
+                      this.chartDatasetsCount = [
+                        { data: this.countData, label: 'Number of Issued Invoice' }
+                      ];
+                      this.totalAmountNumber();
+                    }
                 );
-              }, (e) => {}
+              }, () => {}
           );
-        }, (e) => {
+        }, () => {
         }
     );
   }
   async onSubmit() {
     this.amountData = [];
     this.countData = [];
+    this.totalNumber = 0;
+    this.totalAmount = 0;
     this.subscription = this.invoiceService.invoiceStatistics(this.dashboardForm.value).subscribe(
         (responseChart: StatisticsModel) => {
           let finder = false;
@@ -156,6 +173,8 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
               if (+forData.month === monthSelector) {
                 this.amountData.push(forData.total);
                 this.countData.push(forData.invoiceCount);
+                this.totalAmount += +forData.total;
+                this.totalNumber += +forData.invoiceCount;
                 finder = true;
               }
             }
@@ -170,6 +189,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
           this.chartDatasetsCount = [
             { data: this.countData, label: 'Number of Issued Invoice' }
           ];
+          this.totalAmountNumber();
         }, () => {
           this.chartDatasetsAmount = [
             { data: this.amountData, label: 'Amount of Issued Invoice' }
@@ -177,7 +197,13 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
           this.chartDatasetsCount = [
             { data: this.countData, label: 'Number of Issued Invoice' }
           ];
+          this.totalAmountNumber();
         }
         );
+  }
+  totalAmountNumber() {
+    this.totalAmount = this.toolsService.showNumberWithDecimal(this.totalAmount);
+    this.totalAmountStr = this.toolsService.numberSeparator(this.totalAmount);
+    this.totalNumberStr = this.toolsService.numberSeparator(this.totalNumber);
   }
 }

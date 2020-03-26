@@ -84,23 +84,23 @@ export class CustomerListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onDeleteCustomer(index, id, name) {
     jQuery('#modalMessage').modal('hide');
-    this.mdbTable.removeRow(index);
     const idJson = '{ "id" : "' + id + '" }';
     this.customerService.customerDelete(idJson).subscribe(
         (response) => {
           if (response['message'] === 'SUCCESS') {
-            this.deleteMessageText = name + 'has been deleted successfully';
+            this.mdbTable.removeRow(index);
+            this.deleteMessageText = name + ' has been deleted successfully';
             this.deleteMessageStatus = true;
             setTimeout(() => {
               this.deleteMessageStatus = false;
-            }, 2000);
+            }, 5000);
           }
         }, (e) => {
-          this.deleteMessageText = 'Due to technical issue' + name + 'has not been deleted.';
+          this.deleteMessageText = name + ' has not been deleted, may it be reference in another records.';
           this.deleteMessageStatus = true;
           setTimeout(() => {
             this.deleteMessageStatus = false;
-          }, 2000);
+          }, 5000);
         }
     );
   }

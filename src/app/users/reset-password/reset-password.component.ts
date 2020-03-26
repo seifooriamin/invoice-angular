@@ -75,7 +75,7 @@ export class ResetPasswordComponent implements OnInit {
               );
           }, () => {
               this.errorMessage = '<p class="card-text text-danger">Unexpected error, contact ' +
-                  '<a href="mailto: userservice@einvoicemaker.com">User Services</a></p>';
+                  '<a href="mailto: userservice@einvoicemaker.com">User Support</a></p>';
               this.failStatus = true;
           }
       );

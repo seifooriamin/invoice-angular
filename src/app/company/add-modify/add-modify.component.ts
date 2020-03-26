@@ -29,6 +29,7 @@ export class AddModifyComponent implements OnInit, OnDestroy {
   pageTitle = 'New Company Registration';
   subscription: Subscription;
   logoStatus = false;
+  processing = false;
 
 
   constructor(private formBuilder: FormBuilder, private companyService: CompanyService, private http: HttpClient,
@@ -154,71 +155,78 @@ export class AddModifyComponent implements OnInit, OnDestroy {
       this.router.navigate(['/company/' + this.id + '/modify']);
   }
   onSubmit() {
-      if (this.pageStatus === 'new') {
-          if (this.fillForm.valid) {
+      if (this.fillForm.valid) {
+        if (this.pageStatus === 'new') {
+              this.processing = true;
               this.companyService.companyCreate(this.fileToUpload, this.fillForm.value).subscribe(
                   (response) => {
                       if (response['message'] === 'SIU' || response['message'] === 'SIE') {
                           this.submitMessageStatusSuccess = true;
-                          this.submitMessage = 'The company has been successfully registered';
+                          this.submitMessage = 'The company has been successfully registered.';
                           this.fillForm.reset();
                           this.imageCleanUp();
+                          this.processing = false;
                       } else {
                           if (response['message'] === 'SINU') {
-                              this.submitMessage = 'The company has been successfully registered, the logo has not been uploaded';
+                              this.submitMessage = 'The company has been successfully registered; the logo has not been uploaded.';
                               this.fillForm.reset();
                               this.imageCleanUp();
+                              this.processing = false;
                           } else {
-                              if (response['message'] === 'FAIL') {
+                              if (response['message'] === 'SINV') {
                                   this.submitMessageStatusFail = true;
-                                  this.submitMessage = 'Due to technical issue the company has not been registered';
+                                  this.submitMessage = 'The company has been successfully registered; the logo file was not valid.';
+                                  this.fillForm.reset();
+                                  this.imageCleanUp();
+                                  this.processing = false;
                               }
                           }
                       }
+                  }, () => {
+                      this.submitMessageStatusFail = true;
+                      this.submitMessage = 'Unexpected error, contact User Support.';
+                      this.processing = false;
                   }
               );
           } else {
-              this.submitMessage = 'Fill all the mandatory fields, stared* fields are mandatory';
-              this.submitMessageStatusFail = true;
-              setTimeout(() => {
-                  this.submitMessageStatusFail = false;
-              }, 3000);
-          }
-      } else {
-          if (this.fillForm.valid) {
+              this.processing = true;
               this.companyService.companyUpdate(this.fileToUpload, this.fillForm.value).subscribe(
                   (response) => {
                       if (response['message'] === 'SIU' || response['message'] === 'SIE') {
                           this.submitMessageStatusSuccess = true;
-                          this.submitMessage = 'The company information has been successfully updated';
-                          // this.fillForm.reset();
-                          // this.imageCleanUp();
+                          this.submitMessage = 'The company information has been successfully updated.';
+                          this.processing = false;
                           this.router.navigate(['/company/' + this.id]);
                       } else {
                           if (response['message'] === 'SINU') {
                               this.submitMessage = 'The company information has been successfully updated,' +
-                                  ' but the logo has not been uploaded';
+                                  ' but the logo has not been uploaded.';
+                              this.submitMessageStatusFail = true;
+                              this.processing = false;
                               this.router.navigate(['/company/' + this.id]);
-                              // this.fillForm.reset();
-                              // this.imageCleanUp();
+
                           } else {
-                              if (response['message'] === 'FAIL') {
+                              if (response['message'] === 'SINV') {
                                   this.submitMessageStatusFail = true;
-                                  this.submitMessage = 'Due to technical issue the company information has not been updated';
+                                  this.submitMessage = 'The company information has been successfully updated;' +
+                                      ' the logo file was not valid.';
+                                  this.processing = false;
+                                  this.router.navigate(['/company/' + this.id]);
                               }
                           }
                       }
+                  }, () => {
+                      this.submitMessageStatusFail = true;
+                      this.submitMessage = 'Unexpected error, contact User Support.';
+                      this.processing = false;
                   }
               );
-          } else {
-              this.submitMessage = 'Fill all the mandatory fields';
-              this.submitMessageStatusFail = true;
-              setTimeout(() => {
-                  this.submitMessageStatusFail = false;
-              }, 3000);
           }
-
+          } else {
+          this.toolsService.markFormGroupTouched(this.fillForm);
       }
+
+
   }
   async getFile(url: string, fn: string) {
         const res = await fetch(url);

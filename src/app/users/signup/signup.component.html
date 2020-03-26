@@ -1,7 +1,7 @@
 <div class="container-fluid" style="height: 100vh">
     <div class="row bg-dark">
         <div class="col-12">
-            <a href="http://www.einvoicemaker.com"><img src="../../../assets/sitelogo.png"
+            <a href="http://www.einvoicemaker.com"><img src="./assets/sitelogo.png"
                                                         class="img-fluid img pt-2 pb-2" alt="Easy_Invoice_Maker"></a>
         </div>
     </div>
@@ -22,7 +22,7 @@
                     This field is mandatory
                 </div>
                 <div *ngIf="f.first_name.touched && f.first_name.errors?.maxlength" class="invalid-feedback">
-                    Maximum 50 characters allowed
+                    Maximum allowed characters are 50
                 </div>
                 <div *ngIf="f.first_name.touched && f.first_name.errors?.pattern" class="invalid-feedback">
                     Invalid characters
@@ -37,7 +37,7 @@
                     This field is mandatory
                 </div>
                 <div *ngIf="f.last_name.touched && f.last_name.errors?.maxlength" class="invalid-feedback">
-                    Maximum 50 characters allowed
+                    Maximum allowed characters are 50
                 </div>
                 <div *ngIf="f.last_name.touched && f.last_name.errors?.pattern" class="invalid-feedback">
                     Invalid characters
@@ -105,7 +105,7 @@
             <div class="col-md-4 offset-md-4 col-sm-12 text-center mb-1">
                 <button type="submit" class="btn btn-primary btn-block mb-1"
                         [attr.disabled]="progressing ? 'disabled' : null">Sign up</button>
-                <ngx-loading-bar ref="http" [color]="'blue'" [fixed]="false"></ngx-loading-bar>
+                <ngx-loading-bar [color]="'blue'" [fixed]="false"></ngx-loading-bar>
             </div>
         </div>
     </form>
@@ -121,7 +121,7 @@
                 <div class="card-header"
                      [ngClass]="{ 'text-danger': failStatus, 'text-success': successStatus}">
                     <h5 *ngIf="failStatus"><i class="fas fa-exclamation-triangle fa-1x"></i> Error</h5>
-                    <h5 *ngIf="successStatus"><i class="far fa-check-circle fa-1x"></i> Sign-up Successfull</h5>
+                    <h5 *ngIf="successStatus"><i class="far fa-check-circle fa-1x"></i> Sign-up Successful</h5>
                 </div>
                 <div class="card-body" [innerHTML] = "errorMessage">
                 </div>

@@ -1,4 +1,5 @@
-<div class="container-fluid pl-3 pr-3">
+<ngx-loading-bar ref="http" [color]="'blue'" [fixed]="false"></ngx-loading-bar>
+<div class="container-fluid pl-3 pr-3 pb-2">
     <div class="row mt-2">
         <div class="col-12 text-center">
             <h6>Hi {{userName}}, welcome to your Easy Invoice Maker profile</h6>
@@ -15,9 +16,6 @@
                     <option *ngFor="let years of invoiceYear" value="{{years}}">{{years}}</option>
                 </select>
                 <input type="text" formControlName="user_id" hidden>
-            </div>
-            <div class="col-1">
-                <ngx-loading-bar ref="http" [color]="'blue'" [fixed]="false"></ngx-loading-bar>
             </div>
         </div>
         <div class="form-row mt-2">
@@ -49,6 +47,9 @@
                                 (chartClick)="chartClicked1($event)">
                         </canvas>
                     </div>
+                    <div class="alert alert-info mt-1" role="alert">
+                        Total amount of issued invoices: <strong>{{totalAmountStr}}</strong>
+                    </div>
                 </mdb-card-body>
             </mdb-card>
         </div>
@@ -67,6 +68,9 @@
                                 (chartHover)="chartHovered2($event)"
                                 (chartClick)="chartClicked2($event)">
                         </canvas>
+                    </div>
+                    <div class="alert alert-info mt-1" role="alert">
+                        Total number of issued invoices: <strong>{{totalNumberStr}}</strong>
                     </div>
                 </mdb-card-body>
             </mdb-card>

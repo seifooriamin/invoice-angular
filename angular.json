@@ -35,8 +35,7 @@
               "node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
               "node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
               "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/assets/ihover/ihover.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

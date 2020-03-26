@@ -7,7 +7,7 @@ export const environment = {
   apiUrl: 'http://localhost/invoice-angular/api/',
   imageUrl: 'http://localhost/invoice-angular/api/uploads/',
   imageDefault: 'http://localhost/invoice-angular/api/uploads/default.png',
-  flagUrl: '../assets/flags/'
+  flagUrl: './assets/flags/'
 };
 
 /*

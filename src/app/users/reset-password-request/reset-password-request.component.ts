@@ -17,6 +17,7 @@ export class ResetPasswordRequestComponent implements OnInit, OnDestroy {
   successStatus = false;
   subscription: Subscription;
   errorMessage = '';
+  processing = false;
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService,
               private toolsService: ToolsService, private authentication: AuthenticationService) {
       if (this.authentication.currentUserValue) {
@@ -40,6 +41,7 @@ export class ResetPasswordRequestComponent implements OnInit, OnDestroy {
   }
   onSubmit() {
     if (this.forgetPasswordForm.valid) {
+      this.processing = true;
       this.subscription = this.userService.getEmailExist(this.forgetPasswordForm.value).subscribe(
           (response) => {
             if (response['message'] === 'email exist') {
@@ -52,10 +54,12 @@ export class ResetPasswordRequestComponent implements OnInit, OnDestroy {
                         () => {
                           this.forgetPasswordForm.reset();
                           this.successStatus = true;
+                          this.processing = false;
                           this.errorMessage = '<p class="card-text text-success">Reset Password link has been sent to your email</p>';
                         }, () => {
                             this.errorMessage = '<p class="card-text text-danger">Unexpected error, contact ' +
                                 '<a href="mailto: userservice@einvoicemaker.com">User Services</a></p>';
+                            this.processing = false;
                             this.failStatus = true;
                         }
                     );
@@ -63,12 +67,14 @@ export class ResetPasswordRequestComponent implements OnInit, OnDestroy {
                   }, () => {
                     this.errorMessage = '<p class="card-text text-danger">Unexpected error, contact ' +
                         '<a href="mailto: userservice@einvoicemaker.com">User Services</a></p>';
+                    this.processing = false;
                     this.failStatus = true;
                   }
               );
             } else {
               this.errorMessage = '<p class="card-text text-danger">We cannot find an account with that e-mail address</p>';
               this.failStatus = true;
+              this.processing = false;
               setTimeout( () => {
                 this.failStatus = false;
               }, 5000);
@@ -77,6 +83,7 @@ export class ResetPasswordRequestComponent implements OnInit, OnDestroy {
             this.errorMessage = '<p class="card-text text-danger">Unexpected error, contact ' +
                 '<a href="mailto: userservice@einvoicemaker.com">User Services</a></p>';
             this.failStatus = true;
+            this.processing = false;
           }
       );
     } else {

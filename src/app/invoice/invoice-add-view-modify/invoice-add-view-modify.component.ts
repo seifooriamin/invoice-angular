@@ -96,6 +96,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   };
   invoiceInfo: InvoiceModel;
   typeOptions = [{typeCode: 'P', typeName: 'Percentage'}, {typeCode: 'F', typeName: 'Flat Rate'}];
+  processing = false;
 
 
   searchDescription = (text$: Observable<string>) =>
@@ -333,14 +334,14 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     if (this.invoiceSettingElements.deduction1type === 'P' && +this.invoiceSettingElements.deduction1status === 1) {
       deduction1 = this.toolsService.showNumberWithDecimal(
           (this.invoiceSubTotalDigit * this.invoiceSettingElements.deduction1percentage) / 100);
-      this.f.deduction1.setValue(this.toolsService.numberSeparator(deduction1));
+      this.f.deduction1.setValue(deduction1);
     } else {
       if (+this.invoiceSettingElements.deduction1status === 1) {
         deduction1 = this.toolsService.showNumberWithDecimal(this.f.deduction1.value);
         this.f.deduction1.setValue(deduction1);
       }
       if (+this.invoiceSettingElements.deduction1status === 0) {
-        deduction1 = this.toolsService.showNumberWithDecimal(this.f.deduction1.value);
+        deduction1 = 0;
         this.f.deduction1.setValue(0);
       }
     }
@@ -348,14 +349,14 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     if (this.invoiceSettingElements.deduction2type === 'P' && +this.invoiceSettingElements.deduction2status === 1) {
       deduction2 = this.toolsService.showNumberWithDecimal(
           (totalLocal * this.invoiceSettingElements.deduction2percentage) / 100);
-      this.f.deduction2.setValue(this.toolsService.numberSeparator(deduction2));
+      this.f.deduction2.setValue(deduction2);
     } else {
       if (+this.invoiceSettingElements.deduction2status === 1) {
         deduction2 = this.toolsService.showNumberWithDecimal(this.f.deduction2.value);
         this.f.deduction2.setValue(deduction2);
       }
       if (+this.invoiceSettingElements.deduction2status === 0) {
-        deduction2 = this.toolsService.showNumberWithDecimal(this.f.deduction2.value);
+        deduction2 = 0;
         this.f.deduction2.setValue(0);
       }
     }
@@ -363,42 +364,42 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     if (this.invoiceSettingElements.addition1type === 'P' && +this.invoiceSettingElements.addition1status === 1) {
       addition1 = this.toolsService.showNumberWithDecimal(
           (totalLocal * this.invoiceSettingElements.addition1percentage) / 100);
-      this.f.addition1.setValue(this.toolsService.numberSeparator(addition1));
+      this.f.addition1.setValue(addition1);
     } else {
       if (+this.invoiceSettingElements.addition1status === 1) {
         addition1 = this.toolsService.showNumberWithDecimal(this.f.addition1.value);
         this.f.addition1.setValue(addition1);
       }
       if (+this.invoiceSettingElements.addition1status === 0) {
-        addition1 = this.toolsService.showNumberWithDecimal(this.f.addition1.value);
+        addition1 = 0;
         this.f.addition1.setValue(0);
       }
     }
     if (this.invoiceSettingElements.addition2type === 'P' && +this.invoiceSettingElements.addition2status === 1) {
       addition2 = this.toolsService.showNumberWithDecimal(
           (totalLocal * this.invoiceSettingElements.addition2percentage) / 100);
-      this.f.addition2.setValue(this.toolsService.numberSeparator(addition2));
+      this.f.addition2.setValue(addition2);
     } else {
       if (+this.invoiceSettingElements.addition2status === 1) {
         addition2 = this.toolsService.showNumberWithDecimal(this.f.addition2.value);
         this.f.addition2.setValue(addition2);
       }
       if (+this.invoiceSettingElements.addition2status === 0) {
-        addition2 = this.toolsService.showNumberWithDecimal(this.f.addition2.value);
+        addition2 = 0;
         this.f.addition2.setValue(0);
       }
     }
     if (this.invoiceSettingElements.addition3type === 'P' && +this.invoiceSettingElements.addition3status === 1) {
       addition3 = this.toolsService.showNumberWithDecimal(
           (totalLocal * this.invoiceSettingElements.addition3percentage) / 100);
-      this.f.addition3.setValue(this.toolsService.numberSeparator(addition3));
+      this.f.addition3.setValue(addition3);
     } else {
       if (+this.invoiceSettingElements.addition3status === 1) {
         addition3 = this.toolsService.showNumberWithDecimal(this.f.addition3.value);
         this.f.addition3.setValue(addition3);
       }
       if (+this.invoiceSettingElements.addition3status === 0) {
-        addition3 = this.toolsService.showNumberWithDecimal(this.f.addition3.value);
+        addition3 = 0;
         this.f.addition3.setValue(0);
       }
     }
@@ -657,6 +658,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     this.router.navigate(['/invoice/' + this.id + '/modify']);
   }
   onSubmit() {
+    if (this.fillForm.valid && this.fillFormRows.valid && this.settingForm.valid) {
     this.rowTotalString = [];
     this.rowTotalNumber = [];
     this.invoiceSubTotal = '';
@@ -664,10 +666,9 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     this.invoiceTotal = '';
     this.invoiceTotalDigit = 0;
     if (this.pageStatus === 'new') {
-      if (this.fillForm.valid && this.fillFormRows.valid && this.settingForm.valid) {
+        this.processing = true;
         this.subscription = this.invoiceService.invoiceCreate(this.fillForm.value).subscribe(
-            (response) => {
-              if (response['message'] === 'SUCCESS') {
+            () => {
                 this.subscription = this. subscription = this.invoiceService.getInvoiceNumber(this.jUserID).subscribe(
                     (invoiceID) => {
                         this.settingForm.get('invoice_id').setValue(invoiceID['id']);
@@ -675,121 +676,127 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
                         for (let row = 0; row < this.s.length; row++) {
                           this.s.at(row).get('invoice_id').setValue(invoiceID['id']);
                         }
-                        for (const rowData of this.s.value) {
-                          this.subscription = this.invoiceRowsService.invoiceRowCreate(rowData).subscribe(
-                              (responseRow) => {
-
+                        this.subscription = this.ics.createInvoiceCustomSetting(this.settingForm.value).subscribe(
+                          () => {
+                            let i = 1;
+                            for (const rowData of this.s.value) {
+                              this.subscription = this.invoiceRowsService.invoiceRowCreate(rowData).subscribe(
+                                  () => {
+                                    if (i === this.s.length) {
+                                      this.submitMessage = 'The invoice has been saved successfully.';
+                                      this.submitMessageStatusSuccess = true;
+                                      this.router.navigate(['/invoice/' + this.savedInvoiceID]);
+                                      this.onScrollTop();
+                                      this.processing = false;
+                                      setTimeout(() => {
+                                        this.submitMessageStatusSuccess = false;
+                                      }, 5000);
+                                    }
+                                    i++;
+                                  }, () => {
+                                    this.submitMessage = 'Unexpected error, may the invoice row(s) have not been saved;' +
+                                        ' Contact User Support.';
+                                    this.submitMessageStatusFail = true;
+                                    this.processing = false;
+                                    setTimeout(() => {
+                                      this.submitMessageStatusFail = false;
+                                    }, 5000);
+                                  });
+                            }
                               }, () => {
-                                this.submitMessage = 'Unexpected error occurred, may the invoice row(s) has not been saved';
+                                this.submitMessage = 'Unexpected error, may the invoice row(s) & setting have not been saved;' +
+                                    ' Contact User Support.';
                                 this.submitMessageStatusFail = true;
+                                this.processing = false;
                                 setTimeout(() => {
                                   this.submitMessageStatusFail = false;
-                                }, 3000);
-                              }
-                          );
-                        }
-                        this.subscription = this.ics.createInvoiceCustomSetting(this.settingForm.value).subscribe(
-                            (responseSetting) => {
-                            }
-                        );
-                    } , () => {
-                      this.submitMessage = 'Unexpected error occurred, may the invoice setting has not been saved';
-                      this.submitMessageStatusFail = true;
-                      setTimeout(() => {
-                        this.submitMessageStatusFail = false;
-                      }, 3000);
-                    }
-                );
-                this.submitMessage = 'The invoice has been saved successfully';
-                this.submitMessageStatusSuccess = true;
-                setTimeout(() => {
-                  this.submitMessageStatusSuccess = false;
-                  this.router.navigate(['/invoice/' + this.savedInvoiceID]);
-                  this.onScrollTop();
-                }, 1500);
-              }
-            }, () => {
-              this.submitMessage = 'Unexpected error occurred, your invoice has not been saved';
-              this.submitMessageStatusFail = true;
-              setTimeout(() => {
-                this.submitMessageStatusFail = false;
-              }, 3000);
-            }
-        );
-      } else {
-        this.submitMessage = 'Fill all the mandatory fields, stared* fields are mandatory';
-        this.submitMessageStatusFail = true;
-        setTimeout(() => {
-          this.submitMessageStatusFail = false;
-        }, 3000);
-      }
-    } else {
-      if (this.fillForm.valid && this.fillFormRows.valid && this.settingForm.valid) {
-        const invoiceIDJson = '{ "invoice_id" : "' + this.id + '" }';
-        this.subscription = this.invoiceRowsService.invoiceRowsDelete(invoiceIDJson).subscribe(
-            (response) => {
-              for (const rowData of this.s.value) {
-                this.subscription = this.invoiceRowsService.invoiceRowCreate(rowData).subscribe(
-                    (responseRow) => {
+                                }, 5000);
+                              });
                     }, () => {
-                      this.submitMessage = 'Unexpected error occurred, may the invoice row(s) has not been updated.';
+                      this.submitMessage = 'Unexpected error, may the invoice row(s) & setting have not been saved; ' +
+                          'Contact User Support.';
                       this.submitMessageStatusFail = true;
+                      this.processing = false;
                       setTimeout(() => {
                         this.submitMessageStatusFail = false;
-                      }, 3000);
-                    }
-                );
-              }
+                      }, 5000);
+                    });
             }, () => {
-              this.submitMessage = 'Unexpected error occurred, may the invoice row(s) has not been updated.';
+              this.submitMessage = 'Unexpected error, your invoice has not been saved; Contact User Support.';
               this.submitMessageStatusFail = true;
+              this.processing = false;
               setTimeout(() => {
                 this.submitMessageStatusFail = false;
-              }, 3000);
-            }
-        );
-
+              }, 5000);
+            });
+      }  else {
+        this.processing = true;
         this.invoiceService.invoiceUpdate(this.fillForm.value).subscribe(
-            (response) => {
-              if (response['message'] === 'SUCCESS') {
+            () => {
                 this.ics.updateInvoiceCustomSetting(this.settingForm.value).subscribe(
-                    (resSetting) => {
-                      if (resSetting['message'] === 'SUCCESS') {
-                        this.submitMessage = 'The invoice has been updated successfully';
-                        this.submitMessageStatusSuccess = true;
-                        setTimeout(() => {
-                          this.submitMessageStatusSuccess = false;
-                          this.router.navigate(['/invoice/' + this.id]);
-                          this.onScrollTop();
-                        }, 1500);
-                      }
+                    () => {
+                      const invoiceIDJson = '{ "invoice_id" : "' + this.id + '" }';
+                      this.subscription = this.invoiceRowsService.invoiceRowsDelete(invoiceIDJson).subscribe(
+                          () => {
+                            let i = 1;
+                            for (const rowData of this.s.value) {
+                              this.subscription = this.invoiceRowsService.invoiceRowCreate(rowData).subscribe(
+                                  () => {
+                                    if (i === this.s.length) {
+                                      this.submitMessage = 'The invoice has been updated successfully';
+                                      this.submitMessageStatusSuccess = true;
+                                      this.router.navigate(['/invoice/' + this.id]);
+                                      this.onScrollTop();
+                                      this.processing = false;
+                                      setTimeout(() => {
+                                        this.submitMessageStatusSuccess = false;
+                                      }, 5000);
+                                    }
+                                    i++;
+                                  }, () => {
+                                    this.submitMessage = 'Unexpected error, may the invoice row(s) have not been updated;' +
+                                        ' Contact User Support.';
+                                    this.submitMessageStatusFail = true;
+                                    this.processing = false;
+
+                                    setTimeout(() => {
+                                      this.submitMessageStatusFail = false;
+                                    }, 5000);
+                                  });
+                            }
+                          }, () => {
+                            this.submitMessage = 'Unexpected error, may the invoice row(s) have not been updated;' +
+                                ' Contact User Support.';
+                            this.submitMessageStatusFail = true;
+                            this.processing = false;
+                            setTimeout(() => {
+                              this.submitMessageStatusFail = false;
+                            }, 5000);
+                          });
                     }, () => {
-                      this.submitMessage = 'The invoice has been updated, but its setting has not been updated.';
+                      this.submitMessage = 'Unexpected error, may the invoice row(s) & setting have not been updated;' +
+                          ' Contact User Support.';
                       this.submitMessageStatusFail = true;
+                      this.processing = false;
+                      this.router.navigate(['/invoice/' + this.id]);
+                      this.onScrollTop();
                       setTimeout(() => {
                         this.submitMessageStatusFail = false;
-                        this.router.navigate(['/invoice/' + this.id]);
-                        this.onScrollTop();
-                      }, 3000);
-                    }
-                );
-              }
+                      }, 5000);
+                    });
             }, () => {
-              this.submitMessage = 'Unexpected error occurred, your invoice has not been updated.';
+              this.submitMessage = 'Unexpected error your invoice has not been updated; Contact User Support.';
               this.submitMessageStatusFail = true;
               setTimeout(() => {
                 this.submitMessageStatusFail = false;
-              }, 3000);
-            }
-        );
-      } else {
-        this.submitMessage = 'Fill all the mandatory fields, stared* fields are mandatory';
-        this.submitMessageStatusFail = true;
-        setTimeout(() => {
-          this.submitMessageStatusFail = false;
-        }, 3000);
+              }, 5000);
+            });
+      }} else {
+        this.onScrollTop();
+        this.toolsService.markFormGroupTouched(this.fillForm);
+        this.toolsService.markFormGroupTouched(this.fillFormRows);
+        this.toolsService.markFormGroupTouched(this.settingForm);
       }
-    }
   }
   onLoadCompanyData(companyID) {
     try {
@@ -1058,7 +1065,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
                       '',
                       {
                           text: +this.invoiceSettingElements.deduction1status === 1 ?
-                              this.f.deduction1.value : null,
+                              this.toolsService.numberSeparator(this.f.deduction1.value) : null,
                           alignment: 'right',
                           border: [true, false, true, false],
                       }
@@ -1075,7 +1082,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
                       '',
                       {
                           text: +this.invoiceSettingElements.deduction2status === 1 ?
-                              this.f.deduction2.value : null,
+                              this.toolsService.numberSeparator(this.f.deduction2.value) : null,
                           alignment: 'right',
                           border: [true, false, true, false],
                       }
@@ -1092,7 +1099,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
                       '',
                       {
                           text: +this.invoiceSettingElements.addition1status === 1 ?
-                              this.f.addition1.value : null,
+                              this.toolsService.numberSeparator(this.f.addition1.value) : null,
                           alignment: 'right',
                           border: [true, false, true, false],
                       }
@@ -1109,7 +1116,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
                       '',
                       {
                           text: +this.invoiceSettingElements.addition2status === 1 ?
-                              this.f.addition2.value : null,
+                              this.toolsService.numberSeparator(this.f.addition2.value) : null,
                           alignment: 'right',
                           border: [true, false, true, false],
                       }
@@ -1126,7 +1133,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
                       '',
                       {
                           text: +this.invoiceSettingElements.addition3status === 1 ?
-                              this.f.addition3.value : null,
+                              this.toolsService.numberSeparator(this.f.addition3.value) : null,
                           alignment: 'right',
                           border: [true, false, true, false],
                       }

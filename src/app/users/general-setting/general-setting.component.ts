@@ -28,6 +28,7 @@ export class GeneralSettingComponent implements OnInit {
     subscription: Subscription;
     typeOptions = [{typeCode: 'P', typeName: 'Percentage'}, {typeCode: 'F', typeName: 'Flat Rate'}];
     settingInfo: InvoiceGeneralSettingModel;
+    processing = false;
 
     constructor(private router: Router, private formBuilder: FormBuilder, private toolsService: ToolsService,
                 private igs: InvoiceGeneralSettingService, private currencyService: CurrencyService) {}
@@ -130,30 +131,27 @@ export class GeneralSettingComponent implements OnInit {
     }
     onSubmit() {
         if (this.settingForm.valid) {
+            this.processing = true;
             this.igs.updateInvoiceSetting(this.settingForm.value).subscribe(
                 (response) => {
                     if (response['message'] === 'SUCCESS') {
                         this.submitMessageStatusSuccess = true;
                         this.submitMessage = 'The General Setting has been successfully updated';
+                        this.processing = false;
                         setTimeout(() => {
                             this.submitMessageStatusSuccess = false;
                         }, 5000);
-                    }}
-                    // , () => {
-                    // this.submitMessage = 'Due to technical issue the general setting record has not been updated';
-                    // this.submitMessageStatusFail = true;
-                    // setTimeout(() => {
-                    //     this.submitMessageStatusFail = false;
-                    // }, 5000); }
+                    }}, () => {
+                    this.submitMessage = 'Unexpected error, contact User Support.';
+                    this.submitMessageStatusFail = true;
+                    this.processing = false;
+                    setTimeout(() => {
+                        this.submitMessageStatusFail = false;
+                    }, 5000); }
             );
 
         } else {
-            this.submitMessage = 'Fill all the mandatory fields';
-            this.markFormGroupTouched(this.settingForm);
-            this.submitMessageStatusFail = true;
-            setTimeout(() => {
-                this.submitMessageStatusFail = false;
-            }, 5000);
+            this.toolsService.markFormGroupTouched(this.settingForm);
         }
     }
     private markFormGroupTouched(form: FormGroup) {

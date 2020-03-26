@@ -1,4 +1,3 @@
-<ngx-loading-bar></ngx-loading-bar>
 <div class="container mt-4 bg-dark mb-4">
     <div class="row pt-2">
         <div class="col-lg-1 col-md-2 col-3">
@@ -53,7 +52,7 @@
                                [ngClass]="{ 'is-invalid': f.date.touched && f.date.invalid,
                                     'is-valid': f.date.valid}">
                         <div *ngIf="f.date.touched && f.date.errors?.required" class="invalid-feedback">
-                            Date is mandatory
+                            This field is mandatory
                         </div>
                         <div *ngIf="f.date.touched && f.date.errors?.pattern" class="invalid-feedback">
                             Accepted format is YYYY-MM-DD
@@ -67,7 +66,7 @@
                                     'is-valid': f.estimate_number.valid}"
                            [attr.disabled] = "pageStatus === 'view' || pageStatus === 'modify' ? 'disabled' : null">
                     <div *ngIf="f.estimate_number.touched && f.estimate_number.errors?.required" class="invalid-feedback">
-                        Estimate number is mandatory
+                        This field is mandatory
                     </div>
                     <div *ngIf="f.estimate_number.touched && f.estimate_number.errors?.pattern" class="invalid-feedback">
                         Estimate number should be ended by number
@@ -98,7 +97,7 @@
                             <option *ngFor="let company of companyList" value="{{company.id}}">{{company.name}}</option>
                         </select>
                         <div *ngIf="f.company_id.touched && f.company_id.invalid" class="invalid-feedback">
-                            This field is mandatory, please select one option
+                            This field is mandatory
                         </div>
                     </div>
                 </div>
@@ -151,7 +150,7 @@
                             <option *ngFor="let customer of customerList" value="{{customer.id}}">{{customer.name}}</option>
                         </select>
                         <div *ngIf="f.customer_id.touched && f.customer_id.invalid" class="invalid-feedback">
-                            This field is mandatory, please select one option
+                            This field is mandatory
                         </div>
                     </div>
                 </div>
@@ -186,12 +185,12 @@
                                    [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             <div *ngIf="s.at(i).get('description').touched &&
                             s.at(i).get('description').errors?.required" class="invalid-feedback">
-                                Description is mandatory
+                                This field is mandatory
                             </div>
                             <div *ngIf="s.at(i).get('description').touched &&
                             (s.at(i).get('description').errors?.maxlength || s.at(i).get('description').errors?.pattern)"
                                  class="invalid-feedback">
-                                Maximum allowed characters is 70 and some special characters are not allowed
+                                Maximum allowed characters are 70 and some special characters are not allowed
                             </div>
                         </div>
                         <div class="col-lg-4 col-12">
@@ -205,7 +204,7 @@
                             <div *ngIf="s.at(i).get('comment').touched &&
                             (s.at(i).get('comment').errors?.maxlength || s.at(i).get('comment').errors?.pattern)"
                                  class="invalid-feedback">
-                                Maximum allowed characters is 70 and some special characters are not allowed
+                                Maximum allowed characters are 70 and some special characters are not allowed
                             </div>
                         </div>
                         <div class="col-lg-2 col-6">
@@ -219,7 +218,7 @@
                                    [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             <div *ngIf="s.at(i).get('unit_price').touched &&
                             s.at(i).get('unit_price').errors?.required" class="invalid-feedback">
-                                Unit price is mandatory
+                                This field is mandatory
                             </div>
                         </div>
                         <div class="col-lg-2 col-6">
@@ -233,7 +232,7 @@
                                    [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             <div *ngIf="s.at(i).get('quantity').touched &&
                             s.at(i).get('quantity').errors?.required" class="invalid-feedback">
-                                Quantity is mandatory
+                                This field is mandatory
                             </div>
                         </div>
                     </div>
@@ -249,7 +248,7 @@
                             <div *ngIf="s.at(i).get('unit_measure').touched &&
                             (s.at(i).get('unit_measure').errors?.maxlength || s.at(i).get('unit_measure').errors?.pattern)"
                                  class="invalid-feedback">
-                                Maximum allowed characters is 10 and some special characters are not allowed
+                                Maximum allowed characters are 10 and some special characters are not allowed
                             </div>
                         </div>
                         <div class="col-lg-3 col-5">
@@ -425,15 +424,17 @@
                                     'is-valid': f.note.valid}"
                               [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"></textarea>
                     <div *ngIf="f.note.touched && f.note.invalid" class="invalid-feedback">
-                        Maximum allowed characters is 256
+                        Maximum allowed characters are 256
                     </div>
                 </div>
             </div>
         </div> <!--Invoice Note-->
         <div class="form-group row mt-1"> <!--Submission-->
             <div class="col-md-2 offset-md-5 col-4 offset-4 text-center">
-                <button type="submit" class="btn btn-primary btn-block"
-                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">{{pageStatus === 'modify' ? 'Modify' : 'Register'}}</button>
+                <button type="submit" class="btn btn-primary btn-block mb-1"
+                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null || processing ? 'disabled' : null">
+                    {{pageStatus === 'modify' ? 'Modify' : 'Register'}}</button>
+                <ngx-loading-bar [color]="'blue'" [fixed]="false"></ngx-loading-bar>
             </div>
             <div class="col-md-5 col-12">
                 <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual text-center">

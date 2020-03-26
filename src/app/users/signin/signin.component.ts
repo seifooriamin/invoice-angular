@@ -46,17 +46,18 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
   onSubmit() {
     if (this.fillForm.value) {
-      this.progressing = true;
+      // this.progressing = true;
       this.subscription = this.authentication.login(this.fillForm.value).subscribe(
           () => {
             this.progressing = false;
             this.router.navigate([this.returnUrl]);
-          },
-          () => {
-            this.progressing = false;
-            this.errorMessage = '<p class="card-text text-danger">Your username or password is incorrect</a></p>';
-            this.failStatus = true;
           }
+          // ,
+          // () => {
+          //   this.progressing = false;
+          //   this.errorMessage = '<p class="card-text text-danger">Your username or password is incorrect</a></p>';
+          //   this.failStatus = true;
+          // }
       );
     }
 

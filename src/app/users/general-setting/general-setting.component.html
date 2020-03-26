@@ -1,4 +1,3 @@
-<ngx-loading-bar></ngx-loading-bar>
 <div class="container mt-4 bg-dark mb-4">
     <div class="row pt-2">
         <div class="col-lg-1 col-md-2 col-3">
@@ -45,13 +44,13 @@
                            [ngClass]="{ 'is-invalid': f.deduction1label.touched && f.deduction1label.invalid,
                                     'is-valid': f.deduction1label.valid}">
                     <div *ngIf="f.deduction1label.touched && f.deduction1label.errors?.required" class="invalid-feedback">
-                        Label is mandatory
+                        This field is mandatory
                     </div>
                     <div *ngIf="f.deduction1label.touched && f.deduction1label.errors?.maxlength" class="invalid-feedback">
-                        Maximum 30 characters
+                        Maximum allowed characters are 30
                     </div>
                     <div *ngIf="f.deduction1label.touched && f.deduction1label.errors?.pattern" class="invalid-feedback">
-                        Special characters are not allowed
+                        Invalid characters
                     </div>
                 </div>
                 <div class="col-3">
@@ -72,7 +71,7 @@
                         Invalid percentage
                     </div>
                     <div *ngIf="f.deduction1percentage.touched && f.deduction1percentage.errors?.required" class="invalid-feedback">
-                        Percentage is mandatory (between 0 to 100)
+                        This field is mandatory (between 0 to 100)
                     </div>
                 </div>
             </div> <!--Discount 1-->
@@ -91,13 +90,13 @@
                            [ngClass]="{ 'is-invalid': f.deduction2label.touched && f.deduction2label.invalid,
                                     'is-valid': f.deduction2label.valid}">
                     <div *ngIf="f.deduction2label.touched && f.deduction2label.errors?.required" class="invalid-feedback">
-                        Label is mandatory
+                        This field is mandatory
                     </div>
                     <div *ngIf="f.deduction2label.touched && f.deduction2label.errors?.maxlength" class="invalid-feedback">
-                        Maximum 30 characters
+                        Maximum allowed characters are 30
                     </div>
                     <div *ngIf="f.deduction2label.touched && f.deduction2label.errors?.pattern" class="invalid-feedback">
-                        Special characters are not allowed
+                        Invalid characters
                     </div>
                 </div>
                 <div class="col-3">
@@ -118,7 +117,7 @@
                         Invalid percentage
                     </div>
                     <div *ngIf="f.deduction2percentage.touched && f.deduction2percentage.errors?.required" class="invalid-feedback">
-                        Percentage is mandatory (between 0 to 100)
+                        This field is mandatory (between 0 to 100)
                     </div>
                 </div>
             </div> <!--Discount 2-->
@@ -137,13 +136,13 @@
                            [ngClass]="{ 'is-invalid': f.addition1label.touched && f.addition1label.invalid,
                                     'is-valid': f.addition1label.valid}">
                     <div *ngIf="f.addition1label.touched && f.addition1label.errors?.required" class="invalid-feedback">
-                        Label is mandatory
+                        This field is mandatory
                     </div>
                     <div *ngIf="f.addition1label.touched && f.addition1label.errors?.maxlength" class="invalid-feedback">
-                        Maximum 30 characters
+                        Maximum allowed characters are 30
                     </div>
                     <div *ngIf="f.addition1label.touched && f.addition1label.errors?.pattern" class="invalid-feedback">
-                        Special characters are not allowed
+                        Invalid characters
                     </div>
                 </div>
                 <div class="col-3">
@@ -164,7 +163,7 @@
                         Invalid percentage
                     </div>
                     <div *ngIf="f.addition1percentage.touched && f.addition1percentage.errors?.required" class="invalid-feedback">
-                        Percentage is mandatory (between 0 to 100)
+                        This field is mandatory (between 0 to 100)
                     </div>
                 </div>
             </div> <!--Tax 1-->
@@ -182,10 +181,10 @@
                            [ngClass]="{ 'is-invalid': f.addition2label.touched && f.addition2label.invalid,
                                     'is-valid': f.addition2label.valid}">
                     <div *ngIf="f.addition2label.touched && f.addition2label.errors?.required" class="invalid-feedback">
-                        Label is mandatory
+                        This field is mandatory
                     </div>
                     <div *ngIf="f.addition2label.touched && f.addition2label.errors?.maxlength" class="invalid-feedback">
-                        Maximum 30 characters
+                        Maximum allowed characters are 30
                     </div>
                     <div *ngIf="f.addition2label.touched && f.addition2label.errors?.pattern" class="invalid-feedback">
                         Special characters are not allowed
@@ -209,7 +208,7 @@
                         Invalid percentage
                     </div>
                     <div *ngIf="f.addition2percentage.touched && f.addition2percentage.errors?.required" class="invalid-feedback">
-                        Percentage is mandatory (between 0 to 100)
+                        This field is mandatory (between 0 to 100)
                     </div>
                 </div>
             </div> <!--Tax 2-->
@@ -227,13 +226,13 @@
                            [ngClass]="{ 'is-invalid': f.addition3label.touched && f.addition3label.invalid,
                                     'is-valid': f.addition3label.valid}">
                     <div *ngIf="f.addition3label.touched && f.addition3label.errors?.required" class="invalid-feedback">
-                        Label is mandatory
+                        This feild is mandatory
                     </div>
                     <div *ngIf="f.addition3label.touched && f.addition3label.errors?.maxlength" class="invalid-feedback">
-                        Maximum 30 characters
+                        Maximum allowed characters are 30
                     </div>
                     <div *ngIf="f.addition3label.touched && f.addition3label.errors?.pattern" class="invalid-feedback">
-                        Special characters are not allowed
+                        Invalid characters
                     </div>
                 </div>
                 <div class="col-3">
@@ -254,7 +253,7 @@
                         Invalid percentage
                     </div>
                     <div *ngIf="f.addition3percentage.touched && f.addition3percentage.errors?.required" class="invalid-feedback">
-                        Percentage is mandatory (between 0 to 100)
+                        This field is mandatory (between 0 to 100)
                     </div>
                 </div>
             </div> <!--Tax 3-->
@@ -286,7 +285,9 @@
         </div>
         <div class="form-group row mt-1">
             <div class="col-md-2 offset-md-5 col-4 offset-4 text-center">
-                <button type="submit" class="btn btn-primary btn-block">Modify</button>
+                <button type="submit" class="btn btn-primary btn-block mb-1" [disabled]="processing ? 'disabled' : null">
+                    Modify</button>
+                <ngx-loading-bar [color]="'blue'" [fixed]="false"></ngx-loading-bar>
             </div>
             <div class="col-md-5 col-12">
                 <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual text-center">

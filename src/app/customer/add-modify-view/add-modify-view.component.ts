@@ -22,6 +22,7 @@ export class AddModifyViewComponent implements OnInit, OnDestroy {
   pageStatus = 'new';
   pageTitle = 'New Company Registration';
   subscription: Subscription;
+  processing = false;
   constructor(private formBuilder: FormBuilder, private customerService: CustomerService, private http: HttpClient,
               private toolsService: ToolsService, private router: Router, private route: ActivatedRoute) { }
 
@@ -95,56 +96,37 @@ export class AddModifyViewComponent implements OnInit, OnDestroy {
     this.router.navigate(['/customer/' + this.id + '/modify']);
   }
   onSubmit() {
-    if (this.pageStatus === 'new') {
-      if (this.fillForm.valid) {
+    if (this.fillForm.valid) {
+      if (this.pageStatus === 'new') {
+        this.processing = true;
         this.customerService.customerCreate(this.fillForm.value).subscribe(
-            (response) => {
-              if (response['message'] === 'SUCCESS') {
+            () => {
                 this.submitMessageStatusSuccess = true;
-                this.submitMessage = 'The customer has been successfully registered';
+                this.submitMessage = 'The customer has been successfully registered.';
+                this.processing = false;
                 this.fillForm.reset();
-
-              } else {
-                  if (response['message'] === 'FAIL') {
-                    this.submitMessageStatusFail = true;
-                    this.submitMessage = 'Due to technical issue the customer has not been registered';
-                  }
-                }
-              }
+              }, () => {
+              this.submitMessageStatusFail = true;
+              this.submitMessage = 'Unexpected error, contact User Support.';
+              this.processing = false;
+            }
         );
       } else {
-        this.submitMessage = 'Fill all the mandatory fields';
-        this.submitMessageStatusFail = true;
-        setTimeout(() => {
-          this.submitMessageStatusFail = false;
-        }, 3000);
-      }
-    } else {
-      if (this.fillForm.valid) {
+        this.processing = true;
         this.customerService.customerUpdate(this.fillForm.value).subscribe(
-            (response) => {
-              if (response['message'] === 'SUCCESS') {
+            () => {
                 this.submitMessageStatusSuccess = true;
-                this.submitMessage = 'The customer information has been successfully updated';
+                this.submitMessage = 'The customer information has been successfully updated.';
+                this.processing = false;
                 this.router.navigate(['/customer/' + this.id]);
-              } else {
-                  if (response['message'] === 'FAIL') {
-                    this.submitMessageStatusFail = true;
-                    this.submitMessage = 'Due to technical issue the customer information has not been updated';
-                  }
-                }
-              }
+              }, () => {
+                this.submitMessageStatusFail = true;
+                this.processing = false;
+                this.submitMessage = 'Unexpected error, contact User Support.';
+            }
         );
-      } else {
-        this.submitMessage = 'Fill all the mandatory fields';
-        this.submitMessageStatusFail = true;
-        setTimeout(() => {
-          this.submitMessageStatusFail = false;
-        }, 3000);
+      }} else {
+        this.toolsService.markFormGroupTouched(this.fillForm);
       }
-
-    }
   }
-
-
 }

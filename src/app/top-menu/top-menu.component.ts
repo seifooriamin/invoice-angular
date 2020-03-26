@@ -18,8 +18,7 @@ export class TopMenuComponent implements OnInit {
   submitMessageStatusSuccess = false;
   submitMessage = '';
   passwordCheck: boolean;
-  formInvalidSubmit = false;
-
+  processing = false;
   constructor(private authenticationService: AuthenticationService, private formBuilder: FormBuilder,
               private toolsService: ToolsService, private userService: UserService) { }
 
@@ -56,9 +55,11 @@ export class TopMenuComponent implements OnInit {
   }
   onSubmit() {
     if (this.changePasswordForm.valid) {
+      this.processing = true;
       this.userService.changePassword(this.changePasswordForm.value).subscribe(
           () => {
             this.submitMessage = 'Password has been changed successfully';
+            this.processing = false;
             this.submitMessageStatusSuccess = true;
             this.changePasswordForm.reset();
             this.setUserId();
@@ -73,21 +74,16 @@ export class TopMenuComponent implements OnInit {
               this.submitMessageStatusSuccess = false;
             }, 5000);
           }, () => {
-            this.submitMessage = 'Password has not been changed';
+            this.submitMessage = 'Unexpected error, password has not been changed; Contact User Support';
             this.submitMessageStatusFail = true;
+            this.processing = false;
             setTimeout(() => {
               this.submitMessageStatusFail = false;
             }, 5000);
           }
       );
     } else {
-      this.submitMessage = 'Fill all the mandatory fields';
       this.toolsService.markFormGroupTouched(this.changePasswordForm);
-      this.submitMessageStatusFail = true;
-      this.formInvalidSubmit =  true;
-      setTimeout(() => {
-        this.submitMessageStatusFail = false;
-      }, 5000);
     }
 
   }

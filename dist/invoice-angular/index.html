@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Easy Invoice Builder</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+<link rel="stylesheet" href="styles.4f48a53c16e459871c93.css"></head>
+<body>
+  <app-root></app-root>
+  <script>
+    window.onbeforeunload = function(e) {
+      let date = Date.now();
+
+      localStorage.setItem("lastactivity", date);
+    };
+    window.onload = function() {
+
+      let date1 = localStorage.getItem('lastactivity');
+      let date2 = Date.now();
+      if (date1 !== undefined) {
+        let difference = date2 - date1;
+        let diff = ((difference) / 1000).toFixed(0);
+
+        if (diff > 600) {
+          localStorage.clear();
+          location.reload();
+        }
+      }
+    };
+  </script>
+<script src="runtime-es2015.aa36e2789a7b6e5e7675.js" type="module"></script><script src="polyfills-es2015.6f582e2dd084a9eb31fe.js" type="module"></script><script src="runtime-es5.d3647fbfa3de00cd0bdf.js" nomodule></script><script src="polyfills-es5.6fc79adba80cae5fa417.js" nomodule></script><script src="scripts.5a58bf7cc539f872a983.js"></script><script src="main-es2015.89f5fc56e91d30f96d3d.js" type="module"></script><script src="main-es5.088f555f0be4090cead5.js" nomodule></script></body>
+</html>

@@ -1,4 +1,3 @@
-<ngx-loading-bar></ngx-loading-bar>
 <div class="container mt-4 bg-dark mb-4">
     <div class="row pt-2">
         <div class="col-lg-1 col-md-2 col-3">
@@ -27,7 +26,7 @@
                                     'is-valid': f.name.touched && f.name.valid}" (change)="onSetUserId()"
                            [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                     <div *ngIf="f.name.touched && f.name.invalid" class="invalid-feedback">
-                        Customer name is a mandatory field
+                        This field is mandatory
                     </div>
                     <input type="text" class="form-control" formControlName="user_id" hidden>
                     <input type="text" class="form-control" formControlName="id" hidden>
@@ -41,7 +40,7 @@
                                     'is-valid': f.address.touched && f.address.valid}"
                            [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                     <div *ngIf="f.address.touched && f.address.invalid" class="invalid-feedback">
-                        Just alphabet and numbers are allowed
+                        Invalid characters
                     </div>
                 </div>
             </div>
@@ -53,7 +52,7 @@
                                     'is-valid': f.phone.valid}"
                            [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                     <div *ngIf="f.phone.touched && f.phone.invalid" class="invalid-feedback">
-                        Invalid phone number acceptable format +11111111111 (max 13 digit plus +)
+                        Invalid phone format, acceptable format +11111111111 (max 13 digit plus +)
                     </div>
                 </div>
                 <div class="form-group col-6">
@@ -70,8 +69,10 @@
         </div>
         <div class="form-group row mt-1">
             <div class="col-md-2 offset-md-5 col-4 offset-4 text-center">
-                <button type="submit" class="btn btn-primary btn-block"
-                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">{{pageStatus === 'modify' ? 'Modify' : 'Register'}}</button>
+                <button type="submit" class="btn btn-primary btn-block mb-1"
+                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null || processing ? 'disabled' : null">
+                    {{pageStatus === 'modify' ? 'Modify' : 'Register'}}</button>
+                <ngx-loading-bar [color]="'blue'" [fixed]="false"></ngx-loading-bar>
             </div>
             <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual col-md-4 col-sm-4 text-center">
                 {{ submitMessage }}

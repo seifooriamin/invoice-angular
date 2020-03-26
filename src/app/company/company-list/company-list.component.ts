@@ -89,24 +89,25 @@ export class CompanyListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onDeleteCompany(index, id, name) {
       jQuery('#modalMessage').modal('hide');
-      this.mdbTable.removeRow(index);
       // this.elements.splice(index, 1);
       const idJson = '{ "id" : "' + id + '" }';
       this.companyService.companyDelete(idJson).subscribe(
           (response) => {
               if (response['message'] === 'SUCCESS') {
-                  this.deleteMessageText = name + ' has been deleted successfully';
+                  this.mdbTable.removeRow(index);
+                  this.deleteMessageText = name + ' has been deleted successfully.';
                   this.deleteMessageStatus = true;
                   setTimeout(() => {
                       this.deleteMessageStatus = false;
-                  }, 2000);
+                  }, 5000);
               }
           }, (e) => {
-              this.deleteMessageText = 'Due to technical issue ' + name + ' has not been deleted.';
+              console.log(e);
+              this.deleteMessageText = name + ' has not been deleted, may it be reference in another records.';
               this.deleteMessageStatus = true;
               setTimeout(() => {
                   this.deleteMessageStatus = false;
-              }, 2000);
+              }, 5000);
           }
       );
   }

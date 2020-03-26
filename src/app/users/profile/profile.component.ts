@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
   subscription: Subscription;
   countryList: CountryModel[] = [];
   selectedCountryImage = '';
+  processing = false;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private userService: UserService,
               private toolsService: ToolsService, private countryService: CountryService) { }
@@ -79,28 +80,26 @@ export class ProfileComponent implements OnInit {
   }
   onSubmit() {
     if (this.profileForm.valid) {
+      this.processing = true;
       this.userService.userUpdate(this.profileForm.value).subscribe(
-          (response) => {
-            if (response['message'] === 'SUCCESS') {
+          () => {
               this.submitMessageStatusSuccess = true;
               this.submitMessage = 'Your profile has been successfully updated';
+              this.processing = false;
               setTimeout(() => {
                 this.submitMessageStatusSuccess = false;
               }, 5000);
-            }}, () => {
-            this.submitMessage = 'Due to technical issue your profile has not been updated';
+            }, () => {
+            this.submitMessage = 'Unexpected error, contact User Support.';
             this.submitMessageStatusFail = true;
+            this.processing = false;
             setTimeout(() => {
               this.submitMessageStatusFail = false;
             }, 5000); }
           );
 
     } else {
-      this.submitMessage = 'Fill all the mandatory fields';
-      this.submitMessageStatusFail = true;
-      setTimeout(() => {
-        this.submitMessageStatusFail = false;
-      }, 5000);
+      this.toolsService.markFormGroupTouched(this.profileForm);
     }
   }
   changeCountry(selectedCountry) {
@@ -110,7 +109,6 @@ export class ProfileComponent implements OnInit {
             this.countryList.find(({countryCode}) => countryCode === selectedCountry).flag;
       }
     } catch {
-      console.log('this is catch');
       window.location.reload();
     }
   }
