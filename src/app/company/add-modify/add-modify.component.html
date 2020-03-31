@@ -23,7 +23,8 @@
                         <label for="name" class="col-form-label">Company Name*</label>
                         <input type="text" class="form-control" id="name" formControlName="name"
                                [ngClass]="{ 'is-invalid': f.name.touched && f.name.invalid,
-                                'is-valid': f.name.touched && f.name.valid}" (change)="onSetUserId()"
+                                'is-valid': f.name.touched && f.name.valid}"
+                               (change)="onSetUserId(); whiteSpace(f.name)"
                                [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                         <div *ngIf="f.name.touched && f.name.invalid" class="invalid-feedback">
                             This field is mandatory
@@ -36,6 +37,7 @@
                     <div class="form-group col-12">
                         <label for="address" class="col-form-label">Address*</label>
                         <input type="text" class="form-control" id="address" formControlName="address"
+                               (change)="whiteSpace(f.address)"
                                [ngClass]="{ 'is-invalid': f.address.touched && f.address.invalid,
                                 'is-valid': f.address.touched && f.address.valid}"
                                [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
@@ -48,6 +50,7 @@
                     <div class="form-group col-6">
                         <label for="phone" class="col-form-label">Phone</label>
                         <input type="text" class="form-control" id="phone" formControlName="phone"
+                               (change)="whiteSpace(f.phone)"
                                [ngClass]="{ 'is-invalid': f.phone.touched && f.phone.invalid,
                                 'is-valid': f.phone.valid}"
                                [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
@@ -58,6 +61,7 @@
                     <div class="form-group col-6">
                         <label for="businessNo" class="col-form-label">Business No</label>
                         <input type="text" class="form-control" id="businessNo" formControlName="business_no"
+                               (change)="whiteSpace(f.business_no)"
                                [ngClass]="{ 'is-invalid': f.business_no.touched && f.business_no.invalid,
                                 'is-valid': f.business_no.valid}"
                                [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
@@ -70,6 +74,7 @@
                     <div class="form-group col-6">
                         <label for="gstNo" class="col-form-label">GST No</label>
                         <input type="text" class="form-control" id="gstNo" formControlName="gst_no"
+                               (change)="whiteSpace(f.gst_no)"
                                [ngClass]="{ 'is-invalid': f.gst_no.touched && f.gst_no.invalid,
                                 'is-valid': f.gst_no.valid}"
                                [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
@@ -80,6 +85,7 @@
                     <div class="form-group col-6">
                         <label for="website" class="col-form-label">Website</label>
                         <input type="text" class="form-control" id="website" formControlName="website"
+                               (change)="whiteSpace(f.website)"
                                [ngClass]="{ 'is-invalid': f.website.touched && f.website.invalid,
                                 'is-valid': f.website.valid}"
                                [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
@@ -101,8 +107,8 @@
                     </div>
 
                 </div>
-                <div class="form-row text-light img-box pl-2 pr-2 mb-2">
-                    <div class="form-group col-8">
+                <div class="form-row text-light pl-2 pr-2 mb-2">
+                    <div class="form-group col-lg-8 col-12">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <button type="button" class="btn btn-danger text-light float-right"
@@ -112,7 +118,7 @@
                                 </button>
                             </div>
                             <input type="file" name="image" formControlName="logoFile" accept="image/jpeg,image/png,image/gif"
-                                   class="btn btn-outline-light"
+                                   class="form-control bg-light text-dark"
                                    (change)="handleFileInput($event.target.files)"
                                    [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             <div *ngIf="imageHint" class="invalid-feedback-manual">
@@ -120,21 +126,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-lg-4 col-12">
                         <div class="image-preview" *ngIf="previewUrl">
                             <img [src]="previewUrl"  class="img-thumbnail img" alt="" style="height: 80px"  />
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="form-group row mt-1">
-                <div class="col-lg-2 offset-lg-5 col-4 offset-4 text-center">
+            <div class="form-row mt-1">
+                <div class="form-group col-lg-2 offset-lg-5 col-4 offset-4 text-center">
                     <button type="submit" class="btn btn-primary btn-block mb-1"
                             [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null || processing ? 'disabled' : null">
                         {{pageStatus === 'modify' ? 'Modify' : 'Register'}}</button>
                     <ngx-loading-bar [color]="'blue'" [fixed]="false"></ngx-loading-bar>
                 </div>
-                <div class="col-lg-5 col-4">
+                <div class="col-lg-5 col-12">
                     <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual text-center">
                         {{ submitMessage }}
                     </div>

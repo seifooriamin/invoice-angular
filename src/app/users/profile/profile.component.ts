@@ -12,7 +12,7 @@ import {environment} from '../../../environments/environment';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['../../../my-style.css']
+  // styleUrls: ['../../../styles.css']
 })
 export class ProfileComponent implements OnInit {
   pageTitle = 'Profile';
@@ -84,19 +84,19 @@ export class ProfileComponent implements OnInit {
       this.userService.userUpdate(this.profileForm.value).subscribe(
           () => {
               this.submitMessageStatusSuccess = true;
-              this.submitMessage = 'Your profile has been successfully updated';
+              this.submitMessage = 'Your profile has been successfully updated.';
               this.processing = false;
-              setTimeout(() => {
-                this.submitMessageStatusSuccess = false;
-              }, 5000);
+              // setTimeout(() => {
+              //   this.submitMessageStatusSuccess = false;
+              // }, 5000);
             }, () => {
             this.submitMessage = 'Unexpected error, contact User Support.';
             this.submitMessageStatusFail = true;
             this.processing = false;
-            setTimeout(() => {
-              this.submitMessageStatusFail = false;
-            }, 5000); }
-          );
+            // setTimeout(() => {
+            //   this.submitMessageStatusFail = false;
+            // }, 5000);
+          });
 
     } else {
       this.toolsService.markFormGroupTouched(this.profileForm);

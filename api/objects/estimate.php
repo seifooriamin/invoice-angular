@@ -158,7 +158,7 @@ class Estimate
                     companies co
                     ON e.company_id=co.id   
                     WHERE
-                        e.id = ?
+                        BINARY e.id = ? && e.user_id = ?
                     LIMIT
                         0,1";
 
@@ -167,6 +167,7 @@ class Estimate
 
         // bind id of product to be updated
         $stmt->bindParam(1, $this->id);
+        $stmt->bindParam(2, $this->user_id);
 
         // execute query
         $stmt->execute();

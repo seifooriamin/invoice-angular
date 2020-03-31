@@ -9,7 +9,7 @@ declare var jQuery: any;
 @Component({
   selector: 'app-customer-list',
   templateUrl: './customer-list.component.html',
-  styleUrls: ['../../../my-style.css']
+  // styleUrls: ['../../../styles.css']
 })
 export class CustomerListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
@@ -32,20 +32,23 @@ export class CustomerListComponent implements OnInit, AfterViewInit, OnDestroy {
     const userId: string = '{ "user_id" : "' + this.currentUser['id'] + '" }';
     this.subscribe = this.customerService.customerReadByUser(userId).subscribe(
         (records: Array<CustomerModel>) => {
-          this.data = records['records'];
-          for (let idata of records['records']) {
-            this.elements.push({id: idata.id, name: idata.name , address: idata.address, phone: idata.phone, email: idata.email});
+          if (records['records']) {
+            this.data = records['records'];
+            for (let idata of records['records']) {
+              this.elements.push({id: idata.id, name: idata.name , address: idata.address, phone: idata.phone, email: idata.email});
+            }
+            this.mdbTable.setDataSource(this.elements);
+            this.elements = this.mdbTable.getDataSource();
+            this.previous = this.mdbTable.getDataSource();
+          } else {
+            this.deleteMessageText = 'No record found';
+            this.deleteMessageStatus = true;
+            setTimeout(() => {
+              this.deleteMessageStatus = false;
+            }, 5000);
           }
-          this.mdbTable.setDataSource(this.elements);
-          this.elements = this.mdbTable.getDataSource();
-          this.previous = this.mdbTable.getDataSource();
-        }, (e) => {
-          this.deleteMessageText = 'No record found';
-          this.deleteMessageStatus = true;
-          setTimeout(() => {
-            this.deleteMessageStatus = false;
-          }, 2000);
-        }
+
+        }, () => {}
     );
 
   }
@@ -94,14 +97,14 @@ export class CustomerListComponent implements OnInit, AfterViewInit, OnDestroy {
             setTimeout(() => {
               this.deleteMessageStatus = false;
             }, 5000);
+          } else {
+            this.deleteMessageText = name + ' has not been deleted, it may be used in other record(s).';
+            this.deleteMessageStatus = true;
+            setTimeout(() => {
+              this.deleteMessageStatus = false;
+            }, 5000);
           }
-        }, (e) => {
-          this.deleteMessageText = name + ' has not been deleted, may it be reference in another records.';
-          this.deleteMessageStatus = true;
-          setTimeout(() => {
-            this.deleteMessageStatus = false;
-          }, 5000);
-        }
+        }, () => {}
     );
   }
 

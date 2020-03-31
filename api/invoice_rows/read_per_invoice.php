@@ -48,8 +48,8 @@
         http_response_code(200);
         echo json_encode($invoice_rows_arr);
     }else{
-        http_response_code(404);
-        echo json_encode(array("message" => "no record found"));
+        http_response_code(200);
+        echo json_encode(array("message" => "NOT_FOUND"));
     }
 
 ?>

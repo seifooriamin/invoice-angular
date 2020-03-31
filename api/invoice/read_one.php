@@ -19,6 +19,7 @@
 
     // set ID property of record to read
     $invoice->id = isset($_GET['id']) ? $_GET['id'] : die();
+    $invoice->user_id = isset($_GET['user_id']) ? $_GET['user_id'] : die();
 
     // read the details of product to be edited
     $invoice->readOne();
@@ -64,9 +65,9 @@
 
     else{
         // set response code - 404 Not found
-        http_response_code(404);
+        http_response_code(200);
 
         // tell the user product does not exist
-        echo json_encode(array("message" => "invoice does not exist."));
+        echo json_encode(array("message" => "NOT_FOUND"));
     }
 ?>

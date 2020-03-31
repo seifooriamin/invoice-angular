@@ -4,7 +4,7 @@ import {AuthenticationService} from './shared/services/authentication.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  // styleUrls: ['../styles.css']
 })
 export class AppComponent implements OnInit {
   title = 'Easy Invoice Maker';

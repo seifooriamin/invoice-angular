@@ -4,32 +4,13 @@
   <meta charset="utf-8">
   <title>Easy Invoice Builder</title>
   <base href="/">
-
+  <meta name="description" content="Free Invoice Maker & Free Estimate Maker
+  (Free Invoice Template & Free Estimate Template)">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.png">
-<link rel="stylesheet" href="styles.4f48a53c16e459871c93.css"></head>
+<link rel="stylesheet" href="styles.72ecc84b949a3a4d066e.css"></head>
 <body>
   <app-root></app-root>
-  <script>
-    window.onbeforeunload = function(e) {
-      let date = Date.now();
-
-      localStorage.setItem("lastactivity", date);
-    };
-    window.onload = function() {
-
-      let date1 = localStorage.getItem('lastactivity');
-      let date2 = Date.now();
-      if (date1 !== undefined) {
-        let difference = date2 - date1;
-        let diff = ((difference) / 1000).toFixed(0);
-
-        if (diff > 600) {
-          localStorage.clear();
-          location.reload();
-        }
-      }
-    };
-  </script>
-<script src="runtime-es2015.aa36e2789a7b6e5e7675.js" type="module"></script><script src="polyfills-es2015.6f582e2dd084a9eb31fe.js" type="module"></script><script src="runtime-es5.d3647fbfa3de00cd0bdf.js" nomodule></script><script src="polyfills-es5.6fc79adba80cae5fa417.js" nomodule></script><script src="scripts.5a58bf7cc539f872a983.js"></script><script src="main-es2015.89f5fc56e91d30f96d3d.js" type="module"></script><script src="main-es5.088f555f0be4090cead5.js" nomodule></script></body>
+<script src="assets/js/localStorageClear.js"></script>
+<script src="runtime-es2015.643f4b695220a204bd5e.js" type="module"></script><script src="polyfills-es2015.c952d6940a328f4882de.js" type="module"></script><script src="runtime-es5.9a1e9cc999d25543b48e.js" nomodule></script><script src="polyfills-es5.dc0023901792b2528d4e.js" nomodule></script><script src="scripts.5a58bf7cc539f872a983.js"></script><script src="main-es2015.76f480438a9555a10c99.js" type="module"></script><script src="main-es5.7840ba1109890c84e3bc.js" nomodule></script></body>
 </html>

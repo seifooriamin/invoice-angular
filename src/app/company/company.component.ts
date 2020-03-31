@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
-  styleUrls: ['../../my-style.css']
+  // styleUrls: ['../../styles.css']
 })
 export class CompanyComponent implements OnInit {
 

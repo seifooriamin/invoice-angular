@@ -116,7 +116,7 @@ class Customers
                             users u
                         ON c.user_id=u.id
                     WHERE
-                        c.id = ?
+                        BINARY c.id = ? && c.user_id = ?
                     LIMIT
                         0,1";
 
@@ -125,6 +125,7 @@ class Customers
 
         // bind id of product to be updated
         $stmt->bindParam(1, $this->id);
+        $stmt->bindParam(2, $this->user_id);
 
         // execute query
         $stmt->execute();

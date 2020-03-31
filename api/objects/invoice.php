@@ -233,7 +233,7 @@ class Invoice
                     companies co
                     ON i.company_id=co.id   
                     WHERE
-                        i.id = ?
+                        BINARY i.id = ? && i.user_id = ?
                     LIMIT
                         0,1";
 
@@ -242,6 +242,7 @@ class Invoice
 
         // bind id of product to be updated
         $stmt->bindParam(1, $this->id);
+        $stmt->bindParam(2, $this->user_id);
 
         // execute query
         $stmt->execute();

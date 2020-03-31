@@ -1,0 +1,88 @@
+/* You can add global styles to this file, and also import other style files */
+h1,h2,h3,h4,h5,h6{
+    /*font-family: "Helvetica Neue";*/
+    font-family: "Segoe UI";
+}
+/*body{*/
+/*    overflow: hidden !important;*/
+/*}*/
+div.dropdown-menu {
+    margin: 0.01rem 0 0 !important;
+    background-color: #17a2b8 !important;
+}
+a.dropdown-item {
+    color: rgba(255, 255, 255, 0.5) !important;
+    background-color: #17a2b8 !important;
+    border-bottom: 3px solid #17a2b8 !important;
+}
+a.dropdown-item.active {
+    color: rgba(255, 255, 255, 1) !important;
+    border-bottom: 3px solid #117888 !important;
+}
+a.dropdown-item:hover{
+    color: rgba(255, 255, 255, 1) !important;
+    border-bottom: 3px solid #117888 !important;
+}
+.nav-link {
+    border-bottom: 3px solid #17a2b8 !important;
+}
+.nav-link:hover{
+    border-bottom: 3px solid #117888 !important;
+}
+.nav-item.active{
+    border-bottom: 3px solid #117888 !important;
+}
+table tbody tr:nth-child(even) {
+    background-color: #e6e6e5 !important;
+}
+.invalid-feedback-manual{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+.invalid-feedback-delete{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 100%;
+    color: #dc3545;
+}
+/*th{*/
+/*    cursor: pointer;*/
+/*}*/
+.valid-feedback-manual{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #28a745;
+}
+ul li a {
+    cursor: pointer;
+}
+.container-full-page{
+    background-color: #737373 !important;
+    height: 100vh;
+}
+.border-color{
+    border-color: #737373 !important;
+}
+.img-box{
+    height: 80px;
+}
+
+.mb-custom {
+    margin-bottom: 1.1rem !important;
+}
+.mt-custom {
+    margin-bottom: 0.7rem !important;
+}
+.signin-head{
+    background-color: #000033;
+}
+p a:hover{
+    cursor: pointer;
+}
+.user-header-h1 {
+    font-size: 1.17em;
+}
+

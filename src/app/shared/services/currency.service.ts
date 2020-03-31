@@ -34,7 +34,7 @@ export class CurrencyService {
     {currencyName: 'Czech Republic Koruna', currencyCode: 'CZK', currencySymbol: 'Kč', flag: 'CzechRepublic.png'},
     {currencyName: 'Denmark Krone', currencyCode: 'DKK', currencySymbol: 'kr', flag: 'Denmark.png'},
     {currencyName: 'Dominican Republic Peso', currencyCode: 'DOP', currencySymbol: 'RD$', flag: 'Dominica.png'},
-    {currencyName: 'East Caribbean Dollar', currencyCode: 'XCD', currencySymbol: '$', flag: 'Dominica.png'},
+    {currencyName: 'East Caribbean Dollar', currencyCode: 'XCD', currencySymbol: '$', flag: 'ecd.png'},
     {currencyName: 'Egypt Pound', currencyCode: 'EGP', currencySymbol: '£', flag: 'Egypt.png'},
     {currencyName: 'El Salvador Colon', currencyCode: 'SVC', currencySymbol: '$', flag: 'ElSalvador.png'},
     {currencyName: 'Euro Member Countrie', currencyCode: 'EUR', currencySymbol: '€', flag: 'European Union.png'},

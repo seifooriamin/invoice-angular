@@ -1,29 +1,29 @@
 <ngx-loading-bar></ngx-loading-bar>
 <div class="container mt-4 bg-dark mb-4">
     <div class="row pt-2">
-        <div class="col-lg-1 col-md-2 col-3">
+        <div class="col-lg-1 col-md-2 col-4">
             <button type="button" class="btn btn-block btn-warning text-light "
                     title="Back" (click)="onBack()"><i class="fas fa-arrow-circle-left fa-lg"></i></button>
         </div>
-        <div class="col-lg-1 col-md-2 col-3">
+        <div class="col-lg-1 col-md-2 col-4">
             <button type="button" class="btn btn-block btn-success text-light"
                     *ngIf="pageStatus === 'view'"
                     title="Edit" (click)="onModify()">
                 <i class="fas fa-edit fa-lg"></i></button>
         </div>
-        <div class="col-lg-1 col-md-2 col-3">
+        <div class="col-lg-1 col-md-2 col-4">
             <button type="button" class="btn btn-block btn-primary text-light"
                     *ngIf="pageStatus === 'view'"
                     title="Print invoice" (click)="onPrintInvoice()">
                 <i class="fas fa-print fa-lg"></i></button>
         </div>
-        <div class="col-lg-1 col-md-2 col-3">
+        <div class="col-lg-1 col-md-2 col-4">
             <button type="button" class="btn btn-block btn-danger text-light"
                     *ngIf="pageStatus === 'view'"
                     title="Download invoice PDF" (click)="onDownloadInvoice()">
                 <i class="fas fa-file-pdf fa-lg"></i></button>
         </div>
-        <div class="col-lg-1 col-md-2 col-3">
+        <div class="col-lg-1 col-md-2 col-4">
             <button type="button" class="btn btn-block btn-info text-light"
                     *ngIf="pageStatus === 'view'"
                     title="Open Invoice in browser" (click)="onOpenInvoice()">
@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 col-12">
+        <div class="col-12">
             <h3 class="text-light pt-1">{{pageTitle}}</h3>
         </div>
     </div>
@@ -80,7 +80,7 @@
         </div> <!--Date and Invoice Number-->
         <div class="border border-light mt-1">  <!--Company Information-->
             <div class="form-row mt-2 text-light pl-2 pr-2">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 col-12">
                     <label for="companyID" class="col-form-label">Company Information*</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="offset-lg-4 col-lg-4 col-md-6">
+                <div class="offset-lg-4 col-lg-4 col-md-6 col-12">
                     <img [src]=imgUrl  class="img-thumbnail img" alt="" style="height: 100px"  />
                 </div>
             </div>
@@ -134,7 +134,7 @@
         </div> <!--Company Information-->
         <div class="border border-light mt-1">  <!--Customer Information-->
             <div class="form-row mt-2 text-light pl-2 pr-2">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 col-12">
                     <label for="customerID" class="col-form-label">Customer Information*</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -176,7 +176,7 @@
                  *ngFor="let rows of fillFormRows.get('invoiceRows')['controls']; let i = index;">
                 <div [formGroupName]="i" class="border-bottom border-info pb-2">
                     <div class="form-row text-light pl-2 pr-2">
-                        <div class="col-lg-4 col-12">
+                        <div class="col-lg-4 col-md-6 col-12">
                             <label for="{{'description'+i}}" class="col-form-label">Description*</label>
                             <input formControlName="description" id="{{'description'+i}}"
                                    class="form-control" [ngbTypeahead]="searchDescription"
@@ -195,7 +195,7 @@
                                 Maximum allowed characters are 70 and some special characters are not allowed
                             </div>
                         </div>
-                        <div class="col-lg-4 col-12">
+                        <div class="col-lg-4 col-md-6 col-12">
                             <label for="{{'comment'+i}}" class="col-form-label">Comment</label>
                             <input formControlName="comment" id="{{'comment'+i}}" class="form-control"
                                    [ngbTypeahead]="searchComment"
@@ -209,7 +209,7 @@
                                 Maximum allowed characters are 70 and some special characters are not allowed
                             </div>
                         </div>
-                        <div class="col-lg-2 col-6">
+                        <div class="col-lg-2 col-md-6 col-6">
                             <label for="{{'unitPrice'+i}}" class="col-form-label">Unit Price*</label>
                             <input formControlName="unit_price" id="{{'unitPrice'+i}}" class="form-control text-right"
                                    type="text" placeholder="0.00" (change)="onCurrencyShow($event.target.value, i)"
@@ -223,7 +223,7 @@
                                 This field is mandatory
                             </div>
                         </div>
-                        <div class="col-lg-2 col-6">
+                        <div class="col-lg-2 col-md-6 col-6">
                             <label for="{{'quantity'+i}}" class="col-form-label">Quantity*</label>
                             <input formControlName="quantity" id="{{'quantity'+i}}" class="form-control"
                                    (input)="onRowTotal(i)" (change)="onNumberCorrection($event.target.value, i)"
@@ -258,7 +258,8 @@
                             <input class="font-weight-bold form-control text-right" id="{{'rowTotal'+i}}" disabled
                                    value="{{rowTotalString[i]}}">
                         </div>
-                        <div class="col-lg-1 col-2 offset-lg-6 offset-1 align-self-end">
+                        <div class="col-lg-1 col-2 offset-lg-6 offset-1 align-self-end"
+                             *ngIf="s.length>1">
                               <button type="button" class="btn btn-block btn-danger text-light btn-sm"                                    title="Remove invoice line"
                                 (click)="onRemoveLine(i)"
                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
@@ -284,14 +285,14 @@
         </form> <!--Invoice Rows-->
         <div class="border border-light mt-1"> <!--Summery Part-->
             <div class="form-row text-light pl-2 pr-2 pt-2 pb-2">
-                <div class="col-1">
+                <div class="col-lg-1 col-12">
                     <button type="button" class="btn btn-primary" (click)="onSettingCall()" title="Invoice setting">
                         <i class="fas fa-user-cog"></i></button>
                 </div>
                 <div class="offset-lg-3 col-lg-2 col-3 text-right">
                     <label class="col-form-label">Sub-Total</label>
                 </div>
-                <div class="col-lg-4 col-6 offset-lg-2 offset-2 text-light">
+                <div class="col-lg-4 col-6 offset-lg-2 offset-3 text-light">
                     <input type="text" class="form-control font-weight-bold text-right" disabled
                            value="{{invoiceSubTotal}}">
                 </div>
@@ -437,11 +438,11 @@
                         [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null || processing ? 'disabled' : null">
                     {{pageStatus === 'modify' ? 'Modify' : 'Register'}}</button>
             </div>
-            <div class="col-md-5 col-12">
-                <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual text-center">
+            <div class="col-md-5 col-12 text-center">
+                <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual">
                     {{ submitMessage }}
                 </div>
-                <div *ngIf="submitMessageStatusSuccess" class="valid-feedback-manual text-center">
+                <div *ngIf="submitMessageStatusSuccess" class="valid-feedback-manual">
                     {{ submitMessage }}
                 </div>
             </div>
@@ -463,48 +464,46 @@
                 <div class="container-fluid">
                     <form [formGroup]="settingForm">
                         <div class="form-row text-dark font-weight-bold">
-                            <div class="col-1">
+                            <div class="col-md-1 col-6">
                                 <label class="col-form-label">Show</label>
                             </div>
-                            <div class="col-2">
+                            <div class="col-md-2 col-6">
                                 <label class="col-form-label">Default Label</label>
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4 col-12">
                                 <label class="col-form-label">New Label</label>
                             </div>
-                            <div class="col-3">
+                            <div class="col-md-3 col-6">
                                 <label class="col-form-label">Type</label>
                             </div>
-                            <div class="col-2">
+                            <div class="col-md-2 col-6">
                                 <label  class="col-form-label">Percentage</label>
                             </div>
                         </div>
                         <div class="form-row text-dark">
-                            <div class="col-1">
-                                <div class="form-check justify-content-center align-content-center text-center">
-                                    <input type="checkbox" class="form-check-input mt-3 "
-                                           formControlName="deduction1status" value="0"
-                                           [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
-                                    <input type="text" formControlName="invoice_id" hidden>
-                                </div>
+                            <div class="col-md-1 col-6">
+                                <input type="checkbox" class="ml-3 mt-3 "
+                                       formControlName="deduction1status" value="0"
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+                                <input type="text" formControlName="invoice_id" hidden>
                             </div>
-                            <div class="col-2">
+                            <div class="col-md-2 col-6">
                                 <label class="col-form-label">{{invoiceSettingElements?.deduction1label}}</label>
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4 col-12">
                                 <input type="text" class="form-control" formControlName="deduction1label"
                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
                                        [ngClass]="{ 'is-invalid': g.deduction1label.touched && g.deduction1label.invalid,
                                     'is-valid': g.deduction1label.valid}">
                             </div>
-                            <div class="col-3">
+                            <div class="col-md-3 col-6">
                                 <select class="form-control" formControlName="deduction1type"
                                         [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
                                         (change)="onSetPercentage('deduction1percentage', $event)">
                                     <option *ngFor="let tOption of typeOptions" value="{{tOption.typeCode}}">{{tOption.typeName}}</option>
                                 </select>
                             </div>
-                            <div class="col-2">
+                            <div class="col-md-2 col-6">
                                 <input type="text" class="form-control" formControlName="deduction1percentage"
                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null ||
                                        g.deduction1type.value === 'F' ? 'disabled' : null"
@@ -513,29 +512,28 @@
                             </div>
                         </div>
                         <div class="form-row text-dark">
-                            <div class="col-1">
-                                <div class="form-check justify-content-center align-content-center text-center">
-                                    <input type="checkbox" class="form-check-input mt-3 "
-                                           formControlName="deduction2status" [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
-                                </div>
+                            <div class="col-md-1 col-6">
+                                <input type="checkbox" class="ml-3 mt-3 "
+                                       formControlName="deduction2status"
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             </div>
-                            <div class="col-2">
+                            <div class="col-md-2 col-6">
                                 <label class="col-form-label">{{invoiceSettingElements?.deduction2label}}</label>
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4 col-12">
                                 <input type="text" class="form-control" formControlName="deduction2label"
                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
                                        [ngClass]="{ 'is-invalid': g.deduction2label.touched && g.deduction2label.invalid,
                                     'is-valid': g.deduction2label.valid}">
                             </div>
-                            <div class="col-3">
+                            <div class="col-md-3 col-6">
                                 <select class="form-control" formControlName="deduction2type"
                                         [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
                                         (change)="onSetPercentage('deduction2percentage', $event)">
                                     <option *ngFor="let tOption of typeOptions" value="{{tOption.typeCode}}">{{tOption.typeName}}</option>
                                 </select>
                             </div>
-                            <div class="col-2">
+                            <div class="col-md-2 col-6">
                                 <input type="text" class="form-control" formControlName="deduction2percentage"
                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null ||
                                        g.deduction2type.value === 'F' ? 'disabled' : null"
@@ -544,30 +542,28 @@
                             </div>
                         </div>
                         <div class="form-row text-dark">
-                            <div class="col-1">
-                                <div class="form-check justify-content-center align-content-center text-center">
-                                    <input type="checkbox" class="form-check-input mt-3 "
-                                           formControlName="addition1status"
-                                           [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
-                                </div>
+                            <div class="col-md-1 col-6">
+                                <input type="checkbox" class="ml-3 mt-3 "
+                                       formControlName="addition1status"
+                                       [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             </div>
-                            <div class="col-2">
+                            <div class="col-md-2 col-6">
                                 <label class="col-form-label">{{invoiceSettingElements?.addition1label}}</label>
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4 col-12">
                                 <input type="text" class="form-control" formControlName="addition1label"
                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
                                        [ngClass]="{ 'is-invalid': g.addition1label.touched && g.addition1label.invalid,
                                     'is-valid': g.addition1label.valid}">
                             </div>
-                            <div class="col-3">
+                            <div class="col-md-3 col-6">
                                 <select class="form-control" formControlName="addition1type"
                                         [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
                                         (change)="onSetPercentage('addition1percentage', $event)">
                                     <option *ngFor="let tOption of typeOptions" value="{{tOption.typeCode}}">{{tOption.typeName}}</option>
                                 </select>
                             </div>
-                            <div class="col-2">
+                            <div class="col-md-2 col-6">
                                 <input type="text" class="form-control" formControlName="addition1percentage"
                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null ||
                                        g.addition1type.value === 'F' ? 'disabled' : null"
@@ -576,29 +572,29 @@
                             </div>
                         </div>
                         <div class="form-row text-dark">
-                            <div class="col-1">
-                                <div class="form-check justify-content-center align-content-center text-center">
-                                    <input type="checkbox" class="form-check-input mt-3 "
-                                           formControlName="addition2status" [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
-                                </div>
+                            <div class="col-md-1 col-6">
+                                    <input type="checkbox" class="ml-3 mt-3 "
+                                           formControlName="addition2status"
+                                           [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
+
                             </div>
-                            <div class="col-2">
+                            <div class="col-md-2 col-6">
                                 <label class="col-form-label">{{invoiceSettingElements?.addition2label}}</label>
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4 col-12">
                                 <input type="text" class="form-control" formControlName="addition2label"
                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
                                        [ngClass]="{ 'is-invalid': g.addition2label.touched && g.addition2label.invalid,
                                     'is-valid': g.addition2label.valid}">
                             </div>
-                            <div class="col-3">
+                            <div class="col-md-3 col-6">
                                 <select class="form-control" formControlName="addition2type"
                                         [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
                                         (change)="onSetPercentage('addition2percentage', $event)">
                                     <option *ngFor="let tOption of typeOptions" value="{{tOption.typeCode}}">{{tOption.typeName}}</option>
                                 </select>
                             </div>
-                            <div class="col-2">
+                            <div class="col-md-2 col-6">
                                 <input type="text" class="form-control" formControlName="addition2percentage"
                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null ||
                                        g.addition2type.value === 'F' ? 'disabled' : null"
@@ -607,29 +603,28 @@
                             </div>
                         </div>
                         <div class="form-row text-dark">
-                            <div class="col-1">
-                                <div class="form-check justify-content-center align-content-center text-center">
-                                    <input type="checkbox" class="form-check-input mt-3 "
-                                           formControlName="addition3status" [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
-                                </div>
+                            <div class="col-md-1 col-6">
+                                    <input type="checkbox" class="ml-3 mt-3 "
+                                           formControlName="addition3status"
+                                           [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                             </div>
-                            <div class="col-2">
+                            <div class="col-md-2 col-6">
                                 <label class="col-form-label">{{invoiceSettingElements?.addition3label}}</label>
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4 col-12">
                                 <input type="text" class="form-control" formControlName="addition3label"
                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
                                        [ngClass]="{ 'is-invalid': g.addition3label.touched && g.addition3label.invalid,
                                     'is-valid': g.addition3label.valid}">
                             </div>
-                            <div class="col-3">
+                            <div class="col-md-3 col-6">
                                 <select class="form-control" formControlName="addition3type"
                                         [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null"
                                         (change)="onSetPercentage('addition3percentage', $event)">
                                     <option *ngFor="let tOption of typeOptions" value="{{tOption.typeCode}}">{{tOption.typeName}}</option>
                                 </select>
                             </div>
-                            <div class="col-2">
+                            <div class="col-md-2 col-6">
                                 <input type="text" class="form-control" formControlName="addition3percentage"
                                        [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null ||
                                        g.addition3type.value === 'F' ? 'disabled' : null"
@@ -638,10 +633,10 @@
                             </div>
                         </div>
                         <div class="form-row text-dark">
-                            <div class="col-3">
+                            <div class="offset-md-1 col-md-2 col-6">
                                 <label class="col-form-label">Currency</label>
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4 col-6">
                                 <select class="form-control" #ch formControlName="currency" id="currency"
                                         (change)= "changeCurrency(ch.value)"
                                         [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
@@ -649,16 +644,17 @@
                                         {{cr.currencyName}}</option>
                                 </select>
                             </div>
-                            <div class="col-4">
+                            <div class="col-lg-2 col-md-3 col-12 mt-1 text-center">
                                 <p>{{selectedCurrencyCode}} {{selectedCurrencySymbol}}
                                     <img src="{{selectedCurrencyImage}}" alt="" class="rounded "></p>
                             </div>
                         </div>
                         <div class="form-row text-dark mt-1">
-                            <p>* Discount 1  is calculated based on Sub-Total amount<br>
-                               * Discount 2  is calculated based on Sub-Total - Discount 1<br>
-                               * Tax 1, Tax 2 and Tax 3 is calculated based on Sub-Total - Discount 1 - Discount 2</p>
-
+                            <div class="col-12">
+                                <p>* Discount 1  is calculated based on Sub-Total amount<br>
+                                    * Discount 2  is calculated based on Sub-Total - Discount 1<br>
+                                    * Tax 1, Tax 2 and Tax 3 is calculated based on Sub-Total - Discount 1 - Discount 2</p>
+                            </div>
                         </div>
                     </form>
                 </div>

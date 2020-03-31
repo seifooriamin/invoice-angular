@@ -19,7 +19,7 @@
 
     // set ID property of record to read
     $companies->id = isset($_GET['id']) ? $_GET['id'] : die();
-
+    $companies->user_id = isset($_GET['user_id']) ? $_GET['user_id'] : die();
     // read the details of product to be edited
     $companies->readOne();
 
@@ -37,7 +37,7 @@
             "logo_link" => $companies->logo_link,
             "user_id" => $companies->user_id,
             "user_full_name" => $companies->user_first_name." ". $companies->user_last_name,
-            "created" => $companies->created
+            "created" => $companies->created,
         );
 
         // set response code - 200 OK
@@ -49,9 +49,9 @@
 
     else{
         // set response code - 404 Not found
-        http_response_code(404);
+        http_response_code(200);
 
         // tell the user product does not exist
-        echo json_encode(array("message" => "Company does not exist."));
+        echo json_encode(array("message" => "NOT_FOUND"));
     }
 ?>

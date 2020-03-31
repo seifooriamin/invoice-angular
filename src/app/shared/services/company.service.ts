@@ -27,9 +27,9 @@ export class CompanyService {
   companyDelete(id) {
     return this.httpClient.post(`${environment.apiUrl}companies/delete.php`, id);
   }
-  companyByID(id) {
-    return this.httpClient.get<CompanyModel>(`${environment.apiUrl}companies/read_one.php?id=` + id,
-        {responseType: 'json'});
+  companyByID(id, userID) {
+    return this.httpClient.get<CompanyModel>(`${environment.apiUrl}companies/read_one.php?id=` + id +
+        '&user_id=' + userID, {responseType: 'json'});
   }
   companyUpdate(file: File, data: any) {
     const formData = new FormData();

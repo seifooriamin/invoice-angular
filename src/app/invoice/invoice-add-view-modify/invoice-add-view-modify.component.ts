@@ -26,10 +26,11 @@ declare var jQuery: any;
 @Component({
   selector: 'app-invoice-add-view-modify',
   templateUrl: './invoice-add-view-modify.component.html',
-  styleUrls: ['../../../my-style.css'],
+  // styleUrls: ['../../../styles.css'],
 })
 export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   id = 0;
+  userID: number;
   pageStatus = 'new';
   pageTitle = 'New Invoice Registration';
   submitMessageStatusFail = false;
@@ -125,7 +126,9 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
               private customerService: CustomerService, private invoiceRowsService: InvoiceRowsService,
               private toolsService: ToolsService, private invoiceService: InvoiceService,
               private igs: InvoiceGeneralSettingService, private currencyService: CurrencyService,
-              private ics: InvoiceCustomSettingService, private route: ActivatedRoute) { }
+              private ics: InvoiceCustomSettingService, private route: ActivatedRoute) {
+    this.toolsService.disableBackButton();
+  }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -133,6 +136,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
           this.id = params['id'];
         }
     );
+
     if (this.id) {
       const url = this.router.url;
       if (url.slice(-6) === 'modify') {
@@ -156,6 +160,7 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
       this.fillSettingForm();
       this.onSetInvoiceNumberDefault();
     } else {
+      this.userID = this.toolsService.getUserID()['id'];
       this.fillInvoiceForm();
       this.fillInvoiceSettingForm();
       this.fillInvoiceRowsForm();
@@ -167,26 +172,30 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     }
   }
   async fillInvoiceForm() {
-    this.subscription = this.invoiceService.invoiceByID(this.id).subscribe(
+    this.subscription = this.invoiceService.invoiceByID(this.id, this.userID).subscribe(
         (response) => {
-          this.onLoadCompanyData(response.company_id);
-          this.onLoadCustomerData(response.customer_id);
-          this.fillForm.patchValue({
-            date: response.date,
-            invoice_number: response.invoice_number,
-            company_id: response.company_id,
-            customer_id: response.customer_id,
-            id: response.id,
-            note: response.note,
-            user_id: response.user_id,
-            year: response.year,
-            addition1: response.addition1,
-            addition2: response.addition2,
-            addition3: response.addition3,
-            deduction1: response.deduction1,
-            deduction2: response.deduction2
-          });
-          this.invoiceInfo = response;
+          if (response.invoice_number) {
+            this.onLoadCompanyData(response.company_id);
+            this.onLoadCustomerData(response.customer_id);
+            this.fillForm.patchValue({
+              date: response.date,
+              invoice_number: response.invoice_number,
+              company_id: response.company_id,
+              customer_id: response.customer_id,
+              id: response.id,
+              note: response.note,
+              user_id: response.user_id,
+              year: response.year,
+              addition1: response.addition1,
+              addition2: response.addition2,
+              addition3: response.addition3,
+              deduction1: response.deduction1,
+              deduction2: response.deduction2
+            });
+            this.invoiceInfo = response;
+          } else {
+            this.router.navigate(['invoice/invoice-list']);
+          }
         }, () => {}
     );
 
@@ -194,22 +203,24 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   async fillInvoiceRowsForm() {
     this.subscription = this.invoiceRowsService.invoiceRowsByInvoiceID(this.id).subscribe(
         (response: InvoiceRowsModel[]) => {
-          let i = 0;
-          for (const row of response['records']) {
-            this.onAddLine();
-            this.s.at(i).patchValue({
-              id: row.id,
-              inx: row.inx,
-              invoice_id: row.invoice_id,
-              description: row.description,
-              comment: row.comment,
-              unit_price: row.unit_price,
-              unit_measure: row.unit_measure,
-              quantity: row.quantity,
-              user_id: row.user_id
-            });
-            this.onRowTotal(i);
-            i++;
+          if (response['records']) {
+            let i = 0;
+            for (const row of response['records']) {
+              this.onAddLine();
+              this.s.at(i).patchValue({
+                id: row.id,
+                inx: row.inx,
+                invoice_id: row.invoice_id,
+                description: row.description,
+                comment: row.comment,
+                unit_price: row.unit_price,
+                unit_measure: row.unit_measure,
+                quantity: row.quantity,
+                user_id: row.user_id
+              });
+              this.onRowTotal(i);
+              i++;
+            }
           }
         }, () => {}
     );
@@ -217,44 +228,45 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   async fillInvoiceSettingForm() {
     this.subscription = this.ics.invoiceSettingByInvoiceID(this.id).subscribe(
         (response: InvoiceGeneralSettingModel) => {
-          this.settingForm.patchValue({
-            currency: response.currency,
-            id: response.id,
-            invoice_id: response.invoice_id,
-            deduction1status: +response.deduction1status === 1,
-            deduction1label: response.deduction1label,
-            deduction1type: response.deduction1type,
-            deduction1percentage: response.deduction1percentage,
-            deduction2status: +response.deduction2status === 1,
-            deduction2label: response.deduction2label,
-            deduction2type: response.deduction2type,
-            deduction2percentage: response.deduction2percentage,
-            addition1status: +response.addition1status === 1,
-            addition1label: response.addition1label,
-            addition1type: response.addition1type,
-            addition1percentage: response.addition1percentage,
-            addition2status: +response.addition2status === 1,
-            addition2label: response.addition2label,
-            addition2type: response.addition2type,
-            addition2percentage: response.addition2percentage,
-            addition3status: +response.addition3status === 1,
-            addition3label: response.addition3label,
-            addition3type: response.addition3type,
-            addition3percentage: response.addition3percentage
-          });
-          this.invoiceSettingElements = response;
-          try {
+          if (response.id) {
+            this.settingForm.patchValue({
+              currency: response.currency,
+              id: response.id,
+              invoice_id: response.invoice_id,
+              deduction1status: +response.deduction1status === 1,
+              deduction1label: response.deduction1label,
+              deduction1type: response.deduction1type,
+              deduction1percentage: response.deduction1percentage,
+              deduction2status: +response.deduction2status === 1,
+              deduction2label: response.deduction2label,
+              deduction2type: response.deduction2type,
+              deduction2percentage: response.deduction2percentage,
+              addition1status: +response.addition1status === 1,
+              addition1label: response.addition1label,
+              addition1type: response.addition1type,
+              addition1percentage: response.addition1percentage,
+              addition2status: +response.addition2status === 1,
+              addition2label: response.addition2label,
+              addition2type: response.addition2type,
+              addition2percentage: response.addition2percentage,
+              addition3status: +response.addition3status === 1,
+              addition3label: response.addition3label,
+              addition3type: response.addition3type,
+              addition3percentage: response.addition3percentage
+            });
+            this.invoiceSettingElements = response;
+            try {
               this.selectedCurrencyImage = environment.flagUrl +
                   this.currency.find(({currencyCode}) => currencyCode === response.currency).flag;
               this.selectedCurrencyCode = this.currency.find(({currencyCode}) =>
                   currencyCode === response.currency).currencyCode;
               this.selectedCurrencySymbol = this.currency.find(({currencyCode}) =>
                   currencyCode === response.currency).currencySymbol;
-          } catch {
-                console.log('this is catch');
-                window.location.reload();
+            } catch {
+              console.log('this is catch setting form');
+              // window.location.reload();
+            }
           }
-
         }, () => {}
     );
   }
@@ -281,8 +293,10 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   async getDescription() {
     this.subscription = this.invoiceRowsService.getInvoiceRowsDescription(this.jUserID).subscribe(
         (response) => {
-          for (const rowsDescription of response['records']) {
-            this.descriptionText.push(rowsDescription.description);
+          if (response['records']) {
+            for (const rowsDescription of response['records']) {
+              this.descriptionText.push(rowsDescription.description);
+            }
           }
         }, (e) => {}
     );
@@ -290,8 +304,10 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   async getComment() {
     this.subscription = this.invoiceRowsService.getInvoiceRowsComment(this.jUserID).subscribe(
         (response) => {
-          for (const rowsDescription of response['records']) {
-            this.commentText.push(rowsDescription.comment);
+          if (response['records']) {
+            for (const rowsDescription of response['records']) {
+              this.commentText.push(rowsDescription.comment);
+          }
           }
         }, (e) => {}
     );
@@ -299,8 +315,10 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
   async getUnitMeasure() {
     this.subscription = this.invoiceRowsService.getInvoiceRowsUnitMeasure(this.jUserID).subscribe(
         (response) => {
-          for (const rowsDescription of response['records']) {
-            this.unitMeasureText.push(rowsDescription.unit_measure);
+          if (response['records']) {
+            for (const rowsDescription of response['records']) {
+              this.unitMeasureText.push(rowsDescription.unit_measure);
+          }
           }
         }, (e) => {}
     );
@@ -536,8 +554,8 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
               this.selectedCurrencySymbol = this.currency.find(({currencyCode}) =>
                   currencyCode === response.currency).currencySymbol;
           } catch {
-              console.log('this is catch');
-              window.location.reload();
+              console.log('this is catch General setting form');
+              // window.location.reload();
           }
 
         }
@@ -587,8 +605,8 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
         this.selectedCurrencySymbol = this.currency.find(
             ({currencyCode}) => currencyCode === this.invoiceSettingElements.currency).currencySymbol;
     } catch {
-        console.log('this is catch');
-        window.location.reload();
+        console.log('this is catch cancel setting');
+        // window.location.reload();
     }
 
   }
@@ -685,49 +703,49 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
                                     if (i === this.s.length) {
                                       this.submitMessage = 'The invoice has been saved successfully.';
                                       this.submitMessageStatusSuccess = true;
-                                      this.router.navigate(['/invoice/' + this.savedInvoiceID]);
-                                      this.onScrollTop();
                                       this.processing = false;
-                                      setTimeout(() => {
-                                        this.submitMessageStatusSuccess = false;
-                                      }, 5000);
+                                      this.onScrollTop();
+                                      this.router.navigate(['/invoice/' + this.savedInvoiceID]);
+                                      // setTimeout(() => {
+                                      //   this.submitMessageStatusSuccess = false;
+                                      // }, 5000);
                                     }
                                     i++;
                                   }, () => {
-                                    this.submitMessage = 'Unexpected error, may the invoice row(s) have not been saved;' +
+                                    this.submitMessage = 'Unexpected error, the invoice row(s) may not have been saved;' +
                                         ' Contact User Support.';
                                     this.submitMessageStatusFail = true;
                                     this.processing = false;
-                                    setTimeout(() => {
-                                      this.submitMessageStatusFail = false;
-                                    }, 5000);
+                                    // setTimeout(() => {
+                                    //   this.submitMessageStatusFail = false;
+                                    // }, 5000);
                                   });
                             }
                               }, () => {
-                                this.submitMessage = 'Unexpected error, may the invoice row(s) & setting have not been saved;' +
+                                this.submitMessage = 'Unexpected error, the invoice row(s) & setting may not have been saved;' +
                                     ' Contact User Support.';
                                 this.submitMessageStatusFail = true;
                                 this.processing = false;
-                                setTimeout(() => {
-                                  this.submitMessageStatusFail = false;
-                                }, 5000);
+                                // setTimeout(() => {
+                                //   this.submitMessageStatusFail = false;
+                                // }, 5000);
                               });
                     }, () => {
-                      this.submitMessage = 'Unexpected error, may the invoice row(s) & setting have not been saved; ' +
+                      this.submitMessage = 'Unexpected error, the invoice row(s) & setting may not have been saved; ' +
                           'Contact User Support.';
                       this.submitMessageStatusFail = true;
                       this.processing = false;
-                      setTimeout(() => {
-                        this.submitMessageStatusFail = false;
-                      }, 5000);
+                      // setTimeout(() => {
+                      //   this.submitMessageStatusFail = false;
+                      // }, 5000);
                     });
             }, () => {
               this.submitMessage = 'Unexpected error, your invoice has not been saved; Contact User Support.';
               this.submitMessageStatusFail = true;
               this.processing = false;
-              setTimeout(() => {
-                this.submitMessageStatusFail = false;
-              }, 5000);
+              // setTimeout(() => {
+              //   this.submitMessageStatusFail = false;
+              // }, 5000);
             });
       }  else {
         this.processing = true;
@@ -745,51 +763,50 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
                                     if (i === this.s.length) {
                                       this.submitMessage = 'The invoice has been updated successfully';
                                       this.submitMessageStatusSuccess = true;
-                                      this.router.navigate(['/invoice/' + this.id]);
                                       this.onScrollTop();
                                       this.processing = false;
-                                      setTimeout(() => {
-                                        this.submitMessageStatusSuccess = false;
-                                      }, 5000);
+                                      this.router.navigate(['/invoice/' + this.id]);
+                                      // setTimeout(() => {
+                                      //   this.submitMessageStatusSuccess = false;
+                                      // }, 5000);
                                     }
                                     i++;
                                   }, () => {
-                                    this.submitMessage = 'Unexpected error, may the invoice row(s) have not been updated;' +
+                                    this.submitMessage = 'Unexpected error, the invoice row(s) may not have been updated;' +
                                         ' Contact User Support.';
                                     this.submitMessageStatusFail = true;
                                     this.processing = false;
-
-                                    setTimeout(() => {
-                                      this.submitMessageStatusFail = false;
-                                    }, 5000);
+                                    // setTimeout(() => {
+                                    //   this.submitMessageStatusFail = false;
+                                    // }, 5000);
                                   });
                             }
                           }, () => {
-                            this.submitMessage = 'Unexpected error, may the invoice row(s) have not been updated;' +
+                            this.submitMessage = 'Unexpected error, the invoice row(s) may not have been updated;' +
                                 ' Contact User Support.';
                             this.submitMessageStatusFail = true;
                             this.processing = false;
-                            setTimeout(() => {
-                              this.submitMessageStatusFail = false;
-                            }, 5000);
+                            // setTimeout(() => {
+                            //   this.submitMessageStatusFail = false;
+                            // }, 5000);
                           });
                     }, () => {
-                      this.submitMessage = 'Unexpected error, may the invoice row(s) & setting have not been updated;' +
+                      this.submitMessage = 'Unexpected error, the invoice row(s) & setting may not have been updated;' +
                           ' Contact User Support.';
                       this.submitMessageStatusFail = true;
                       this.processing = false;
-                      this.router.navigate(['/invoice/' + this.id]);
-                      this.onScrollTop();
-                      setTimeout(() => {
-                        this.submitMessageStatusFail = false;
-                      }, 5000);
+                      // this.router.navigate(['/invoice/' + this.id]);
+                      // this.onScrollTop();
+                      // setTimeout(() => {
+                      //   this.submitMessageStatusFail = false;
+                      // }, 5000);
                     });
             }, () => {
               this.submitMessage = 'Unexpected error your invoice has not been updated; Contact User Support.';
               this.submitMessageStatusFail = true;
-              setTimeout(() => {
-                this.submitMessageStatusFail = false;
-              }, 5000);
+              // setTimeout(() => {
+              //   this.submitMessageStatusFail = false;
+              // }, 5000);
             });
       }} else {
         this.onScrollTop();
@@ -802,8 +819,8 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
     try {
         this.companyInfo = this.companyList.find(company => company.id === companyID);
     } catch {
-        console.log('this is catch');
-        window.location.reload();
+        console.log('this is catch company data ');
+        // window.location.reload();
     }
 
     if (this.companyInfo.logo_link) {
@@ -817,8 +834,8 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
       try {
           this.customerInfo = this.customerList.find(customer => customer.id === customerID);
       } catch {
-          console.log('this is catch');
-          window.location.reload();
+          console.log('this is catch customer data');
+          // window.location.reload();
       }
 
   }
@@ -848,8 +865,8 @@ export class InvoiceAddViewModifyComponent implements OnInit, OnDestroy {
         this.selectedCurrencySymbol = this.currency.find(({currencyCode}) =>
             currencyCode === currencySelected).currencySymbol;
     } catch {
-        console.log('this is catch');
-        window.location.reload();
+        console.log('this is catch change currency');
+        // window.location.reload();
     }
   }
   onScrollTop() {

@@ -18,9 +18,9 @@ export class CustomerService {
   customerDelete(id) {
     return this.httpClient.post(`${environment.apiUrl}customers/delete`, id);
   }
-  customerByID(id) {
-    return this.httpClient.get<CompanyModel>(`${environment.apiUrl}customers/read_one.php?id=` + id,
-        {responseType: 'json'});
+  customerByID(id, userID) {
+    return this.httpClient.get<CompanyModel>(`${environment.apiUrl}customers/read_one.php?id=` + id +
+        '&user_id=' + userID, {responseType: 'json'});
   }
   customerCreate(data: any) {
     return this.httpClient.post(`${environment.apiUrl}customers/create`, data);

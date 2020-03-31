@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
+import {LocationStrategy} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToolsService {
 
-  constructor() { }
+  constructor(private locationStrategy: LocationStrategy) { }
 
   imageAccept(imageType: string) {
     if ((imageType === 'image/gif') || (imageType === 'image/jpeg') || (imageType === 'image/png')) {
@@ -49,6 +50,15 @@ export class ToolsService {
       if ((control as any).controls) {
         this.markFormGroupTouched(control as FormGroup);
       }
+    });
+  }
+  whiteSpaceRemover(formControl: FormControl) {
+    formControl.setValue(formControl.value.trim());
+  }
+  disableBackButton() {
+    history.pushState(null, null, location.href);
+    this.locationStrategy.onPopState(() => {
+      history.pushState(null, null, location.href);
     });
   }
 

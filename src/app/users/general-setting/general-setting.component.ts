@@ -13,7 +13,7 @@ import {environment} from '../../../environments/environment';
 @Component({
   selector: 'app-general-setting',
   templateUrl: './general-setting.component.html',
-  styleUrls: ['../../../my-style.css']
+  // styleUrls: ['../../../styles.css']
 })
 export class GeneralSettingComponent implements OnInit {
     settingForm: FormGroup;
@@ -136,32 +136,23 @@ export class GeneralSettingComponent implements OnInit {
                 (response) => {
                     if (response['message'] === 'SUCCESS') {
                         this.submitMessageStatusSuccess = true;
-                        this.submitMessage = 'The General Setting has been successfully updated';
+                        this.submitMessage = 'The General Setting has been successfully updated.';
                         this.processing = false;
-                        setTimeout(() => {
-                            this.submitMessageStatusSuccess = false;
-                        }, 5000);
+                        // setTimeout(() => {
+                        //     this.submitMessageStatusSuccess = false;
+                        // }, 5000);
                     }}, () => {
                     this.submitMessage = 'Unexpected error, contact User Support.';
                     this.submitMessageStatusFail = true;
                     this.processing = false;
-                    setTimeout(() => {
-                        this.submitMessageStatusFail = false;
-                    }, 5000); }
-            );
+                    // setTimeout(() => {
+                    //     this.submitMessageStatusFail = false;
+                    // }, 5000);
+                });
 
         } else {
             this.toolsService.markFormGroupTouched(this.settingForm);
         }
-    }
-    private markFormGroupTouched(form: FormGroup) {
-        Object.values(form.controls).forEach(control => {
-            control.markAsTouched();
-
-            if ((control as any).controls) {
-                this.markFormGroupTouched(control as FormGroup);
-            }
-        });
     }
     get f() { return this.settingForm.controls; }
 

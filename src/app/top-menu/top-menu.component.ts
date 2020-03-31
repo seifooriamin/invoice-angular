@@ -9,7 +9,7 @@ declare var jQuery: any;
 @Component({
   selector: 'app-top-menu',
   templateUrl: './top-menu.component.html',
-  styleUrls: ['../../my-style.css']
+  // styleUrls: ['../../styles.css']
 })
 export class TopMenuComponent implements OnInit {
   changePasswordForm: FormGroup;

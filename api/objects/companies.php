@@ -130,15 +130,15 @@ class Companies
                             users u
                         ON c.user_id=u.id
                     WHERE
-                        c.id = ?
+                        BINARY c.id = ? && c.user_id = ?
                     LIMIT
                         0,1";
 
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
-
         // bind id of product to be updated
         $stmt->bindParam(1, $this->id);
+        $stmt->bindParam(2, $this->user_id);
 
         // execute query
         $stmt->execute();
@@ -147,6 +147,7 @@ class Companies
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // set values to object properties
+        $this->id = $row['id'];
         $this->name = $row['name'];
         $this->address = $row['address'];
         $this->phone = $row['phone'];

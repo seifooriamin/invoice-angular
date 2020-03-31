@@ -22,26 +22,14 @@ export class AuthenticationService {
   }
 
   login(data: any) {
-    // return this.http.post<any>('http://www.einvoicemaker.com/invoice/api/users/login.php', data)
-    //     .pipe(map(user => {
-    //       // store user details and jwt token in local storage to keep user logged in between page refreshes
-    //       if (user['message'] === 'Successful login.'){
-    //           localStorage.setItem('jwt', user['jwt']);
-    //           localStorage.setItem('access_level', user['access_level']);
-    //           localStorage.setItem('first_name', user['first_name']);
-    //           localStorage.setItem('last_name', user['last_name']);
-    //           localStorage.setItem('currentUser', JSON.stringify(user));
-    //           this.currentUserSubject.next(user);
-    //           return user;
-    //       }
-    //     }));
     return this.http.post<any>(`${environment.apiUrl}users/login`, data)
         .pipe(map(user => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            if (user['message'] === 'Successful login.') {
+            if (user['message'] === 'SUCCESS') {
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
-                return user;
+                return true;
+            } else {
+                return false;
             }
         }));
   }

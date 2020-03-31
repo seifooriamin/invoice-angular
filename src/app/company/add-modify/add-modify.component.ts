@@ -13,7 +13,7 @@ import {environment} from '../../../environments/environment';
 @Component({
   selector: 'app-add-modify',
   templateUrl: './add-modify.component.html',
-  styleUrls: ['../../../my-style.css']
+  // styleUrls: ['../../../styles.css']
 })
 export class AddModifyComponent implements OnInit, OnDestroy {
   fillForm: FormGroup;
@@ -30,6 +30,7 @@ export class AddModifyComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   logoStatus = false;
   processing = false;
+  userID: number;
 
 
   constructor(private formBuilder: FormBuilder, private companyService: CompanyService, private http: HttpClient,
@@ -38,11 +39,11 @@ export class AddModifyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.params.subscribe(
           (params: Params) => {
-              this.id = params['id'];
+              this.id = params.id;
           }
       );
-
     if (this.id) {
+        this.userID = this.toolsService.getUserID()['id'];
         const url = this.router.url;
         if (url.slice(-6) === 'modify') {
             this.pageStatus = 'modify';
@@ -80,27 +81,31 @@ export class AddModifyComponent implements OnInit, OnDestroy {
       });
   }
   fillFormData() {
-        this.subscription = this.companyService.companyByID(this.id).subscribe(
+        this.subscription = this.companyService.companyByID(this.id, this.userID).subscribe(
             (company: CompanyModel) => {
-                this.companyData = company;
-                this.id = company.id;
-                this.fillForm.patchValue({
-                    user_id: company.user_id,
-                    name: company.name,
-                    address: company.address,
-                    phone: company.phone,
-                    business_no: company.business_no,
-                    gst_no: company.gst_no,
-                    website: company.website,
-                    email: company.email,
-                    id: company.id
-                });
-                if (company.logo_link) {
-                    this.previewUrl = `${environment.imageUrl}` + company.logo_link;
-                    this.getFile(`${environment.imageUrl}` + company.logo_link, company.logo_link);
-                    this.logoStatus = true;
+                if (company.id) {
+                    this.companyData = company;
+                    this.id = company.id;
+                    this.fillForm.patchValue({
+                        user_id: company.user_id,
+                        name: company.name,
+                        address: company.address,
+                        phone: company.phone,
+                        business_no: company.business_no,
+                        gst_no: company.gst_no,
+                        website: company.website,
+                        email: company.email,
+                        id: company.id
+                    });
+                    if (company.logo_link) {
+                        this.previewUrl = `${environment.imageUrl}` + company.logo_link;
+                        this.getFile(`${environment.imageUrl}` + company.logo_link, company.logo_link);
+                        this.logoStatus = true;
+                    }
+                } else {
+                    this.router.navigate(['company/company-list']);
                 }
-
+            }, () => {
             }
         );
     }
@@ -137,7 +142,7 @@ export class AddModifyComponent implements OnInit, OnDestroy {
 
         const reader = new FileReader();
         reader.readAsDataURL(this.fileToUpload);
-        reader.onload = (_event) => {
+        reader.onload = () => {
             this.previewUrl = reader.result;
         };
     }
@@ -156,6 +161,8 @@ export class AddModifyComponent implements OnInit, OnDestroy {
   }
   onSubmit() {
       if (this.fillForm.valid) {
+        this.submitMessageStatusSuccess = false;
+        this.submitMessageStatusFail = false;
         if (this.pageStatus === 'new') {
               this.processing = true;
               this.companyService.companyCreate(this.fileToUpload, this.fillForm.value).subscribe(
@@ -233,6 +240,7 @@ export class AddModifyComponent implements OnInit, OnDestroy {
         const blob = await res.blob();
         this.fileToUpload = new File([blob], fn);
     }
-
-
+  whiteSpace(formControl) {
+      this.toolsService.whiteSpaceRemover(formControl);
+  }
 }

@@ -17,47 +17,59 @@
         </div>
     </div>
     <div class="row">
-        <table mdbTable #tableEl="mdbTable" class="z-depth-1 ">
-            <thead class="unique-color white-text">
-            <tr>
-                <th [mdbTableSort]="elements" sortBy="invoice_number" class="font-weight-bold">Invoice Number <i class="fas fa-sort"></i></th>
-                <th [mdbTableSort]="elements" sortBy="date" class="font-weight-bold">Date <i class="fas fa-sort"></i></th>
-                <th [mdbTableSort]="elements" sortBy="customer_Name" class="font-weight-bold">Customer <i class="fas fa-sort"></i></th>
-                <th [mdbTableSort]="elements" sortBy="company_name" class="font-weight-bold">Company <i class="fas fa-sort"></i></th>
-                <th [mdbTableSort]="elements" sortBy="total" class="font-weight-bold">Total <i class="fas fa-sort"></i></th>
-                <th [mdbTableSort]="elements" sortBy="year" class="font-weight-bold">Year <i class="fas fa-sort"></i></th>
-                <th class="font-weight-bold">Operations</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let el of elements; let i = index">
-                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.invoice_number}}</td>
-                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.date}}</td>
-                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.customer_name}}</td>
-                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.company_name}}</td>
-                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.total}}</td>
-                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.year}}</td>
-                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-                    <button type="button" class="btn btn-danger ml-1" (click)="onModalShow(el.invoice_number, i , el.id)"><i class="fas fa-trash-alt"></i></button>
-                    <a  class="btn btn-success ml-1 text-light" [routerLink]="['../']+el.id"><i class="fas fa-eye"></i></a>
-                    <a  class="btn btn-primary ml-1 text-light" [routerLink]="['../']+el.id+['/modify']"><i class="fas fa-edit"></i></a></td>
-            </tr>
-            </tbody>
-            <tfoot class="grey lighten-5 w-100">
-            <tr>
-                <td colspan="7">
-                    <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="7">
-                    <div *ngIf="deleteMessageStatus" class="invalid-feedback-manual text-center">
-                        {{deleteMessageText}}
-                    </div>
-                </td>
-            </tr>
-            </tfoot>
-        </table>
+        <div class="col-12 table-responsive">
+            <table mdbTable #tableEl="mdbTable" small="true">
+                <thead class="unique-color white-text">
+                <tr>
+                    <th [mdbTableSort]="elements" sortBy="invoice_number" class="font-weight-bold">Invoice Number <i class="fas fa-sort"></i></th>
+                    <th [mdbTableSort]="elements" sortBy="date" class="font-weight-bold">Date <i class="fas fa-sort"></i></th>
+                    <th [mdbTableSort]="elements" sortBy="customer_Name" class="font-weight-bold">Customer <i class="fas fa-sort"></i></th>
+                    <th [mdbTableSort]="elements" sortBy="company_name" class="font-weight-bold">Company <i class="fas fa-sort"></i></th>
+                    <th [mdbTableSort]="elements" sortBy="total" class="font-weight-bold">Total <i class="fas fa-sort"></i></th>
+                    <th [mdbTableSort]="elements" sortBy="year" class="font-weight-bold">Year <i class="fas fa-sort"></i></th>
+                    <th class="font-weight-bold" colspan="3">Operations</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let el of elements; let i = index">
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.invoice_number}}</td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.date}}</td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.customer_name}}</td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.company_name}}</td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.total}}</td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.year}}</td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                        <button type="button" class="btn btn-danger btn-sm" title="Delete"
+                                (click)="onModalShow(el.invoice_number, i , el.id)">
+                            <i class="fas fa-trash-alt"></i></button>
+                    </td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                        <a  class="btn btn-success btn-sm text-light" [routerLink]="['../']+el.id" title="View">
+                            <i class="fas fa-eye"></i></a>
+                    </td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                        <a  class="btn btn-primary btn-sm text-light" title="Modify" [routerLink]="['../']+el.id+['/modify']">
+                            <i class="fas fa-edit"></i></a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot class="grey lighten-5 w-100">
+                <tr>
+                    <td colspan="9">
+                        <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="9">
+                        <div *ngIf="deleteMessageStatus" class="invalid-feedback-delete text-center">
+                            {{deleteMessageText}}
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+
     </div>
 </div>
 

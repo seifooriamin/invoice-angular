@@ -9,7 +9,7 @@ import {AuthenticationService} from '../../shared/services/authentication.servic
 @Component({
   selector: 'app-reset-password-request',
   templateUrl: './reset-password-request.component.html',
-  styleUrls: ['../../../my-style.css']
+  // styleUrls: ['../../../styles.css']
 })
 export class ResetPasswordRequestComponent implements OnInit, OnDestroy {
   forgetPasswordForm: FormGroup;

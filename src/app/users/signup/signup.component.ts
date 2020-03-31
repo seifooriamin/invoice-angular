@@ -14,7 +14,7 @@ declare var jQuery: any;
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['../../../my-style.css']
+  // styleUrls: ['../../../styles.css']
 })
 export class SignupComponent implements OnInit, OnDestroy {
   fillForm: FormGroup;
@@ -114,6 +114,9 @@ export class SignupComponent implements OnInit, OnDestroy {
       }
 
   }
+    whiteSpace(formControl) {
+        this.toolsService.whiteSpaceRemover(formControl);
+    }
   get f() { return this.fillForm.controls; }
 
 }

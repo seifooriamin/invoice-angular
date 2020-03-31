@@ -20,16 +20,18 @@ import {EstimateService} from '../../shared/services/estimate.service';
 import {EstimateCustomSettingService} from '../../shared/services/estimate-custom-setting.service';
 import {EstimateModel} from '../../shared/models/estimate.model';
 import {EstimateRowsModel} from '../../shared/models/estimate-rows.model';
+import {LocationStrategy} from '@angular/common';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 declare var jQuery: any;
 
 @Component({
   selector: 'app-estimate-add-view-modify',
   templateUrl: './estimate-add-view-modify.component.html',
-  styleUrls: ['../../../my-style.css']
+  // styleUrls: ['../../../styles.css']
 })
 export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
   id = 0;
+  userID: number;
   pageStatus = 'new';
   pageTitle = 'New Estimate Registration';
   submitMessageStatusFail = false;
@@ -124,7 +126,10 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
               private customerService: CustomerService, private estimateRowsService: EstimateRowsService,
               private toolsService: ToolsService, private estimateService: EstimateService,
               private igs: InvoiceGeneralSettingService, private currencyService: CurrencyService,
-              private ecs: EstimateCustomSettingService, private route: ActivatedRoute) { }
+              private ecs: EstimateCustomSettingService, private route: ActivatedRoute,
+              ) {
+      this.toolsService.disableBackButton();
+    }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -133,6 +138,7 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
         }
     );
     if (this.id) {
+      this.userID = this.toolsService.getUserID()['id'];
       const url = this.router.url;
       if (url.slice(-6) === 'modify') {
         this.pageStatus = 'modify';
@@ -166,25 +172,30 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
     }
   }
   async fillEstimateForm() {
-    this.subscription = this.estimateService.estimateByID(this.id).subscribe(
+    this.subscription = this.estimateService.estimateByID(this.id, this.userID).subscribe(
         (response) => {
-          this.onLoadCompanyData(response.company_id);
-          this.onLoadCustomerData(response.customer_id);
-          this.fillForm.patchValue({
-            date: response.date,
-            estimate_number: response.estimate_number,
-            company_id: response.company_id,
-            customer_id: response.customer_id,
-            id: response.id,
-            note: response.note,
-            user_id: response.user_id,
-            addition1: response.addition1,
-            addition2: response.addition2,
-            addition3: response.addition3,
-            deduction1: response.deduction1,
-            deduction2: response.deduction2
-          });
-          this.estimateInfo = response;
+          if (response.estimate_number) {
+            this.onLoadCompanyData(response.company_id);
+            this.onLoadCustomerData(response.customer_id);
+            this.fillForm.patchValue({
+              date: response.date,
+              estimate_number: response.estimate_number,
+              company_id: response.company_id,
+              customer_id: response.customer_id,
+              id: response.id,
+              note: response.note,
+              user_id: response.user_id,
+              addition1: response.addition1,
+              addition2: response.addition2,
+              addition3: response.addition3,
+              deduction1: response.deduction1,
+              deduction2: response.deduction2
+            });
+            this.estimateInfo = response;
+          } else {
+            this.router.navigate(['estimate/estimate-list']);
+          }
+
         }, () => {}
     );
 
@@ -192,22 +203,24 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
   async fillEstimateRowsForm() {
     this.subscription = this.estimateRowsService.estimateRowsByEstimateID(this.id).subscribe(
         (response: EstimateRowsModel[]) => {
-          let i = 0;
-          for (const row of response['records']) {
-            this.onAddLine();
-            this.s.at(i).patchValue({
-              id: row.id,
-              inx: row.inx,
-              estimate_id: row.estimate_id,
-              description: row.description,
-              comment: row.comment,
-              unit_price: row.unit_price,
-              unit_measure: row.unit_measure,
-              quantity: row.quantity,
-              user_id: row.user_id
-            });
-            this.onRowTotal(i);
-            i++;
+          if (response['records']) {
+            let i = 0;
+            for (const row of response['records']) {
+              this.onAddLine();
+              this.s.at(i).patchValue({
+                id: row.id,
+                inx: row.inx,
+                estimate_id: row.estimate_id,
+                description: row.description,
+                comment: row.comment,
+                unit_price: row.unit_price,
+                unit_measure: row.unit_measure,
+                quantity: row.quantity,
+                user_id: row.user_id
+              });
+              this.onRowTotal(i);
+              i++;
+            }
           }
         }, () => {}
     );
@@ -215,43 +228,44 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
   async fillEstimateSettingForm() {
     this.subscription = this.ecs.estimateSettingByEstimateID(this.id).subscribe(
         (response: InvoiceGeneralSettingModel) => {
-          this.settingForm.patchValue({
-            currency: response.currency,
-            id: response.id,
-            estimate_id: response.estimate_id,
-            deduction1status: +response.deduction1status === 1,
-            deduction1label: response.deduction1label,
-            deduction1type: response.deduction1type,
-            deduction1percentage: response.deduction1percentage,
-            deduction2status: +response.deduction2status === 1,
-            deduction2label: response.deduction2label,
-            deduction2type: response.deduction2type,
-            deduction2percentage: response.deduction2percentage,
-            addition1status: +response.addition1status === 1,
-            addition1label: response.addition1label,
-            addition1type: response.addition1type,
-            addition1percentage: response.addition1percentage,
-            addition2status: +response.addition2status === 1,
-            addition2label: response.addition2label,
-            addition2type: response.addition2type,
-            addition2percentage: response.addition2percentage,
-            addition3status: +response.addition3status === 1,
-            addition3label: response.addition3label,
-            addition3type: response.addition3type,
-            addition3percentage: response.addition3percentage
-          });
-          this.estimateSettingElements = response;
-          try {
-            this.selectedCurrencyImage = environment.flagUrl +
-                this.currency.find(({currencyCode}) => currencyCode === response.currency).flag;
-            this.selectedCurrencyCode = this.currency.find(({currencyCode}) =>
-                currencyCode === response.currency).currencyCode;
-            this.selectedCurrencySymbol = this.currency.find(({currencyCode}) =>
-                currencyCode === response.currency).currencySymbol;
-          } catch {
-            window.location.reload();
+          if (response.id) {
+            this.settingForm.patchValue({
+              currency: response.currency,
+              id: response.id,
+              estimate_id: response.estimate_id,
+              deduction1status: +response.deduction1status === 1,
+              deduction1label: response.deduction1label,
+              deduction1type: response.deduction1type,
+              deduction1percentage: response.deduction1percentage,
+              deduction2status: +response.deduction2status === 1,
+              deduction2label: response.deduction2label,
+              deduction2type: response.deduction2type,
+              deduction2percentage: response.deduction2percentage,
+              addition1status: +response.addition1status === 1,
+              addition1label: response.addition1label,
+              addition1type: response.addition1type,
+              addition1percentage: response.addition1percentage,
+              addition2status: +response.addition2status === 1,
+              addition2label: response.addition2label,
+              addition2type: response.addition2type,
+              addition2percentage: response.addition2percentage,
+              addition3status: +response.addition3status === 1,
+              addition3label: response.addition3label,
+              addition3type: response.addition3type,
+              addition3percentage: response.addition3percentage
+            });
+            this.estimateSettingElements = response;
+            try {
+              this.selectedCurrencyImage = environment.flagUrl +
+                  this.currency.find(({currencyCode}) => currencyCode === response.currency).flag;
+              this.selectedCurrencyCode = this.currency.find(({currencyCode}) =>
+                  currencyCode === response.currency).currencyCode;
+              this.selectedCurrencySymbol = this.currency.find(({currencyCode}) =>
+                  currencyCode === response.currency).currencySymbol;
+            } catch {
+              // window.location.reload();
+            }
           }
-
         }, () => {}
     );
   }
@@ -278,8 +292,10 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
   async getDescription() {
     this.subscription = this.estimateRowsService.getEstimateRowsDescription(this.jUserID).subscribe(
         (response) => {
-          for (const rowsDescription of response['records']) {
-            this.descriptionText.push(rowsDescription.description);
+          if (response['records']) {
+            for (const rowsDescription of response['records']) {
+              this.descriptionText.push(rowsDescription.description);
+            }
           }
         }, () => {}
     );
@@ -287,8 +303,10 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
   async getComment() {
     this.subscription = this.estimateRowsService.getEstimateRowsComment(this.jUserID).subscribe(
         (response) => {
-          for (const rowsDescription of response['records']) {
-            this.commentText.push(rowsDescription.comment);
+          if (response['records']) {
+            for (const rowsDescription of response['records']) {
+              this.commentText.push(rowsDescription.comment);
+            }
           }
         }, () => {}
     );
@@ -296,8 +314,10 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
   async getUnitMeasure() {
     this.subscription = this.estimateRowsService.getEstimateRowsUnitMeasure(this.jUserID).subscribe(
         (response) => {
-          for (const rowsDescription of response['records']) {
-            this.unitMeasureText.push(rowsDescription.unit_measure);
+          if (response['records']) {
+            for (const rowsDescription of response['records']) {
+              this.unitMeasureText.push(rowsDescription.unit_measure);
+            }
           }
         }, () => {}
     );
@@ -668,48 +688,45 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
                                           if (i === this.s.length) {
                                             this.submitMessage = 'The estimate has been saved successfully.';
                                             this.submitMessageStatusSuccess = true;
-                                            this.router.navigate(['/estimate/' + this.savedEstimateID]);
                                             this.processing = false;
                                             this.onScrollTop();
-                                            setTimeout(() => {
-                                              this.submitMessageStatusSuccess = false;
-                                            }, 5000);
+                                            this.router.navigate(['/estimate/' + this.savedEstimateID]);
                                           }
                                           i++;
                                         }, () => {
-                                          this.submitMessage = 'Unexpected error, may the estimate row(s) have not been ' +
+                                          this.submitMessage = 'Unexpected error, the estimate row(s) may not have been ' +
                                               'saved; Contact User Support.';
                                           this.submitMessageStatusFail = true;
                                           this.processing = false;
-                                          setTimeout(() => {
-                                            this.submitMessageStatusFail = false;
-                                          }, 5000);
+                                          // setTimeout(() => {
+                                          //   this.submitMessageStatusFail = false;
+                                          // }, 5000);
                                         });
                                   }
                             }, () => {
-                              this.submitMessage = 'Unexpected error, may the estimate row(s) & setting have not been ' +
+                              this.submitMessage = 'Unexpected error, the estimate row(s) & setting may noy have been ' +
                                   'saved; Contact User Support.';
                               this.processing = false;
                               this.submitMessageStatusFail = true;
-                              setTimeout(() => {
-                                this.submitMessageStatusFail = false;
-                              }, 5000);
+                              // setTimeout(() => {
+                              //   this.submitMessageStatusFail = false;
+                              // }, 5000);
                             });
                     }, () => {
-                      this.submitMessage = 'Unexpected error, may the estimate row(s) & setting have not been saved; Contact User Support.';
+                      this.submitMessage = 'Unexpected error, the estimate row(s) & setting may not have been saved; Contact User Support.';
                       this.submitMessageStatusFail = true;
                       this.processing = false;
-                      setTimeout(() => {
-                        this.submitMessageStatusFail = false;
-                      }, 5000);
+                      // setTimeout(() => {
+                      //   this.submitMessageStatusFail = false;
+                      // }, 5000);
                     });
             }, () => {
               this.submitMessage = 'Unexpected error, your estimate has not been saved; Contact User Support.';
               this.submitMessageStatusFail = true;
               this.processing = false;
-              setTimeout(() => {
-                this.submitMessageStatusFail = false;
-              }, 5000);
+              // setTimeout(() => {
+              //   this.submitMessageStatusFail = false;
+              // }, 5000);
             });
       } else {
         this.processing = true;
@@ -728,48 +745,48 @@ export class EstimateAddViewModifyComponent implements OnInit, OnDestroy {
                                       this.submitMessage = 'The estimate has been updated successfully.';
                                       this.submitMessageStatusSuccess = true;
                                       this.processing = false;
-                                      this.router.navigate(['/estimate/' + this.id]);
                                       this.onScrollTop();
-                                      setTimeout(() => {
-                                        this.submitMessageStatusSuccess = false;
-                                      }, 5000);
+                                      this.router.navigate(['/estimate/' + this.id]);
+                                      // setTimeout(() => {
+                                      //   this.submitMessageStatusSuccess = false;
+                                      // }, 5000);
                                     }
                                     i++;
                                   }, () => {
-                                    this.submitMessage = 'Unexpected error, may the estimate row(s) have not been updated;' +
+                                    this.submitMessage = 'Unexpected error, the estimate row(s) may not have been updated;' +
                                         ' Contact User Support.';
                                     this.processing = false;
                                     this.submitMessageStatusFail = true;
-                                    setTimeout(() => {
-                                      this.submitMessageStatusFail = false;
-                                    }, 5000);
+                                    // setTimeout(() => {
+                                    //   this.submitMessageStatusFail = false;
+                                    // }, 5000);
                                   }
                               );
                             }}, () => {
-                              this.submitMessage = 'Unexpected error, may the estimate row(s) have not been updated; Contact User Support.';
+                              this.submitMessage = 'Unexpected error, the estimate row(s) may not have been updated; Contact User Support.';
                               this.submitMessageStatusFail = true;
                               this.processing = false;
-                              setTimeout(() => {
-                                this.submitMessageStatusFail = false;
-                              }, 5000);
+                              // setTimeout(() => {
+                              //   this.submitMessageStatusFail = false;
+                              // }, 5000);
                             });
                     }, () => {
-                      this.submitMessage = 'Unexpected error, may the estimate rows & setting have not been updated; Contact User Support.';
+                      this.submitMessage = 'Unexpected error, the estimate rows & setting may not have been updated; Contact User Support.';
                       this.submitMessageStatusFail = true;
                       this.processing = false;
-                      this.router.navigate(['/estimate/' + this.id]);
-                      setTimeout(() => {
-                        this.submitMessageStatusFail = false;
-                        this.onScrollTop();
-                      }, 5000);
+                      // this.router.navigate(['/estimate/' + this.id]);
+                      // setTimeout(() => {
+                      //   this.submitMessageStatusFail = false;
+                      //   this.onScrollTop();
+                      // }, 5000);
                     });
               }, () => {
                 this.submitMessage = 'Unexpected error your estimate has not been updated; Contact User Support.';
                 this.submitMessageStatusFail = true;
                 this.processing = false;
-                setTimeout(() => {
-                  this.submitMessageStatusFail = false;
-                }, 5000);
+                // setTimeout(() => {
+                //   this.submitMessageStatusFail = false;
+                // }, 5000);
             });
       }} else {
         this.onScrollTop();

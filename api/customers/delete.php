@@ -37,7 +37,7 @@
     else{
 
         // set response code - 503 service unavailable
-        http_response_code(503);
+        http_response_code(200);
 
         // tell the user
         echo json_encode(array("message" => "FAIL"));

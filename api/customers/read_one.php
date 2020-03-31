@@ -20,6 +20,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
     // set ID property of record to read
     $customers->id = isset($_GET['id']) ? $_GET['id'] : die();
+    $customers->user_id = isset($_GET['user_id']) ? $_GET['user_id'] : die();
 
     // read the details of product to be edited
     $customers->readOne();
@@ -46,9 +47,9 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
     else{
         // set response code - 404 Not found
-        http_response_code(404);
+        http_response_code(200);
 
         // tell the user product does not exist
-        echo json_encode(array("message" => "The customer does not exist."));
+        echo json_encode(array("message" => "NOT_FOUND"));
     }
 ?>

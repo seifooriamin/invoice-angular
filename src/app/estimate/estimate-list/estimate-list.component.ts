@@ -1,17 +1,15 @@
 import {AfterViewInit, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MdbTableDirective, MdbTablePaginationComponent, TooltipConfig} from 'node_modules/angular-bootstrap-md';
+import {MdbTableDirective, MdbTablePaginationComponent} from 'node_modules/angular-bootstrap-md';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {EstimateModel} from '../../shared/models/estimate.model';
 import {EstimateService} from '../../shared/services/estimate.service';
-import {EstimateRowsService} from '../../shared/services/estimate-rows.service';
-import {EstimateCustomSettingService} from '../../shared/services/estimate-custom-setting.service';
 import {ToolsService} from '../../shared/services/tools.service';
 declare var jQuery: any;
 @Component({
   selector: 'app-estimate-list',
   templateUrl: './estimate-list.component.html',
-  styleUrls: ['../../../my-style.css']
+  // styleUrls: ['../../../styles.css']
 })
 export class EstimateListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
@@ -35,22 +33,23 @@ export class EstimateListComponent implements OnInit, AfterViewInit, OnDestroy {
     const userId: string = '{ "user_id" : "' + this.currentUser['id'] + '" }';
     this.subscribe = this.estimateService.estimateReadByUser(userId).subscribe(
         (records: Array<EstimateModel>) => {
-          // this.data = records['records'];
-          for (const idata of records['records']) {
-            this.elements.push({id: idata.id, estimate_number: idata.estimate_number,
-              date: idata.date, customer_name: idata.customer_name, company_name: idata.company_name,
-              total: this.toolsService.numberSeparator(this.toolsService.showNumberWithDecimal(idata.total))});
+          if (records['records']) {
+            for (const idata of records['records']) {
+              this.elements.push({id: idata.id, estimate_number: idata.estimate_number,
+                date: idata.date, customer_name: idata.customer_name, company_name: idata.company_name,
+                total: this.toolsService.numberSeparator(this.toolsService.showNumberWithDecimal(idata.total))});
+            }
+            this.mdbTable.setDataSource(this.elements);
+            this.elements = this.mdbTable.getDataSource();
+            this.previous = this.mdbTable.getDataSource();
+          } else {
+            this.deleteMessageText = 'No record found';
+            this.deleteMessageStatus = true;
+            setTimeout(() => {
+              this.deleteMessageStatus = false;
+            }, 5000);
           }
-          this.mdbTable.setDataSource(this.elements);
-          this.elements = this.mdbTable.getDataSource();
-          this.previous = this.mdbTable.getDataSource();
-        }, (e) => {
-          this.deleteMessageText = 'No record found';
-          this.deleteMessageStatus = true;
-          setTimeout(() => {
-            this.deleteMessageStatus = false;
-          }, 2000);
-        }
+        }, () => {}
     );
   }
   ngAfterViewInit(): void {

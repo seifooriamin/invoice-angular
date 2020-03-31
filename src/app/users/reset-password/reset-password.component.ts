@@ -10,7 +10,7 @@ import {AuthenticationService} from '../../shared/services/authentication.servic
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['../../../my-style.css']
+  // styleUrls: ['../../../styles.css']
 })
 export class ResetPasswordComponent implements OnInit {
   successStatus = false;

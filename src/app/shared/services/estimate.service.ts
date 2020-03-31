@@ -22,9 +22,9 @@ export class EstimateService {
   estimateCreate(data) {
     return this.httpClient.post(`${environment.apiUrl}estimate/create`, data);
   }
-  estimateByID(id) {
-    return this.httpClient.get<EstimateModel>(`${environment.apiUrl}estimate/read_one.php?id=` + id,
-        {responseType: 'json'});
+  estimateByID(id, userID) {
+    return this.httpClient.get<EstimateModel>(`${environment.apiUrl}estimate/read_one.php?id=` + id +
+        '&user_id=' + userID,{responseType: 'json'});
   }
   estimateUpdate(data) {
     return this.httpClient.patch(`${environment.apiUrl}estimate/update`, data);
@@ -39,40 +39,43 @@ export class EstimateService {
       const userId: string = '{ "user_id" : "' + currentUser['id'] + '" }';
       this.getEstimateNumber(userId).subscribe(
           (response) => {
-            const lastEstimateNumber = response['estimate_number'];
-            let separator = 0;
-            const estimateNumberLength = lastEstimateNumber.length;
-            const lengthMines = estimateNumberLength - 1;
-            for (let counter = lengthMines; counter >= 0; counter--) {
-              if (!(+lastEstimateNumber.substr(counter, 1) >= 0) &&
-                  !(+lastEstimateNumber.substr(counter, 1) <= 9)) {
-                separator = ++counter;
-                break;
-              }
-            }
-            const digitPartLength = estimateNumberLength - separator;
-            digitPart = lastEstimateNumber.substr(separator, digitPartLength);
-            realDigit = +digitPart;
-            const previousRealDigit = realDigit;
-            ++realDigit;
-            if ((realDigit.toString().length - previousRealDigit.toString().length) > 0) {
-              const reducer = separator + 1;
-              digitPart = lastEstimateNumber.substr(reducer, digitPartLength);
-            }
-            for (let counter = 0; counter < digitPart.length; counter++) {
-              if ((digitPart.substr(counter, 1)) === '0') {
-                newDigitPart += digitPart.substr(counter, 1);
+              if (response['estimate_number']) {
+                  const lastEstimateNumber = response['estimate_number'];
+                  let separator = 0;
+                  const estimateNumberLength = lastEstimateNumber.length;
+                  const lengthMines = estimateNumberLength - 1;
+                  for (let counter = lengthMines; counter >= 0; counter--) {
+                      if (!(+lastEstimateNumber.substr(counter, 1) >= 0) &&
+                          !(+lastEstimateNumber.substr(counter, 1) <= 9)) {
+                          separator = ++counter;
+                          break;
+                      }
+                  }
+                  const digitPartLength = estimateNumberLength - separator;
+                  digitPart = lastEstimateNumber.substr(separator, digitPartLength);
+                  realDigit = +digitPart;
+                  const previousRealDigit = realDigit;
+                  ++realDigit;
+                  if ((realDigit.toString().length - previousRealDigit.toString().length) > 0) {
+                      const reducer = separator + 1;
+                      digitPart = lastEstimateNumber.substr(reducer, digitPartLength);
+                  }
+                  for (let counter = 0; counter < digitPart.length; counter++) {
+                      if ((digitPart.substr(counter, 1)) === '0') {
+                          newDigitPart += digitPart.substr(counter, 1);
+                      } else {
+                          break;
+                      }
+                  }
+                  newDigitPart += realDigit;
+                  prefix = lastEstimateNumber.substr(0, separator);
+                  resolve({estimateDigit: newDigitPart, estimatePrefix: prefix});
               } else {
-                break;
+                  newDigitPart = '001';
+                  resolve({estimateDigit: newDigitPart, estimatePrefix: prefix});
               }
-            }
-            newDigitPart += realDigit;
-            prefix = lastEstimateNumber.substr(0, separator);
-            resolve({estimateDigit: newDigitPart, estimatePrefix: prefix});
-          }, (e) => {
-            newDigitPart = '001';
-            resolve({estimateDigit: newDigitPart, estimatePrefix: prefix});
-          }
+
+          }, () => {}
       );
     });
     return q;

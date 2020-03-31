@@ -7,7 +7,7 @@ import {AuthenticationService} from '../../shared/services/authentication.servic
 @Component({
   selector: 'app-verify',
   templateUrl: './verify.component.html',
-  styleUrls: ['../../../my-style.css']
+  // styleUrls: ['../../../my-style.css']
 })
 export class VerifyComponent implements OnInit, OnDestroy {
   token: string;

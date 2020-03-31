@@ -14,24 +14,11 @@
           [formGroup]="fillForm" (ngSubmit)="onSubmit()">
         <div class="form-row pr-2 pl-2 pt-2">
             <label for="email" class="col-form-label">Email*</label>
-            <input type="text" class="form-control" id="email" formControlName="email"
-                   [ngClass]="{ 'is-invalid': f.email.touched && f.email.invalid,
-                            'is-valid': f.email.valid}">
-            <div *ngIf="f.email.touched && f.email.errors?.required" class="invalid-feedback">
-                Enter your email address to log in to your account
-            </div>
-            <div *ngIf="f.email.touched && f.email.errors?.email" class="invalid-feedback">
-                Invalid email format (yourname@domain.com)
-            </div>
+            <input type="text" class="form-control" id="email" formControlName="email" (change)="whiteSpace(f.email)">
         </div>
         <div class="form-row pr-2 pl-2 pt-2">
             <label for="password" class="col-form-label">Password*</label>
-            <input type="password" class="form-control" id="password" formControlName="password"
-                   [ngClass]="{ 'is-invalid': f.password.touched && f.password.invalid,
-                            'is-valid': f.password.valid}">
-            <div *ngIf="f.password.touched && f.password.errors?.required" class="invalid-feedback">
-                Enter your password to log in to your account
-            </div>
+            <input type="password" class="form-control" id="password" formControlName="password">
         </div>
         <div class="form-row pr-2 pl-2 pb-3 pt-3">
             <div class="col-md-6 offset-md-3 col-12 text-center mb-1">

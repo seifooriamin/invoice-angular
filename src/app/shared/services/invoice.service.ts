@@ -22,9 +22,9 @@ export class InvoiceService {
   invoiceCreate(data) {
     return this.httpClient.post(`${environment.apiUrl}invoice/create`, data);
   }
-  invoiceByID(id) {
-    return this.httpClient.get<InvoiceModel>(`${environment.apiUrl}invoice/read_one.php?id=` + id,
-      {responseType: 'json'});
+  invoiceByID(id, userID) {
+    return this.httpClient.get<InvoiceModel>(`${environment.apiUrl}invoice/read_one.php?id=` + id + '&user_id='
+        + userID,{responseType: 'json'});
   }
   invoiceUpdate(data) {
       return this.httpClient.patch(`${environment.apiUrl}invoice/update`, data);
@@ -45,40 +45,42 @@ export class InvoiceService {
       const userId: string = '{ "user_id" : "' + currentUser['id'] + '" }';
       this.getInvoiceNumber(userId).subscribe(
           (response) => {
-            const lastInvoiceNumber = response['invoice_number'];
-            let separator = 0;
-            const invoiceNumberLength = lastInvoiceNumber.length;
-            const lengthMines = invoiceNumberLength - 1;
-            for (let counter = lengthMines; counter >= 0; counter--) {
-              if (!(+lastInvoiceNumber.substr(counter, 1) >= 0) &&
-                  !(+lastInvoiceNumber.substr(counter, 1) <= 9)) {
-                  separator = ++counter;
-                  break;
-              }
-            }
-            const digitPartLength = invoiceNumberLength - separator;
-            digitPart = lastInvoiceNumber.substr(separator, digitPartLength);
-            realDigit = +digitPart;
-            const previousRealDigit = realDigit;
-            ++realDigit;
-            if ((realDigit.toString().length - previousRealDigit.toString().length) > 0) {
-                const reducer = separator + 1;
-                digitPart = lastInvoiceNumber.substr(reducer, digitPartLength);
-            }
-            for (let counter = 0; counter < digitPart.length; counter++) {
-              if ((digitPart.substr(counter, 1)) === '0') {
-                newDigitPart += digitPart.substr(counter, 1);
+              if (response['invoice_number']) {
+                  const lastInvoiceNumber = response['invoice_number'];
+                  let separator = 0;
+                  const invoiceNumberLength = lastInvoiceNumber.length;
+                  const lengthMines = invoiceNumberLength - 1;
+                  for (let counter = lengthMines; counter >= 0; counter--) {
+                      if (!(+lastInvoiceNumber.substr(counter, 1) >= 0) &&
+                          !(+lastInvoiceNumber.substr(counter, 1) <= 9)) {
+                          separator = ++counter;
+                          break;
+                      }
+                  }
+                  const digitPartLength = invoiceNumberLength - separator;
+                  digitPart = lastInvoiceNumber.substr(separator, digitPartLength);
+                  realDigit = +digitPart;
+                  const previousRealDigit = realDigit;
+                  ++realDigit;
+                  if ((realDigit.toString().length - previousRealDigit.toString().length) > 0) {
+                      const reducer = separator + 1;
+                      digitPart = lastInvoiceNumber.substr(reducer, digitPartLength);
+                  }
+                  for (let counter = 0; counter < digitPart.length; counter++) {
+                      if ((digitPart.substr(counter, 1)) === '0') {
+                          newDigitPart += digitPart.substr(counter, 1);
+                      } else {
+                          break;
+                      }
+                  }
+                  newDigitPart += realDigit;
+                  prefix = lastInvoiceNumber.substr(0, separator);
+                  resolve({invoiceDigit: newDigitPart, invoicePrefix: prefix});
               } else {
-                  break;
+                  newDigitPart = '001';
+                  resolve({invoiceDigit: newDigitPart, invoicePrefix: prefix});
               }
-            }
-            newDigitPart += realDigit;
-            prefix = lastInvoiceNumber.substr(0, separator);
-            resolve({invoiceDigit: newDigitPart, invoicePrefix: prefix});
-          }, (e) => {
-            newDigitPart = '001';
-            resolve({invoiceDigit: newDigitPart, invoicePrefix: prefix});
-          }
+          }, () => {}
       );
     });
     return q;

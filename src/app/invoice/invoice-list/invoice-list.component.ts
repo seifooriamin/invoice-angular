@@ -4,14 +4,12 @@ import {Subscription} from 'rxjs';
 import {InvoiceModel} from '../../shared/models/invoice.model';
 import {Router} from '@angular/router';
 import {InvoiceService} from '../../shared/services/invoice.service';
-import {InvoiceRowsService} from '../../shared/services/invoice-rows.service';
-import {InvoiceCustomSettingService} from '../../shared/services/invoice-custom-setting.service';
 import {ToolsService} from '../../shared/services/tools.service';
 declare var jQuery: any;
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoice-list.component.html',
-  styleUrls: ['../../../my-style.css']
+  // styleUrls: ['../../../styles.css']
 })
 export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
@@ -35,22 +33,24 @@ export class InvoiceListComponent implements OnInit, OnDestroy, AfterViewInit {
     const userId: string = '{ "user_id" : "' + this.currentUser['id'] + '" }';
     this.subscribe = this.invoiceService.invoiceReadByUser(userId).subscribe(
         (records: Array<InvoiceModel>) => {
-          // this.data = records['records'];
-          for (const idata of records['records']) {
-            this.elements.push({id: idata.id, invoice_number: idata.invoice_number,
-              date: idata.date, customer_name: idata.customer_name, company_name: idata.company_name,
-              total: this.toolsService.numberSeparator(this.toolsService.showNumberWithDecimal(idata.total)), year: idata.year});
+          if (records['records']) {
+            for (const idata of records['records']) {
+              this.elements.push({id: idata.id, invoice_number: idata.invoice_number,
+                date: idata.date, customer_name: idata.customer_name, company_name: idata.company_name,
+                total: this.toolsService.numberSeparator(this.toolsService.showNumberWithDecimal(idata.total)), year: idata.year});
+            }
+            this.mdbTable.setDataSource(this.elements);
+            this.elements = this.mdbTable.getDataSource();
+            this.previous = this.mdbTable.getDataSource();
+          } else {
+            this.deleteMessageText = 'No record found';
+            this.deleteMessageStatus = true;
+            setTimeout(() => {
+              this.deleteMessageStatus = false;
+            }, 5000);
           }
-          this.mdbTable.setDataSource(this.elements);
-          this.elements = this.mdbTable.getDataSource();
-          this.previous = this.mdbTable.getDataSource();
-        }, (e) => {
-          this.deleteMessageText = 'No record found';
-          this.deleteMessageStatus = true;
-          setTimeout(() => {
-            this.deleteMessageStatus = false;
-          }, 2000);
-        }
+
+        }, () => {}
     );
   }
   searchItems() {

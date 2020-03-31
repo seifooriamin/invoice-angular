@@ -2,156 +2,679 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c4c7dfe-6670-4a27-8f34-d59f1855566a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/company/company-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/customer/customer-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/estimate/estimate-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/invoice/invoice-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/users/users-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Develop Note.docx" beforeDir="false" afterPath="$PROJECT_DIR$/Develop Note.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messages.docx" beforeDir="false" afterPath="$PROJECT_DIR$/Messages.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/angular.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/companies/create.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/companies/create.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/companies/read.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/companies/read.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/companies/delete.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/companies/delete.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/companies/read_one.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/companies/read_one.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/companies/read_paging.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/companies/read_paging.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/companies/readbyuser.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/companies/readbyuser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/companies/search.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/companies/search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/companies/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/companies/update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/config/core.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/config/core.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/customers/create.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/customers/create.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/customers/read.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/customers/read.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/customers/delete.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/customers/delete.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/customers/read_one.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/customers/read_one.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/customers/read_paging.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/customers/read_paging.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/customers/readbyuser.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/customers/readbyuser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/customers/search.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/customers/search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/customers/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/customers/update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/estimate/create.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/estimate/create.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/estimate/getestimatenumber.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/estimate/getestimatenumber.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/estimate/read_one.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/estimate/read_one.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/estimate/readbyuser.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/estimate/readbyuser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/estimate/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/estimate/update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/estimate_custom_setting/create.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/estimate_custom_setting/create.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/estimate_custom_setting/readonebyestimateid.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/estimate_custom_setting/readonebyestimateid.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/estimate_rows/create.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/estimate_rows/create.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/estimate_rows/getcomment.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/estimate_rows/getcomment.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/estimate_rows/getdescription.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/estimate_rows/getdescription.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/estimate_rows/getunitmeasure.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/estimate_rows/getunitmeasure.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/estimate_rows/read_per_estimate.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/estimate_rows/read_per_estimate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/invoice/create.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice/create.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/invoice/getinvoicenumber.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice/getinvoicenumber.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/invoice/getyear.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice/getyear.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/invoice/invoice_statistics.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice/invoice_statistics.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/invoice/read.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice/read.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/invoice/read_one.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice/read_one.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/invoice/read_paging.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice/read_paging.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/invoice/readbyuser.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice/readbyuser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/invoice/search.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice/search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/invoice/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice/update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/invoice_custom_setting/create.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_custom_setting/create.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/invoice_custom_setting/readonebyinvoiceid.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_custom_setting/readonebyinvoiceid.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/invoice_custom_setting/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_custom_setting/update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/invoice_general_setting/create.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_general_setting/create.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/invoice_general_setting/readonebyuserid.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_general_setting/readonebyuserid.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/invoice_general_setting/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_general_setting/update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/invoice_rows/create.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_rows/create.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/invoice_rows/getcomment.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_rows/getcomment.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/invoice_rows/getdescription.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_rows/getdescription.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/invoice_rows/getunitmeasure.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_rows/getunitmeasure.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/invoice_rows/read.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_rows/read.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/invoice_rows/read_one.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_rows/read_one.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/invoice_rows/read_per_invoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_rows/read_per_invoice.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/invoice_rows/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/invoice_rows/update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/users/access_code_exists.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/users/access_code_exists.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/users/create.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/users/create.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/users/getlastuserid.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/users/getlastuserid.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/users/password_check.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/users/password_check.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/users/read_one.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/users/read_one.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/users/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/users/update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/users/update_access_code.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/users/update_access_code.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/users/update_password.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/users/update_password.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/users/verify.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/users/verify.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/objects/companies.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/objects/companies.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/objects/customers.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/objects/customers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/objects/estimate.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/objects/estimate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/objects/invoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/objects/invoice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/users/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/users/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/01.0a3750e6fdb29fcd632e.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/02.351bd6828f980ec53eb3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/03.e438ea2aabdb1087dc4f.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/04.0284d042a6c29213aaa1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/05.5014f9cce435c71ade63.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/06.21612b9d3e9d84e7e876.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/07.f8da0281186df8f17f73.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/08.975f7e0074400e7561ba.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/09.fd19309a1932b4751387.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/3rdpartylicenses.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Bold.39b2c3031be6b4ea96e2.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Bold.dc81817def276b4f2139.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Bold.e31fcf1885e371e19f57.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Bold.ecdd509cadbf1ea78b8d.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Light.3b813c2ae0d04909a33a.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Light.46e48ce0628835f68a73.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Light.69f8a0617ac472f78e45.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Light.a990f611f2305dc12965.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Medium.4d9f3f9e5195e7b074bb.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Medium.574fd0b50367f886d359.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Medium.894a2ede85a483bf9bed.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Medium.fc78759e93a6cac50458.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Regular.2751ee43015f9884c364.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Regular.30799efa5bf74129468a.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Regular.ba3dcd8903e3d0af5de7.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Regular.df7b648ce5356ea1ebce.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Thin.7500519de3d82e33d158.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Thin.94998475f6aea65f5584.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Thin.954bbdeb86483e4ffea0.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/Roboto-Thin.dfe56a876d0282555d1e.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/arrow_left.270f72df47e036d9cfa1.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/arrow_right.d9ccc77c8240ad0dc272.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/ASEAN.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Afghanistan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/AfricanUnion.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Albania.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Algeria.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/American Samoa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Andorra.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Angola.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Anguilla.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Antarctica.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Antigua&amp;Barbuda.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Arab League.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Argentina.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Armenia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Aruba.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Australia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Austria.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Azerbaijan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Bahamas.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Bahrain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Bangladesh.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Barbados.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Belarus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Belgium.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Belize.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Benin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Bermuda.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Bhutan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Bolivia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/BosniaHerzegovina.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Botswana.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Brazil.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/BritishIndianOceanTerritory.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Brunei.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Bulgaria.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Burkinafaso.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Burundi.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/CARICOM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/CIS.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Caboverde.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Cambodja.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Cameroon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Canada.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Cape Verde.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/CaymanIslands.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/CentralAfricanRepublic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Chad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Chile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/China.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Christmasisland.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/CocosIsland.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Colombia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Commonwealth.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Comoros.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Congo-Brazzaville.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Congo-Kinshasa(Zaire).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/CookIslands.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/CostaRica.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Croatia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Cuba.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Curacao.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Cyprus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/CzechRepublic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Denmark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Djibouti.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Dominica.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Dominican Republic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Ecuador.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Egypt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/ElSalvador.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/England.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Equatorial Guinea.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/EquatorialGuinea.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Eritrea.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Estonia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Eswatini.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Ethiopia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/European Union.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Falklandislands.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Faroes.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Fiji.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Finland.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/France.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Gabon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Gambia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Georgia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Germany.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Ghana.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Gibraltar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Greece.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Greenland.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Grenada.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Guadeloupe.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Guam.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Guatemala.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Guernsey.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Guinea.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/GuineaBissau.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Guyana.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Haiti.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Holysee.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Honduras.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/HongKong.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Hungary.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Iceland.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/India.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Indonezia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Iran.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Iraq.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Ireland.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Islamic Conference.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Isle of Man.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/IsleofMan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Israel.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Italy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Ivoirecoast.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Jamaica.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Japan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Jersey.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Jordan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Kazakhstan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Kenya.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Kiribati.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Kosovo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Kuwait.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Kyrgyzstan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Laos.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Latvia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Lebanon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Lesotho.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Liberia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Libya.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Liechtenshein.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Lithuania.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Luxembourg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Macao.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Macedonia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Madagascar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Malawi.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Malaysia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Maldives.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Mali.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Malta.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/MarshallIslands.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Martinique.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Mauritania.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Mauritius.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Mexico.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Micronesia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Moldova.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Monaco.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Mongolia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Montenegro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Montserrat.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Morocco.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Mozambique.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/MyanmarBurma.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/NATO.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Namibia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Nauru.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Nepal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Netherlands Antilles.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Netherlands.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/NetherlandsAntilles.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/NewCaledonia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/NewZealand.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Nicaragua.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Niger.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Nigeria.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Niue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/NorfolkIsland.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/NorthKorea.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Northern Cyprus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Northern Ireland.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/NorthernMarianaIslands.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Norway.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/OPEC.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Olimpic Movement.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Oman.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Pakistan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Palau.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Palestine.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Panama.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/PapuaNewGuinea.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Paraguay.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Peru.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Philippines.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Pitcarin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Poland.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Portugal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/PuertoRico.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Qatar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Red Cross.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Reunion.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Romania.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/RussianFederation.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Rwanda.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/SaintLucia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Sainthelena.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Samoa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/SanMarino.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/SaoTome&amp;Principe.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/SaudiArabia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Scotland.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Senegal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/SerbiaYugoslavia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Seychelles.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/SierraLeone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Singapore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/SintMaarten.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Slovakia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Slovenia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/SolomonIslands.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Somalia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Somaliland.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/SouthAfrica.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/SouthGeorgiaSandwichIslands.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/SouthKorea.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/SouthSudan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Spain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/SriLanka.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/St Kitts &amp; Nevis.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/St Vincent &amp; the Grenadines.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Sudan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Suriname.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Swaziland.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Sweden.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Switzerland.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Syria.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Tahiti(French Polinesia).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Taiwan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Tajikistan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Tanzania.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Thailand.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/TimorLeste.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Togo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Tonga.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Trinidad&amp;Tobago.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Tunisia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Turkey.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Turkmenistan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/TurksandCaicosIslands.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Tuvalu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/UK.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/USA.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Uganda.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Ukraine.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/United Nations.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/UnitedArabEmirates.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Uruguay.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Uzbekistan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Vanutau.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Vatican City.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Venezuela.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/VietNam.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/VirginIslandsBritish.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/VirginIslandsUS.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Wales.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/WesternSahara.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Yemen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Zambia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/flags/Zimbabwe.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/images/Desert.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/assets/sitelogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/fa-brands-400.067595ad77ecc0db9c81.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/fa-brands-400.57dcda6f368ea90179f7.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/fa-brands-400.9d67fa1429375bd2a899.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/fa-brands-400.9ec698d1a597bff5df33.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/fa-brands-400.b564da88bbf0c4aa446f.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/fa-regular-400.3351f435b3c9037fd88a.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/fa-regular-400.4165c2688309cbfb1b87.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/fa-regular-400.5d0861781aeef6c82fda.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/fa-regular-400.73cf49a2232c06c920b7.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/fa-regular-400.a0e3ac82940c1998c597.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/fa-solid-900.0724bb8b89ab6b8b9b7d.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/fa-solid-900.55eb2a60e8181f0e68b5.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/fa-solid-900.75f38a159982b6bd1704.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/fa-solid-900.89e02bae13c9131c7468.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/fa-solid-900.cdfec5cf5e9840889790.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/main-es2015.89f5fc56e91d30f96d3d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/main-es5.088f555f0be4090cead5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/polyfills-es2015.6f582e2dd084a9eb31fe.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/polyfills-es5.6fc79adba80cae5fa417.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/runtime-es2015.aa36e2789a7b6e5e7675.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/runtime-es5.d3647fbfa3de00cd0bdf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/scripts.5a58bf7cc539f872a983.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/invoice-angular/styles.4f48a53c16e459871c93.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/company/add-modify/add-modify.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/company/add-modify/add-modify.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/company/add-modify/add-modify.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/company/add-modify/add-modify.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/company/company-list/company-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/company/company-list/company-list.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/company/company-list/company-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/company/company-list/company-list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/confirm-modal/confirm-modal.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/confirm-modal/confirm-modal.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/confirm-modal/confirm-modal.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/confirm-modal/confirm-modal.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/company/company.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/company/company.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/customer/add-modify-view/add-modify-view.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/customer/add-modify-view/add-modify-view.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/customer/add-modify-view/add-modify-view.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/customer/add-modify-view/add-modify-view.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/customer/customer-list/customer-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/customer/customer-list/customer-list.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/customer/customer-list/customer-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/customer/customer-list/customer-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/customer/customer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/customer/customer.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/dashboard/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard/dashboard.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/dashboard/dashboard.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/estimate/estimate-list/estimate-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/estimate/estimate-list/estimate-list.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/estimate/estimate-list/estimate-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/estimate/estimate-list/estimate-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/estimate/estimate.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/estimate/estimate.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/invoice/invoice-list/invoice-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/invoice/invoice-list/invoice-list.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/invoice/invoice-list/invoice-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/invoice/invoice-list/invoice-list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/shared/services/country.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/country.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/invoice/invoice.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/invoice/invoice.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/shared/services/authentication.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/authentication.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/shared/services/company.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/company.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/shared/services/currency.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/currency.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/shared/services/customer.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/customer.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/shared/services/estimate.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/estimate.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/shared/services/invoice.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/invoice.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/shared/services/tools.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/tools.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/shared/services/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/top-menu/top-menu.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/top-menu/top-menu.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/top-menu/top-menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/top-menu/top-menu.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/users/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/profile/profile.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/users/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/profile/profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/users/signin/signin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/signin/signin.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/users/signin/signin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/signin/signin.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/users/signup/signup.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/signup/signup.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/users/signup/signup.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/signup/signup.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/users/users.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/users.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/users/verify/verify.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/users/verify/verify.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/ASEAN.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/ASEAN.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/assets/flags/Afghanistan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Afghanistan.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Afghanistan_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/African Union.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Antigua &amp; Barbuda.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Bosnia &amp; Herzegovina.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Burkina Faso.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Cayman Islands.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Central African Republic.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Cook Islands.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Costa Rica.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Cote d'Ivoire.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Czech Republic.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/El Salvador.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Guinea-Bissau.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Hong Kong.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Marshall Islands.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Myanmar(Burma).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/New Caledonia.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/New Zealand.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/North Korea.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Papua New Guinea.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Puerto Rico.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Russian Federation.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Saint Lucia.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/San Marino.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Sao Tome &amp; Principe.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Saudi Arabia.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Serbia(Yugoslavia).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Sierra Leone.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Solomon Islands.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/South Africa.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/South Korea.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Sri Lanka.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Thumbs.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Timor-Leste.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Trinidad &amp; Tobago.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Turks and Caicos Islands.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/United Arab Emirates.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Viet Nam.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Virgin Islands British.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Virgin Islands US.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/Western Sahara.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/flags/readme !.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/ihover/ihover.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/environments/environment.prod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/environments/environment.prod.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/environments/environment.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/AfricanUnion.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/AfricanUnion.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Albania.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Albania.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Algeria.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Algeria.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/American Samoa.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/American Samoa.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Andorra.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Andorra.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Angola.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Angola.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Anguilla.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Anguilla.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Antarctica.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Antarctica.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Antigua&amp;Barbuda.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Antigua&amp;Barbuda.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Arab League.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Arab League.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Argentina.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Argentina.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Armenia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Armenia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Aruba.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Aruba.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Australia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Australia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Austria.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Austria.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Azerbaijan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Azerbaijan.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Bahamas.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Bahamas.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Bahrain.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Bahrain.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Bangladesh.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Bangladesh.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Barbados.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Barbados.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Belarus.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Belarus.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Belgium.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Belgium.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Belize.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Belize.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Benin.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Benin.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Bermuda.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Bermuda.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Bhutan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Bhutan.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Bolivia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Bolivia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/BosniaHerzegovina.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/BosniaHerzegovina.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Botswana.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Botswana.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Brazil.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Brazil.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/BritishIndianOceanTerritory.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/BritishIndianOceanTerritory.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Brunei.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Brunei.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Bulgaria.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Bulgaria.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Burkinafaso.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Burkinafaso.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Burundi.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Burundi.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/CARICOM.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/CARICOM.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/CIS.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/CIS.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Caboverde.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Caboverde.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Cambodja.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Cambodja.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Cameroon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Cameroon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Canada.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Canada.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Cape Verde.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Cape Verde.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/CaymanIslands.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/CaymanIslands.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/CentralAfricanRepublic.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/CentralAfricanRepublic.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Chad.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Chad.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Chile.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Chile.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/China.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/China.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Christmasisland.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Christmasisland.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/CocosIsland.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/CocosIsland.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Colombia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Colombia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Commonwealth.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Commonwealth.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Comoros.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Comoros.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Congo-Brazzaville.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Congo-Brazzaville.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Congo-Kinshasa(Zaire).png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Congo-Kinshasa(Zaire).png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/CookIslands.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/CookIslands.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/CostaRica.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/CostaRica.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Croatia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Croatia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Cuba.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Cuba.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Curacao.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Curacao.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Cyprus.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Cyprus.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/CzechRepublic.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/CzechRepublic.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Denmark.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Denmark.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Djibouti.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Djibouti.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Dominica.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Dominica.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Dominican Republic.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Dominican Republic.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Ecuador.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Ecuador.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Egypt.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Egypt.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/ElSalvador.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/ElSalvador.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/England.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/England.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Equatorial Guinea.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Equatorial Guinea.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/EquatorialGuinea.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/EquatorialGuinea.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Eritrea.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Eritrea.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Estonia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Estonia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Eswatini.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Eswatini.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Ethiopia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Ethiopia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/European Union.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/European Union.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Falklandislands.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Falklandislands.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Faroes.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Faroes.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Fiji.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Fiji.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Finland.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Finland.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/France.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/France.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Gabon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Gabon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Gambia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Gambia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Georgia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Georgia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Germany.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Germany.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Ghana.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Ghana.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Gibraltar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Gibraltar.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Greece.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Greece.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Greenland.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Greenland.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Grenada.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Grenada.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Guadeloupe.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Guadeloupe.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Guam.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Guam.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Guatemala.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Guatemala.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Guernsey.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Guernsey.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Guinea.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Guinea.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/GuineaBissau.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/GuineaBissau.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Guyana.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Guyana.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Haiti.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Haiti.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Holysee.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Holysee.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Honduras.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Honduras.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/HongKong.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/HongKong.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Hungary.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Hungary.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Iceland.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Iceland.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/India.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/India.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Indonezia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Indonezia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Iran.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Iran.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Iraq.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Iraq.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Ireland.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Ireland.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Islamic Conference.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Islamic Conference.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Isle of Man.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/IsleofMan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/IsleofMan.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Israel.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Israel.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Italy.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Italy.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Ivoirecoast.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Ivoirecoast.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Jamaica.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Jamaica.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Japan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Japan.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Jersey.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Jersey.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Jordan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Jordan.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Kazakhstan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Kazakhstan.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Kenya.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Kenya.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Kiribati.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Kiribati.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Kosovo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Kosovo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Kuwait.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Kuwait.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Kyrgyzstan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Kyrgyzstan.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Laos.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Laos.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Latvia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Latvia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Lebanon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Lebanon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Lesotho.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Lesotho.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Liberia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Liberia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Libya.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Libya.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Liechtenshein.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Liechtenshein.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Lithuania.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Lithuania.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Luxembourg.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Luxembourg.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Macao.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Macao.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Macedonia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Macedonia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Madagascar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Madagascar.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Malawi.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Malawi.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Malaysia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Malaysia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Maldives.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Maldives.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Mali.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Mali.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Malta.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Malta.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/MarshallIslands.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/MarshallIslands.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Martinique.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Martinique.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Mauritania.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Mauritania.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Mauritius.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Mauritius.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Mexico.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Mexico.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Micronesia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Micronesia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Moldova.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Moldova.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Monaco.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Monaco.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Mongolia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Mongolia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Montenegro.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Montenegro.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Montserrat.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Montserrat.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Morocco.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Morocco.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Mozambique.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Mozambique.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/MyanmarBurma.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/MyanmarBurma.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/NATO.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/NATO.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Namibia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Namibia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Nauru.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Nauru.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Nepal.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Nepal.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Netherlands Antilles.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Netherlands Antilles.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Netherlands.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Netherlands.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/NetherlandsAntilles.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/NetherlandsAntilles.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/NewCaledonia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/NewCaledonia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/NewZealand.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/NewZealand.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Nicaragua.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Nicaragua.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Niger.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Niger.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Nigeria.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Nigeria.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Niue.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Niue.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/NorfolkIsland.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/NorfolkIsland.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/NorthKorea.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/NorthKorea.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Northern Cyprus.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Northern Cyprus.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Northern Ireland.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Northern Ireland.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/NorthernMarianaIslands.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/NorthernMarianaIslands.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Norway.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Norway.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/OPEC.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/OPEC.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Olimpic Movement.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Olimpic Movement.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Oman.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Oman.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Pakistan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Pakistan.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Palau.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Palau.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Palestine.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Palestine.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Panama.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Panama.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/PapuaNewGuinea.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/PapuaNewGuinea.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Paraguay.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Paraguay.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Peru.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Peru.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Philippines.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Philippines.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Pitcarin.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Pitcarin.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Poland.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Poland.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Portugal.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Portugal.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/PuertoRico.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/PuertoRico.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Qatar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Qatar.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Red Cross.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Red Cross.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Reunion.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Reunion.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Romania.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Romania.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/RussianFederation.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/RussianFederation.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Rwanda.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Rwanda.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/SaintLucia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/SaintLucia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Sainthelena.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Sainthelena.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Samoa.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Samoa.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/SanMarino.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/SanMarino.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/SaoTome&amp;Principe.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/SaoTome&amp;Principe.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/SaudiArabia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/SaudiArabia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Scotland.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Scotland.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Senegal.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Senegal.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/SerbiaYugoslavia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/SerbiaYugoslavia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Seychelles.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Seychelles.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/SierraLeone.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/SierraLeone.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Singapore.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Singapore.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/SintMaarten.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/SintMaarten.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Slovakia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Slovakia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Slovenia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Slovenia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/SolomonIslands.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/SolomonIslands.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Somalia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Somalia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Somaliland.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Somaliland.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/SouthAfrica.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/SouthAfrica.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/SouthGeorgiaSandwichIslands.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/SouthGeorgiaSandwichIslands.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/SouthKorea.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/SouthKorea.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/SouthSudan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/SouthSudan.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Spain.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Spain.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/SriLanka.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/SriLanka.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/St Kitts &amp; Nevis.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/St Kitts &amp; Nevis.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/St Vincent &amp; the Grenadines.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/St Vincent &amp; the Grenadines.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Sudan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Sudan.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Suriname.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Suriname.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Swaziland.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Swaziland.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Sweden.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Sweden.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Switzerland.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Switzerland.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Syria.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Syria.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Tahiti(French Polinesia).png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Tahiti(French Polinesia).png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Taiwan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Taiwan.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Tajikistan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Tajikistan.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Tanzania.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Tanzania.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Thailand.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Thailand.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/TimorLeste.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/TimorLeste.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Togo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Togo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Tonga.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Tonga.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Trinidad&amp;Tobago.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Trinidad&amp;Tobago.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Tunisia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Tunisia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Turkey.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Turkey.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Turkmenistan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Turkmenistan.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/TurksandCaicosIslands.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/TurksandCaicosIslands.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Tuvalu.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Tuvalu.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/UK.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/UK.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/USA.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/USA.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Uganda.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Uganda.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Ukraine.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Ukraine.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/United Nations.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/United Nations.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/UnitedArabEmirates.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/UnitedArabEmirates.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Uruguay.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Uruguay.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Uzbekistan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Uzbekistan.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Vanutau.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Vanutau.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Vatican City.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Vatican City.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Venezuela.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Venezuela.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/VietNam.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/VietNam.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/VirginIslandsBritish.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/VirginIslandsBritish.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/VirginIslandsUS.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/VirginIslandsUS.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Wales.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Wales.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/WesternSahara.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/WesternSahara.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Yemen.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Yemen.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Zambia.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Zambia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/flags/Zimbabwe.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/flags/Zimbabwe.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/sitelogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/sitelogo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/my-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/my-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/my-style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -173,106 +696,131 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/shared/services/invoice.service.ts">
+        <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-328">
+            <state relative-caret-position="275">
+              <caret line="261" column="48" lean-forward="true" selection-start-line="261" selection-start-column="48" selection-end-line="261" selection-end-column="48" />
               <folding>
-                <element signature="e#0#43#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/environments/environment.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/users/login.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-493">
-              <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/company/company-list/company-list.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#118#0" expanded="true" />
+                <element signature="n#div#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#0;n#div#0;n#div#1;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#2;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#3;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#0;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#2;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#2;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#3;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#4;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#5;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#6;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#4;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#5;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#1;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#2;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#3;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#4;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#1;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#2;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#3;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#4;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#0;n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#1;n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#2;n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#3;n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#select#0;n#div#3;n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#4;n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#0;n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#1;n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#2;n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#3;n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#4;n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#0;n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#1;n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#2;n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#3;n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#4;n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#0;n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#1;n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#2;n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#3;n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#4;n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#0;n#div#6;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#1;n#div#6;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#2;n#div#6;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/app/company/company-list/company-list.component.html">
+        <entry file="file://$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="34" column="87" selection-start-line="34" selection-start-column="87" selection-end-line="34" selection-end-column="87" />
+            <state relative-caret-position="340">
+              <caret line="259" column="48" lean-forward="true" selection-start-line="259" selection-start-column="48" selection-end-line="259" selection-end-column="48" />
+              <folding>
+                <element signature="n#div#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#0;n#div#0;n#div#1;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#2;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#3;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#0;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#1;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#2;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#4;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#5;n#form#0;n#div#0;n#!!top" />
+                <element signature="n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#1;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#2;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#3;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#4;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#0;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#1;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#2;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#3;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#4;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#0;n#div#6;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+                <element signature="n#div#1;n#div#6;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.ts">
+        <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="1015" column="20" selection-start-line="1015" selection-start-column="14" selection-end-line="1015" selection-end-column="20" />
+            <state relative-caret-position="-8623">
+              <caret line="129" column="42" selection-start-line="129" selection-start-column="42" selection-end-line="129" selection-end-column="42" />
               <folding>
                 <element signature="e#0#59#0" expanded="true" />
+                <element signature="n#!!block;n#onRowTotal#0;n#InvoiceAddViewModifyComponent#0" />
+                <element signature="n#!!block;n#calcSubTotal#0;n#InvoiceAddViewModifyComponent#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/config/database.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/users/signin/signin.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="49" column="6" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="6" />
-              <folding>
-                <element signature="e#0#59#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/shared/services/authentication.service.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-408">
-              <folding>
-                <element signature="e#0#43#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/config/core.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -284,21 +832,12 @@
       <list>
         <option value="TypeScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>'P'</find>
-      <find>'F'</find>
-      <find>A3P</find>
-      <find>id</find>
-      <find>formcontrolname=&quot;id&quot;</find>
-      <find>misma</find>
-      <find>onLoadCompanyCustomerList</find>
-      <find>getComment</find>
-      <find>error</find>
-      <find>flag:</find>
       <find>flag:'</find>
       <find>tur</find>
       <find>Saint helena</find>
@@ -314,11 +853,21 @@
       <find>onsubmit</find>
       <find>onAddCurrencySymbol</find>
       <find>calc</find>
-      <find>onsu</find>
       <find>calctotal</find>
-      <find>onsub</find>
       <find>ven</find>
       <find>colspa</find>
+      <find>east</find>
+      <find>armen</find>
+      <find>mb-3</find>
+      <find>mb-</find>
+      <find>this is</find>
+      <find>this is catch</find>
+      <find>onsub</find>
+      <find>formcontrol</find>
+      <find>formcon</find>
+      <find>show</find>
+      <find>onsu</find>
+      <find>form-check</find>
     </findStrings>
     <replaceStrings>
       <replace>flag :</replace>
@@ -336,57 +885,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/src/app/shared/services/customer.service.ts" />
+        <option value="$PROJECT_DIR$/api/objects/invoice.php" />
+        <option value="$PROJECT_DIR$/api/invoice/read_one.php" />
+        <option value="$PROJECT_DIR$/src/app/shared/services/invoice.service.ts" />
+        <option value="$PROJECT_DIR$/api/invoice_custom_setting/readonebyinvoiceid.php" />
+        <option value="$PROJECT_DIR$/api/estimate/getestimatenumber.php" />
         <option value="$PROJECT_DIR$/api/estimate/read_one.php" />
         <option value="$PROJECT_DIR$/api/estimate/readbyuser.php" />
-        <option value="$PROJECT_DIR$/api/estimate/update.php" />
-        <option value="$PROJECT_DIR$/api/customers/update.php" />
-        <option value="$PROJECT_DIR$/api/companies/update.php" />
-        <option value="$PROJECT_DIR$/api/estimate_custom_setting/create.php" />
+        <option value="$PROJECT_DIR$/api/objects/estimate.php" />
         <option value="$PROJECT_DIR$/api/estimate_custom_setting/readonebyestimateid.php" />
-        <option value="$PROJECT_DIR$/api/estimate_rows/create.php" />
         <option value="$PROJECT_DIR$/api/estimate_rows/getcomment.php" />
         <option value="$PROJECT_DIR$/api/estimate_rows/getdescription.php" />
         <option value="$PROJECT_DIR$/api/estimate_rows/getunitmeasure.php" />
+        <option value="$PROJECT_DIR$/src/app/shared/services/estimate.service.ts" />
+        <option value="$PROJECT_DIR$/src/app/estimate/estimate-list/estimate-list.component.ts" />
         <option value="$PROJECT_DIR$/api/estimate_rows/read_per_estimate.php" />
-        <option value="$PROJECT_DIR$/api/invoice/create.php" />
-        <option value="$PROJECT_DIR$/api/invoice/getinvoicenumber.php" />
-        <option value="$PROJECT_DIR$/api/invoice/getyear.php" />
         <option value="$PROJECT_DIR$/api/invoice/invoice_statistics.php" />
-        <option value="$PROJECT_DIR$/api/invoice/read.php" />
-        <option value="$PROJECT_DIR$/api/invoice/read_one.php" />
-        <option value="$PROJECT_DIR$/api/invoice/read_paging.php" />
-        <option value="$PROJECT_DIR$/api/invoice/readbyuser.php" />
-        <option value="$PROJECT_DIR$/api/invoice/search.php" />
-        <option value="$PROJECT_DIR$/api/invoice/update.php" />
-        <option value="$PROJECT_DIR$/api/invoice_custom_setting/create.php" />
-        <option value="$PROJECT_DIR$/api/invoice_custom_setting/readonebyinvoiceid.php" />
-        <option value="$PROJECT_DIR$/api/invoice_custom_setting/update.php" />
-        <option value="$PROJECT_DIR$/api/invoice_general_setting/create.php" />
-        <option value="$PROJECT_DIR$/api/invoice_general_setting/readonebyuserid.php" />
-        <option value="$PROJECT_DIR$/api/invoice_general_setting/update.php" />
-        <option value="$PROJECT_DIR$/api/invoice_rows/create.php" />
-        <option value="$PROJECT_DIR$/api/invoice_rows/getcomment.php" />
-        <option value="$PROJECT_DIR$/api/invoice_rows/getdescription.php" />
-        <option value="$PROJECT_DIR$/api/invoice_rows/getunitmeasure.php" />
-        <option value="$PROJECT_DIR$/api/invoice_rows/read.php" />
-        <option value="$PROJECT_DIR$/api/invoice_rows/read_one.php" />
-        <option value="$PROJECT_DIR$/api/invoice_rows/read_per_invoice.php" />
-        <option value="$PROJECT_DIR$/api/invoice_rows/update.php" />
-        <option value="$PROJECT_DIR$/api/users/access_code_exists.php" />
-        <option value="$PROJECT_DIR$/api/users/create.php" />
-        <option value="$PROJECT_DIR$/api/users/getlastuserid.php" />
-        <option value="$PROJECT_DIR$/api/users/password_check.php" />
-        <option value="$PROJECT_DIR$/api/users/read_one.php" />
-        <option value="$PROJECT_DIR$/api/users/update.php" />
-        <option value="$PROJECT_DIR$/api/users/update_access_code.php" />
-        <option value="$PROJECT_DIR$/api/users/update_password.php" />
-        <option value="$PROJECT_DIR$/api/users/verify.php" />
-        <option value="$PROJECT_DIR$/src/environments/environment.ts" />
-        <option value="$PROJECT_DIR$/api/config/core.php" />
-        <option value="$PROJECT_DIR$/api/config/database.php" />
-        <option value="$PROJECT_DIR$/src/app/users/signin/signin.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/dashboard/dashboard.component.ts" />
+        <option value="$PROJECT_DIR$/api/companies/delete.php" />
+        <option value="$PROJECT_DIR$/api/customers/delete.php" />
+        <option value="$PROJECT_DIR$/src/assets/localStorageClear.js" />
+        <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/api/users/login.php" />
+        <option value="$PROJECT_DIR$/src/app/shared/services/authentication.service.ts" />
+        <option value="$PROJECT_DIR$/src/app/company/company-list/company-list.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/customer/customer-list/customer-list.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/top-menu/top-menu.component.html" />
+        <option value="$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.html" />
+        <option value="$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/users/profile/profile.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/users/signin/signin.component.html" />
+        <option value="$PROJECT_DIR$/src/app/users/signin/signin.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/users/signup/signup.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/users/signup/signup.component.html" />
+        <option value="$PROJECT_DIR$/src/app/dashboard/dashboard.component.html" />
+        <option value="$PROJECT_DIR$/src/styles.css" />
+        <option value="$PROJECT_DIR$/src/app/customer/add-modify-view/add-modify-view.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/company/add-modify/add-modify.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/company/add-modify/add-modify.component.html" />
+        <option value="$PROJECT_DIR$/src/app/customer/add-modify-view/add-modify-view.component.html" />
+        <option value="$PROJECT_DIR$/src/app/shared/services/tools.service.ts" />
+        <option value="$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/invoice/invoice-list/invoice-list.component.html" />
         <option value="$PROJECT_DIR$/src/app/company/company-list/company-list.component.html" />
+        <option value="$PROJECT_DIR$/src/app/customer/customer-list/customer-list.component.html" />
+        <option value="$PROJECT_DIR$/src/app/estimate/estimate-list/estimate-list.component.html" />
+        <option value="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/users/profile/profile.component.html" />
+        <option value="$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.html" />
+        <option value="$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html" />
+        <option value="$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.html" />
       </list>
     </option>
   </component>
@@ -405,7 +954,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -429,21 +977,6 @@
               <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="company" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
-              <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="company" type="462c0819:PsiDirectoryNode" />
-              <item name="company-list" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
-              <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="estimate" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -454,16 +987,40 @@
               <item name="estimate" type="462c0819:PsiDirectoryNode" />
               <item name="estimate-add-view-modify" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
+              <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="users" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
+              <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="users" type="462c0819:PsiDirectoryNode" />
+              <item name="general-setting" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="invoice-angular" type="b2602c69:ProjectViewProjectNode" />
+              <item name="invoice-angular" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="users" type="462c0819:PsiDirectoryNode" />
+              <item name="signin" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Admin-Dashboard" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/app/dashboard" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -475,16 +1032,16 @@
     <property name="ts.external.directory.path" value="C:\wamp64\www\invoice-angular\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\invoice-angular\src\app\dashboard" />
+      <recent name="C:\wamp64\www\invoice-angular\src\app\users" />
+      <recent name="C:\wamp64\www\invoice-angular\src\app\invoice" />
+      <recent name="C:\wamp64\www\invoice-angular\src\app\estimate" />
+      <recent name="C:\wamp64\www\invoice-angular\src\app\customer" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\invoice-angular\src\app\users" />
       <recent name="C:\wamp64\www\invoice-angular\src\app" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\invoice-angular\src\app\shared\models" />
-      <recent name="C:\wamp64\www\invoice-angular\api\invoice" />
-      <recent name="C:\wamp64\www\invoice-angular\api\libs\email_sender\email_template" />
-      <recent name="C:\wamp64\www\invoice-angular\api\users" />
-      <recent name="C:\wamp64\www\invoice-angular\api\libs\email_sender" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -563,16 +1120,21 @@
       <workItem from="1584821473557" duration="39799000" />
       <workItem from="1585000704647" duration="16507000" />
       <workItem from="1585162066062" duration="13732000" />
+      <workItem from="1585244622794" duration="3031000" />
+      <workItem from="1585349334450" duration="11402000" />
+      <workItem from="1585429418955" duration="18385000" />
+      <workItem from="1585510801856" duration="5126000" />
+      <workItem from="1585591924535" duration="28836000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1020446000" />
+    <option name="totallyTimeSpent" value="1087226000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="702" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49824563" visible="true" weight="0.29727685" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49824563" visible="true" weight="0.31996974" />
       <window_info id="Structure" order="1" sideWeight="0.5017544" side_tool="true" weight="0.30484116" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -622,335 +1184,307 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/api/invoice/read_one.php">
+    <entry file="file://$PROJECT_DIR$/api/estimate_rows/getdescription.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="51" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
+        <state relative-caret-position="355">
+          <caret line="47" column="54" selection-start-line="47" selection-start-column="54" selection-end-line="47" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice/read_paging.php">
+    <entry file="file://$PROJECT_DIR$/api/estimate_custom_setting/readonebyestimateid.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="51" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
+        <state relative-caret-position="850">
+          <caret line="50" column="54" selection-start-line="50" selection-start-column="54" selection-end-line="50" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice/readbyuser.php">
+    <entry file="file://$PROJECT_DIR$/api/invoice/invoice_statistics.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="46" lean-forward="true" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
+        <state relative-caret-position="901">
+          <caret line="53" column="54" selection-start-line="53" selection-start-column="54" selection-end-line="53" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice/search.php">
+    <entry file="file://$PROJECT_DIR$/api/estimate_rows/getunitmeasure.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="51" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
+        <state relative-caret-position="782">
+          <caret line="46" column="54" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_custom_setting/create.php">
+    <entry file="file://$PROJECT_DIR$/src/app/shared/services/estimate.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="46" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
+        <state relative-caret-position="1258">
+          <caret line="77" column="20" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice/update.php">
+    <entry file="file://$PROJECT_DIR$/api/estimate/read_one.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="53" selection-start-line="4" selection-start-column="53" selection-end-line="4" selection-end-column="53" />
+        <state relative-caret-position="1190">
+          <caret line="70" column="54" selection-start-line="70" selection-start-column="54" selection-end-line="70" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_custom_setting/delete.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_custom_setting/readonebyinvoiceid.php">
+    <entry file="file://$PROJECT_DIR$/api/estimate_rows/read_per_estimate.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="51" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
+        <state relative-caret-position="867">
+          <caret line="51" column="54" selection-start-line="51" selection-start-column="54" selection-end-line="51" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_custom_setting/update.php">
+    <entry file="file://$PROJECT_DIR$/api/companies/delete.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="53" selection-start-line="4" selection-start-column="53" selection-end-line="4" selection-end-column="53" />
+        <state relative-caret-position="304">
+          <caret line="39" column="30" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_general_setting/create.php">
+    <entry file="file://$PROJECT_DIR$/api/customers/delete.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="51" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
+        <state relative-caret-position="663">
+          <caret line="39" column="30" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_general_setting/readonebyuserid.php">
+    <entry file="file://$PROJECT_DIR$/src/assets/localStorageClear.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="46" lean-forward="true" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
+        <state>
+          <caret lean-forward="true" selection-end-line="18" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_general_setting/update.php">
+    <entry file="file://$PROJECT_DIR$/api/users/login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="53" selection-start-line="4" selection-start-column="53" selection-end-line="4" selection-end-column="53" />
+        <state relative-caret-position="233">
+          <caret line="67" column="41" selection-start-line="67" selection-start-column="34" selection-end-line="67" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_rows/create.php">
+    <entry file="file://$PROJECT_DIR$/src/app/shared/services/authentication.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="46" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
+        <state relative-caret-position="-272">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_rows/delete.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_rows/deletebyinvoiceid.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_rows/getcomment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="6" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_rows/getdescription.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="6" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_rows/getunitmeasure.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="6" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_rows/read.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="6" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_rows/read_one.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_rows/read_per_invoice.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="6" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice_rows/update.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="53" selection-start-line="4" selection-start-column="53" selection-end-line="4" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/access_code_exists.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="6" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/change_password.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="46" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/emailvalidated.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/getlastuserid.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="6" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/password_check.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="49" selection-start-line="3" selection-start-column="49" selection-end-line="3" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/read_one.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="6" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/update.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="53" selection-start-line="4" selection-start-column="53" selection-end-line="4" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/update_access_code.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="51" selection-start-line="4" selection-start-column="51" selection-end-line="4" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/update_password.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="51" selection-start-line="4" selection-start-column="51" selection-end-line="4" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/validate_token.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/verify.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="5" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice/getyear.php">
+    <entry file="file://$PROJECT_DIR$/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice/getinvoicenumber.php">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="6" selection-end-column="43" />
+        <state relative-caret-position="146">
+          <caret line="27" column="25" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/invoice/create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="46" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/angular.json">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/estimate_rows/create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="46" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/estimate_rows/deletebyestimateid.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="120" lean-forward="true" selection-start-line="6" selection-end-line="6" selection-end-column="120" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/app/users/users.component.html">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/dashboard/dashboard.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1683">
+        <state relative-caret-position="2106">
+          <caret line="206" selection-start-line="206" selection-end-line="206" />
           <folding>
             <element signature="e#0#74#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/shared/services/company.service.ts">
+    <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-list/invoice-list.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
+        <state relative-caret-position="-458">
+          <caret line="52" column="18" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="18" />
           <folding>
-            <element signature="e#0#43#0" expanded="true" />
+            <element signature="e#0#118#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/shared/services/invoice.service.ts">
+    <entry file="file://$PROJECT_DIR$/src/app/top-menu/top-menu.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-328">
+        <state relative-caret-position="-1144">
           <folding>
-            <element signature="e#0#43#0" expanded="true" />
+            <element signature="e#0#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/config/core.php">
+    <entry file="file://$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="-306">
+          <caret line="24" column="110" selection-start-line="24" selection-start-column="110" selection-end-line="24" selection-end-column="110" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/config/database.php">
+    <entry file="file://$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="-529">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/users/signin/signin.component.ts">
+    <entry file="file://$PROJECT_DIR$/api/libs/email_sender/email_template/activation_email.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="49" column="6" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="6" />
+        <state relative-caret-position="-3519" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="140" selection-start-line="140" selection-end-line="142" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/profile/profile.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="95" selection-start-line="95" selection-end-line="97" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/reset-password/reset-password.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1090">
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/reset-password-request/reset-password-request.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="59" selection-start-line="59" selection-end-line="62" selection-end-column="51" />
           <folding>
             <element signature="e#0#59#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/shared/services/authentication.service.ts">
+    <entry file="file://$PROJECT_DIR$/src/app/dashboard/dashboard.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-408">
+        <state relative-caret-position="68">
+          <caret line="4" column="75" selection-start-line="4" selection-start-column="75" selection-end-line="4" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/signup/signup.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-510">
+          <caret line="66" column="58" selection-start-line="66" selection-start-column="58" selection-end-line="66" selection-end-column="58" />
           <folding>
-            <element signature="e#0#43#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/environments/environment.ts">
+    <entry file="file://$PROJECT_DIR$/src/app/users/signup/signup.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+        <state relative-caret-position="403">
+          <caret line="118" column="5" selection-start-line="118" selection-start-column="5" selection-end-line="118" selection-end-column="5" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#0#59#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/users/login.php">
+    <entry file="file://$PROJECT_DIR$/src/app/top-menu/top-menu.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-493">
-          <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+        <state relative-caret-position="1088">
+          <caret line="108" column="165" selection-start-line="108" selection-start-column="165" selection-end-line="108" selection-end-column="165" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/signin/signin.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="20" column="97" lean-forward="true" selection-start-line="20" selection-start-column="97" selection-end-line="20" selection-end-column="97" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/signin/signin.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="70" selection-start-line="70" selection-end-line="72" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/customer/add-modify-view/add-modify-view.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="140" column="1" lean-forward="true" selection-start-line="140" selection-start-column="1" selection-end-line="140" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/company/add-modify/add-modify.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="243" selection-start-line="243" selection-end-line="243" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/company/add-modify/add-modify.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="142" selection-start-line="142" selection-end-line="142" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/customer/add-modify-view/add-modify-view.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="85" column="18" lean-forward="true" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/company/company-list/company-list.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="1785">
+          <caret line="105" column="108" selection-start-line="105" selection-start-column="108" selection-end-line="105" selection-end-column="108" />
+          <folding>
+            <element signature="e#0#118#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/estimate/estimate-list/estimate-list.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="51" column="18" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
           <folding>
             <element signature="e#0#118#0" expanded="true" />
           </folding>
@@ -959,18 +1493,239 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="1015" column="20" selection-start-line="1015" selection-start-column="14" selection-end-line="1015" selection-end-column="20" />
+        <state relative-caret-position="202">
+          <caret line="130" column="44" selection-start-line="130" selection-start-column="44" selection-end-line="130" selection-end-column="44" />
           <folding>
             <element signature="e#0#59#0" expanded="true" />
+            <element signature="n#!!block;n#ngOnInit#0;n#EstimateAddViewModifyComponent#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/shared/services/tools.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="57" column="19" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="40" column="6" selection-start-line="40" selection-start-column="6" selection-end-line="40" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/customer/customer-list/customer-list.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="100" column="102" selection-start-line="100" selection-start-column="102" selection-end-line="100" selection-end-column="102" />
+          <folding>
+            <element signature="e#0#118#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/company/company-list/company-list.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="34" column="87" selection-start-line="34" selection-start-column="87" selection-end-line="34" selection-end-column="87" />
+        <state relative-caret-position="389">
+          <caret line="44" column="83" selection-start-line="44" selection-start-column="83" selection-end-line="44" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-list/invoice-list.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="50" column="83" selection-start-line="50" selection-start-column="83" selection-end-line="50" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/customer/customer-list/customer-list.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="46" column="83" selection-start-line="46" selection-start-column="83" selection-end-line="46" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/estimate/estimate-list/estimate-list.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="48" column="83" selection-start-line="48" selection-start-column="83" selection-end-line="48" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/profile/profile.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/users/general-setting/general-setting.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="253" column="22" lean-forward="true" selection-start-line="253" selection-start-column="22" selection-end-line="253" selection-end-column="22" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#1;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#1;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#1;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#3;n#div#1;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#4;n#div#1;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#2;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#2;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#2;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#3;n#div#2;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#4;n#div#2;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#3;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#3;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#3;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#3;n#div#3;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#4;n#div#3;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#4;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#4;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#3;n#div#4;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#4;n#div#4;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#5;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#5;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#5;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#5;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#3;n#div#5;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#4;n#div#5;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#6;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#6;n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#6;n#div#0;n#form#0;n#div#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8623">
+          <caret line="129" column="42" selection-start-line="129" selection-start-column="42" selection-end-line="129" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+            <element signature="n#!!block;n#onRowTotal#0;n#InvoiceAddViewModifyComponent#0" />
+            <element signature="n#!!block;n#calcSubTotal#0;n#InvoiceAddViewModifyComponent#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/invoice/invoice-add-view-modify/invoice-add-view-modify.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="261" column="48" lean-forward="true" selection-start-line="261" selection-start-column="48" selection-end-line="261" selection-end-column="48" />
+          <folding>
+            <element signature="n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#0;n#div#1;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#3;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#3;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#4;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#5;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#6;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#4;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#5;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#2;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#3;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#4;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#1;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#2;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#3;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#4;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#0;n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#1;n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#2;n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#3;n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#select#0;n#div#3;n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#4;n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#0;n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#1;n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#2;n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#3;n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#4;n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#0;n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#1;n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#2;n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#3;n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#4;n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#0;n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#1;n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#2;n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#3;n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#4;n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#0;n#div#6;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#1;n#div#6;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#2;n#div#6;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/estimate/estimate-add-view-modify/estimate-add-view-modify.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="259" column="48" lean-forward="true" selection-start-line="259" selection-start-column="48" selection-end-line="259" selection-end-column="48" />
+          <folding>
+            <element signature="n#div#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#0;n#div#1;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#3;n#div#0;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#form#0;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#2;n#div#0;n#div#3;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#4;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#5;n#form#0;n#div#0;n#!!top" />
+            <element signature="n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#2;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#3;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#4;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#0;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#1;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#2;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#3;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#4;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#2;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#3;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#4;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#5;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#0;n#div#6;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+            <element signature="n#div#1;n#div#6;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -4,32 +4,13 @@
   <meta charset="utf-8">
   <title>Easy Invoice Builder</title>
   <base href="/">
-
+  <meta name="description" content="Free Invoice Maker & Free Estimate Maker
+  (Free Invoice Template & Free Estimate Template)">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.png">
 </head>
 <body>
   <app-root></app-root>
-  <script>
-    window.onbeforeunload = function(e) {
-      let date = Date.now();
-
-      localStorage.setItem("lastactivity", date);
-    };
-    window.onload = function() {
-
-      let date1 = localStorage.getItem('lastactivity');
-      let date2 = Date.now();
-      if (date1 !== undefined) {
-        let difference = date2 - date1;
-        let diff = ((difference) / 1000).toFixed(0);
-
-        if (diff > 600) {
-          localStorage.clear();
-          location.reload();
-        }
-      }
-    };
-  </script>
+<script src="assets/js/localStorageClear.js"></script>
 </body>
 </html>

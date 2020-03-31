@@ -13,9 +13,10 @@
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Company
                 </a>
-                <div class="dropdown-menu submenu-color" aria-labelledby="companyDropdown">
-                    <a class="dropdown-item submenu-item-color" routerLink="/company/company-list">List</a>
-                    <a class="dropdown-item submenu-item-color" routerLink="/company/new">Create New</a>
+                <div class="dropdown-menu" aria-labelledby="companyDropdown">
+                    <a class="dropdown-item submenu-item-color" routerLink="/company/company-list"
+                       [routerLinkActive]="['active']">List</a>
+                    <a class="dropdown-item" routerLink="/company/new" [routerLinkActive]="['active']">Create New</a>
                 </div>
             </li>
             <li class="nav-item dropdown" [routerLinkActive]="['active']">
@@ -23,9 +24,10 @@
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Customer
                 </a>
-                <div class="dropdown-menu submenu-color" aria-labelledby="customerDropdown">
-                    <a class="dropdown-item submenu-item-color" routerLink="/customer/customer-list">List</a>
-                    <a class="dropdown-item submenu-item-color" routerLink="/customer/new">Create New</a>
+                <div class="dropdown-menu" aria-labelledby="customerDropdown">
+                    <a class="dropdown-item" routerLink="/customer/customer-list"
+                       [routerLinkActive]="['active']">List</a>
+                    <a class="dropdown-item" routerLink="/customer/new" [routerLinkActive]="['active']">Create New</a>
                 </div>
             </li>
             <li class="nav-item dropdown" [routerLinkActive]="['active']">
@@ -33,9 +35,10 @@
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Invoice
                 </a>
-                <div class="dropdown-menu submenu-color" aria-labelledby="invoiceDropdown">
-                    <a class="dropdown-item submenu-item-color" routerLink="/invoice/invoice-list">List</a>
-                    <a class="dropdown-item submenu-item-color" routerLink="/invoice/new">Create New</a>
+                <div class="dropdown-menu" aria-labelledby="invoiceDropdown">
+                    <a class="dropdown-item" routerLink="/invoice/invoice-list"
+                       [routerLinkActive]="['active']">List</a>
+                    <a class="dropdown-item" routerLink="/invoice/new" [routerLinkActive]="['active']">Create New</a>
                 </div>
             </li>
             <li class="nav-item dropdown" [routerLinkActive]="['active']">
@@ -43,9 +46,10 @@
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Estimate
                 </a>
-                <div class="dropdown-menu submenu-color" aria-labelledby="estimateDropdown">
-                    <a class="dropdown-item submenu-item-color" routerLink="/estimate/estimate-list">List</a>
-                    <a class="dropdown-item submenu-item-color" routerLink="/estimate/new">Create New</a>
+                <div class="dropdown-menu" aria-labelledby="estimateDropdown">
+                    <a class="dropdown-item" routerLink="/estimate/estimate-list"
+                       [routerLinkActive]="['active']">List</a>
+                    <a class="dropdown-item" routerLink="/estimate/new" [routerLinkActive]="['active']">Create New</a>
                 </div>
             </li>
         </ul>
@@ -55,12 +59,14 @@
                    aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user-cog fa-lg"></i>
                 </a>
-                <div class="dropdown-menu submenu-color dropdown-menu-right dropdown-default"
+                <div class="dropdown-menu dropdown-menu-right dropdown-default"
                      aria-labelledby="userDropdown">
-                    <a class="dropdown-item submenu-item-color" routerLink="/users/profile"><i class="fas fa-user"></i> My Account</a>
-                    <a class="dropdown-item submenu-item-color" (click)="onShowPassChange()"><i class="fas fa-key"></i> Change Password</a>
-                    <a class="dropdown-item submenu-item-color" routerLink="/users/generalsetting"><i class="fas fa-cog"></i> Setting</a>
-                    <a class="dropdown-item submenu-item-color" (click)="onSignOut()"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                    <a class="dropdown-item" routerLink="/users/profile"
+                       [routerLinkActive]="['active']"><i class="fas fa-user"></i> My Account</a>
+                    <a class="dropdown-item" (click)="onShowPassChange()"><i class="fas fa-key"></i> Change Password</a>
+                    <a class="dropdown-item" routerLink="/users/generalsetting"
+                       [routerLinkActive]="['active']"><i class="fas fa-cog"></i> Setting</a>
+                    <a class="dropdown-item" (click)="onSignOut()"><i class="fas fa-sign-out-alt"></i> Log out</a>
                 </div>
             </li>
         </ul>
@@ -89,7 +95,7 @@
                                         The old email is not correct
                                     </div>
                                     <div *ngIf="f.old_password.touched && f.old_password.invalid && !passwordCheck" class="invalid-feedback">
-                                        Old Password is a mandatory field
+                                        This field is mandatory
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +106,7 @@
                                            [ngClass]="{ 'is-invalid': f.password.touched && f.password.invalid,
                                 'is-valid': f.password.touched && f.password.valid}">
                                     <div *ngIf="f.password.touched && f.password.invalid" class="invalid-feedback">
-                                        New Password is a mandatory field, Password should be between 6 to 15 characters and must have contain uppercase, lowercase and digit
+                                        This field is mandatory, Password should be between 6 to 15 characters and must have contain uppercase, lowercase and digits.
                                     </div>
                                 </div>
                             </div>

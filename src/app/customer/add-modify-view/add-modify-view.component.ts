@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs';
 @Component({
   selector: 'app-add-modify-view',
   templateUrl: './add-modify-view.component.html',
-  styleUrls: ['../../../my-style.css']
+  // styleUrls: ['../../../styles.css']
 })
 export class AddModifyViewComponent implements OnInit, OnDestroy {
   fillForm: FormGroup;
@@ -18,6 +18,7 @@ export class AddModifyViewComponent implements OnInit, OnDestroy {
   submitMessageStatusSuccess = false;
   submitMessage = '';
   id = 0;
+  userID: number;
   customerData: CustomerModel;
   pageStatus = 'new';
   pageTitle = 'New Company Registration';
@@ -34,6 +35,7 @@ export class AddModifyViewComponent implements OnInit, OnDestroy {
     );
 
     if (this.id) {
+      this.userID = this.toolsService.getUserID()['id'];
       const url = this.router.url;
       if (url.slice(-6) === 'modify') {
         this.pageStatus = 'modify';
@@ -67,18 +69,22 @@ export class AddModifyViewComponent implements OnInit, OnDestroy {
     });
   }
   fillFormData() {
-    this.subscription = this.customerService.customerByID(this.id).subscribe(
+    this.subscription = this.customerService.customerByID(this.id, this.userID).subscribe(
         (customer: CustomerModel) => {
-          this.customerData = customer;
-          this.id = customer.id;
-          this.fillForm.patchValue({
-            user_id: customer.user_id,
-            name: customer.name,
-            address: customer.address,
-            phone: customer.phone,
-            email: customer.email,
-            id: customer.id
-          });
+            if (customer.id) {
+                this.customerData = customer;
+                this.id = customer.id;
+                this.fillForm.patchValue({
+                    user_id: customer.user_id,
+                    name: customer.name,
+                    address: customer.address,
+                    phone: customer.phone,
+                    email: customer.email,
+                    id: customer.id
+                });
+            } else {
+                this.router.navigate(['customer/customer-list']);
+            }
         }
     );
   }
@@ -128,5 +134,8 @@ export class AddModifyViewComponent implements OnInit, OnDestroy {
       }} else {
         this.toolsService.markFormGroupTouched(this.fillForm);
       }
+  }
+  whiteSpace(formControl) {
+    this.toolsService.whiteSpaceRemover(formControl);
   }
 }

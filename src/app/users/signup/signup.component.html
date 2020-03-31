@@ -48,6 +48,7 @@
             <div class="form-group col-md-6 col-sm-12">
                 <label for="email" class="col-form-label">Email*</label>
                 <input type="email" class="form-control" id="email" formControlName="email"
+                       (change)="whiteSpace(f.email)"
                        [ngClass]="{ 'is-invalid': f.email.touched && f.email.invalid,
                                     'is-valid': f.email.touched && f.email.valid}">
                 <div *ngIf="f.email.touched && f.email.errors?.required" class="invalid-feedback">
@@ -63,6 +64,7 @@
             <div class="form-group col-md-6 col-sm-12">
                 <label for="confirmEmail" class="col-form-label">Confirm Email*</label>
                 <input type="email" class="form-control" id="confirmEmail" formControlName="confirmEmail"
+                       (change)="whiteSpace(f.confirmEmail)"
                        [ngClass]="{ 'is-invalid': f.confirmEmail.touched && f.confirmEmail.invalid,
                                     'is-valid': f.confirmEmail.touched && f.confirmEmail.valid}">
                 <div *ngIf="f.confirmEmail.touched && f.confirmEmail.errors?.required" class="invalid-feedback">

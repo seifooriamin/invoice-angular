@@ -22,8 +22,9 @@
                 <div class="form-group col-8">
                     <label for="name" class="col-form-label">Customer Name</label>
                     <input type="text" class="form-control" id="name" formControlName="name"
-                           [ngClass]="{ 'is-invalid': f.name.touched && f.name.invalid,
-                                    'is-valid': f.name.touched && f.name.valid}" (change)="onSetUserId()"
+                            [ngClass]="{ 'is-invalid': f.name.touched && f.name.invalid,
+                                    'is-valid': f.name.touched && f.name.valid}"
+                           (change)="onSetUserId(); whiteSpace(f.name)"
                            [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
                     <div *ngIf="f.name.touched && f.name.invalid" class="invalid-feedback">
                         This field is mandatory
@@ -36,6 +37,7 @@
                 <div class="form-group col-12">
                     <label for="address" class="col-form-label">Address</label>
                     <input type="text" class="form-control" id="address" formControlName="address"
+                           (change)="whiteSpace(f.address)"
                            [ngClass]="{ 'is-invalid': f.address.touched && f.address.invalid,
                                     'is-valid': f.address.touched && f.address.valid}"
                            [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null">
@@ -68,17 +70,19 @@
             </div>
         </div>
         <div class="form-group row mt-1">
-            <div class="col-md-2 offset-md-5 col-4 offset-4 text-center">
+            <div class="col-lg-2 offset-lg-5 col-4 offset-4 text-center">
                 <button type="submit" class="btn btn-primary btn-block mb-1"
                         [attr.disabled] = "pageStatus === 'view' ? 'disabled' : null || processing ? 'disabled' : null">
                     {{pageStatus === 'modify' ? 'Modify' : 'Register'}}</button>
                 <ngx-loading-bar [color]="'blue'" [fixed]="false"></ngx-loading-bar>
             </div>
-            <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual col-md-4 col-sm-4 text-center">
-                {{ submitMessage }}
-            </div>
-            <div *ngIf="submitMessageStatusSuccess" class="valid-feedback-manual col-md-4 col-sm-4 text-center">
-                {{ submitMessage }}
+            <div class="col-lg-5 col-12 text-center">
+                <div *ngIf="submitMessageStatusFail" class="invalid-feedback-manual">
+                    {{ submitMessage }}
+                </div>
+                <div *ngIf="submitMessageStatusSuccess" class="valid-feedback-manual">
+                    {{ submitMessage }}
+                </div>
             </div>
         </div>
     </form>
